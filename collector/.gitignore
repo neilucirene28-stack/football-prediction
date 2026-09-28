@@ -1,0 +1,5 @@
+.env
+browser-profile/
+data/
+logs/
+node_modules/
