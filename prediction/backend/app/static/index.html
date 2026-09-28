@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>足球预测系统 · 比赛数据</title>
+<style>
+:root { color-scheme: light; --blue:#3169df; --bg:#f6f8fc; --text:#202631; --muted:#687386; --line:#e1e6ef; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); }
+header { background:var(--blue); color:#fff; padding:16px 18px; position:sticky; top:0; z-index:10; }
+header h1 { margin:0; font-size:19px; font-weight:650; }
+.cnt { font-size:13px; font-weight:500; opacity:.9; }
+main { max-width:1080px; margin:0 auto; padding:20px 14px 40px; }
+.meta { font-size:13px; color:var(--muted); margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px; }
+.card,.detail,.note { background:#fff; border-radius:14px; box-shadow:0 1px 4px #192c4a10; padding:17px; }
+.card { cursor:pointer; border:1px solid transparent; width:100%; text-align:left; font:inherit; color:inherit; }
+.card:focus-visible,.tab:focus-visible,.back:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+.card .lg { color:var(--blue); font-size:13px; margin-bottom:5px; }
+.card .vs { font-size:18px; font-weight:650; margin-bottom:5px; }
+.card .tm { font-size:13px; color:var(--muted); }
+.card .od { display:inline-block; margin-top:10px; border-radius:20px; background:#e9f0ff; color:#3169df; padding:3px 10px; font-size:12px; }
+.back { display:inline-block; padding:5px 0; color:var(--blue); background:none; border:0; text-decoration:none; cursor:pointer; font:inherit; margin-bottom:15px; }
+.detail h2 { font-size:18px; line-height:1.5; margin:0; }
+.detail .sub { font-size:13px; font-weight:400; color:var(--muted); }
+.tabs { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+.tab { appearance:none; padding:9px 15px; background:#f0f4fa; border:1px solid var(--line); border-radius:24px; color:#343d4d; font:inherit; cursor:pointer; }
+.tab.on { color:#fff; background:var(--blue); border-color:var(--blue); }
+.empty { color:#825f2b; background:#fff9ed; border:1px dashed #e4c995; border-radius:12px; padding:16px; line-height:1.7; }
+.available { border-radius:12px; background:#edf8f2; color:#186b47; padding:12px 14px; margin-bottom:12px; font-size:13px; }
+.section-title { margin:17px 0 8px; font-size:15px; }
+.table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+table { width:100%; border-collapse:collapse; min-width:490px; }
+th,td { padding:10px 9px; text-align:left; border-bottom:1px solid #edf0f5; white-space:nowrap; font-size:13px; }
+th { background:#f1f4f9; }
+.error { color:#b6262e; padding:16px; background:#fff4f4; border-radius:12px; }
+.coverage { border:1px solid var(--line); padding:13px; border-radius:12px; margin:14px 0; background:#f7f9ff; line-height:1.6; font-size:13px; }
+.note { font-size:13px; color:var(--muted); margin-bottom:14px; }
+@media(max-width:540px){ header h1{font-size:18px} .grid{grid-template-columns:1fr} .detail{padding:16px 14px} .tab{font-size:14px} }
+</style>
+</head>
+<body>
+<header><h1>足球预测系统 · 比赛数据 <span id="cnt" class="cnt"></span></h1></header>
+<main>
+  <div class="note">历史采集样本展示。当前仅提供只读浏览；数据上传暂未开放，等待 HTTPS 安全连接配置。</div>
+  <div id="app"><div class="meta">加载比赛卡片中…</div></div>
+</main>
+<script>
+'use strict';
+const app = document.getElementById('app');
+const cnt = document.getElementById('cnt');
+const MODS = [
+  ['analysis','分析'], ['asia','亚让'], ['total_goals','总进球'],
+  ['wdl','胜平负'], ['corners','角球'], ['live_analysis','现场分析']
+];
+const MISSING = {
+  analysis:'当前比赛缺少分析资料。',
+  asia:'当前比赛缺少亚洲让球盘口资料。',
+  total_goals:'当前比赛缺少总进球盘口资料。',
+  wdl:'当前比赛缺少胜平负资料。',
+  corners:'当前比赛缺少角球数据。',
+  live_analysis:'当前比赛缺少现场分析与首发阵容资料。'
+};
+function esc(value) {
+  return String(value == null ? '' : value).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function textValue(v, fallback='—') { return v == null || v === '' ? fallback : esc(v); }
+function dateText(value) {
+  if (!value) return '未知';
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? esc(value) : d.toLocaleString('zh-CN', {
+    timeZone:'Asia/Shanghai', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false
+  });
+}
+async function fetchJson(url) {
+  const res = await fetch(url, {headers:{'Accept':'application/json'}, cache:'no-store'});
+  if (!res.ok) throw new Error('服务器返回 HTTP ' + res.status);
+  return res.json();
+}
+function hasActualData(v) {
+  if (v == null || v === '') return false;
+  if (Array.isArray(v)) return v.some(hasActualData);
+  if (typeof v !== 'object') return typeof v === 'string' ? v.trim().length > 0 : true;
+  if (v.status && /^(failed|error|missing|not_collected|pending_review)$/i.test(String(v.status))) return false;
+  const metadata = new Set(['status','reason','error','message','collected_at','captured_at','采集时间','来源网址','数据状态']);
+  return Object.entries(v).some(([k,val]) => !metadata.has(k) && hasActualData(val));
+}
+function missingHtml(key,v) {
+  if (v && typeof v === 'object') {
+    if (v.status === 'failed' || v.status === 'error')
+      return '<div class="empty">数据缺失｜采集时该模块抓取失败（'+esc(v.reason || v.error || '原因未知')+'）。原始记录保存在后台。</div>';
+    if (v.status === 'pending_review')
+      return '<div class="empty">数据待核实｜'+esc(v.reason || '来源或字段语义尚未确认')+'。暂不作为正式比赛数据。</div>';
+    if (v.status === 'not_collected')
+      return '<div class="empty">数据缺失｜该模块尚未采集。</div>';
+  }
+  return '<div class="empty">数据缺失｜'+esc(MISSING[key] || '暂无可确认的数据。')+'</div>';
+}
+function normalizedText(v) {
+  if (typeof v === 'string') return v.trim();
+  if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+  return '';
+}
+function renderFields(v) {
+  // Only display clearly-labelled scalar business fields. Raw and malformed tables remain backend-only.
+  if (!v || typeof v !== 'object' || Array.isArray(v)) return '';
+  const blacklist = /^(status|reason|error|message|raw_payload|normalized_payload|collection_snapshot_id|snapshot_id|source_url|来源网址|采集时间|captured_at|collected_at|数据状态|分类表格)$/i;
+  const fields = Object.entries(v).filter(([k,x]) => !blacklist.test(k) && normalizedText(x));
+  if (!fields.length) return '';
+  return '<div class="table-scroll"><table><tbody>'+ fields.slice(0,50).map(([k,x]) =>
+    '<tr><th scope="row">'+esc(k)+'</th><td>'+esc(normalizedText(x))+'</td></tr>').join('')+'</tbody></table></div>';
+}
+function moduleHtml(key,v) {
+  if (!hasActualData(v)) return missingHtml(key,v);
+  const fields = renderFields(v);
+  if (fields) return '<div class="available">已有可阅读的采集字段；未核实的原始表格未在此展示。</div>'+fields;
+  return '<div class="empty">数据待核实｜该模块保存了原始采集内容，但尚未整理成可确认的业务字段；原始记录保存在后台。</div>';
+}
+function coverageHtml(report) {
+  if (!report || typeof report !== 'object') return '';
+  const missing = Array.isArray(report.missing) ? report.missing : [];
+  const text = missing.length ? missing.map(x => esc(x.label)+'（'+esc(x.reason)+'）').join('、') : '六模块及开球时间、竞彩赔率均有可显示字段，但仍需核实来源和时效。';
+  return '<div class="coverage"><strong>赛前数据完整性提示</strong><br>'+text+'<br><small>这不是预测；存在字段不代表数据可靠。未运行 AI 分析。</small></div>';
+}
+function oddsHtml(list) {
+  if (!Array.isArray(list) || !list.length) return '';
+  const marketName = v => ({wdl:'竞彩胜平负',nwdl:'竞彩让球胜平负',WDL:'竞彩胜平负',NWDL:'竞彩让球胜平负'})[String(v)] || textValue(v,'未标明市场');
+  const rows = list.map(o => '<tr><td>'+marketName(o.market)+'</td><td>'+textValue(o.home_odds)+'</td><td>'+textValue(o.draw_odds)+'</td><td>'+textValue(o.away_odds)+'</td><td>'+dateText(o.observed_at)+'</td></tr>').join('');
+  return '<h3 class="section-title">已入库竞彩赔率（'+list.length+' 条）</h3><div class="table-scroll"><table><thead><tr><th>市场</th><th>主胜</th><th>平</th><th>客胜</th><th>观测时间（北京时间）</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+async function loadList() {
+  app.innerHTML = '<div class="meta">加载比赛卡片中…</div>';
+  try {
+    const data = await fetchJson('/api/v1/matches');
+    const matches = Array.isArray(data.matches) ? data.matches : [];
+    cnt.textContent = '共 '+ (data.total ?? matches.length) +' 场';
+    app.innerHTML = '<p class="meta">点击比赛卡片查看六模块数据</p><div class="grid">'+matches.map(m =>
+      '<button type="button" class="card" data-id="'+esc(m.match_id)+'"><div class="lg">'+textValue(m.competition,'未知赛事')+' · '+textValue(m.sporttery_no,'无编号')+'</div><div class="vs">'+textValue(m.home_team,'未知主队')+' vs '+textValue(m.away_team,'未知客队')+'</div><div class="tm">开球 '+dateText(m.kickoff_at)+'（北京时间）</div><div class="od">竞彩 '+textValue(m.sporttery_count,'0')+' 条</div></button>').join('')+'</div>';
+    app.querySelectorAll('.card').forEach(el => el.addEventListener('click',()=>loadDetail(el.dataset.id)));
+  } catch(e) {
+    app.innerHTML = '<div class="error">比赛列表加载失败：'+esc(e.message)+'。请刷新页面重试。</div>';
+  }
+}
+async function loadDetail(id) {
+  app.innerHTML = '<div class="meta">加载比赛详情中…</div>';
+  try {
+    const m = await fetchJson('/api/v1/matches/'+encodeURIComponent(id));
+    const odds = Array.isArray(m.sporttery_odds) ? m.sporttery_odds : [];
+    const modules = m.modules && typeof m.modules === 'object' ? m.modules : {};
+    const section = key => key === 'wdl' && odds.length
+      ? oddsHtml(odds) + (modules.wdl != null ? '<h3 class="section-title">附加采集资料</h3>' + moduleHtml(key,modules.wdl) : '')
+      : moduleHtml(key,modules[key]);
+    app.innerHTML = '<button type="button" class="back" id="backBtn">← 返回卡片</button><article class="detail"><h2>'+textValue(m.home_team,'未知主队')+' vs '+textValue(m.away_team,'未知客队')+'</h2><div class="sub">'+textValue(m.competition,'未知赛事')+' · '+textValue(m.sporttery_no,'无编号')+' · 开球 '+dateText(m.kickoff_at)+'（北京时间）</div>'+coverageHtml(m.data_coverage)+'<div class="tabs" role="tablist" aria-label="比赛数据模块">'+MODS.map(([k,name],i)=>'<button type="button" role="tab" aria-selected="'+(i===0)+'" class="tab'+(i===0?' on':'')+'" data-k="'+k+'">'+name+'</button>').join('')+'</div><section id="modBox" role="tabpanel">'+section('analysis')+'</section></article>';
+    document.getElementById('backBtn').addEventListener('click',loadList);
+    const modBox = document.getElementById('modBox');
+    app.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click',()=>{
+      app.querySelectorAll('.tab').forEach(t=>{t.classList.remove('on');t.setAttribute('aria-selected','false');});
+      tab.classList.add('on'); tab.setAttribute('aria-selected','true');
+      modBox.innerHTML = section(tab.dataset.k);
+    }));
+    window.scrollTo(0,0);
+  } catch(e) {
+    app.innerHTML = '<button type="button" class="back" id="backBtn">← 返回卡片</button><div class="error">详情加载失败：'+esc(e.message)+'</div>';
+    document.getElementById('backBtn').addEventListener('click',loadList);
+  }
+}
+loadList();
+</script>
+</body>
+</html>
