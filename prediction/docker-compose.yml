@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: football-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - football-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./backend
+    container_name: football-backend
+    environment:
+      DATABASE_HOST: football-postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      RAW_DATA_DIR: /app/data/raw
+      COLLECTOR_DATA: /app/collector-data
+      # Uploads default off until a real TLS ingress and token rotation are configured.
+      UPLOADS_ENABLED: "false"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8000
+    volumes:
+      - ./data/raw:/app/data/raw
+      - ./logs:/app/logs
+      - /opt/football-collector-v2/football-collector-release/data:/app/collector-data:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - football-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+
+networks:
+  football-network:
+    name: football-network
+    driver: bridge
