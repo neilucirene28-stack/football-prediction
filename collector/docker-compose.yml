@@ -1,0 +1,11 @@
+services:
+  collector:
+    build: .
+    restart: unless-stopped
+    init: true
+    shm_size: 1gb
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./browser-profile:/app/browser-profile
