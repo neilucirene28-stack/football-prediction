@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+data/
+logs/
+browser-profile/
+node_modules/
+.git/
