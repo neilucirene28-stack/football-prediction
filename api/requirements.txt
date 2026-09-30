@@ -1,0 +1,4 @@
+fastapi
+uvicorn[standard]
+psycopg[binary]
+penaltyblog  # Pi-rating 影子评分（scripts/pi_update.py, scripts/pi_shadow.py）

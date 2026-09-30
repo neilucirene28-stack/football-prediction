@@ -1,0 +1,1 @@
+{"_fitted_on":"2026-09-29","_method":"pooled Platt, 5-fold CV","_n":126,"_note":"Platt 校准参数。拟合自 126 场 form-only walk-forward 回测（2026-09-29），pooled 三类共享，5折CV外样本验证 Brier 0.2516->0.2188、LogLoss 1.3026->1.0808。仅适用于无市场信号的 form-only 预测；有市场融合的预测不得直接套用（会过度收缩）。","form_only":{"away":[0.2111,-0.5022],"draw":[0.2111,-0.5022],"home":[0.2111,-0.5022]}}

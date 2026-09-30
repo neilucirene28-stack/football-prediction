@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>足球预测 v2</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+         max-width: 720px; margin: 0 auto; padding: 16px; background: #f6f7f9; color: #222; }
+  h1 { font-size: 20px; }
+  .card { background: #fff; border-radius: 12px; padding: 16px; margin: 12px 0;
+          box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .meta { color: #888; font-size: 13px; margin: 4px 0 10px; }
+  button { background: #1677ff; color: #fff; border: 0; border-radius: 8px;
+           padding: 8px 18px; font-size: 14px; cursor: pointer; }
+  button:disabled { background: #aaa; }
+  .probs { display: flex; gap: 8px; margin: 10px 0; }
+  .prob { flex: 1; text-align: center; background: #f0f4ff; border-radius: 8px; padding: 8px; }
+  .prob b { display: block; font-size: 18px; }
+  .tag { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 10px;
+         background: #eef; margin-right: 6px; }
+  .warn { color: #b26a00; font-size: 13px; }
+  pre { white-space: pre-wrap; font-size: 13px; background: #f7f7f7; padding: 8px;
+        border-radius: 8px; }
+</style>
+</head>
+<body>
+<h1>⚽ 足球预测 v2 <span class="tag" id="src"></span></h1>
+<p class="warn">概率为赛前估计，仅供参考，不构成投注建议。</p>
+<div id="list"></div>
+
+<script>
+async function load() {
+  const r = await fetch('/api/matches');
+  const data = await r.json();
+  document.getElementById('src').textContent = '数据源: ' + data.source;
+  const box = document.getElementById('list');
+  box.innerHTML = '';
+  data.matches.forEach(m => {
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.innerHTML = `
+      <b>${m.home_team} vs ${m.away_team}</b>
+      <div class="meta">${m.competition} · ${new Date(m.kickoff_at).toLocaleString('zh-CN')}</div>
+      <button data-id="${m.id}">生成预测</button>
+      <div class="result"></div>`;
+    d.querySelector('button').onclick = ev => predict(m, ev.target, d.querySelector('.result'));
+    box.appendChild(d);
+  });
+}
+
+async function predict(m, btn, out) {
+  btn.disabled = true; btn.textContent = '计算中…';
+  const payload = {
+    home: m.home_team, away: m.away_team, competition: m.competition,
+    kickoff_at: m.kickoff_at, snapshot_at: m.snapshot_at || new Date().toISOString(),
+    league_avg_goals: 2.7,
+    home_recent: m.home_recent, away_recent: m.away_recent,
+    odds: m.odds, ou_line: 2.5, match_id: m.id
+  };
+  try {
+    const r = await fetch('/api/predict', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const p = await r.json();
+    if (p.status !== 'ok') { out.innerHTML = `<p class="warn">${p.reason || '数据不足'}</p>`; return; }
+    const pct = x => (x * 100).toFixed(1) + '%';
+    out.innerHTML = `
+      <div class="probs">
+        <div class="prob">主胜<b>${pct(p.p_home)}</b></div>
+        <div class="prob">平局<b>${pct(p.p_draw)}</b></div>
+        <div class="prob">客胜<b>${pct(p.p_away)}</b></div>
+      </div>
+      <div>
+        <span class="tag">完整度 ${p.grade}(${p.completeness})</span>
+        <span class="tag">信心 ${p.confidence}(${p.confidence_score})</span>
+        <span class="tag">冷门风险 ${p.upset_risk}</span>
+        <span class="tag">λ ${p.lambda_home}/${p.lambda_away}</span>
+      </div>
+      <p>首选方向：<b>${p.recommendation.direction}</b>（${pct(p.recommendation.prob)}）</p>
+      <p>比分参考：${p.derivatives.top_scores.map(s => s.score + ' ' + pct(s.prob)).join(' · ')}</p>
+      ${p.derivatives.upset_score ? `<p>冷门比分：${p.derivatives.upset_score.score}（${pct(p.derivatives.upset_score.prob)}）</p>` : ''}
+      <p>半场：${pct(p.derivatives.half_time.p_home)} / ${pct(p.derivatives.half_time.p_draw)} / ${pct(p.derivatives.half_time.p_away)}</p>
+      <p>期望进球 ${p.derivatives.expected_goals} · 主要区间 ${p.derivatives.main_goal_interval.label}（${pct(p.derivatives.main_goal_interval.prob)}）</p>
+      <p>BTTS ${pct(p.derivatives.btts)} · 大2.5 ${p.derivatives.over_under ? pct(p.derivatives.over_under.over) : '—'}</p>
+      ${p.derivatives.asian ? `<p>亚盘${p.derivatives.asian.handicap}：赢${pct(p.derivatives.asian.win)} 走${pct(p.derivatives.asian.push)} 输${pct(p.derivatives.asian.lose)} · 模型合理盘口 ${p.derivatives.asian.fair_handicap}${p.derivatives.asian.movement ? ' · ' + p.derivatives.asian.movement.direction + '/' + (p.derivatives.asian.movement.signal || '—') : ''}</p>` : ''}
+      ${p.consistency_issues.length ? `<p class="warn">一致性警告：${p.consistency_issues.join('；')}</p>` : ''}
+      <p>MC ${p.monte_carlo.ran ? 'n=' + p.monte_carlo.n + ' ' + pct(p.monte_carlo.p_home) + '/' + pct(p.monte_carlo.p_draw) + '/' + pct(p.monte_carlo.p_away) : '未运行（数据不足）'}</p>
+      ${p.value.length ? `<p>价值方向：${p.value.map(v => v.outcome + '(edge ' + v.edge + ')').join(', ')}</p>` : '<p class="warn">无显著价值方向</p>'}
+      <pre>${p.notes.join('\n')}</pre>`;
+  } catch (e) {
+    out.innerHTML = `<p class="warn">请求失败: ${e}</p>`;
+  } finally {
+    btn.disabled = false; btn.textContent = '生成预测';
+  }
+}
+load();
+</script>
+</body>
+</html>

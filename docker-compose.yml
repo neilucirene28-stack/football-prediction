@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-fpv2}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fpv2secret}
+      POSTGRES_DB: ${POSTGRES_DB:-fpv2}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-fpv2}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://fpv2:fpv2secret@postgres:5432/fpv2}
+      ELO_K: ${ELO_K:-30}
+      DIXON_COLES_RHO: ${DIXON_COLES_RHO:--0.13}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+  collector:
+    build: ./collector
+    profiles: ["collect"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://fpv2:fpv2secret@postgres:5432/fpv2}
+      SOURCE: ${SOURCE:-demo}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python -m collector --source demo --once
+
+volumes:
+  pgdata:

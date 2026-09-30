@@ -1,0 +1,212 @@
+import sys
+from pathlib import Path
+
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from engine.predictor import predict, PredictError
+
+
+def _mk(n_home, n_away, venue):
+    return [{"gf": n_home, "ga": n_away, "venue": venue} for _ in range(8)]
+
+
+def sample_payload(**kw):
+    p = {
+        "home": "土耳其", "away": "意大利", "competition": "欧国联",
+        "kickoff_at": "2026-10-05T02:45:00+08:00",
+        "snapshot_at": "2026-10-04T20:00:00+08:00",
+        "league_avg_goals": 2.70,
+        "home_recent": _mk(2, 1, "H"),
+        "away_recent": _mk(1, 1, "A"),
+        "odds": {"home": 2.69, "draw": 3.30, "away": 2.20},
+        "ou_line": 2.5,
+    }
+    p.update(kw)
+    return p
+
+
+def test_predict_ok_and_sums_to_one():
+    r = predict(sample_payload())
+    assert r["status"] == "ok"
+    assert abs(r["p_home"] + r["p_draw"] + r["p_away"] - 1.0) < 5e-4  # 4位小数舍入容差
+    assert r["grade"] in ("A", "B", "C")
+    assert r["derivatives"]["over_under"] is not None
+    assert len(r["derivatives"]["top_scores"]) == 3
+
+
+def test_predict_rejects_past_match():
+    with pytest.raises(PredictError):
+        predict(sample_payload(kickoff_at="2026-09-01T02:45:00+08:00"))
+
+
+def test_predict_insufficient_data_grade_d():
+    r = predict(sample_payload(home_recent=[], away_recent=[], odds=None))
+    assert r["status"] == "insufficient_data"
+    assert r["grade"] == "D"
+
+
+def test_predict_without_market_is_pure_model():
+    r = predict(sample_payload(odds=None))
+    assert r["status"] == "ok"
+    assert r["weights"]["model"] == 1.0
+    assert r["market"] is None
+
+
+def test_neutral_site_removes_home_advantage():
+    p1 = sample_payload()
+    p2 = sample_payload(neutral_site=True)
+    r1, r2 = predict(p1), predict(p2)
+    assert r1["lambda_notes"]["home_adv_factor"] == 1.12
+    assert r2["lambda_notes"]["home_adv_factor"] == 1.0
+    assert r2["lambda_notes"]["neutral_site"] is True
+    # 中立场地：主队进球期望更低（无 1.12 加成），客队不变
+    assert r2["lambda_home"] < r1["lambda_home"]
+    assert r2["lambda_away"] == r1["lambda_away"]
+    assert abs(r2["p_home"] + r2["p_draw"] + r2["p_away"] - 1.0) < 1e-9
+
+
+# ---------------- v2.4: 结构性收缩 ----------------
+
+def _extreme_small_sample(venue):
+    # 前 3 场比分极端（模拟弱旅大胜虚高，如朝鲜女足式 10-0/8-0），后 5 场正常
+    return ([{"gf": 10, "ga": 0, "venue": venue},
+             {"gf": 8, "ga": 0, "venue": venue},
+             {"gf": 5, "ga": 1, "venue": venue}]
+            + [{"gf": 2, "ga": 1, "venue": venue} for _ in range(5)])
+
+
+def test_shrinkage_dampens_extreme_small_sample():
+    p = sample_payload(home_recent=_extreme_small_sample("H"),
+                       away_recent=_mk(1, 1, "A"), odds=None)
+    r_noshrink = predict(p, config={"shrink_prior": 0.0})
+    r_shrink = predict(p, config={"shrink_prior": 3.0})
+    # 收缩后：主队进球期望向联赛均值回落（3.965 → 3.344，约 -16%）
+    assert r_shrink["lambda_home"] < r_noshrink["lambda_home"] * 0.9
+    assert r_shrink["lambda_notes"]["shrink_prior"] == 3.0
+
+
+def test_shrinkage_keeps_large_sample_stable():
+    # 大样本（10 场、比分正常）下收缩几乎不改变结果
+    big = [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(10)]
+    p = sample_payload(home_recent=big, away_recent=_mk(1, 1, "A"), odds=None)
+    r0 = predict(p, config={"shrink_prior": 0.0})
+    r3 = predict(p, config={"shrink_prior": 3.0})
+    assert abs(r0["lambda_home"] - r3["lambda_home"]) < 0.25
+
+
+def test_shrink_prior_zero_restores_v23():
+    p = sample_payload(home_recent=_extreme_small_sample("H"), odds=None)
+    r = predict(p, config={"shrink_prior": 0.0})
+    assert r["lambda_notes"]["shrink_prior"] == 0.0
+
+
+# ---------------- v2.4: 背离门控 ----------------
+
+def test_divergence_gate_triggers_and_downgrades():
+    # 模型强烈看好主队（主队极强、客队极弱），市场却强烈看好客队
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds={"home": 8.0, "draw": 5.0, "away": 1.30},
+    )
+    r = predict(p)
+    assert r["divergence"] is not None
+    assert r["divergence"]["model_direction"] == "home"
+    assert r["divergence"]["market_direction"] == "away"
+    assert r["divergence"]["gap"] >= 0.15
+    assert any("背离" in n for n in r["notes"])
+    assert "模型与市场严重背离" in r["upset_risk_factors"]
+
+
+def test_divergence_gate_quiet_when_aligned():
+    # 模型与市场方向一致（都看好主队）→ 门控静默
+    p = sample_payload(odds={"home": 1.60, "draw": 3.80, "away": 5.50})
+    r = predict(p)
+    assert r["divergence"] is None
+
+
+def test_divergence_gate_disabled_by_config():
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds={"home": 8.0, "draw": 5.0, "away": 1.30},
+    )
+    r = predict(p, config={"divergence_gate": 0.0})
+    assert r["divergence"] is None
+
+
+def test_divergence_downgrades_confidence_one_level():
+    # 完整信号 payload：无门控时信心为 B，触发背离后正好降一档到 C
+    p = sample_payload(
+        home_recent=[{"gf": 2, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)],
+        odds={"home": 3.20, "draw": 3.40, "away": 2.10},
+        elo={"home": 1900, "away": 1500},
+        asian={"handicap": -0.5},
+        opening_odds={"home": 2.60, "draw": 3.30, "away": 2.60},
+    )
+    r_gate = predict(p)
+    r_off = predict(p, config={"divergence_gate": 0.0})
+    assert r_gate["divergence"] is not None
+    assert r_off["confidence"] == "B"
+    assert r_gate["confidence"] == "C"
+    assert r_gate["confidence_score"] < r_off["confidence_score"]
+    assert r_gate["upset_risk"] > r_off["upset_risk"]
+
+
+# ---------------- 让平机制（2026-09-30 复盘：14 场 7 让平） ----------------
+# 根因：λ 高估 → 净胜分布过宽 → P(让平)被压低、P(穿盘)虚高。
+# v2.4 收缩打在根因上；此处 pin 住机制方向，不拟合参数。
+
+def test_shrinkage_raises_push_prob_and_tames_cover_prob():
+    p = sample_payload(
+        home_recent=[{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 1, "ga": 2, "venue": "A"} for _ in range(8)],
+        handicap_line=-2, odds=None,
+    )
+    r0 = predict(p, config={"shrink_prior": 0.0})   # v2.3 行为
+    r3 = predict(p, config={"shrink_prior": 3.0})   # v2.4 行为
+    h0, h3 = r0["derivatives"]["handicap_1x2"], r3["derivatives"]["handicap_1x2"]
+    assert h0["line"] == h3["line"] == -2
+    # 收缩后：净胜恰=2（让平）概率上升，净胜≥3（穿盘）概率下降
+    assert h3["p_draw"] > h0["p_draw"]
+    assert h3["p_home"] < h0["p_home"]
+
+
+# ---------------- 小样本 / 对手强度覆盖率 ----------------
+
+def test_opp_adjust_coverage_zero_when_no_opp_ratings():
+    # 当前采集链路不提供 opp_attack/opp_defense → 覆盖率 0，诚实标注
+    r = predict(sample_payload())
+    assert r["lambda_notes"]["opp_adjust_coverage"] == 0.0
+
+
+def test_opp_adjust_coverage_full_when_provided():
+    p = sample_payload(
+        home_recent=[{"gf": 2, "ga": 1, "venue": "H",
+                      "opp_attack": 1.1, "opp_defense": 0.9} for _ in range(8)],
+        away_recent=[{"gf": 1, "ga": 1, "venue": "A",
+                      "opp_attack": 1.0, "opp_defense": 1.0} for _ in range(8)],
+    )
+    r = predict(p)
+    assert r["lambda_notes"]["opp_adjust_coverage"] == 1.0
+
+
+def test_degraded_small_sample_flag_and_no_overconfidence():
+    # 样本<5 场 → degraded=True 标记；信心永不高于完整度等级
+    base = {"home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)]}
+    p_ok = sample_payload(
+        away_recent=[{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)], **base)
+    p_deg = sample_payload(
+        away_recent=[{"gf": 1, "ga": 1, "venue": "A"} for _ in range(4)], **base)
+    r_ok, r_deg = predict(p_ok), predict(p_deg)
+    assert r_ok["lambda_notes"]["degraded"] is False
+    assert r_deg["lambda_notes"]["degraded"] is True
+    assert r_deg["lambda_notes"]["away_sample"] == 4
+    order = ["S", "A", "B", "C"]
+    # 降档逻辑（predictor 第 11 节）：degraded 触发时信心恰好低一档
+    assert order.index(r_deg["confidence"]) >= order.index(r_deg["grade"])
+    # 非 degraded 对照组不受该标记影响（degraded=False 不应成为降档原因）
+    assert r_ok["lambda_notes"]["degraded"] is False

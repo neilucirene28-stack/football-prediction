@@ -1,0 +1,3 @@
+{
+  "tests/test_predictor.py::test_degraded_small_sample_downgrades_confidence": true
+}
