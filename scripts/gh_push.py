@@ -11,6 +11,7 @@ import fnmatch
 import json
 import os
 import sys
+import time
 import urllib.request
 
 sys.path.insert(0, "/opt/hatch/skills/skill-creator/bin")
@@ -53,18 +54,27 @@ def ignored(rel):
     return False
 
 
-def api(method, path, data=None):
-    req = urllib.request.Request(
-        API + path,
-        data=json.dumps(data).encode() if data is not None else None,
-        headers={"Accept": "application/vnd.github+json",
-                 "User-Agent": "muse-github-skill",
-                 "Content-Type": "application/json"},
-        method=method)
-    add_surrogate_to_request(req, "custom.github",
-                             allowed_hosts=["api.github.com"])
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return read_json_response(resp)
+def api(method, path, data=None, retries=5):
+    last = None
+    for attempt in range(retries):
+        req = urllib.request.Request(
+            API + path,
+            data=json.dumps(data).encode() if data is not None else None,
+            headers={"Accept": "application/vnd.github+json",
+                     "User-Agent": "muse-github-skill",
+                     "Content-Type": "application/json"},
+            method=method)
+        add_surrogate_to_request(req, "custom.github",
+                                 allowed_hosts=["api.github.com"])
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return read_json_response(resp)
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code not in (400, 429, 500, 502, 503):
+                raise
+            time.sleep(2 ** attempt)
+    raise last
 
 
 def collect_files():
