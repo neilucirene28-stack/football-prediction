@@ -7,6 +7,7 @@
 用法: python3 scripts/gh_push.py
 """
 import base64
+import fnmatch
 import json
 import os
 import sys
@@ -21,8 +22,35 @@ BRANCH = "v2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API = f"https://api.github.com/repos/{OWNER}/{REPO}"
 
-SKIP_DIRS = {".git", "__pycache__", ".venv", "venv", "node_modules"}
+SKIP_DIRS = {".git", "__pycache__", ".venv", ".venv-soccerdata", "venv",
+             "node_modules", ".pytest_cache"}
+# 按相对路径前缀跳过的目录（每日生成的快照，不进仓库）
+SKIP_DIR_PREFIXES = ("data/daily/",)
 SKIP_FILES = {".DS_Store"}
+
+
+def load_gitignore():
+    """读取 .gitignore，推送时同样生效（防止 key 泄漏）。"""
+    pats = []
+    gi = os.path.join(ROOT, ".gitignore")
+    if os.path.exists(gi):
+        with open(gi, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    pats.append(line)
+    return pats
+
+
+GITIGNORE_PATS = load_gitignore()
+
+
+def ignored(rel):
+    base = os.path.basename(rel)
+    for pat in GITIGNORE_PATS:
+        if fnmatch.fnmatch(rel, pat) or fnmatch.fnmatch(base, pat):
+            return True
+    return False
 
 
 def api(method, path, data=None):
@@ -41,6 +69,7 @@ def api(method, path, data=None):
 
 def collect_files():
     out = []
+    skipped_secret = []
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fn in filenames:
@@ -48,14 +77,33 @@ def collect_files():
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, ROOT)
+            if rel.replace(os.sep, "/").startswith(SKIP_DIR_PREFIXES):
+                continue
+            if ignored(rel):
+                skipped_secret.append(rel)
+                continue
             with open(full, "rb") as f:
                 out.append((rel, f.read()))
+    if skipped_secret:
+        print(f"已按 .gitignore 跳过 {len(skipped_secret)} 个文件: "
+              f"{', '.join(skipped_secret[:8])}"
+              f"{'...' if len(skipped_secret) > 8 else ''}")
     return sorted(out)
 
 
 def main():
+    msg = (sys.argv[1] if len(sys.argv) > 1
+           else "football-prediction-v2: 数据源接入+每日抓取 (2026-10-01)")
     files = collect_files()
     print(f"共 {len(files)} 个文件")
+    # 安全复核：key 文件绝不能出现在推送列表里
+    bad = [r for r, _ in files
+           if os.path.basename(r).startswith(".") and
+           r.split(".")[-1].endswith("_key") or r in
+           (".af_key", ".fd_key", ".odds_key", ".fc_key")]
+    if bad:
+        print(f"拒绝推送：发现密钥文件 {bad}")
+        sys.exit(1)
     tree = []
     for i, (rel, content) in enumerate(files):
         blob = api("POST", "/git/blobs",
@@ -67,16 +115,23 @@ def main():
             print(f"  blob {i + 1}/{len(files)}")
     tree_obj = api("POST", "/git/trees", {"tree": tree})
     print("tree:", tree_obj["sha"][:12])
-    commit = api("POST", "/git/commits",
-                 {"message": "football-prediction-v2: 采集器+部署+引擎 (v2.3)",
-                  "tree": tree_obj["sha"], "parents": []})
-    print("commit:", commit["sha"][:12])
     try:
         ref = api("GET", f"/git/ref/heads/{BRANCH}")
-        api("PATCH", f"/git/refs/heads/{BRANCH}", {"sha": commit["sha"],
-                                                  "force": True})
-        print(f"分支 {BRANCH} 已更新 (原 {ref['object']['sha'][:12]})")
+        parent_sha = ref["object"]["sha"]
+        print(f"v2 当前头: {parent_sha[:12]}，将作为父提交（保留历史）")
+        parents = [parent_sha]
+        ref_exists = True
     except Exception:
+        parents = []
+        ref_exists = False
+    commit = api("POST", "/git/commits",
+                 {"message": msg,
+                  "tree": tree_obj["sha"], "parents": parents})
+    print("commit:", commit["sha"][:12])
+    if ref_exists:
+        api("PATCH", f"/git/refs/heads/{BRANCH}", {"sha": commit["sha"]})
+        print(f"分支 {BRANCH} 已快进更新")
+    else:
         api("POST", "/git/refs",
             {"ref": f"refs/heads/{BRANCH}", "sha": commit["sha"]})
         print(f"分支 {BRANCH} 已创建")

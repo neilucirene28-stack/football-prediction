@@ -1,0 +1,302 @@
+{
+ "arsenal": {
+  "name": "Arsenal",
+  "thesportsdb_id": "133604",
+  "espn_id": "359",
+  "apifootball_id": "42"
+ },
+ "aston villa": {
+  "name": "Aston Villa",
+  "thesportsdb_id": "133601",
+  "espn_id": "4328",
+  "apifootball_id": "66"
+ },
+ "bournemouth": {
+  "name": "Bournemouth",
+  "thesportsdb_id": "134301",
+  "espn_id": "349",
+  "apifootball_id": "35"
+ },
+ "brentford": {
+  "name": "Brentford",
+  "thesportsdb_id": "134355",
+  "espn_id": "337",
+  "apifootball_id": "55"
+ },
+ "brighton and hove albion": {
+  "name": "Brighton and Hove Albion",
+  "thesportsdb_id": "133619",
+  "espn_id": "331",
+  "apifootball_id": "51"
+ },
+ "chelsea": {
+  "name": "Chelsea",
+  "thesportsdb_id": "133610",
+  "espn_id": "363",
+  "apifootball_id": "49"
+ },
+ "coventry city": {
+  "name": "Coventry City",
+  "thesportsdb_id": "133625",
+  "espn_id": "388",
+  "apifootball_id": "1346"
+ },
+ "crystal palace": {
+  "name": "Crystal Palace",
+  "thesportsdb_id": "133632",
+  "espn_id": "384",
+  "apifootball_id": "52"
+ },
+ "everton": {
+  "name": "Everton",
+  "thesportsdb_id": "133615",
+  "espn_id": "368",
+  "apifootball_id": "45"
+ },
+ "fulham": {
+  "name": "Fulham",
+  "thesportsdb_id": "133600",
+  "espn_id": "370",
+  "apifootball_id": "36"
+ },
+ "athletic bilbao": {
+  "name": "Athletic Bilbao",
+  "thesportsdb_id": "133727",
+  "espn_id": "93",
+  "apifootball_id": "531"
+ },
+ "atlético madrid": {
+  "name": "Atlético Madrid",
+  "thesportsdb_id": "133729",
+  "espn_id": "1068",
+  "apifootball_id": "530"
+ },
+ "barcelona": {
+  "name": "Barcelona",
+  "thesportsdb_id": "133739",
+  "espn_id": "83",
+  "apifootball_id": "529"
+ },
+ "celta vigo": {
+  "name": "Celta Vigo",
+  "thesportsdb_id": "133937",
+  "espn_id": "85",
+  "apifootball_id": "538"
+ },
+ "deportivo alavés": {
+  "name": "Deportivo Alavés",
+  "thesportsdb_id": "134221",
+  "espn_id": "96",
+  "apifootball_id": "542"
+ },
+ "deportivo de a coruña": {
+  "name": "Deportivo de A Coruña",
+  "thesportsdb_id": "133816",
+  "espn_id": "90",
+  "apifootball_id": "544"
+ },
+ "elche": {
+  "name": "Elche",
+  "thesportsdb_id": "134384",
+  "espn_id": "3751",
+  "apifootball_id": "797"
+ },
+ "espanyol": {
+  "name": "Espanyol",
+  "thesportsdb_id": "133734",
+  "espn_id": "88",
+  "apifootball_id": "540"
+ },
+ "getafe": {
+  "name": "Getafe",
+  "thesportsdb_id": "133731",
+  "espn_id": "2922",
+  "apifootball_id": "546"
+ },
+ "levante": {
+  "name": "Levante",
+  "thesportsdb_id": "133732",
+  "espn_id": "1538",
+  "apifootball_id": "539"
+ },
+ "ac milan": {
+  "name": "AC Milan",
+  "thesportsdb_id": "133667",
+  "espn_id": "103",
+  "apifootball_id": "489"
+ },
+ "atalanta": {
+  "name": "Atalanta",
+  "thesportsdb_id": "134782",
+  "espn_id": "105",
+  "apifootball_id": "499"
+ },
+ "bologna": {
+  "name": "Bologna",
+  "thesportsdb_id": "134781",
+  "espn_id": "107",
+  "apifootball_id": "500"
+ },
+ "cagliari": {
+  "name": "Cagliari",
+  "thesportsdb_id": "134783",
+  "espn_id": "2925",
+  "apifootball_id": "490"
+ },
+ "como": {
+  "name": "Como",
+  "thesportsdb_id": "134243",
+  "espn_id": "2572",
+  "apifootball_id": "895"
+ },
+ "fiorentina": {
+  "name": "Fiorentina",
+  "thesportsdb_id": "133674",
+  "espn_id": "109",
+  "apifootball_id": "502"
+ },
+ "frosinone": {
+  "name": "Frosinone",
+  "thesportsdb_id": "133818",
+  "espn_id": "4057",
+  "apifootball_id": "512"
+ },
+ "genoa": {
+  "name": "Genoa",
+  "thesportsdb_id": "133675",
+  "espn_id": "3263",
+  "apifootball_id": "495"
+ },
+ "inter milan": {
+  "name": "Inter Milan",
+  "thesportsdb_id": "133681",
+  "espn_id": "110",
+  "apifootball_id": "505"
+ },
+ "juventus": {
+  "name": "Juventus",
+  "thesportsdb_id": "133676",
+  "espn_id": "111",
+  "apifootball_id": "496"
+ },
+ "augsburg": {
+  "name": "Augsburg",
+  "thesportsdb_id": "133652",
+  "espn_id": "3841",
+  "apifootball_id": "170"
+ },
+ "bayer leverkusen": {
+  "name": "Bayer Leverkusen",
+  "thesportsdb_id": "133666",
+  "espn_id": "131",
+  "apifootball_id": "168"
+ },
+ "bayern munich": {
+  "name": "Bayern Munich",
+  "thesportsdb_id": "133664",
+  "espn_id": "132",
+  "apifootball_id": "157"
+ },
+ "borussia dortmund": {
+  "name": "Borussia Dortmund",
+  "thesportsdb_id": "133650",
+  "espn_id": "124",
+  "apifootball_id": "165"
+ },
+ "borussia mönchengladbach": {
+  "name": "Borussia Mönchengladbach",
+  "thesportsdb_id": "134779",
+  "espn_id": "268",
+  "apifootball_id": "163"
+ },
+ "eintracht frankfurt": {
+  "name": "Eintracht Frankfurt",
+  "thesportsdb_id": "133814",
+  "espn_id": "125",
+  "apifootball_id": "169"
+ },
+ "elversberg": {
+  "name": "Elversberg",
+  "thesportsdb_id": "138411",
+  "espn_id": "10388",
+  "apifootball_id": "1660"
+ },
+ "freiburg": {
+  "name": "Freiburg",
+  "thesportsdb_id": "133653",
+  "espn_id": "126",
+  "apifootball_id": "160"
+ },
+ "hamburg": {
+  "name": "Hamburg",
+  "thesportsdb_id": "133651",
+  "espn_id": "127",
+  "apifootball_id": "175"
+ },
+ "hoffenheim": {
+  "name": "Hoffenheim",
+  "thesportsdb_id": "133657",
+  "espn_id": "7911",
+  "apifootball_id": "167"
+ },
+ "angers": {
+  "name": "Angers",
+  "thesportsdb_id": "134709",
+  "espn_id": "7868",
+  "apifootball_id": "77"
+ },
+ "auxerre": {
+  "name": "Auxerre",
+  "thesportsdb_id": "134788",
+  "espn_id": "172",
+  "apifootball_id": "108"
+ },
+ "brest": {
+  "name": "Brest",
+  "thesportsdb_id": "133704",
+  "espn_id": "6997",
+  "apifootball_id": "106"
+ },
+ "le havre": {
+  "name": "Le Havre",
+  "thesportsdb_id": "133862",
+  "espn_id": "3236",
+  "apifootball_id": "111"
+ },
+ "le mans": {
+  "name": "Le Mans",
+  "thesportsdb_id": "133848",
+  "espn_id": "0",
+  "apifootball_id": "1298"
+ },
+ "lens": {
+  "name": "Lens",
+  "thesportsdb_id": "133822",
+  "espn_id": "175",
+  "apifootball_id": "116"
+ },
+ "lille": {
+  "name": "Lille",
+  "thesportsdb_id": "133711",
+  "espn_id": "166",
+  "apifootball_id": "79"
+ },
+ "lorient": {
+  "name": "Lorient",
+  "thesportsdb_id": "133715",
+  "espn_id": "273",
+  "apifootball_id": "97"
+ },
+ "lyon": {
+  "name": "Lyon",
+  "thesportsdb_id": "133713",
+  "espn_id": "167",
+  "apifootball_id": "80"
+ },
+ "marseille": {
+  "name": "Marseille",
+  "thesportsdb_id": "133707",
+  "espn_id": "176",
+  "apifootball_id": "81"
+ }
+}

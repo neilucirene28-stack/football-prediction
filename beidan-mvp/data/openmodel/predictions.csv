@@ -1,0 +1,202 @@
+kickoff,league,home,away,pHome,pDraw,pAway,modelPick,lockedOn,homeGoals,awayGoals,result,correct
+2026-08-15T17:30:00+00:00,la-liga,"Alaves","Getafe",0.3801,0.2846,0.3354,home,2026-08-15,3,0,home,true
+2026-08-15T19:30:00+00:00,la-liga,"Sevilla","Rayo Vallecano",0.321,0.2839,0.3951,away,2026-08-15,2,1,home,false
+2026-08-16T15:00:00+00:00,la-liga,"Santander","Villarreal",0.2219,0.2686,0.5095,away,2026-08-16,2,2,draw,false
+2026-08-16T17:00:00+00:00,la-liga,"Espanyol","Levante",0.4032,0.2834,0.3134,home,2026-08-16,3,0,home,true
+2026-08-17T19:00:00+00:00,la-liga,"Depor","Elche",0.3257,0.2841,0.3901,away,2026-08-17,1,1,draw,false
+2026-08-19T19:00:00+00:00,la-liga,"Atletico","Malaga",0.7186,0.1992,0.0822,home,2026-08-19,2,0,home,true
+2026-08-20T19:00:00+00:00,la-liga,"Rayo Vallecano","Alaves",0.4689,0.276,0.2551,home,2026-08-20,1,1,draw,false
+2026-08-21T18:45:00+00:00,ligue-1,"Marseille","Strasbourg",0.421,0.282,0.2971,home,2026-08-21,4,0,home,true
+2026-08-21T19:00:00+00:00,premier-league,"Arsenal","Coventry",0.8505,0.126,0.0235,home,2026-08-21,3,0,home,true
+2026-08-21T19:00:00+00:00,la-liga,"Betis","Sociedad",0.5067,0.2692,0.2241,home,2026-08-21,1,0,home,true
+2026-08-22T11:30:00+00:00,premier-league,"Hull","Man United",0.0678,0.186,0.7463,away,2026-08-22,2,0,home,false
+2026-08-22T14:00:00+00:00,premier-league,"Everton","Crystal Palace",0.4135,0.2826,0.3039,home,2026-08-22,2,0,home,true
+2026-08-22T14:00:00+00:00,premier-league,"Ipswich","Sunderland",0.3051,0.2827,0.4121,away,2026-08-22,2,1,home,false
+2026-08-22T14:00:00+00:00,premier-league,"Forest","Leeds",0.4434,0.2796,0.2771,home,2026-08-22,0,1,away,false
+2026-08-22T15:00:00+00:00,la-liga,"Bilbao","Sevilla",0.4633,0.2768,0.2598,home,2026-08-22,1,3,away,false
+2026-08-22T15:15:00+00:00,ligue-1,"Lens","Auxerre",0.5852,0.2495,0.1653,home,2026-08-22,5,2,home,true
+2026-08-22T16:30:00+00:00,premier-league,"Brentford","Tottenham",0.4847,0.2734,0.2419,home,2026-08-22,3,0,home,true
+2026-08-22T16:30:00+00:00,serie-a,"Udinese","Como",0.2857,0.2807,0.4336,away,2026-08-22,1,1,draw,false
+2026-08-22T16:30:00+00:00,serie-a,"Inter","Monza",0.8065,0.1537,0.0398,home,2026-08-22,4,1,home,true
+2026-08-22T17:30:00+00:00,la-liga,"Valencia","Celta",0.41,0.2829,0.3071,home,2026-08-22,0,0,draw,false
+2026-08-22T18:45:00+00:00,serie-a,"Genoa","Napoli",0.2367,0.2722,0.4911,away,2026-08-22,0,2,away,true
+2026-08-22T18:45:00+00:00,serie-a,"Parma","Cagliari",0.4206,0.282,0.2974,home,2026-08-22,0,1,away,false
+2026-08-22T18:45:00+00:00,ligue-1,"Nice","Lorient",0.3485,0.2849,0.3666,away,2026-08-22,0,0,draw,false
+2026-08-22T18:45:00+00:00,ligue-1,"Toulouse","Lyon",0.3233,0.284,0.3927,away,2026-08-22,0,2,away,true
+2026-08-22T18:45:00+00:00,ligue-1,"Troyes","Paris FC",0.2919,0.2814,0.4266,away,2026-08-22,0,0,draw,false
+2026-08-22T18:45:00+00:00,ligue-1,"Le Mans","Brest",0.2707,0.2786,0.4507,away,2026-08-22,2,2,draw,false
+2026-08-22T19:30:00+00:00,la-liga,"Espanyol","Real Madrid",0.1348,0.2349,0.6304,away,2026-08-22,1,2,away,true
+2026-08-23T13:00:00+00:00,premier-league,"Man City","Bournemouth",0.5324,0.2636,0.204,home,2026-08-23,2,1,home,true
+2026-08-23T13:00:00+00:00,premier-league,"Brighton","Aston Villa",0.3236,0.284,0.3923,away,2026-08-23,4,0,home,false
+2026-08-23T13:00:00+00:00,ligue-1,"Angers","Lille",0.2042,0.2636,0.5322,away,2026-08-23,0,2,away,true
+2026-08-23T15:00:00+00:00,la-liga,"Atletico","Villarreal",0.5042,0.2697,0.2261,home,2026-08-23,2,2,draw,false
+2026-08-23T15:15:00+00:00,ligue-1,"Le Havre","Monaco",0.2614,0.2771,0.4614,away,2026-08-23,0,1,away,true
+2026-08-23T15:30:00+00:00,premier-league,"Newcastle","Liverpool",0.3299,0.2843,0.3857,away,2026-08-23,2,2,draw,false
+2026-08-23T16:30:00+00:00,serie-a,"Frosinone","Juventus",0.1938,0.2603,0.5459,away,2026-08-23,0,1,away,true
+2026-08-23T16:30:00+00:00,serie-a,"Venezia","Lecce",0.4505,0.2786,0.2708,home,2026-08-23,0,2,away,false
+2026-08-23T17:30:00+00:00,la-liga,"Getafe","Santander",0.4896,0.2725,0.2379,home,2026-08-23,1,0,home,true
+2026-08-23T18:45:00+00:00,serie-a,"Atalanta","Sassuolo",0.5835,0.25,0.1665,home,2026-08-23,2,1,home,true
+2026-08-23T18:45:00+00:00,serie-a,"Torino","Milan",0.2733,0.279,0.4477,away,2026-08-23,1,2,away,true
+2026-08-23T18:45:00+00:00,ligue-1,"Rennes","Paris SG",0.1559,0.2454,0.5987,away,2026-08-23,2,2,draw,false
+2026-08-23T19:30:00+00:00,la-liga,"Elche","Barcelona",0.0997,0.2128,0.6875,away,2026-08-23,0,5,away,true
+2026-08-24T16:30:00+00:00,serie-a,"Bologna","Lazio",0.4118,0.2828,0.3055,home,2026-08-24,0,1,away,false
+2026-08-24T17:30:00+00:00,la-liga,"Osasuna","Levante",0.4452,0.2793,0.2755,home,2026-08-24,0,0,draw,false
+2026-08-24T18:45:00+00:00,serie-a,"Roma","Fiorentina",0.5617,0.2562,0.1821,home,2026-08-24,4,0,home,true
+2026-08-24T19:00:00+00:00,premier-league,"Fulham","Chelsea",0.3929,0.284,0.3231,home,2026-08-24,2,3,away,false
+2026-08-24T19:30:00+00:00,la-liga,"Malaga","Depor",0.4353,0.2805,0.2842,home,2026-08-24,1,1,draw,false
+2026-08-25T19:00:00+00:00,la-liga,"Valencia","Betis",0.3475,0.2849,0.3676,away,2026-08-25,0,1,away,true
+2026-08-26T19:00:00+00:00,la-liga,"Real Madrid","Sociedad",0.7239,0.1967,0.0794,home,2026-08-26,4,1,home,true
+2026-08-27T18:30:00+00:00,la-liga,"Celta","Osasuna",0.4794,0.2743,0.2463,home,2026-08-27,1,2,away,false
+2026-08-27T19:00:00+00:00,la-liga,"Barcelona","Bilbao",0.7624,0.1778,0.0598,home,2026-08-27,2,0,home,true
+2026-08-28T17:00:00+00:00,la-liga,"Santander","Elche",0.3706,0.2848,0.3446,home,2026-08-28,3,2,home,true
+2026-08-28T18:30:00+00:00,bundesliga,"Bayern","Stuttgart",0.6943,0.2099,0.0957,home,2026-08-28,5,1,home,true
+2026-08-28T18:45:00+00:00,serie-a,"Milan","Venezia",0.6272,0.236,0.1368,home,2026-08-28,2,0,home,true
+2026-08-28T18:45:00+00:00,ligue-1,"Lille","Paris SG",0.1919,0.2597,0.5484,away,2026-08-28,2,2,draw,false
+2026-08-28T19:00:00+00:00,premier-league,"Crystal Palace","Man City",0.2147,0.2667,0.5186,away,2026-08-28,1,4,away,true
+2026-08-28T19:30:00+00:00,la-liga,"Alaves","Villarreal",0.2941,0.2816,0.4243,away,2026-08-28,1,0,home,false
+2026-08-29T11:30:00+00:00,premier-league,"Liverpool","Forest",0.5348,0.263,0.2022,home,2026-08-29,2,2,draw,false
+2026-08-29T13:30:00+00:00,bundesliga,"Mainz","Paderborn",0.5894,0.2482,0.1623,home,2026-08-29,0,0,draw,false
+2026-08-29T13:30:00+00:00,bundesliga,"RB Leipzig","Gladbach",0.5591,0.2569,0.184,home,2026-08-29,3,0,home,true
+2026-08-29T13:30:00+00:00,bundesliga,"Union Berlin","Frankfurt",0.3625,0.2849,0.3526,home,2026-08-29,3,3,draw,false
+2026-08-29T13:30:00+00:00,bundesliga,"Koeln","Hoffenheim",0.2668,0.278,0.4552,away,2026-08-29,3,2,home,false
+2026-08-29T13:30:00+00:00,bundesliga,"Elversberg","Leverkusen",0.1333,0.2341,0.6326,away,2026-08-29,3,2,home,false
+2026-08-29T14:00:00+00:00,premier-league,"Bournemouth","Everton",0.4745,0.2751,0.2504,home,2026-08-29,1,1,draw,false
+2026-08-29T14:00:00+00:00,premier-league,"Coventry","Hull",0.5344,0.2631,0.2024,home,2026-08-29,0,1,away,false
+2026-08-29T15:00:00+00:00,la-liga,"Levante","Betis",0.2621,0.2772,0.4607,away,2026-08-29,5,2,home,false
+2026-08-29T15:15:00+00:00,ligue-1,"Strasbourg","Lens",0.3233,0.284,0.3927,away,2026-08-29,2,1,home,false
+2026-08-29T16:30:00+00:00,premier-league,"Tottenham","Newcastle",0.3315,0.2844,0.3841,away,2026-08-29,0,2,away,true
+2026-08-29T16:30:00+00:00,serie-a,"Sassuolo","Torino",0.4158,0.2824,0.3018,home,2026-08-29,2,1,home,true
+2026-08-29T16:30:00+00:00,serie-a,"Fiorentina","Frosinone",0.5363,0.2627,0.2011,home,2026-08-29,0,3,away,false
+2026-08-29T16:30:00+00:00,serie-a,"Monza","Udinese",0.294,0.2816,0.4244,away,2026-08-29,2,3,away,true
+2026-08-29T16:30:00+00:00,bundesliga,"Dortmund","Hamburg",0.6894,0.212,0.0986,home,2026-08-29,2,0,home,true
+2026-08-29T17:00:00+00:00,la-liga,"Sociedad","Espanyol",0.4366,0.2804,0.283,home,2026-08-29,2,1,home,true
+2026-08-29T18:45:00+00:00,serie-a,"Juventus","Parma",0.6412,0.231,0.1278,home,2026-08-29,2,0,home,true
+2026-08-29T18:45:00+00:00,ligue-1,"Lyon","Le Havre",0.6217,0.2379,0.1404,home,2026-08-29,1,1,draw,false
+2026-08-29T18:45:00+00:00,ligue-1,"Lorient","Troyes",0.5542,0.2582,0.1876,home,2026-08-29,1,2,away,false
+2026-08-29T18:45:00+00:00,ligue-1,"Brest","Toulouse",0.3919,0.2841,0.3241,home,2026-08-29,2,2,draw,false
+2026-08-29T18:45:00+00:00,ligue-1,"Auxerre","Angers",0.5073,0.2691,0.2236,home,2026-08-29,1,3,away,false
+2026-08-29T19:30:00+00:00,la-liga,"Sevilla","Atletico",0.2269,0.2699,0.5031,away,2026-08-29,1,3,away,true
+2026-08-30T13:00:00+00:00,premier-league,"Chelsea","Brighton",0.3916,0.2841,0.3243,home,2026-08-30,4,3,home,true
+2026-08-30T13:00:00+00:00,premier-league,"Leeds","Brentford",0.3696,0.2848,0.3456,home,2026-08-30,1,1,draw,false
+2026-08-30T13:00:00+00:00,premier-league,"Sunderland","Fulham",0.3261,0.2842,0.3898,away,2026-08-30,1,0,home,false
+2026-08-30T13:00:00+00:00,ligue-1,"Paris FC","Nice",0.4686,0.276,0.2553,home,2026-08-30,3,0,home,true
+2026-08-30T13:30:00+00:00,bundesliga,"Freiburg","Werder",0.5565,0.2576,0.186,home,2026-08-30,4,1,home,true
+2026-08-30T15:00:00+00:00,la-liga,"Real Madrid","Malaga",0.8302,0.1396,0.0303,home,2026-08-30,4,0,home,true
+2026-08-30T15:15:00+00:00,ligue-1,"Rennes","Le Mans",0.6828,0.2148,0.1024,home,2026-08-30,3,2,home,true
+2026-08-30T15:30:00+00:00,premier-league,"Man United","Ipswich",0.696,0.2092,0.0948,home,2026-08-30,5,2,home,true
+2026-08-30T15:30:00+00:00,bundesliga,"Augsburg","Schalke",0.5538,0.2583,0.1879,home,2026-08-30,3,0,home,true
+2026-08-30T16:30:00+00:00,serie-a,"Napoli","Como",0.4527,0.2784,0.2689,home,2026-08-30,1,2,away,false
+2026-08-30T17:30:00+00:00,la-liga,"Depor","Valencia",0.2625,0.2773,0.4602,away,2026-08-30,3,1,home,false
+2026-08-30T18:45:00+00:00,serie-a,"Lazio","Genoa",0.543,0.261,0.196,home,2026-08-30,1,0,home,true
+2026-08-30T18:45:00+00:00,serie-a,"Cagliari","Inter",0.1298,0.2321,0.6381,away,2026-08-30,0,1,away,true
+2026-08-30T18:45:00+00:00,ligue-1,"Monaco","Marseille",0.4066,0.2831,0.3102,home,2026-08-30,2,0,home,true
+2026-08-30T19:30:00+00:00,la-liga,"Celta","Bilbao",0.4544,0.2781,0.2675,home,2026-08-30,0,2,away,false
+2026-08-31T16:30:00+00:00,serie-a,"Lecce","Roma",0.1863,0.2577,0.556,away,2026-08-31,0,4,away,true
+2026-08-31T17:30:00+00:00,la-liga,"Osasuna","Getafe",0.4212,0.2819,0.2969,home,2026-08-31,1,0,home,true
+2026-08-31T18:45:00+00:00,serie-a,"Atalanta","Bologna",0.5081,0.2689,0.223,home,2026-08-31,1,0,home,true
+2026-08-31T19:00:00+00:00,premier-league,"Aston Villa","Arsenal",0.2343,0.2717,0.494,away,2026-08-31,0,1,away,true
+2026-08-31T19:30:00+00:00,la-liga,"Barcelona","Rayo Vallecano",0.7287,0.1945,0.0768,home,2026-08-31,5,2,home,true
+2026-09-03T18:45:00+00:00,ligue-1,"Toulouse","Lille",0.2816,0.2802,0.4383,away,2026-09-03,0,1,away,true
+2026-09-03T19:00:00+00:00,la-liga,"Sociedad","Celta",0.4097,0.2829,0.3074,home,2026-09-03,0,0,draw,false
+2026-09-04T17:00:00+00:00,ligue-1,"Lyon","Auxerre",0.5875,0.2488,0.1636,home,2026-09-04,3,1,home,true
+2026-09-04T18:30:00+00:00,bundesliga,"Stuttgart","Koeln",0.6268,0.2361,0.1371,home,2026-09-04,4,1,home,true
+2026-09-04T18:45:00+00:00,serie-a,"Genoa","Como",0.2296,0.2706,0.4999,away,2026-09-04,1,4,away,true
+2026-09-04T19:00:00+00:00,premier-league,"Ipswich","Liverpool",0.149,0.2421,0.6089,away,2026-09-04,0,2,away,true
+2026-09-04T19:00:00+00:00,la-liga,"Betis","Real Madrid",0.2077,0.2647,0.5276,away,2026-09-04,1,0,home,false
+2026-09-04T19:05:00+00:00,ligue-1,"Paris SG","Monaco",0.6763,0.2175,0.1062,home,2026-09-04,1,2,away,false
+2026-09-05T11:30:00+00:00,premier-league,"Newcastle","Bournemouth",0.4013,0.2835,0.3152,home,2026-09-05,2,2,draw,false
+2026-09-05T13:00:00+00:00,serie-a,"Fiorentina","Torino",0.4468,0.2791,0.274,home,2026-09-05,1,2,away,false
+2026-09-05T13:30:00+00:00,bundesliga,"Werder","RB Leipzig",0.2253,0.2695,0.5052,away,2026-09-05,3,1,home,false
+2026-09-05T13:30:00+00:00,bundesliga,"Gladbach","Elversberg",0.5253,0.2652,0.2095,home,2026-09-05,3,4,away,false
+2026-09-05T13:30:00+00:00,bundesliga,"Hoffenheim","Dortmund",0.2478,0.2746,0.4776,away,2026-09-05,2,3,away,true
+2026-09-05T13:30:00+00:00,bundesliga,"Leverkusen","Union Berlin",0.6169,0.2395,0.1436,home,2026-09-05,4,0,home,true
+2026-09-05T13:30:00+00:00,bundesliga,"Paderborn","Freiburg",0.1979,0.2617,0.5405,away,2026-09-05,0,1,away,true
+2026-09-05T14:00:00+00:00,premier-league,"Fulham","Crystal Palace",0.4276,0.2813,0.2911,home,2026-09-05,2,3,away,false
+2026-09-05T14:00:00+00:00,premier-league,"Man City","Coventry",0.8054,0.1544,0.0403,home,2026-09-05,1,0,home,true
+2026-09-05T14:00:00+00:00,premier-league,"Brighton","Leeds",0.4659,0.2765,0.2577,home,2026-09-05,1,1,draw,false
+2026-09-05T14:00:00+00:00,premier-league,"Brentford","Sunderland",0.55,0.2593,0.1908,home,2026-09-05,1,1,draw,false
+2026-09-05T14:00:00+00:00,premier-league,"Forest","Tottenham",0.4892,0.2726,0.2383,home,2026-09-05,0,0,draw,false
+2026-09-05T14:15:00+00:00,la-liga,"Bilbao","Atletico",0.2347,0.2718,0.4935,away,2026-09-05,3,0,home,false
+2026-09-05T15:15:00+00:00,ligue-1,"Lens","Lorient",0.5819,0.2505,0.1676,home,2026-09-05,0,1,away,false
+2026-09-05T16:00:00+00:00,serie-a,"Inter","Napoli",0.5548,0.258,0.1872,home,2026-09-05,3,2,home,true
+2026-09-05T16:30:00+00:00,premier-league,"Hull","Aston Villa",0.1045,0.2163,0.6792,away,2026-09-05,0,0,draw,false
+2026-09-05T16:30:00+00:00,la-liga,"Rayo Vallecano","Santander",0.5355,0.2628,0.2016,home,2026-09-05,3,2,home,true
+2026-09-05T16:30:00+00:00,bundesliga,"Schalke","Bayern",0.0237,0.1269,0.8494,away,2026-09-05,0,0,draw,false
+2026-09-05T18:45:00+00:00,serie-a,"Roma","Atalanta",0.4613,0.2771,0.2615,home,2026-09-05,2,1,home,true
+2026-09-05T18:45:00+00:00,ligue-1,"Nice","Le Mans",0.5084,0.2689,0.2227,home,2026-09-05,1,1,draw,false
+2026-09-05T18:45:00+00:00,ligue-1,"Le Havre","Brest",0.368,0.2849,0.3472,home,2026-09-05,1,2,away,false
+2026-09-05T19:00:00+00:00,la-liga,"Villarreal","Depor",0.6311,0.2346,0.1343,home,2026-09-05,2,3,away,false
+2026-09-06T13:00:00+00:00,premier-league,"Everton","Man United",0.3272,0.2842,0.3886,away,2026-09-06,2,2,draw,false
+2026-09-06T13:00:00+00:00,serie-a,"Frosinone","Venezia",0.4259,0.2815,0.2926,home,2026-09-06,3,2,home,true
+2026-09-06T13:00:00+00:00,serie-a,"Parma","Monza",0.4737,0.2752,0.2511,home,2026-09-06,1,1,draw,false
+2026-09-06T13:00:00+00:00,ligue-1,"Troyes","Strasbourg",0.2298,0.2706,0.4995,away,2026-09-06,2,6,away,true
+2026-09-06T13:30:00+00:00,bundesliga,"Hamburg","Mainz",0.3347,0.2845,0.3807,away,2026-09-06,0,5,away,true
+2026-09-06T14:15:00+00:00,la-liga,"Valencia","Barcelona",0.1197,0.2262,0.6541,away,2026-09-06,0,5,away,true
+2026-09-06T15:15:00+00:00,ligue-1,"Angers","Rennes",0.2334,0.2715,0.4951,away,2026-09-06,1,2,away,true
+2026-09-06T15:30:00+00:00,premier-league,"Arsenal","Chelsea",0.6775,0.217,0.1055,home,2026-09-06,2,1,home,true
+2026-09-06T15:30:00+00:00,bundesliga,"Frankfurt","Augsburg",0.4364,0.2804,0.2832,home,2026-09-06,1,4,away,false
+2026-09-06T16:00:00+00:00,serie-a,"Bologna","Sassuolo",0.4831,0.2737,0.2432,home,2026-09-06,2,2,draw,false
+2026-09-06T16:30:00+00:00,la-liga,"Malaga","Levante",0.3135,0.2834,0.4031,away,2026-09-06,0,0,draw,false
+2026-09-06T16:30:00+00:00,la-liga,"Alaves","Osasuna",0.4093,0.2829,0.3077,home,2026-09-06,5,2,home,true
+2026-09-06T18:45:00+00:00,serie-a,"Juventus","Milan",0.4374,0.2803,0.2823,home,2026-09-06,1,1,draw,false
+2026-09-06T18:45:00+00:00,ligue-1,"Marseille","Paris FC",0.5084,0.2689,0.2227,home,2026-09-06,2,3,away,false
+2026-09-06T19:00:00+00:00,la-liga,"Espanyol","Sevilla",0.3985,0.2837,0.3178,home,2026-09-06,1,1,draw,false
+2026-09-07T16:30:00+00:00,serie-a,"Cagliari","Lecce",0.4447,0.2794,0.2759,home,2026-09-07,1,0,home,true
+2026-09-07T17:00:00+00:00,la-liga,"Getafe","Celta",0.3849,0.2844,0.3307,home,2026-09-07,1,1,draw,false
+2026-09-07T18:45:00+00:00,serie-a,"Udinese","Lazio",0.34,0.2847,0.3753,away,2026-09-07,1,2,away,true
+2026-09-07T19:30:00+00:00,la-liga,"Elche","Sociedad",0.3471,0.2849,0.3681,away,2026-09-07,2,3,away,true
+2026-09-11T18:30:00+00:00,bundesliga,"Union Berlin","Schalke",0.5241,0.2655,0.2104,home,2026-09-09,,,,
+2026-09-11T18:45:00+00:00,serie-a,"Venezia","Fiorentina",0.3484,0.2849,0.3667,away,2026-09-09,,,,
+2026-09-11T18:45:00+00:00,ligue-1,"Rennes","Marseille",0.4448,0.2794,0.2758,home,2026-09-09,,,,
+2026-09-11T19:00:00+00:00,la-liga,"Sevilla","Valencia",0.3996,0.2836,0.3168,home,2026-09-09,,,,
+2026-09-12T12:00:00+00:00,la-liga,"Santander","Alaves",0.3037,0.2826,0.4137,away,2026-09-09,,,,
+2026-09-12T13:00:00+00:00,serie-a,"Genoa","Frosinone",0.4113,0.2828,0.3059,home,2026-09-09,,,,
+2026-09-12T13:30:00+00:00,bundesliga,"Freiburg","Gladbach",0.5608,0.2564,0.1828,home,2026-09-09,,,,
+2026-09-12T13:30:00+00:00,bundesliga,"Mainz","Frankfurt",0.4657,0.2765,0.2578,home,2026-09-09,,,,
+2026-09-12T13:30:00+00:00,bundesliga,"Dortmund","Paderborn",0.7848,0.1659,0.0493,home,2026-09-09,,,,
+2026-09-12T13:30:00+00:00,bundesliga,"Hoffenheim","Stuttgart",0.3179,0.2837,0.3984,away,2026-09-09,,,,
+2026-09-12T13:30:00+00:00,bundesliga,"Augsburg","Leverkusen",0.27,0.2785,0.4515,away,2026-09-09,,,,
+2026-09-12T14:00:00+00:00,premier-league,"Bournemouth","Brentford",0.4384,0.2801,0.2815,home,2026-09-09,,,,
+2026-09-12T14:00:00+00:00,premier-league,"Liverpool","Fulham",0.5749,0.2525,0.1726,home,2026-09-09,,,,
+2026-09-12T14:00:00+00:00,premier-league,"Chelsea","Hull",0.7287,0.1945,0.0768,home,2026-09-09,,,,
+2026-09-12T14:00:00+00:00,premier-league,"Crystal Palace","Ipswich",0.598,0.2456,0.1564,home,2026-09-09,,,,
+2026-09-12T14:00:00+00:00,premier-league,"Aston Villa","Forest",0.5065,0.2693,0.2242,home,2026-09-09,,,,
+2026-09-12T14:15:00+00:00,la-liga,"Osasuna","Espanyol",0.4424,0.2797,0.2779,home,2026-09-09,,,,
+2026-09-12T15:15:00+00:00,ligue-1,"Strasbourg","Monaco",0.373,0.2848,0.3422,home,2026-09-09,,,,
+2026-09-12T16:00:00+00:00,serie-a,"Lazio","Milan",0.3719,0.2848,0.3433,home,2026-09-09,,,,
+2026-09-12T16:30:00+00:00,premier-league,"Tottenham","Everton",0.3396,0.2847,0.3757,away,2026-09-09,,,,
+2026-09-12T16:30:00+00:00,la-liga,"Bilbao","Elche",0.534,0.2632,0.2028,home,2026-09-09,,,,
+2026-09-12T16:30:00+00:00,bundesliga,"Koeln","Werder",0.3637,0.2849,0.3513,home,2026-09-09,,,,
+2026-09-12T18:45:00+00:00,serie-a,"Atalanta","Cagliari",0.6029,0.2441,0.1531,home,2026-09-09,,,,
+2026-09-12T18:45:00+00:00,ligue-1,"Lorient","Toulouse",0.4248,0.2816,0.2936,home,2026-09-09,,,,
+2026-09-12T18:45:00+00:00,ligue-1,"Auxerre","Nice",0.4402,0.2799,0.2799,home,2026-09-09,,,,
+2026-09-12T18:45:00+00:00,ligue-1,"Le Havre","Angers",0.4327,0.2808,0.2865,home,2026-09-09,,,,
+2026-09-12T18:45:00+00:00,ligue-1,"Paris FC","Lyon",0.3085,0.283,0.4085,away,2026-09-09,,,,
+2026-09-12T19:00:00+00:00,premier-league,"Sunderland","Arsenal",0.0946,0.2091,0.6963,away,2026-09-09,,,,
+2026-09-12T19:00:00+00:00,la-liga,"Real Madrid","Rayo Vallecano",0.6824,0.2149,0.1026,home,2026-09-09,,,,
+2026-09-13T12:00:00+00:00,la-liga,"Celta","Malaga",0.5492,0.2595,0.1913,home,2026-09-09,,,,
+2026-09-13T13:00:00+00:00,premier-league,"Coventry","Brighton",0.1946,0.2606,0.5448,away,2026-09-09,,,,
+2026-09-13T13:00:00+00:00,serie-a,"Lecce","Monza",0.4533,0.2783,0.2684,home,2026-09-09,,,,
+2026-09-13T13:00:00+00:00,ligue-1,"Lille","Troyes",0.6997,0.2076,0.0927,home,2026-09-09,,,,
+2026-09-13T13:30:00+00:00,bundesliga,"RB Leipzig","Hamburg",0.6215,0.2379,0.1406,home,2026-09-09,,,,
+2026-09-13T14:15:00+00:00,la-liga,"Levante","Barcelona",0.1001,0.2132,0.6867,away,2026-09-09,,,,
+2026-09-13T15:15:00+00:00,ligue-1,"Le Mans","Lens",0.1538,0.2444,0.6018,away,2026-09-09,,,,
+2026-09-13T15:30:00+00:00,premier-league,"Man United","Man City",0.3055,0.2828,0.4118,away,2026-09-09,,,,
+2026-09-13T15:30:00+00:00,bundesliga,"Elversberg","Bayern",0.0387,0.1522,0.8091,away,2026-09-09,,,,
+2026-09-13T16:00:00+00:00,serie-a,"Napoli","Bologna",0.5257,0.2651,0.2092,home,2026-09-09,,,,
+2026-09-13T16:30:00+00:00,la-liga,"Getafe","Depor",0.4887,0.2727,0.2386,home,2026-09-09,,,,
+2026-09-13T18:45:00+00:00,serie-a,"Sassuolo","Juventus",0.2459,0.2742,0.4799,away,2026-09-09,,,,
+2026-09-13T18:45:00+00:00,ligue-1,"Brest","Paris SG",0.1094,0.2196,0.671,away,2026-09-09,,,,
+2026-09-13T19:00:00+00:00,la-liga,"Sociedad","Atletico",0.2577,0.2765,0.4659,away,2026-09-09,,,,
+2026-09-14T16:30:00+00:00,serie-a,"Torino","Roma",0.2,0.2623,0.5377,away,2026-09-09,,,,
+2026-09-14T16:30:00+00:00,serie-a,"Como","Parma",0.6575,0.2249,0.1176,home,2026-09-09,,,,
+2026-09-14T18:45:00+00:00,serie-a,"Inter","Udinese",0.7142,0.2012,0.0846,home,2026-09-09,,,,
+2026-09-14T19:00:00+00:00,premier-league,"Leeds","Newcastle",0.369,0.2848,0.3461,home,2026-09-09,,,,
+2026-09-14T19:00:00+00:00,la-liga,"Villarreal","Betis",0.3869,0.2843,0.3288,home,2026-09-09,,,,
+2026-09-15T17:00:00+00:00,la-liga,"Rayo Vallecano","Espanyol",0.4906,0.2723,0.2371,home,2026-09-09,,,,
+2026-09-15T18:00:00+00:00,la-liga,"Alaves","Valencia",0.438,0.2802,0.2818,home,2026-09-09,,,,
+2026-09-15T19:30:00+00:00,la-liga,"Elche","Real Madrid",0.1021,0.2146,0.6833,away,2026-09-09,,,,
+2026-09-16T17:00:00+00:00,la-liga,"Atletico","Osasuna",0.6071,0.2427,0.1502,home,2026-09-09,,,,
+2026-09-16T17:00:00+00:00,la-liga,"Depor","Sevilla",0.3406,0.2847,0.3746,away,2026-09-09,,,,
+2026-09-16T19:30:00+00:00,la-liga,"Barcelona","Santander",0.8476,0.1283,0.0241,home,2026-09-09,,,,
+2026-09-16T19:30:00+00:00,la-liga,"Levante","Bilbao",0.3564,0.2849,0.3586,away,2026-09-09,,,,
