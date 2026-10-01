@@ -10,8 +10,9 @@ https://www.football-data.co.uk/mmz4281/{赛季}/{联赛代码}.csv
 
 import csv
 import os
-import subprocess
 import tempfile
+
+from _http import download_with_retry
 
 BASE_URL = "https://www.football-data.co.uk/mmz4281"
 
@@ -42,17 +43,11 @@ def download_csv(league_code, season, save_path=None):
         fd, save_path = tempfile.mkstemp(suffix=".csv")
         os.close(fd)
 
-    cmd = [
-        "curl", "-s", "-L", "--max-time", "30",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        "-o", save_path, url,
-    ]
-    subprocess.run(cmd, timeout=40, check=True)
-
-    # 验证文件有效
-    size = os.path.getsize(save_path)
-    if size < 1000:
-        raise RuntimeError(f"CSV下载异常，文件仅 {size} 字节: {url}")
+    # 必须跟随重定向 (-L)：www.football-data.co.uk → football-data.co.uk
+    download_with_retry(
+        url, save_path, follow_redirects=True, timeout=30,
+        max_retries=3, min_size=1000,
+    )
     return save_path
 
 

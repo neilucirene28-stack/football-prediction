@@ -60,7 +60,7 @@
 
 **不覆盖**: J联赛/K联赛/巴西/美职 (纯欧洲)
 **接入难度**: 极低。CSV 直接下载，pandas 一行读入。
-**推荐用途**: 欧洲联赛历史回填 (xG+赔率+比分三合一)，与现有 football-charts 互补。
+**推荐用途**: 欧洲联赛历史回填 (比分+多家赔率+射门/角球/牌三合一)，与现有 football-charts 互补。不含 xG。
 
 ---
 
@@ -146,7 +146,7 @@ england, espana, italy, deutschland, austria, south-america, europe, world, leag
 | 优先级 | 数据源 | 费用 | 核心价值 | 接入成本 |
 |---|---|---|---|---|
 | **P0** | **ESPN 隐藏 API** | 免费免key | 25+联赛实时比分/赛程/积分榜，覆盖 J1/巴西/美职/北欧 | 极低 |
-| **P1** | **football-data.co.uk** | 免费免key | 17个欧洲联赛，xG+多家赔率+比分三合一 CSV | 极低 |
+| **P1** | **football-data.co.uk** | 免费免key | 17个欧洲联赛，比分+多家赔率+射门/角球/牌三合一 CSV（无 xG） | 极低 |
 | **P2** | **thesportsdb** | 免费 (key=3) | 跨源球队 ID 映射，赛程补充 | 低 |
 | **P3** | **openfootball** | 免费 (公共领域) | 欧洲历史数据补充，无版权顾虑 | 低 |
 | 观察 | flashscore-scraper | 声称免费 | Flashscore 独家数据 | 待验证 |
@@ -165,15 +165,15 @@ england, espana, italy, deutschland, austria, south-america, europe, world, leag
 | 美职 | API-Football ✅ | ESPN ✅ | 无 |
 | 北欧 (瑞/挪/丹/芬) | The Odds API ✅ | ESPN ✅ | 无 |
 | 英冠/德乙等次级 | 部分 | ESPN + football-data.co.uk ✅ | 无 |
-| 欧洲 xG | Understat (5联赛) | football-data.co.uk (17联赛) ✅ | 大幅改善 |
+| 欧洲 xG | Understat (5联赛) | 仍只有 Understat（fd.co.uk 实测无 xG 列） | 未改善 |
 
-**结论**: 本次新增后，竞彩常客覆盖基本无缺口。最大增益是 **football-data.co.uk 的免费 xG** (17个欧洲联赛，Understat 只有5个)。
+**结论**: 本次新增后，竞彩常客覆盖基本无缺口。最大增益是 **ESPN 的免费实时比分/赛程**（覆盖 J1/巴西/美职/北欧）与 **football-data.co.uk 的历史比分+多家赔率**；欧洲 xG 仍只依赖 Understat 5 联赛。
 
 ---
 
 ## 六、建议接入顺序
 
 1. **ESPN 模块** (`collector/sources/espn.py`): `get_scoreboard(联赛代码)` + `get_standings(联赛代码)`，作为 API-Football 额度耗尽时的自动降级源
-2. **football-data.co.uk 模块** (`collector/sources/fd_co_uk.py`): CSV 下载 + 解析，重点提取 HxG/AxG 列，补欧洲联赛 xG 特征
+2. **football-data.co.uk 模块** (`collector/sources/fd_co_uk.py`): CSV 下载 + 解析，提取比分/多家初盘收盘赔率/射门角球牌（无 xG 列，xG 仍走 Understat）
 3. **thesportsdb 模块** (`collector/sources/thesportsdb.py`): 建跨源 ID 映射表 `team_id_map.json`
 4. openfootball 按需补充历史数据 (暂不写模块，用时直接 curl)

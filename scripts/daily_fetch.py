@@ -14,12 +14,16 @@
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.expanduser("~/workspace/football-prediction-v2")
 SRC_DIR = os.path.join(BASE_DIR, "collector", "sources")
 DATA_DIR = os.path.join(BASE_DIR, "data", "daily")
 sys.path.insert(0, SRC_DIR)
+
+# 清理 no_proxy 里的 IPv6 条目（httpx 会因此报 InvalidURL）
+from _http import clean_no_proxy
+clean_no_proxy()
 
 os.makedirs(DATA_DIR, exist_ok=True)
 
@@ -90,10 +94,36 @@ except Exception as e:
     results["sources"]["the_odds_api"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] The Odds API: {e}")
 
-# 4. theopenmodel: 五大联赛预测
+# 4. theopenmodel: 五大联赛预测（含新鲜度校验）
+#    防泄漏：只保留 kickoff > 抓取时刻的；快照过期（最新比赛距今>3天）标 stale
 try:
-    from openmodel import get_predictions
-    preds = get_predictions()
+    from openmodel import (
+        get_predictions, filter_upcoming, snapshot_is_stale,
+    )
+    fetch_time = datetime.now(timezone.utc)
+
+    # 全部未结算行 → 新鲜度检查 → 只要未来的
+    all_unsettled = get_predictions(only_upcoming=False)
+    future_preds = filter_upcoming(all_unsettled, asof=fetch_time)
+    stale = snapshot_is_stale(all_unsettled, asof=fetch_time, max_age_days=3)
+
+    latest_ko = None
+    warning = ""
+    kos = [p["kickoff"] for p in all_unsettled if p.get("kickoff")]
+    if kos:
+        latest_ko = max(kos)
+        age_days = (fetch_time - latest_ko).days
+        if stale:
+            if age_days > 3:
+                warning = (
+                    f"最新预测比赛 {latest_ko.strftime('%Y-%m-%d')} 距今 {age_days} 天，"
+                    "数据源疑似停更，预测不可作为当前推荐使用"
+                )
+            else:
+                warning = "预测快照为空或无可用场次"
+    else:
+        warning = "预测文件为空或无可解析的开球时间"
+
     # 转成可序列化格式
     def _ser(o):
         if isinstance(o, dict):
@@ -103,28 +133,86 @@ try:
         if hasattr(o, 'isoformat'):
             return o.isoformat()
         return o
-    preds_clean = _ser(preds) if isinstance(preds, list) else []
+    preds_clean = _ser(future_preds)
     save("openmodel_predictions", preds_clean)
     n = len(preds_clean)
-    results["sources"]["theopenmodel"] = {"ok": True, "count": n}
-    print(f"[OK] theopenmodel: {n}条预测")
+    results["sources"]["theopenmodel"] = {
+        "ok": True,
+        "count": n,
+        "total_parsed": len(all_unsettled),
+        "latest_kickoff": latest_ko.isoformat() if latest_ko else None,
+        "stale": stale,
+    }
+    if stale:
+        results["sources"]["theopenmodel"]["warning"] = warning
+        print(f"[WARN] theopenmodel 数据过期: {warning}")
+    print(f"[OK] theopenmodel: {n}条未来预测 (原始未结算{len(all_unsettled)}条)")
 except Exception as e:
     results["sources"]["theopenmodel"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] theopenmodel: {e}")
 
 # 5. football-charts: 历史比分增量 (J2/K1/K2)
+#    赛季探测：先试当年，不存在(unknown_season)则用 API 返回的可用赛季回退；
+#    无可用赛季记为 missing，绝不能把 unknown_season 记成成功。
 try:
-    from footballcharts import fetch_league_history
-    fc_counts = {}
+    from footballcharts import (
+        get_results, results_to_history,
+        parse_held_seasons, is_unknown_season_error,
+    )
+    cur_year = datetime.now().year
+
+    def _fetch_fc_with_season_probe(code):
+        """返回 (season_used, history)；无可用赛季时抛异常"""
+        candidates = [str(cur_year), str(cur_year - 1)]
+        tried = set()
+        note = ""
+        i = 0
+        while i < len(candidates):
+            season = candidates[i]
+            i += 1
+            if season in tried:
+                continue
+            tried.add(season)
+            try:
+                matches = get_results(code, season)
+            except Exception as e:
+                msg = str(e)
+                if is_unknown_season_error(msg):
+                    # API 会告诉实际持有的赛季，加入候选
+                    for hs in parse_held_seasons(msg):
+                        if hs not in tried and hs not in candidates:
+                            candidates.append(hs)
+                    note = f"{season}: unknown_season"
+                else:
+                    note = f"{season}: {msg[:120]}"
+                continue
+            if not matches:
+                note = f"{season}: 返回空"
+                continue
+            return season, results_to_history(matches)
+        raise RuntimeError(f"{code} 无可用赛季 (已试 {sorted(tried)}): {note}")
+
+    fc_report = {}
+    fc_all_ok = True
     for league, code in [("J2", "japan2"), ("K1", "korea1"), ("K2", "korea2")]:
         try:
-            history = fetch_league_history(code, seasons=["2026"])
-            fc_counts[league] = len(history)
+            season_used, history = _fetch_fc_with_season_probe(code)
+            entry = {"ok": True, "season": season_used, "count": len(history)}
+            if season_used != str(cur_year):
+                entry["note"] = f"{cur_year}赛季不存在，已回退到{season_used}赛季"
+            fc_report[league] = entry
+            print(f"  - {league}: {season_used}赛季 {len(history)}场")
         except Exception as e:
-            fc_counts[league] = f"失败: {e}"
-    save("fc_history_increment", fc_counts)
-    results["sources"]["football_charts"] = {"ok": True, "counts": fc_counts}
-    print(f"[OK] football-charts: {fc_counts}")
+            fc_report[league] = {"ok": False, "missing": True, "error": str(e)[:200]}
+            fc_all_ok = False
+            print(f"  - {league} 缺失: {e}")
+    save("fc_history_increment", fc_report)
+    results["sources"]["football_charts"] = {
+        "ok": fc_all_ok, "leagues": fc_report,
+    }
+    if not fc_all_ok:
+        results["sources"]["football_charts"]["partial"] = True
+    print(f"[{'OK' if fc_all_ok else 'WARN'}] football-charts: {fc_report}")
 except Exception as e:
     results["sources"]["football_charts"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] football-charts: {e}")

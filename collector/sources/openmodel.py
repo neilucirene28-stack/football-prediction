@@ -13,9 +13,10 @@ CC BY 4.0 协议免费使用。
 
 import csv
 import os
-import subprocess
 import time
-from datetime import datetime
+from datetime import datetime, timezone
+
+from _http import download_with_retry
 
 BASE_URL = "https://theopenmodel.com/data"
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "beidan-mvp", "data", "openmodel")
@@ -35,19 +36,11 @@ CACHE_TTL_HOURS = 12
 
 
 def _download(filename):
-    """下载 CSV 到缓存目录"""
+    """下载 CSV 到缓存目录（带重试/退避）"""
     os.makedirs(CACHE_DIR, exist_ok=True)
     url = f"{BASE_URL}/{filename}"
     dest = os.path.join(CACHE_DIR, filename)
-
-    cmd = [
-        "curl", "-s", "--max-time", "30",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        "-o", dest, url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=45)
-    if result.returncode != 0 or not os.path.exists(dest):
-        raise RuntimeError(f"下载失败: {url}")
+    download_with_retry(url, dest, timeout=30, max_retries=3, min_size=100)
     return dest
 
 
@@ -59,17 +52,49 @@ def _is_cache_fresh(filename):
     return age_hours < CACHE_TTL_HOURS
 
 
-def get_predictions(force_refresh=False):
+def filter_upcoming(predictions, asof=None):
     """
-    获取 The Open Model 的全部预测
-    返回: list of {
-        kickoff (datetime), league, home, away,
-        p_home, p_draw, p_away, model_pick
-    }
-    只返回未开赛的 (result 为空的)
+    只保留 kickoff 在 asof 之后的预测。
+
+    防泄漏：不能只凭 result 为空判断未开赛 —— 源文件里存在
+    kickoff 已过但 result 为空的陈旧行，必须按时间过滤。
+    纯函数，可离线测试。
     """
+    if asof is None:
+        asof = datetime.now(timezone.utc)
+    out = []
+    for p in predictions:
+        ko = p.get("kickoff")
+        if ko is None:
+            continue
+        if ko > asof:
+            out.append(p)
+    return out
+
+
+def snapshot_is_stale(predictions, asof=None, max_age_days=3):
+    """
+    预测快照是否过期：
+    - 空列表 → True
+    - 最新一场的 kickoff 距 asof 超过 max_age_days 天 → True
+    （说明源文件超过 max_age_days 天没有新增未来场次）
+    纯函数，可离线测试。
+    """
+    if not predictions:
+        return True
+    if asof is None:
+        asof = datetime.now(timezone.utc)
+    kickoffs = [p["kickoff"] for p in predictions if p.get("kickoff")]
+    if not kickoffs:
+        return True
+    newest = max(kickoffs)
+    return (asof - newest).total_seconds() > max_age_days * 86400
+
+
+def _parse_unsettled():
+    """解析 CSV 中所有 result 为空的行（不过滤开球时间）。内部用。"""
     filename = "predictions.csv"
-    if force_refresh or not _is_cache_fresh(filename):
+    if not _is_cache_fresh(filename):
         _download(filename)
 
     path = os.path.join(CACHE_DIR, filename)
@@ -102,6 +127,25 @@ def get_predictions(force_refresh=False):
                 "model_pick": row.get("modelPick", "").strip(),
                 "source": "theopenmodel",
             })
+    return out
+
+
+def get_predictions(force_refresh=False, only_upcoming=True):
+    """
+    获取 The Open Model 的全部预测
+    返回: list of {
+        kickoff (datetime), league, home, away,
+        p_home, p_draw, p_away, model_pick
+    }
+    only_upcoming=True（默认）: 只返回未开赛的 (result 为空 且 kickoff 在未来)，
+        防泄漏 —— 不能只凭 result 为空判断未开赛；
+    only_upcoming=False: 返回全部未结算行，供调用方做新鲜度检查后自行过滤。
+    """
+    if force_refresh:
+        _download("predictions.csv")
+    out = _parse_unsettled()
+    if only_upcoming:
+        out = filter_upcoming(out)
     return out
 
 

@@ -7,9 +7,9 @@ https://www.api-football.com/
 Key 存储: ~/.af_key (权限600, 不进git)
 """
 
-import json
 import os
-import subprocess
+
+from _http import fetch_with_retry
 
 BASE_URL = "https://v3.football.api-sports.io"
 KEY_FILE = os.path.join(os.path.dirname(__file__), "..", "..", ".af_key")
@@ -45,21 +45,15 @@ def _get_key():
 
 
 def _request(endpoint, params=None):
-    """调用 API-Football"""
+    """调用 API-Football（重试/退避由 _http.fetch_with_retry 统一处理）"""
     key = _get_key()
     url = f"{BASE_URL}{endpoint}"
     if params:
         qs = "&".join(f"{k}={v}" for k, v in params.items())
         url = f"{url}?{qs}"
-
-    cmd = [
-        "curl", "-s", "--max-time", "20",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        "-H", f"x-apisports-key: {key}",
-        url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=30)
-    data = json.loads(result.stdout)
+    data = fetch_with_retry(
+        url, headers={"x-apisports-key": key}, timeout=20,
+    )
     if data.get("errors"):
         raise RuntimeError(f"API 错误: {data['errors']}")
     return data

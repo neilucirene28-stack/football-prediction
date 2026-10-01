@@ -8,7 +8,8 @@ https://www.thesportsdb.com/api/v1/json/3/...
 
 import json
 import os
-import subprocess
+
+from _http import fetch_with_retry
 
 BASE_URL = "https://www.thesportsdb.com/api/v1/json/3"
 CACHE_FILE = os.path.join(os.path.dirname(__file__), "..", "..", "data", "team_id_map.json")
@@ -17,13 +18,7 @@ CACHE_FILE = os.path.abspath(CACHE_FILE)
 
 def _request(endpoint):
     url = f"{BASE_URL}/{endpoint}"
-    cmd = [
-        "curl", "-s", "--max-time", "20",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=30)
-    return json.loads(result.stdout)
+    return fetch_with_retry(url, timeout=20)
 
 
 def search_teams(league_name):

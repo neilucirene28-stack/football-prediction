@@ -6,8 +6,7 @@ https://site.api.espn.com/apis/site/v2/sports/soccer/{联赛代码}/scoreboard
 注意: 需 --compressed 解 gzip，否则部分联赛返回乱码
 """
 
-import json
-import subprocess
+from _http import fetch_with_retry
 
 BASE_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer"
 
@@ -40,13 +39,8 @@ def _request(path, params=None):
     if params:
         qs = "&".join(f"{k}={v}" for k, v in params.items())
         url = f"{url}?{qs}"
-    cmd = [
-        "curl", "-s", "--compressed", "--max-time", "20",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=30)
-    return json.loads(result.stdout)
+    # --compressed: ESPN 部分联赛返回 gzip，不解会乱码
+    return fetch_with_retry(url, extra_args=["--compressed"], timeout=20)
 
 
 def get_scoreboard(league_code, date_str=None):
@@ -62,7 +56,7 @@ def get_scoreboard(league_code, date_str=None):
     data = _request(f"/{code}/scoreboard", params)
     out = []
     for ev in data.get("events", []):
-        comp = ev.get("competitions", [{}])[0]
+        comp = (ev.get("competitions") or [{}])[0]
         competitors = comp.get("competitors", [])
         home = next((c for c in competitors if c.get("homeAway") == "home"), {})
         away = next((c for c in competitors if c.get("homeAway") == "away"), {})
@@ -99,7 +93,7 @@ def get_standings(league_code, season="2026"):
                 "gf": stats.get("pointsFor", 0),
                 "ga": stats.get("pointsAgainst", 0),
                 "points": stats.get("points", 0),
-                "rank": team.get("team", {}).get("id", ""),
+                "rank": stats.get("rank", ""),
             })
     return out
 

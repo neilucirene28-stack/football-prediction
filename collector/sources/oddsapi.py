@@ -7,9 +7,9 @@ https://the-odds-api.com/
 Key 存储: ~/.odds_key (权限600, 不进git)
 """
 
-import json
 import os
-import subprocess
+
+from _http import fetch_with_retry, fetch_response_headers
 
 BASE_URL = "https://api.the-odds-api.com/v4"
 KEY_FILE = os.path.join(os.path.dirname(__file__), "..", "..", ".odds_key")
@@ -54,13 +54,7 @@ def _request(endpoint, params=None):
     url = f"{BASE_URL}{endpoint}"
     qs = "&".join(f"{k}={v}" for k, v in params.items())
     url = f"{url}?{qs}"
-    cmd = [
-        "curl", "-s", "--max-time", "20",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=30)
-    return json.loads(result.stdout)
+    return fetch_with_retry(url, timeout=20)
 
 
 def get_odds(sport_key, markets="h2h", regions="eu", odds_format="decimal"):
@@ -99,25 +93,13 @@ def get_odds(sport_key, markets="h2h", regions="eu", odds_format="decimal"):
 
 
 def get_quota():
-    """查看剩余额度 (从响应头获取，这里用 /sports 调用估算)"""
-    # The Odds API 在响应头 x-requests-remaining 返回剩余额度
+    """查看剩余额度 (从响应头 x-requests-remaining / x-requests-used 获取)"""
     key = _get_key()
-    cmd = [
-        "curl", "-s", "-D", "-", "-o", "/dev/null", "--max-time", "15",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        f"{BASE_URL}/sports/?apiKey={key}",
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=20)
-    headers = result.stdout.decode()
-    remaining = None
-    used = None
-    for line in headers.split("\n"):
-        ll = line.lower()
-        if "x-requests-remaining" in ll:
-            remaining = line.split(":")[1].strip()
-        if "x-requests-used" in ll:
-            used = line.split(":")[1].strip()
-    return {"used": used, "remaining": remaining}
+    headers = fetch_response_headers(f"{BASE_URL}/sports/?apiKey={key}", timeout=15)
+    return {
+        "used": headers.get("x-requests-used"),
+        "remaining": headers.get("x-requests-remaining"),
+    }
 
 
 if __name__ == "__main__":

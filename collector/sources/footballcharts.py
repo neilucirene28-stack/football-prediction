@@ -12,11 +12,12 @@ Key 通过环境变量 FC_API_KEY 传入，不硬编码
 更早赛季需付费。J2/K2 等咱们之前完全缺的联赛，近两季数据已够用。
 """
 
-import json
 import os
-import subprocess
+import re
 import time
 from datetime import datetime, timezone
+
+from _http import fetch_with_retry, HTTPError
 
 BASE_URL = "https://footballcharts-backend.onrender.com/api/v1"
 ATTRIBUTION = "Data by football-charts.com"
@@ -60,7 +61,7 @@ def _get_api_key():
 
 
 def _request(path):
-    """带限流的 GET 请求 (经 curl 子进程，走系统代理配置)"""
+    """带限流的 GET 请求（重试/退避由 _http.fetch_with_retry 统一处理）"""
     global _last_request
     elapsed = time.time() - _last_request
     if elapsed < REQUEST_INTERVAL:
@@ -68,43 +69,33 @@ def _request(path):
 
     url = f"{BASE_URL}{path}"
     key = _get_api_key()
-
-    cmd = [
-        "curl", "-s", "--max-time", "30",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        "-H", "User-Agent: football-prediction-v2/1.0",
-        "-H", "Accept: application/json",
-    ]
+    headers = {
+        "User-Agent": "football-prediction-v2/1.0",
+        "Accept": "application/json",
+    }
     if key:
-        cmd += ["-H", f"Authorization: Bearer {key}"]
-    # 429 时把响应头也打出来判断
-    cmd += ["-w", "\n%{http_code}", url]
+        headers["Authorization"] = f"Bearer {key}"
+    try:
+        return fetch_with_retry(url, headers=headers, timeout=30, max_retries=3)
+    finally:
+        _last_request = time.time()
 
-    last_err = None
-    for attempt in range(3):
-        try:
-            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=45)
-            _last_request = time.time()
-            out = proc.stdout.rstrip("\n")
-            # 分离 body 和 status code
-            if "\n" in out:
-                body, code_str = out.rsplit("\n", 1)
-            else:
-                body, code_str = out, ""
-            try:
-                code = int(code_str.strip())
-            except ValueError:
-                code = 0
-            if code == 429:
-                time.sleep(60)
-                continue
-            if code != 200:
-                raise RuntimeError(f"football-charts API {code}: {path}: {body[:200]}")
-            return json.loads(body)
-        except (subprocess.TimeoutExpired, json.JSONDecodeError) as e:
-            last_err = e
-            time.sleep(2 * (attempt + 1))
-    raise RuntimeError(f"football-charts API 请求失败(3次重试): {path}: {last_err}")
+
+def parse_held_seasons(error_message):
+    """
+    从 unknown_season 错误里解析 API 实际持有的赛季列表。
+    错误形如: '"japan2" has no season "2026". ... Seasons held: 2025, 2024, 2023, ...'
+    返回: ["2025", "2024", ...]（无匹配时返回 []）
+    """
+    m = re.search(r"[Ss]easons held:\s*([\d,\s]+)", error_message or "")
+    if not m:
+        return []
+    return [s.strip() for s in m.group(1).split(",") if s.strip().isdigit()]
+
+
+def is_unknown_season_error(exc):
+    """判断异常是否为 unknown_season（赛季不存在），调用方可据此回退赛季"""
+    return "unknown_season" in str(exc)
 
 
 def get_leagues():

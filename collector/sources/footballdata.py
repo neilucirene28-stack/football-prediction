@@ -7,9 +7,9 @@ https://www.football-data.org/
 Key 存储: ~/.fd_key (权限600, 不进git)
 """
 
-import json
 import os
-import subprocess
+
+from _http import fetch_with_retry
 
 BASE_URL = "https://api.football-data.org/v4"
 KEY_FILE = os.path.join(os.path.dirname(__file__), "..", "..", ".fd_key")
@@ -43,14 +43,9 @@ def _request(endpoint, params=None):
     if params:
         qs = "&".join(f"{k}={v}" for k, v in params.items())
         url = f"{url}?{qs}"
-    cmd = [
-        "curl", "-s", "--max-time", "20",
-        "--cacert", "/run/hatch/egress-tls/ca-bundle.pem",
-        "-H", f"X-Auth-Token: {key}",
-        url,
-    ]
-    result = subprocess.run(cmd, capture_output=True, timeout=30)
-    return json.loads(result.stdout)
+    return fetch_with_retry(
+        url, headers={"X-Auth-Token": key}, timeout=20,
+    )
 
 
 def get_matches(date_from, date_to, competitions=None):
