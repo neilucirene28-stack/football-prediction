@@ -11,6 +11,7 @@
 - Transfermarkt: 伤停名单(每日) + 俱乐部身价(每周一)
 - BetExplorer: 降赔榜 + 主要联赛当前赔率 (drift 信号)
 - FootyStats: 球队 xG (总进球/上下单双独立信号)
+- 澳客北单: 六玩法即时SP + 500彩票交叉验证 (2026-10-06 接入)
 - Understat: xG数据 (每周一次，本脚本跳过，由weekly任务处理)
 
 输出: ~/workspace/football-prediction-v2/data/daily/YYYY-MM-DD/
@@ -472,6 +473,34 @@ try:
 except Exception as e:
     results["sources"]["fotmob"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] FotMob: {e}")
+
+# 14. 北单官方SP: 澳客六玩法即时SP + 500彩票交叉验证（2026-10-06 用户批准接入）
+try:
+    from beidan import get_all_sp, get_500_headers
+    bd_merged = get_all_sp()
+    bd_matches = {}
+    for (home, away), v in bd_merged.items():
+        bd_matches[f"{home}vs{away}"] = v
+    bd_500 = []
+    try:
+        bd_500 = get_500_headers()
+    except Exception as e:
+        print(f"  - 500北单交叉验证失败: {e}")
+    save("beidan_sp", {"source": "okooo",
+                       "matches": bd_matches,
+                       "w500_crosscheck": bd_500})
+    n_wdl = sum(1 for v in bd_matches.values() if v.get("sp_wdl"))
+    results["sources"]["beidan_sp"] = {
+        "ok": True, "matches": len(bd_matches),
+        "with_wdl": n_wdl, "w500_cross": len(bd_500),
+        "note": "澳客六玩法即时SP；WL为澳客自有让球胜负盘(0.5盘/两项)，"
+                "非官方北单让球胜平负，仅作市场信号",
+    }
+    print(f"[OK] 北单SP: {len(bd_matches)}场（胜平负 {n_wdl}场），"
+          f"500交叉 {len(bd_500)}场")
+except Exception as e:
+    results["sources"]["beidan_sp"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] 北单SP: {e}")
 
 # 保存汇总
 save("_summary", results)
