@@ -1,17 +1,22 @@
 """红黄牌 MVP 测试。"""
 import os
 import sys
+from datetime import datetime, timedelta
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from engine.cards import _pois_over, predict_cards
 from engine.predictor import _cards_block, predict
 
 
+def _future_ts(**kw):
+    return (datetime.now().astimezone() + timedelta(**kw)).isoformat()
+
+
 def _payload(**kw):
     p = {
         "home": "阿森纳", "away": "曼城", "competition": "英超",
-        "kickoff_at": "2026-10-05T02:45:00+08:00",
-        "snapshot_at": "2026-10-04T20:00:00+08:00",
+        "kickoff_at": _future_ts(days=2),
+        "snapshot_at": _future_ts(days=1),
         "league_avg_goals": 2.70,
         "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
         "away_recent": [{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)],

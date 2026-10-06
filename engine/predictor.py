@@ -18,7 +18,8 @@ from .strengths import estimate_lambdas, team_tier
 from .poisson import (score_matrix, match_probs, btts_prob, over_under_prob,
                       asian_handicap_probs, handicap_1x2, top_scores,
                       total_goals_distribution, expected_total_goals,
-                      main_goal_interval, half_time_probs)
+                      main_goal_interval, half_time_probs,
+                      half_full_1x2, total_goals_exact)
 from .market import (implied_proportional, shin_probs, overround,
                      kelly_fraction, market_drift, fair_handicap,
                      handicap_movement)
@@ -29,6 +30,9 @@ from .montecarlo import maybe_simulate
 from .cards import predict_cards
 from .market_flow import (flow_features, apply_volume_weight,
                           movement_features)
+from .letdraw import (calibrate_handicap_1x2, letdraw_guard)
+from .beidan_calibration import apply_beidan_calibration
+from .beidan_upset import upset_risk as beidan_upset_risk, risk_tier as beidan_risk_tier
 
 _CARDS_ALIAS = None
 
@@ -73,7 +77,13 @@ class PredictError(ValueError):
 
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
-ENGINE_VERSION = "2.4"
+ENGINE_VERSION = "2.5"
+
+
+# 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
+# 依据：69 场弱赛事回填，预测期望 3.09 vs 实际 2.84（+0.24 球系统性高估）；
+# 其他 502 场偏差仅 -0.03。见 docs/model-v25-changelog.md。
+WEAK_COMPETITIONS = {"欧国联", "友谊赛", "球会友谊", "亚运男足", "亚运女足"}
 
 
 def model_version(cfg: dict) -> str:
@@ -159,13 +169,26 @@ def _upset_risk(p_final, top3, movement, p_draw) -> tuple[float, list[str]]:
 
 
 def predict(payload: dict, config: dict | None = None,
-          asof: datetime | None = None) -> dict:
-    """asof: 回测用虚拟"现在"时间。生产调用必须为 None。"""
+          asof: datetime | None = None, model: str = "jingcai") -> dict:
+    """asof: 回测用虚拟"现在"时间。生产调用必须为 None。
+
+    model: "jingcai"（默认，现有行为）| "beidan"（北单适配层：
+           北单专属Platt校准 + 冷门分层风险分 + 六玩法输出标记）。
+    数学引擎（Poisson/Dixon-Coles/Elo）两者共享，不重写。
+    """
+    if model not in ("jingcai", "beidan"):
+        raise PredictError(f"未知模型: {model}")
     cfg = {"rho": -0.13, "kelly_fraction": 0.25, "model_edge": 0.0,
            "decay": 0.90, "ht_factor": 0.44, "mc_n": 20000,
            "mc_min_score": 60, "platt": None,
            # 攻防评级向联赛均值收缩的先验权重（场）；0 = 关闭收缩
            "shrink_prior": 3.0,
+           # 弱赛事（欧国联/友谊赛等）用更强的收缩先验；0 = 不区分
+           "weak_shrink_prior": 6.0,
+           # 弱赛事期望总进球封顶；0 = 不封顶
+           "weak_goal_cap": 2.8,
+           # 让平校准混合权重（0=关闭，0.5=默认）；见 engine/letdraw.py
+           "letdraw_strength": 0.5,
            # 背离门控：模型信号与市场信号首选方向不一致且差距超过此阈值时
            # 自动触发背离警告并下调信心一档。0 = 关闭门控
            "divergence_gate": 0.15}
@@ -211,14 +234,26 @@ def predict(payload: dict, config: dict | None = None,
     # 中立场地（如杯赛决赛/锦标赛）：主队无主场加成
     neutral = bool(payload.get("neutral_site"))
     ht, at_ = team_tier(home_recent), team_tier(away_recent)
+    # v2.5：弱赛事用更强的收缩先验（弱队进攻 λ 系统性高估，见 WEAK_COMPETITIONS）
+    # 用户显式传入 shrink_prior 时优先尊重用户设置（可复现/可关闭）
+    competition = payload.get("competition", "")
+    is_weak = competition in WEAK_COMPETITIONS
+    user_cfg = config or {}
+    if is_weak and "shrink_prior" not in user_cfg and cfg.get("weak_shrink_prior"):
+        eff_shrink = cfg["weak_shrink_prior"]
+    else:
+        eff_shrink = cfg["shrink_prior"]
     lam_h, lam_a, lam_notes = estimate_lambdas(
         home_recent, away_recent, league_avg,
         injury=payload.get("injury"), decay=cfg["decay"],
         home_adv_factor=1.0 if neutral else 1.12,
         home_tier=ht, away_tier=at_,
-        shrink_prior=cfg["shrink_prior"])
+        shrink_prior=eff_shrink)
     lam_notes["home_adv_factor"] = 1.0 if neutral else 1.12
     lam_notes["neutral_site"] = neutral
+    lam_notes["weak_competition"] = is_weak
+    if is_weak:
+        lam_notes["shrink_prior_effective"] = eff_shrink
 
     h2h = payload.get("h2h") or []
     if h2h:
@@ -228,6 +263,15 @@ def predict(payload: dict, config: dict | None = None,
         lam_h *= (1 + adj)
         lam_a *= (1 - adj)
         lam_notes["h2h_adjust"] = round(adj, 4)
+
+    # v2.5：弱赛事期望总进球封顶（按比例缩放，保持主客比例）
+    weak_cap = cfg.get("weak_goal_cap") or 0
+    if is_weak and weak_cap > 0 and lam_h + lam_a > weak_cap:
+        scale = weak_cap / (lam_h + lam_a)
+        lam_h *= scale
+        lam_a *= scale
+        lam_notes["weak_goal_cap_applied"] = {
+            "cap": weak_cap, "scale": round(scale, 4)}
 
     # ---- 4. 比分矩阵 → 模型信号 ----
     matrix = score_matrix(lam_h, lam_a, rho=cfg["rho"])
@@ -327,6 +371,14 @@ def predict(payload: dict, config: dict | None = None,
         "cards": _cards_block(payload),
         "half_time": half_time_probs(lam_h, lam_a, ht_factor=cfg["ht_factor"],
                                      rho=cfg["rho"]),
+        # 输出格式升级（对齐竞彩官方五大玩法）：半全场 9 种组合 + 总进球精确分布。
+        # 纯输出项，不改变任何概率逻辑，ENGINE_VERSION 保持 2.5。
+        "half_full_1x2": {k: round(v, 4) for k, v in
+                          half_full_1x2(lam_h, lam_a,
+                                        ht_factor=cfg["ht_factor"],
+                                        rho=cfg["rho"]).items()},
+        "total_goals_exact": {str(k): round(v, 4) for k, v in
+                              total_goals_exact(matrix).items()},
     }
     interval, interval_p = main_goal_interval(matrix)
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
@@ -355,8 +407,17 @@ def predict(payload: dict, config: dict | None = None,
     handicap = payload.get("handicap_line")
     if handicap is not None:
         h, d, a = handicap_1x2(matrix, int(handicap))
-        deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h, 4),
-                                 "p_draw": round(d, 4), "p_away": round(a, 4)}
+        # v2.5：让平校准（修正矩阵系统性低估 P(让平)；见 engine/letdraw.py）
+        h2, d2, a2 = calibrate_handicap_1x2(
+            h, d, a, int(handicap), league=competition,
+            strength=cfg.get("letdraw_strength", 0.5))
+        deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
+                                 "p_draw": round(d2, 4), "p_away": round(a2, 4),
+                                 "p_home_raw": round(h, 4),
+                                 "p_draw_raw": round(d, 4),
+                                 "p_away_raw": round(a, 4),
+                                 "letdraw_guard": letdraw_guard(
+                                     h2, d2, a2, int(handicap))}
 
     # 冷门比分：第二可能结果中概率最高的比分
     order = sorted(range(3), key=lambda i: p_final[i], reverse=True)
@@ -419,8 +480,37 @@ def predict(payload: dict, config: dict | None = None,
         "value_outcomes": [v["outcome"] for v in value],
     }
 
+    # ---- 北单适配层（model='beidan' 时启用，与竞彩链路隔离） ----
+    beidan_out = {}
+    if model == "beidan":
+        # 北单专属Platt校准：对胜平负首选、让球首选、总进球首选分别校准
+        p_top_sp = max(p_home, p_draw, p_away)
+        beidan_out["calibrated_p_top_sp"] = round(apply_beidan_calibration("sp", p_top_sp), 4)
+        # 让球首选概率（从 handicap_1x2 取）
+        try:
+            h1x2 = deriv.get("handicap_1x2", {})
+            p_top_rq = max(h1x2.get("p_home", 0), h1x2.get("p_draw", 0), h1x2.get("p_away", 0))
+        except Exception:
+            p_top_rq = p_top_sp
+        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4)
+        # 冷门分层：翻车风险分
+        rq_val = 0
+        try:
+            rq_val = int(payload.get("handicap", 0) or 0)
+        except (ValueError, TypeError):
+            rq_val = 0
+        b_risk = beidan_upset_risk(
+            p_model_top=p_top_sp,
+            handicap=rq_val,
+            league=payload.get("competition", "") or payload.get("league", ""),
+        )
+        beidan_out["upset_risk"] = b_risk
+        beidan_out["upset_risk_tier"] = beidan_risk_tier(b_risk)
+        beidan_out["playtypes"] = ["胜平负", "让球胜平负", "比分", "总进球", "半全场", "上下单双"]
+
     return {
         "status": "ok",
+        "model": model,
         "model_version": version,
         "match": {"home": home, "away": away,
                   "competition": payload.get("competition", ""),
@@ -447,6 +537,7 @@ def predict(payload: dict, config: dict | None = None,
         "divergence": divergence,
         "upset_risk": risk,
         "upset_risk_factors": risk_factors,
+        "beidan": beidan_out,
         "monte_carlo": mc,
         "calibrated": platt_on,
         "recommendation": recommendation,

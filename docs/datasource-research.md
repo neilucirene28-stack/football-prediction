@@ -1,3 +1,92 @@
+# 足球数据源调研报告 (第三批)
+
+> 调研时间: 2026-10-05
+> 方法: 全部结论来自本机实测 (代理CA: /run/hatch/egress-tls/ca-bundle.pem)，未实测的不写
+> 状态: 4 个源已全部接入默认管线 (scripts/daily_fetch.py 第 7–10 节)
+
+---
+
+## 一、实测可用 ✅（已接入默认管线）
+
+### 1. Matchbook Exchange API ⭐ 交易量数据源
+
+- **地址**: `GET https://api.matchbook.com/edge/rest/events?sport-ids=15&per-page=200`
+- **费用**: 完全免费，无需 key
+- **返回**: JSON，event 含 `name`（"Home vs Away"）、`start`（ISO）、`volume`（交易量）、`markets`、`status`
+- **实测** (2026-10-05): 130 场未开赛 open 场次，交易量中位数 348
+- **用途**: 用户明确要求的交易量信号。`volume_weight()` 影子特征已实现
+  （相对当日中位数的对数权重，上限 3.0 下限 0.2），**只记录不进生产**
+- **验证**: 影子模式 → walk-forward 有效才考虑接入；验证桩 `scripts/validate_volume_shadow.py`
+- **模块**: `collector/sources/matchbook.py::get_upcoming_volumes()`
+- **落盘**: `data/daily/YYYY-MM-DD/matchbook_volume.json`
+  （每场含 home/away/start/volume/volume_weight）
+
+### 1b. Smarkets Exchange API ⭐ 第二交易所赔率源（2026-10-05 接入）
+
+- **地址**: `GET https://api.smarkets.com/v3/events/?type=football_match&state=upcoming&limit=20&sort=start_datetime,id`
+- **费用**: 完全免费，无需 key、无需注册
+- **链路**: events → `/v3/events/{id}/markets/` 找 `market_type.name=="WINNER_3_WAY"`（全场胜平负）
+  → `/v3/markets/{mid}/contracts/`（contract_type: HOME/DRAW/AWAY）
+  → `/v3/markets/{mid}/quotes/`（按 contract_id 分组的 bids/offers，price 为万分比概率）
+- **实测**: 买卖中点转十进制赔率（如 Barcelona vs Getafe 主胜中点 1.10）；今日 7 场竞彩（塞浦路斯/黑山等）在列
+- **注意**: v3 REST **无 volume/成交额字段**——这是赔率源不是成交量源（成交量只有 Matchbook）
+  limit>30 返回空，用 20+分页；sort 只能用 `start_datetime,id`
+- **用途**: 1X2 买卖中点（mid_1/mid_x/mid_2）+ 买卖价差，独立交易所市场信号
+- **模块**: `collector/sources/smarkets.py::get_upcoming_quotes()`
+- **落盘**: `data/daily/YYYY-MM-DD/smarkets_quotes.json`（daily_fetch 第 7a 节）
+
+### 2. Transfermarkt ⭐ 伤停 + 俱乐部身价
+
+- **地址**: `https://www.transfermarkt.com/premier-league/verletztespieler/wettbewerbsauswahl/...`
+  （伤停）；`https://www.transfermarkt.com/premier-league/startseite/...`（身价）
+- **费用**: 完全免费，无需 key，静态 HTML 可抓
+- **注意**: 必须带桌面 UA，否则返回极简错误页；请求间隔 ≥2 秒保持礼貌
+- **实测** (2026-10-05): 伤停 68 人（含球员/位置/俱乐部/伤情/预计回归）；
+  俱乐部身价 20 队（如曼城 €1430m、阿森纳 €1330m）
+- **GitHub 评估** (按长期规矩先搜): `omkarcloud/transfermarkt-scraper` 仅 1★
+  且为 FastAPI 服务形态需独立部署，与本项目采集器直调形态不合 → 直接静态解析
+- **频率**: 伤停每日；身价每周一（低频，球队实力先验）
+- **模块**: `collector/sources/transfermarkt.py::get_injuries()/get_club_values()`
+- **落盘**: `data/daily/YYYY-MM-DD/tm_injuries.json`、`tm_club_values.json`（周一）
+
+### 3. BetExplorer ⭐ 当前赔率 + 降赔榜
+
+- **地址**: `https://www.betexplorer.com/football/<country>/<league>/`
+  （注意路径是 `/football/` 不是 `/soccer/`）；降赔榜 `/football/dropping-odds/`
+- **费用**: 完全免费，无需 key，静态 HTML 可抓
+- **实测** (2026-10-05): 联赛页 10 行（比分/当前 1X2 赔率，`data-odd` 属性）；
+  降赔榜 6–7 场（含 drop% 与庄家覆盖数）
+- **注意**: 单场详情页赔率对比表是 JS 渲染，静态抓不到；
+  开盘赔率已有 Titan007（90家欧指初盘），这里只取当前赔率 + 异动
+- **用途**: drift 信号（当前赔率 vs Titan007 初盘对照）+ 降赔榜异动
+- **模块**: `collector/sources/betexplorer.py::get_league_odds()/get_dropping_odds()`
+- **落盘**: `data/daily/YYYY-MM-DD/be_league_odds.json`、`be_dropping_odds.json`
+
+### 4. FootyStats ⭐ 球队 xG
+
+- **地址**: `https://footystats.org/<country>/<league>/xg`
+- **费用**: 完全免费，无需 key，静态 HTML 可抓
+- **实测** (2026-10-05): 英超 20 队，MP/xG/xGA/xGD/GF/GA
+  （如曼联 xG 2.31/xGA 1.25，布莱顿 xG 2.04/xGA 1.23）
+- **注意**: 页面部分 `<td>` 未闭合 + 嵌套表格 hover-modal，HTMLParser 需防御性解析；
+  队名在单元格内重复出现，需去重清洗
+- **用途**: 独立于自有引擎的第三方 xG 信号，用于总进球/上下单双玩法的独立校验
+- **模块**: `collector/sources/footystats.py::get_team_xg()`
+- **落盘**: `data/daily/YYYY-MM-DD/fs_team_xg.json`
+
+---
+
+## 二、配套改动 (2026-10-05)
+
+- **队名映射**: 新建 `collector/sources/team_names.py`
+  （normalize: 小写/去 FC 后缀/&→and + lookup 查 `data/team_id_map.json`）；
+  `team_id_map.json` 从 50 队补到 66 队（补 16 支英超缺失队，ID 未知留空不编造）
+- **管线**: `scripts/daily_fetch.py` 新增第 7–10 节，`_summary.json` 同步更新
+- **纪律**: 4 源全部只读免费，不碰 API-Football / The Odds API 配额；
+  engine/ 权重/融合/门控一律未动
+
+---
+
 # 足球数据源调研报告 (第二批)
 
 > 调研时间: 2026-10-01
@@ -177,3 +266,62 @@ england, espana, italy, deutschland, austria, south-america, europe, world, leag
 2. **football-data.co.uk 模块** (`collector/sources/fd_co_uk.py`): CSV 下载 + 解析，提取比分/多家初盘收盘赔率/射门角球牌（无 xG 列，xG 仍走 Understat）
 3. **thesportsdb 模块** (`collector/sources/thesportsdb.py`): 建跨源 ID 映射表 `team_id_map.json`
 4. openfootball 按需补充历史数据 (暂不写模块，用时直接 curl)
+
+---
+
+## 七、2026-10-05 联赛扩覆盖（第四批接入的 4 源从 5 联赛扩到 15 联赛）
+
+用户批准"加入"后，transfermarkt / betexplorer / footystats 从五大联赛扩展到 15 联赛：
+英超、西甲、意甲、德甲、法甲、英冠、西乙、德乙、法乙、荷甲、葡超、巴西甲、美职、J1联赛、K1联赛。
+（matchbook 本来就是全局事件流，无需扩。）
+
+新增/修正的映射（实测发现）：
+- transfermarkt：法乙 ("ligue-2","FR2")；J1 ("j1-league","JAP1")——注意不是 JPN1；K1 ("k-league-1","RSK1")——注意不是 KOR1
+- betexplorer：法乙 france/ligue-2；J1 japan/j1-league；K1 south-korea/k-league-1；巴西甲路径冠名变为 brazil/serie-a-betano（旧 brazil/serie-a 已 301 到首页）
+- footystats：西乙 spain/segunda-division；德乙 germany/2-bundesliga；法乙 france/ligue-2；J1 japan/j1-league（注意不是 j-league）；K1 south-korea/k-league-1；另修正旧映射：西甲 spain/laliga→spain/la-liga、葡超 portugal/liga-portugal→portugal/liga-nos（旧 slug 已被 CF 质询页取代）
+
+实测结果（2026-10-05，逐联赛端到端）：
+- transfermarkt：15/15 伤停（共 725 人）、15/15 身价（共 297 队）；J1 身价曾遇一次 405 偶发反爬，重试通过
+- betexplorer：15/15 联赛赔率 + 降赔榜；K1 仅 1 行（赛季末场次少，正常）
+- footystats：15/15（共 296 队 xG）
+
+daily_fetch.py：新增 EXPANDED_LEAGUES（15 联赛），第 8/9/10 节循环抓取，逐联赛 try/except 隔离失败。
+耗时影响：每日约 +2 分钟（transfermarkt 礼貌间隔 2s×15 联赛为主）；周一身价日约 +3.5 分钟。
+
+## 八、2026-10-05 澳客/500彩票网补数据（用户点名要亚盘/大小球/阵容/伤停/H2H/xG）
+
+用户指出澳客网和500彩票网有这些数据，要求抓回。实测结论：
+
+### 澳客 (www.okooo.com) —— 部分可用 ✅（history 页已接入默认管线第 11 节）
+
+- **`/jingcai/` 当前对阵页**：200。含 data-mid、队名、让球rq、竞彩SP。注意日期页
+  `/jingcai/YYYY-MM-DD` 会 301 跳到带斜杠地址再 405（反爬），只能用当前页。
+- **`/soccer/match/{mid}/history/`**：200，~300KB 纯静态。含两队交锋（H2H）、
+  双方近10场战绩、联赛排名、未来赛程；每场附 99家平均欧指终指 + 365亚盘
+  （水位/盘口/水位）；首行为本场即时指数。7/7 一次抓通（后又 7/7，14/14 稳定）。
+- **`/soccer/match/{mid}/odds/`**：部分 200 但只是 AJAX 壳，欧赔数据走
+  `Remoting/json.php`，静态抓不到。
+- **`/ah/`、`/overunder/`、`/qingbao/`（情报/阵容伤停）、对阵页 base**：
+  405 反爬（时好时坏，重试偶尔可过），不稳定，不依赖。
+- **静态缺失**：大小球、欧赔/亚盘初盘、阵容/首发/伤停、xG（澳客无 xG）。
+- **模块**：`collector/sources/okooo.py`（`get_board_map`/`find_mid`/`get_match_history`，
+  405 有限重试 + 4s 礼貌间隔）；落盘 `data/daily/YYYY-MM-DD/okooo_history.json`。
+
+### 500彩票网 —— 静态不可用 ❌（只报"手动/单次可用"，不硬接）
+
+- `www.500.com` 首页 200：有 7 场对阵卡片，链接全部指向 `odds.500.com/fenxi/youliao-{id}.shtml`
+  （7 场 ID 已映射：1398658/1398656/1398612/1398659/1398609/1398654/1398615）。
+- `odds.500.com` 全站 EO_Bot_Ssid JS 质询，静态抓不到任何数据页。
+- `live.500.com` 200 但数据 JS 驱动，静态无对阵 ID。
+- 结论：500 的数据（亚盘/大小球/情报）只能走浏览器人工看，不做长期静态源。
+
+### 本次 7 场实际补回的数据
+
+`data/daily/2026-10-05/okooo_500_matches.json`：
+- 每场：双方近10场战绩（含每场欧指+亚盘）、H2H（1~10场）、本场即时欧指99家平均、
+  本场即时亚盘365（盘口+水位）。
+- 仍缺（已如实标缺失）：大小球、欧赔/亚盘初盘、阵容/首发/伤停、xG。
+  - 伤停可用 transfermarkt（俱乐部口径；国家队比赛日本身无俱乐部伤停概念，
+    且开球前 14h 首发未公布，属合理缺失）。
+  - 大小球/初盘：vip.titan007.com（亚让13家/大小球16家）本机仍 000 不通；
+    500/澳客对应页静态不可抓 → 需浏览器单次抓取，或接受缺失。

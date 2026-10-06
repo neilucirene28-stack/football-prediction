@@ -2,3 +2,10 @@
 .af_key
 .fd_key
 .odds_key
+.venv/
+.venv-soccerdata/
+.pytest_cache/
+__pycache__/
+*.pyc
+data/daily/
+data/backfill/

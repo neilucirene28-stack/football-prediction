@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -12,11 +13,16 @@ def _mk(n_home, n_away, venue):
     return [{"gf": n_home, "ga": n_away, "venue": venue} for _ in range(8)]
 
 
+def _future_ts(**kw):
+    # 测试固件用相对时间，避免硬编码日期过期导致 predict 拒单
+    return (datetime.now().astimezone() + timedelta(**kw)).isoformat()
+
+
 def sample_payload(**kw):
     p = {
         "home": "土耳其", "away": "意大利", "competition": "欧国联",
-        "kickoff_at": "2026-10-05T02:45:00+08:00",
-        "snapshot_at": "2026-10-04T20:00:00+08:00",
+        "kickoff_at": _future_ts(days=2),
+        "snapshot_at": _future_ts(days=1),
         "league_avg_goals": 2.70,
         "home_recent": _mk(2, 1, "H"),
         "away_recent": _mk(1, 1, "A"),
@@ -78,8 +84,10 @@ def _extreme_small_sample(venue):
 
 
 def test_shrinkage_dampens_extreme_small_sample():
+    # 用非弱赛事联赛，避免弱赛事 goal_cap 干扰收缩机制本身的验证
     p = sample_payload(home_recent=_extreme_small_sample("H"),
-                       away_recent=_mk(1, 1, "A"), odds=None)
+                       away_recent=_mk(1, 1, "A"), odds=None,
+                       competition="英超")
     r_noshrink = predict(p, config={"shrink_prior": 0.0})
     r_shrink = predict(p, config={"shrink_prior": 3.0})
     # 收缩后：主队进球期望向联赛均值回落（3.965 → 3.344，约 -16%）
@@ -165,9 +173,12 @@ def test_shrinkage_raises_push_prob_and_tames_cover_prob():
         home_recent=[{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
         away_recent=[{"gf": 1, "ga": 2, "venue": "A"} for _ in range(8)],
         handicap_line=-2, odds=None,
+        # 非弱赛事：避免弱赛事 goal_cap / 让平校准干扰收缩机制验证
+        competition="英超",
     )
-    r0 = predict(p, config={"shrink_prior": 0.0})   # v2.3 行为
-    r3 = predict(p, config={"shrink_prior": 3.0})   # v2.4 行为
+    # 让平校准会压缩原始差异，此处只验证收缩机制本身，关闭校准
+    r0 = predict(p, config={"shrink_prior": 0.0, "letdraw_strength": 0.0})   # v2.3 行为
+    r3 = predict(p, config={"shrink_prior": 3.0, "letdraw_strength": 0.0})   # v2.4 行为
     h0, h3 = r0["derivatives"]["handicap_1x2"], r3["derivatives"]["handicap_1x2"]
     assert h0["line"] == h3["line"] == -2
     # 收缩后：净胜恰=2（让平）概率上升，净胜≥3（穿盘）概率下降
@@ -210,3 +221,68 @@ def test_degraded_small_sample_flag_and_no_overconfidence():
     assert order.index(r_deg["confidence"]) >= order.index(r_deg["grade"])
     # 非 degraded 对照组不受该标记影响（degraded=False 不应成为降档原因）
     assert r_ok["lambda_notes"]["degraded"] is False
+
+
+# ---------------- v2.5：弱赛事收缩/封顶 + 让平校准 ----------------
+
+def _weak_payload(**kw):
+    # 高进球样本，确保期望总进球 > 2.8 以触发封顶
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 1, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 2, "ga": 2, "venue": "A"} for _ in range(8)],
+        odds=None, competition="欧国联")
+    p.update(kw)
+    return p
+
+
+def test_weak_competition_uses_stronger_shrink():
+    r = predict(_weak_payload())
+    assert r["lambda_notes"]["weak_competition"] is True
+    assert r["lambda_notes"]["shrink_prior_effective"] == 6.0
+
+
+def test_strong_competition_uses_default_shrink():
+    p = _weak_payload(competition="英超")
+    r = predict(p)
+    assert r["lambda_notes"]["weak_competition"] is False
+    assert "shrink_prior_effective" not in r["lambda_notes"]
+    assert r["lambda_notes"]["shrink_prior"] == 3.0
+
+
+def test_weak_goal_cap_applied():
+    r = predict(_weak_payload())
+    notes = r["lambda_notes"]
+    assert "weak_goal_cap_applied" in notes
+    assert r["lambda_home"] + r["lambda_away"] <= 2.8 + 1e-9
+    # 主客比例保持
+    assert notes["weak_goal_cap_applied"]["cap"] == 2.8
+
+
+def test_weak_goal_cap_disabled_by_config():
+    r = predict(_weak_payload(), config={"weak_goal_cap": 0})
+    assert "weak_goal_cap_applied" not in r["lambda_notes"]
+
+
+def test_explicit_shrink_prior_wins_over_weak_default():
+    # 用户显式设置优先于弱赛事默认（可复现/可关闭）
+    r = predict(_weak_payload(), config={"shrink_prior": 0.0})
+    assert r["lambda_notes"]["shrink_prior"] == 0.0
+
+
+def test_letdraw_calibration_in_handicap_output():
+    p = sample_payload(handicap_line=-1, odds=None, competition="英超")
+    r = predict(p)
+    h = r["derivatives"]["handicap_1x2"]
+    # 校准后 p_draw 向 0.25 先验靠拢（raw 值保留供审计；输出保留 4 位小数）
+    assert "p_draw_raw" in h
+    assert abs(h["p_draw"] - (0.5 * h["p_draw_raw"] + 0.5 * 0.25)) < 1e-3
+    assert abs(h["p_home"] + h["p_draw"] + h["p_away"] - 1.0) < 1e-3
+    assert "letdraw_guard" in h
+    assert isinstance(h["letdraw_guard"]["flags"], list)
+
+
+def test_letdraw_calibration_disabled_by_config():
+    p = sample_payload(handicap_line=-1, odds=None, competition="英超")
+    r = predict(p, config={"letdraw_strength": 0.0})
+    h = r["derivatives"]["handicap_1x2"]
+    assert h["p_draw"] == h["p_draw_raw"]

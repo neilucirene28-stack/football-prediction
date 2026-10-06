@@ -6,6 +6,11 @@
 - The Odds API: 实时赔率快照 (500次/月，约用10-15次)
 - football-charts: 历史比分增量 (5000次/天，约用10次)
 - theopenmodel: 五大联赛预测 (免费)
+- ESPN 隐藏 API: 实时比分/赛程 (免费无限制)
+- Matchbook: 交易量快照 (volume_weight 影子特征，只记录不进生产)
+- Transfermarkt: 伤停名单(每日) + 俱乐部身价(每周一)
+- BetExplorer: 降赔榜 + 主要联赛当前赔率 (drift 信号)
+- FootyStats: 球队 xG (总进球/上下单双独立信号)
 - Understat: xG数据 (每周一次，本脚本跳过，由weekly任务处理)
 
 输出: ~/workspace/football-prediction-v2/data/daily/YYYY-MM-DD/
@@ -234,6 +239,239 @@ try:
 except Exception as e:
     results["sources"]["espn"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] ESPN: {e}")
+
+# 7. Matchbook: 交易量快照 (volume_weight 影子特征，只记录不进生产)
+try:
+    from matchbook import get_upcoming_volumes, volume_weight
+    mb_events = get_upcoming_volumes()
+    vols = sorted([e["volume"] for e in mb_events if e["volume"] > 0],
+                  reverse=True)
+    med_vol = vols[len(vols) // 2] if vols else 0
+    mb_rows = []
+    for e in mb_events:
+        mb_rows.append({
+            "home": e["home"], "away": e["away"],
+            "start": e["start"].isoformat() if e["start"] else None,
+            "volume": e["volume"],
+            # 影子特征：交易量权重，仅记录；生产融合前需 walk-forward 验证
+            "volume_weight": volume_weight(e["volume"], med_vol),
+        })
+    save("matchbook_volume", mb_rows)
+    results["sources"]["matchbook"] = {
+        "ok": True, "events": len(mb_rows),
+        "median_volume": med_vol,
+        "note": "volume_weight 为影子特征，不进生产权重/融合/门控",
+    }
+    print(f"[OK] Matchbook: {len(mb_rows)}场未开赛，交易量中位数{med_vol:.0f}")
+except Exception as e:
+    results["sources"]["matchbook"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] Matchbook: {e}")
+
+# 7a. Smarkets: 第二交易所 1X2 买卖中点（独立市场信号；无成交量字段，不做 volume）
+try:
+    from smarkets import get_upcoming_quotes
+    sm_rows, sm_skipped = get_upcoming_quotes(hours_ahead=48, max_events=60)
+    sm_out = []
+    for r in sm_rows:
+        sm_out.append({
+            "home": r["home"], "away": r["away"],
+            "start": r["start"].isoformat() if r["start"] else None,
+            "mid_1": r["mid_1"], "mid_x": r["mid_x"], "mid_2": r["mid_2"],
+            "spread_1": r["spread_1"], "spread_x": r["spread_x"],
+            "spread_2": r["spread_2"],
+            "market_id": r["market_id"], "event_id": r["event_id"],
+        })
+    save("smarkets_quotes", sm_out)
+    results["sources"]["smarkets"] = {
+        "ok": True, "events": len(sm_out), "skipped": sm_skipped,
+        "note": "交易所买卖中点赔率；Smarkets 无 volume 字段，不做成交量源",
+    }
+    print(f"[OK] Smarkets: {len(sm_out)}场有1X2中点，跳过{sm_skipped}场")
+except Exception as e:
+    results["sources"]["smarkets"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] Smarkets: {e}")
+
+# 7b. 扩联赛名单：五大联赛 + 北单常客（transfermarkt/betexplorer/footystats 三源共用）
+EXPANDED_LEAGUES = ["英超", "西甲", "意甲", "德甲", "法甲",
+                    "英冠", "西乙", "德乙", "法乙", "荷甲", "葡超",
+                    "巴西甲", "美职", "J1联赛", "K1联赛"]
+
+# 8. Transfermarkt: 伤停名单（每日）+ 俱乐部身价（每周一）
+try:
+    from transfermarkt import get_injuries, get_club_values
+    injuries, tm_inj_lg = [], {}
+    for lg in EXPANDED_LEAGUES:
+        try:
+            rows = get_injuries(lg)
+            injuries.extend(rows)
+            tm_inj_lg[lg] = len(rows)
+        except Exception as e:
+            tm_inj_lg[lg] = f"FAIL: {str(e)[:80]}"
+            print(f"  - Transfermarkt {lg} 伤停失败: {e}")
+    save("tm_injuries", injuries)
+    tm_entry = {"ok": True, "injuries": len(injuries), "by_league": tm_inj_lg}
+    # 身价低频：每周一抓一次即可
+    weekday = datetime.now().weekday()
+    if weekday == 0:
+        values, tm_val_lg = [], {}
+        for lg in EXPANDED_LEAGUES:
+            try:
+                rows = get_club_values(lg)
+                values.extend(rows)
+                tm_val_lg[lg] = len(rows)
+            except Exception as e:
+                tm_val_lg[lg] = f"FAIL: {str(e)[:80]}"
+                print(f"  - Transfermarkt {lg} 身价失败: {e}")
+        save("tm_club_values", values)
+        tm_entry["club_values"] = len(values)
+        tm_entry["values_by_league"] = tm_val_lg
+        print(f"  - 俱乐部身价: {len(values)}队 (每周一更新)")
+    else:
+        tm_entry["club_values"] = "skipped (weekly, Monday only)"
+    results["sources"]["transfermarkt"] = tm_entry
+    print(f"[OK] Transfermarkt: 伤停{len(injuries)}人 ({len(EXPANDED_LEAGUES)}联赛)")
+except Exception as e:
+    results["sources"]["transfermarkt"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] Transfermarkt: {e}")
+
+# 9. BetExplorer: 降赔榜 + 主要联赛当前赔率 (drift 信号，配 Titan007 初盘)
+try:
+    from betexplorer import get_dropping_odds, get_league_odds
+    dropping = get_dropping_odds()
+    save("be_dropping_odds", dropping)
+    be_odds = {}
+    for lg in EXPANDED_LEAGUES:
+        try:
+            be_odds[lg] = get_league_odds(lg)
+        except Exception as e:
+            print(f"  - BetExplorer {lg} 失败: {e}")
+    save("be_league_odds", be_odds)
+    n_odds = sum(len(v) for v in be_odds.values())
+    results["sources"]["betexplorer"] = {
+        "ok": True, "dropping": len(dropping), "league_rows": n_odds,
+    }
+    print(f"[OK] BetExplorer: 降赔榜{len(dropping)}场，联赛赔率{n_odds}行")
+except Exception as e:
+    results["sources"]["betexplorer"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] BetExplorer: {e}")
+
+# 10. FootyStats: 球队 xG (总进球/上下单双的独立信号)
+try:
+    from footystats import get_team_xg
+    fs_xg = {}
+    for lg in EXPANDED_LEAGUES:
+        try:
+            fs_xg[lg] = get_team_xg(lg)
+        except Exception as e:
+            print(f"  - FootyStats {lg} 失败: {e}")
+    save("fs_team_xg", fs_xg)
+    n_teams = sum(len(v) for v in fs_xg.values())
+    results["sources"]["footystats"] = {"ok": True, "teams": n_teams}
+    print(f"[OK] FootyStats: {n_teams}队xG")
+except Exception as e:
+    results["sources"]["footystats"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] FootyStats: {e}")
+
+# 11. 澳客: 战绩/H2H/即时欧指+亚盘（静态 history 页；大小球/初盘/阵容伤停静态无）
+try:
+    from okooo import get_board_map, get_match_history
+    ok_map = get_board_map("jingcai")
+    ok_data = {}
+    for (home, away), mid in ok_map.items():
+        try:
+            ok_data[f"{home}vs{away}"] = {"okooo_mid": mid,
+                                          **get_match_history(mid)}
+        except Exception as e:
+            print(f"  - 澳客 {home}vs{away} 失败: {e}")
+    save("okooo_history", ok_data)
+    results["sources"]["okooo"] = {"ok": True, "matches": len(ok_data)}
+    print(f"[OK] 澳客: {len(ok_data)}场战绩/H2H/即时指数")
+except Exception as e:
+    results["sources"]["okooo"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] 澳客: {e}")
+
+# 12. 7M体育: 天气/开球时间/亚盘/阵容/战绩/H2H（静态 JS，无反爬）
+try:
+    from qim import find_mid as qim_find_mid, get_match_snapshot, get_h2h, get_form
+    from okooo import get_board_map as _ok_board_map
+    qim_map = _ok_board_map("jingcai")
+    qim_data, qim_miss = {}, []
+    for (home, away) in qim_map.keys():
+        try:
+            mid = qim_find_mid(home, away)
+            if not mid:
+                qim_miss.append(f"{home}vs{away}")
+                continue
+            snap = get_match_snapshot(mid)
+            # 战绩/H2H 为增量信息，失败不影响快照主体
+            try:
+                snap["h2h"] = get_h2h(mid)
+            except Exception as e:
+                snap["h2h_error"] = str(e)[:120]
+            try:
+                snap["form"] = get_form(mid)
+            except Exception as e:
+                snap["form_error"] = str(e)[:120]
+            qim_data[f"{home}vs{away}"] = snap
+        except Exception as e:
+            print(f"  - 7M {home}vs{away} 失败: {e}")
+            qim_miss.append(f"{home}vs{away}")
+    save("qim_match_data", {"source": "7m", "matches": qim_data,
+                            "unmapped": qim_miss})
+    results["sources"]["qim"] = {"ok": True, "matches": len(qim_data),
+                                 "unmapped": qim_miss}
+    print(f"[OK] 7M体育: {len(qim_data)}场天气/阵容/战绩，未映射{len(qim_miss)}场")
+except Exception as e:
+    results["sources"]["qim"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] 7M体育: {e}")
+
+# 13. FotMob: 低级别联赛赛程/比分/积分榜（北单常客：J2/J3/K2/K3/挪甲/挪乙/瑞典甲/瑞典乙/巴西乙）
+#     非官方接口，逐联赛 try/except 隔离；单场无赔率(odds 恒 null)；失败不影响其他源
+try:
+    from fotmob import (get_standings as fm_standings, get_fixtures as fm_fixtures,
+                        get_matches as fm_matches, FOTMOB_LOW_LEAGUES)
+    from team_names import lookup as _tm_lookup, add_team as _tm_add
+    fm_report, fm_data = {}, {}
+    fm_new_teams = 0
+    for lg in FOTMOB_LOW_LEAGUES:
+        try:
+            st = fm_standings(lg)
+            fx = fm_fixtures(lg)
+            # 按需补 team_id_map.json（fotmob_id）
+            for t in st:
+                if not _tm_lookup(t["name"]):
+                    if _tm_add(t["name"], {"name": t["name"],
+                                           "fotmob_id": t["fotmob_id"]}):
+                        fm_new_teams += 1
+            fm_data[lg] = {"standings": st, "fixtures": fx}
+            fm_report[lg] = {
+                "ok": True, "teams": len(st), "fixtures": len(fx),
+                "finished": sum(1 for x in fx if x["finished"]),
+            }
+            print(f"  - FotMob {lg}: {len(st)}队 {len(fx)}场")
+        except Exception as e:
+            fm_report[lg] = {"ok": False, "error": str(e)[:150]}
+            print(f"  - FotMob {lg} 失败: {e}")
+    try:
+        fm_today = fm_matches()
+        fm_report["_today"] = {"ok": True, "matches": len(fm_today)}
+    except Exception as e:
+        fm_today = []
+        fm_report["_today"] = {"ok": False, "error": str(e)[:150]}
+        print(f"  - FotMob 当日赛程失败: {e}")
+    save("fotmob_lowleagues", {"leagues": fm_data, "today_matches": fm_today})
+    fm_ok_n = sum(1 for l in FOTMOB_LOW_LEAGUES
+                  if fm_report.get(l, {}).get("ok"))
+    results["sources"]["fotmob"] = {
+        "ok": fm_ok_n > 0, "leagues": fm_report,
+        "new_teams_mapped": fm_new_teams,
+        "note": "非官方接口；单场无赔率(odds恒null)；失败已按联赛隔离",
+    }
+    print(f"[OK] FotMob: {fm_ok_n}/{len(FOTMOB_LOW_LEAGUES)}联赛，"
+          f"新映射{fm_new_teams}队")
+except Exception as e:
+    results["sources"]["fotmob"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] FotMob: {e}")
 
 # 保存汇总
 save("_summary", results)

@@ -128,3 +128,71 @@ def half_time_probs(lambda_home: float, lambda_away: float,
         "ht_factor": ht_factor,
         "top_scores": [{"score": s, "prob": round(p, 4)} for s, p in ht_scores],
     }
+
+
+def _outcome(h: int, a: int) -> str:
+    return "胜" if h > a else ("平" if h == a else "负")
+
+
+def half_full_1x2(lambda_home: float, lambda_away: float,
+                  ht_factor: float = 0.44,
+                  rho: float = 0.0) -> dict:
+    """半全场胜平负：9 种组合概率（竞彩官方玩法）。
+
+    推导：半场比分矩阵 M_ht（λ×ht_factor，Dixon-Coles 修正，与 half_time_probs
+    同口径）× 下半场独立 Poisson（λ×(1-ht_factor)）→ 半场比分与全场比分的
+    联合分布，再按（半场胜平负 × 全场胜平负）聚合为 9 种组合。
+    注意半场与全场不是独立的，不能直接相乘边际概率。
+
+    返回 {"胜胜": p, "胜平": p, "胜负": p,
+           "平胜": p, "平平": p, "平负": p,
+           "负胜": p, "负平": p, "负负": p}，加总 ≈ 1。
+    """
+    m_ht = score_matrix(lambda_home * ht_factor, lambda_away * ht_factor,
+                        rho=rho)
+    lam_h2 = lambda_home * (1.0 - ht_factor)
+    lam_a2 = lambda_away * (1.0 - ht_factor)
+    # 下半场进球截断：归一化后尾部可忽略
+    max_2h = 15
+    pmf_h2 = [pmf(k, lam_h2) for k in range(max_2h + 1)]
+    pmf_a2 = [pmf(k, lam_a2) for k in range(max_2h + 1)]
+    s_h, s_a = sum(pmf_h2), sum(pmf_a2)
+    pmf_h2 = [v / s_h for v in pmf_h2]
+    pmf_a2 = [v / s_a for v in pmf_a2]
+    keys = ("胜胜", "胜平", "胜负", "平胜", "平平", "平负", "负胜", "负平", "负负")
+    combos = {k: 0.0 for k in keys}
+    n_ht = len(m_ht)
+    for i in range(n_ht):
+        for j in range(n_ht):
+            p_ht = m_ht[i][j]
+            if p_ht == 0.0:
+                continue
+            ht_o = _outcome(i, j)
+            for dh in range(max_2h + 1):
+                ph2 = pmf_h2[dh]
+                if ph2 == 0.0:
+                    continue
+                for da in range(max_2h + 1):
+                    p = p_ht * ph2 * pmf_a2[da]
+                    if p == 0.0:
+                        continue
+                    combos[ht_o + _outcome(i + dh, j + da)] += p
+    return combos
+
+
+def total_goals_exact(matrix, tail: int = 7) -> dict:
+    """总进球数精确分布（竞彩官方玩法）：{0:p, 1:p, ..., (tail-1):p, "7+":p}。
+
+    tail=7 时返回 0~6 精确球数 + "7+" 归尾，加总 = 1。
+    """
+    dist = {k: 0.0 for k in range(tail)}
+    tail_key = f"{tail}+"
+    dist[tail_key] = 0.0
+    for i, row in enumerate(matrix):
+        for j, p in enumerate(row):
+            t = i + j
+            if t >= tail:
+                dist[tail_key] += p
+            else:
+                dist[t] += p
+    return dist

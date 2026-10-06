@@ -1,6 +1,6 @@
 import sys
 import uuid
-from datetime import date
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -15,11 +15,15 @@ def _mk(n_home, n_away, venue):
     return [{"gf": n_home, "ga": n_away, "venue": venue} for _ in range(8)]
 
 
+def _future_ts(**kw):
+    return (datetime.now().astimezone() + timedelta(**kw)).isoformat()
+
+
 def sample_payload(**kw):
     p = {
         "home": "土耳其", "away": "意大利", "competition": "欧国联",
-        "kickoff_at": "2026-10-05T02:45:00+08:00",
-        "snapshot_at": "2026-10-04T20:00:00+08:00",
+        "kickoff_at": _future_ts(days=2),
+        "snapshot_at": _future_ts(days=1),
         "league_avg_goals": 2.70,
         "home_recent": _mk(2, 1, "H"),
         "away_recent": _mk(1, 1, "A"),
@@ -34,7 +38,7 @@ def sample_payload(**kw):
 def test_model_version_deterministic():
     cfg = {"rho": -0.13, "decay": 0.9}
     assert model_version(cfg) == model_version(cfg)
-    assert model_version(cfg).startswith("v2.4+")
+    assert model_version(cfg).startswith("v2.5+")
 
 
 def test_model_version_changes_with_params():
@@ -46,7 +50,7 @@ def test_model_version_changes_with_params():
 def test_predict_result_carries_model_version():
     r = predict(sample_payload())
     assert r["status"] == "ok"
-    assert r["model_version"].startswith("v2.4+")
+    assert r["model_version"].startswith("v2.5+")
     # 同一 payload 同一版本
     assert predict(sample_payload())["model_version"] == r["model_version"]
 

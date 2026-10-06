@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-fpv2}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fpv2secret}
@@ -20,6 +21,7 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
+    restart: unless-stopped
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://fpv2:fpv2secret@postgres:5432/fpv2}
       ELO_K: ${ELO_K:-30}

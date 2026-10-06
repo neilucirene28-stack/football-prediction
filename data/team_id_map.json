@@ -298,5 +298,261 @@
   "thesportsdb_id": "133707",
   "espn_id": "176",
   "apifootball_id": "81"
+ },
+ "burnley": {
+  "name": "Burnley",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "leeds united": {
+  "name": "Leeds United",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "liverpool": {
+  "name": "Liverpool",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "luton town": {
+  "name": "Luton Town",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "manchester city": {
+  "name": "Manchester City",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "manchester united": {
+  "name": "Manchester United",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "newcastle united": {
+  "name": "Newcastle United",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "nottingham forest": {
+  "name": "Nottingham Forest",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "sheffield united": {
+  "name": "Sheffield United",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "sunderland": {
+  "name": "Sunderland",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "tottenham hotspur": {
+  "name": "Tottenham Hotspur",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "west ham united": {
+  "name": "West Ham United",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "wolverhampton wanderers": {
+  "name": "Wolverhampton Wanderers",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "ipswich town": {
+  "name": "Ipswich Town",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "leicester city": {
+  "name": "Leicester City",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "southampton": {
+  "name": "Southampton",
+  "thesportsdb_id": null,
+  "espn_id": null,
+  "apifootball_id": null
+ },
+ "vegalta sendai": {
+  "name": "Vegalta Sendai",
+  "fotmob_id": "162192"
+ },
+ "albirex niigata": {
+  "name": "Albirex Niigata",
+  "fotmob_id": "4425"
+ },
+ "kataller toyama": {
+  "name": "Kataller Toyama",
+  "fotmob_id": "164737"
+ },
+ "rb omiya ardija": {
+  "name": "RB Omiya Ardija",
+  "fotmob_id": "4398"
+ },
+ "yokohama": {
+  "name": "Yokohama FC",
+  "fotmob_id": "49615"
+ },
+ "shonan bellmare": {
+  "name": "Shonan Bellmare",
+  "fotmob_id": "6180"
+ },
+ "fujieda myfc": {
+  "name": "Fujieda MYFC",
+  "fotmob_id": "305776"
+ },
+ "blaublitz akita": {
+  "name": "Blaublitz Akita",
+  "fotmob_id": "194015"
+ },
+ "tokushima vortis": {
+  "name": "Tokushima Vortis",
+  "fotmob_id": "162199"
+ },
+ "montedio yamagata": {
+  "name": "Montedio Yamagata",
+  "fotmob_id": "164720"
+ },
+ "tegevajaro miyazaki": {
+  "name": "Tegevajaro Miyazaki",
+  "fotmob_id": "941024"
+ },
+ "oita trinita": {
+  "name": "Oita Trinita",
+  "fotmob_id": "4427"
+ },
+ "tochigi city": {
+  "name": "Tochigi City FC",
+  "fotmob_id": "194029"
+ },
+ "júbilo iwata": {
+  "name": "Júbilo Iwata",
+  "fotmob_id": "8065"
+ },
+ "vanraure hachinohe": {
+  "name": "Vanraure Hachinohe",
+  "fotmob_id": "584880"
+ },
+ "iwaki": {
+  "name": "Iwaki FC",
+  "fotmob_id": "860934"
+ },
+ "sagan tosu": {
+  "name": "Sagan Tosu",
+  "fotmob_id": "162193"
+ },
+ "hokkaido consadole sapporo": {
+  "name": "Hokkaido Consadole Sapporo",
+  "fotmob_id": "112688"
+ },
+ "fc imabari": {
+  "name": "FC Imabari",
+  "fotmob_id": "820969"
+ },
+ "ventforet kofu": {
+  "name": "Ventforet Kofu",
+  "fotmob_id": "8539"
+ },
+ "vila nova": {
+  "name": "Vila Nova",
+  "fotmob_id": "109706"
+ },
+ "juventude": {
+  "name": "Juventude",
+  "fotmob_id": "10274"
+ },
+ "novorizontino": {
+  "name": "Novorizontino",
+  "fotmob_id": "581838"
+ },
+ "criciúma": {
+  "name": "Criciúma",
+  "fotmob_id": "7729"
+ },
+ "fortaleza": {
+  "name": "Fortaleza",
+  "fotmob_id": "8287"
+ },
+ "atlético-go": {
+  "name": "Atlético-GO",
+  "fotmob_id": "165545"
+ },
+ "crb": {
+  "name": "CRB",
+  "fotmob_id": "104821"
+ },
+ "operário-pr": {
+  "name": "Operário-PR",
+  "fotmob_id": "197429"
+ },
+ "sport recife": {
+  "name": "Sport Recife",
+  "fotmob_id": "6305"
+ },
+ "cuiabá": {
+  "name": "Cuiabá",
+  "fotmob_id": "197815"
+ },
+ "são bernardo": {
+  "name": "São Bernardo",
+  "fotmob_id": "231931"
+ },
+ "goiás": {
+  "name": "Goiás",
+  "fotmob_id": "9862"
+ },
+ "náutico": {
+  "name": "Náutico",
+  "fotmob_id": "2369"
+ },
+ "athletic club mg": {
+  "name": "Athletic Club MG",
+  "fotmob_id": "1221604"
+ },
+ "ceará": {
+  "name": "Ceará",
+  "fotmob_id": "172341"
+ },
+ "botafogo sp": {
+  "name": "Botafogo SP",
+  "fotmob_id": "8355"
+ },
+ "avaí": {
+  "name": "Avaí",
+  "fotmob_id": "104822"
+ },
+ "londrina": {
+  "name": "Londrina",
+  "fotmob_id": "298660"
+ },
+ "américa-mg": {
+  "name": "América-MG",
+  "fotmob_id": "1757"
+ },
+ "ponte preta": {
+  "name": "Ponte Preta",
+  "fotmob_id": "8630"
  }
 }

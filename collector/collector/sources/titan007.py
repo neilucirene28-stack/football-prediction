@@ -42,6 +42,10 @@ _BASID_URL = "https://live.titan007.com/vbsxml/Ballpub/BaSID.js?r=007"
 _DETAIL_URL = "https://live.titan007.com/detail/{mid}cn.htm"
 _ANALYSIS_URL = "https://zq.titan007.com/analysis/{mid}cn.htm"
 _X12JS_URL = "https://1x2d.titan007.com/{mid}.js?r=007"
+
+# 分析页战绩保留深度（条/队）：h_data/a_data/v_data 按实际行数全解析，
+# 上限 HISTORY_DEPTH。页面展示为几十场/队（用户 bf 录屏确认）。
+HISTORY_DEPTH = 30
 _ASIAN_URL = "https://vip.titan007.com/AsianOdds_n.aspx?id={mid}&l=0"
 _OU_URL = "https://vip.titan007.com/OverDown_n.aspx?id={mid}&l=0"
 _CORNER_URL = "https://vip.titan007.com/Corner.aspx?id={mid}&l=0"
@@ -384,16 +388,22 @@ class Titan007Source(Source):
 
     @staticmethod
     def parse_analysis(html: str, home_id: int, away_id: int) -> dict:
-        """解析分析页：对赛往绩 / 近期战绩 / 相同盘路摘要。"""
+        """解析分析页：对赛往绩 / 近期战绩 / 相同盘路摘要。
+
+        深度: h_data/a_data/v_data 数组按页面实际行数全解析，最多保留
+        HISTORY_DEPTH 条/队（页面通常带 30 场，用户在 bf 录屏中确认过
+        几十场/队的展示；zq.titan007.com 当前对机房 IP 断连，行数上限
+        未在现网逐场核验，解析器按实际行数兜底）。
+        """
         detail: dict = {}
         v_rows = _parse_js_row_array(html, "v_data")
         h_rows = _parse_js_row_array(html, "h_data")
         a_rows = _parse_js_row_array(html, "a_data")
         h2h = Titan007Source._history_rows(v_rows, home_id, perspective="h2h")
-        home_recent = Titan007Source._history_rows(h_rows, home_id)[:10]
-        away_recent = Titan007Source._history_rows(a_rows, away_id)[:10]
+        home_recent = Titan007Source._history_rows(h_rows, home_id)[:HISTORY_DEPTH]
+        away_recent = Titan007Source._history_rows(a_rows, away_id)[:HISTORY_DEPTH]
         if h2h:
-            detail["h2h"] = h2h[:10]
+            detail["h2h"] = h2h[:HISTORY_DEPTH]
         if home_recent:
             detail["home_recent"] = home_recent
         if away_recent:
@@ -742,3 +752,55 @@ class Titan007Source(Source):
             if m:
                 matches.append(m)
         return self.validate(matches)
+
+    def get_totals(self, mid: str | int) -> dict | None:
+        """单场大小球（总进球）盘口：各公司初盘/即时。
+
+        必抓项（用户 2026-10-05 明确要求：大小球与欧赔/亚盘同级，
+        daily_fetch 必须调用，不得以"缺失"代替抓取）。
+        返回:
+        {
+          "mid": str, "n_companies": int,
+          "ref": {"company","line","over_water","under_water",
+                  "open_line","open_over_water","open_under_water"} | None,
+          "companies": [{"company","open_line","open_over","open_under",
+                         "live_line","live_over","live_under"}, ...],
+          "captured_at": iso,
+        }
+        抓不到返回 None（调用方记 missing，不硬编）。
+        参考公司优先取"澳*"（澳客），无则取第一家。
+        """
+        mid = str(mid)
+        try:
+            html = self._get(_OU_URL.format(mid=mid))
+        except Exception:
+            return None
+        rows = self._parse_odds_table(html, "ou")
+        if not rows:
+            return None
+        companies = [{
+            "company": r["company"],
+            "open_line": parse_ou_number(r["open_line"]),
+            "open_over": _num(r["open_water1"]),
+            "open_under": _num(r["open_water2"]),
+            "live_line": parse_ou_number(r["live_line"]),
+            "live_over": _num(r["live_water1"]),
+            "live_under": _num(r["live_water2"]),
+        } for r in rows]
+        ref = next((r for r in rows if r["company"] == "澳*"), rows[0])
+        return {
+            "mid": mid,
+            "n_companies": len(rows),
+            "ref": {
+                "company": ref["company"],
+                "line": parse_ou_number(ref["live_line"]),
+                "over_water": _num(ref["live_water1"]),
+                "under_water": _num(ref["live_water2"]),
+                "open_line": parse_ou_number(ref["open_line"]),
+                "open_over_water": _num(ref["open_water1"]),
+                "open_under_water": _num(ref["open_water2"]),
+            },
+            "companies": companies,
+            "captured_at": datetime.now(timezone.utc).isoformat(),
+            "source": "titan007",
+        }
