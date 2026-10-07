@@ -286,3 +286,97 @@ def test_letdraw_calibration_disabled_by_config():
     r = predict(p, config={"letdraw_strength": 0.0})
     h = r["derivatives"]["handicap_1x2"]
     assert h["p_draw"] == h["p_draw_raw"]
+
+
+# ---------------- v2.5b: 让球口径背离门控 fallback ----------------
+# 背景：2026-10-06 竞彩009（瑞士vs北马其顿）胜平负未开售，原门控整段跳过，
+# 模型让负84% vs 市场让负25.3% 零标记。无胜平负市场但有官方让球SP时，
+# 用让球口径（模型校准后 handicap_1x2 vs 让球SP去水）跑同一套门控。
+
+
+def _hcap_strong_away():
+    # 009式：主队极弱、客队极强，让-2 下模型让负占优
+    return sample_payload(
+        home_recent=[{"gf": 0, "ga": 3, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 3, "ga": 0, "venue": "A"} for _ in range(8)],
+        odds=None, handicap_line=-2,
+    )
+
+
+def test_handicap_gate_triggers_like_009():
+    p = _hcap_strong_away()
+    p["handicap_sp"] = [1.65, 4.20, 3.50]  # 官方让球SP：市场看好让胜
+    r = predict(p)
+    d = r["divergence"]
+    assert d is not None
+    assert d["market"] == "handicap"
+    assert d["model_direction"] == "away"   # 模型：让负
+    assert d["market_direction"] == "home"  # 市场：让胜
+    assert d["gap"] >= 0.15
+    assert "模型与让球市场严重背离" in r["upset_risk_factors"]
+
+
+def test_handicap_gate_triggers_like_007():
+    # 007式：模型让负(-2)占优（约六成），市场让胜占优 → 触发
+    p = sample_payload(
+        home_recent=[{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 1, "ga": 2, "venue": "A"} for _ in range(8)],
+        odds=None, handicap_line=-2,
+        handicap_sp=[1.78, 4.30, 2.98],
+    )
+    r = predict(p)
+    d = r["divergence"]
+    assert d is not None
+    assert d["market"] == "handicap"
+    assert d["model_direction"] == "away"
+    assert d["market_direction"] == "home"
+    assert d["gap"] >= 0.15
+
+
+def test_handicap_gate_quiet_when_aligned():
+    # 模型与让球市场方向一致（都看好让胜）→ 静默
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds=None, handicap_line=-2,
+        handicap_sp=[1.30, 5.00, 8.00],
+    )
+    assert predict(p)["divergence"] is None
+
+
+def test_handicap_gate_quiet_without_handicap_sp():
+    # 无 handicap_sp 时行为与 v2.5 完全一致：不触发
+    p = _hcap_strong_away()
+    assert predict(p)["divergence"] is None
+
+
+def test_handicap_gate_not_used_when_1x2_market_exists():
+    # 有胜平负市场时走原有 1X2 门控，不重复触发让球门控
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds={"home": 8.0, "draw": 5.0, "away": 1.30},
+        handicap_line=-2,
+        handicap_sp=[1.65, 4.20, 3.50],
+    )
+    r = predict(p)
+    d = r["divergence"]
+    assert d is not None
+    assert "market" not in d  # 1X2 口径，无 handicap 标记
+    assert d["model_direction"] == "home"
+    assert d["market_direction"] == "away"
+
+
+def test_handicap_gate_malformed_sp_is_safe():
+    # handicap_sp 残缺/非法 → 不崩溃、不触发
+    p = _hcap_strong_away()
+    p["handicap_sp"] = ["x", None]
+    assert predict(p)["divergence"] is None
+    p["handicap_sp"] = [1.65, 4.20]  # 少一项
+    assert predict(p)["divergence"] is None
+
+
+def test_handicap_gate_disabled_by_config():
+    p = _hcap_strong_away()
+    p["handicap_sp"] = [1.65, 4.20, 3.50]
+    assert predict(p, config={"divergence_gate": 0.0})["divergence"] is None

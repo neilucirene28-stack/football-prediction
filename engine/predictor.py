@@ -452,21 +452,58 @@ def predict(payload: dict, config: dict | None = None,
     # 方向获胜，因此背离时不硬扛：自动降一档并标记。
     divergence = None
     gate = cfg["divergence_gate"]
-    if gate > 0 and p_market is not None:
+
+
+    def _divergence_gate(p_mod, p_mkt):
+        """同一套门控逻辑：首选方向不一致且 gap >= gate → 返回 divergence dict。"""
         names3 = ("home", "draw", "away")
-        m_dir = max(range(3), key=lambda i: p_model[i])
-        k_dir = max(range(3), key=lambda i: p_market[i])
-        gap = abs(p_model[m_dir] - p_market[m_dir])
+        m_dir = max(range(3), key=lambda i: p_mod[i])
+        k_dir = max(range(3), key=lambda i: p_mkt[i])
+        gap = abs(p_mod[m_dir] - p_mkt[m_dir])
         if m_dir != k_dir and gap >= gate:
-            divergence = {
+            return {
                 "model_direction": names3[m_dir],
                 "market_direction": names3[k_dir],
                 "gap": round(gap, 4),
             }
-            confidence = {"S": "A", "A": "B", "B": "C", "C": "C"}[confidence]
-            conf_score = round(max(conf_score - 15.0, 0.0), 1)
-            risk = round(min(risk + 15.0, 100.0), 1)
-            risk_factors.append("模型与市场严重背离")
+        return None
+
+    if gate > 0 and p_market is not None:
+        divergence = _divergence_gate(p_model, p_market)
+    elif gate > 0:
+        # v2.5b fallback：胜平负未开售（p_market 为 None）但有官方让球SP时，
+        # 用让球口径跑同一套门控：模型校准后 handicap_1x2 vs 让球SP去水概率。
+        # 2026-10-06 竞彩009（瑞士vs北马其顿）教训：模型让负84% vs 市场让负25.3%
+        # 差59个点方向完全相反，原门控对此类场次完全失明。
+        # payload 新字段：handicap_sp=[让胜SP,让平SP,让负SP]，对应 handicap_line。
+        # 组装位置见 docs/payload-fields.md；调用方在拿到官方让球SP时传入。
+        hsp = payload.get("handicap_sp")
+        hcap = deriv.get("handicap_1x2")
+        o = None
+        if hsp and hcap:
+            try:
+                o = (float(hsp[0]), float(hsp[1]), float(hsp[2]))
+            except (TypeError, ValueError, IndexError):
+                o = None
+        if o is not None:
+            try:
+                p_hcap = shin_probs(o)
+            except Exception:
+                p_hcap = implied_proportional(o)
+            p_mod_hcap = (float(hcap["p_home"]), float(hcap["p_draw"]),
+                          float(hcap["p_away"]))
+            divergence = _divergence_gate(p_mod_hcap, p_hcap)
+            if divergence is not None:
+                divergence["market"] = "handicap"
+                divergence["handicap_line"] = hcap.get("line")
+
+    if divergence is not None:
+        confidence = {"S": "A", "A": "B", "B": "C", "C": "C"}[confidence]
+        conf_score = round(max(conf_score - 15.0, 0.0), 1)
+        risk = round(min(risk + 15.0, 100.0), 1)
+        risk_factors.append("模型与让球市场严重背离"
+                            if divergence.get("market") == "handicap"
+                            else "模型与市场严重背离")
 
     # ---- 12. Monte Carlo（门控） ----
     mc = maybe_simulate(lam_h, lam_a, completeness=score,
