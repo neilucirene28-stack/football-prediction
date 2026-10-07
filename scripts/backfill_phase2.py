@@ -23,7 +23,12 @@ OUT = f"{BASE}/hidden_backfill_phase2.jsonl"
 
 
 def to_recent(entries, team_side):
-    """澳客 form -> predictor home_recent 格式。team_side: 'home' 或 'away' 指被统计球队在目标比赛中的身份。"""
+    """澳客 form -> predictor home_recent 格式。team_side: 'home' 或 'away' 指被统计球队在目标比赛中的身份。
+
+    venue 编码约定与 engine/strengths.attack_defense 一致：'H'/'A'/'N'。
+    （2026-10-07 修正：此前输出小写 "home"/"away"，被 attack_defense 的
+    venue='H'/'A' 过滤条件静默丢弃，导致回填近况全部失效。）
+    """
     out = []
     for e in entries:
         is_home = e["venue"] == "home"
@@ -35,7 +40,7 @@ def to_recent(entries, team_side):
         res = "W" if gf > ga else ("D" if gf == ga else "L")
         out.append({"opponent": opp, "home_away": "H" if is_home else "A",
                     "gf": int(gf), "ga": int(ga), "result": res,
-                    "date": e["date"], "venue": "home" if is_home else "away"})
+                    "date": e["date"], "venue": "H" if is_home else "A"})
     return out
 
 
