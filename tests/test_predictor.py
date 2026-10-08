@@ -273,10 +273,14 @@ def test_letdraw_calibration_in_handicap_output():
     p = sample_payload(handicap_line=-1, odds=None, competition="英超")
     r = predict(p)
     h = r["derivatives"]["handicap_1x2"]
-    # 校准后 p_draw 向 0.25 先验靠拢（raw 值保留供审计；输出保留 4 位小数）
+    # P0 Bug3修复后：校准后 p_draw 仍向 0.25 先验靠拢（方向保留），
+    # 但须满足事件包含约束 P(让胜)+P(让平) ≤ P(主胜)，故不再精确等于混合公式
     assert "p_draw_raw" in h
-    assert abs(h["p_draw"] - (0.5 * h["p_draw_raw"] + 0.5 * 0.25)) < 1e-3
+    assert h["p_draw"] > h["p_draw_raw"], "让平应被抬高（v2.5方向）"
+    assert h["p_draw"] < 0.25 + 1e-3, "让平不应超过先验太多"
     assert abs(h["p_home"] + h["p_draw"] + h["p_away"] - 1.0) < 1e-3
+    # 事件包含：让胜+让平 ≤ 最终主胜
+    assert h["p_home"] + h["p_draw"] <= r["p_home"] + 1e-3
     assert "letdraw_guard" in h
     assert isinstance(h["letdraw_guard"]["flags"], list)
 
