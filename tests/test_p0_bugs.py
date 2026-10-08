@@ -32,3 +32,24 @@ class TestBug1VenueMissing:
         # 主场筛选应只用4场H记录（+0场N），进攻评级应高
         assert d_h["n"] == 4
         assert a_h > 1.5
+
+
+class TestBug2Shin:
+    """Bug2: shin_probs 不得退化为等比归一。"""
+
+    def test_shin_differs_from_proportional(self):
+        from engine.market import shin_probs, implied_proportional
+        out = shin_probs((2, 3, 4))
+        exp = implied_proportional((2, 3, 4))
+        assert abs(sum(out) - 1.0) < 1e-9
+        # 必须有可观测差异（>0.5pp）
+        assert any(abs(a - b) > 0.005 for a, b in zip(out, exp)), \
+            f"shin退化为等比归一: {out}"
+        # Shin方向：热门真实概率应高于盘口暗示（水位加在热门身上）
+        assert out[0] > exp[0]
+
+    def test_shin_fair_book_degrades(self):
+        from engine.market import shin_probs, implied_proportional
+        out = shin_probs((2, 3, 6))  # booksum=1.0，无水位
+        exp = implied_proportional((2, 3, 6))
+        assert all(abs(a - b) < 1e-6 for a, b in zip(out, exp))
