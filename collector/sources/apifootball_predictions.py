@@ -102,3 +102,28 @@ def get_predictions_bulk(fixture_ids, max_n=40):
         except Exception:
             out[fid] = None
     return out
+
+
+def load_afb_lookup(day_dir):
+    """
+    读当日 afb_predictions.json，返回 {(board_home, board_away): [pH, pD, pA]}。
+
+    只有无歧义对齐的条目（带 board_home/board_away）才进入；同联赛同时开球的
+    多场在 daily_fetch 侧已跳过中文名，这里查不到就回 None，调用方静默跳过。
+    供 predict 脚本组装 payload 的 af_pred 字段用；board 名是 okooo 中文名，
+    与 500.com 有细微差异时（如"布拉干RB"vs"布拉干蒂诺RB"）调用方做模糊匹配。
+    """
+    import json
+    import os
+
+    fp = os.path.join(day_dir, "afb_predictions.json")
+    try:
+        d = json.load(open(fp, encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+    out = {}
+    for _fid, x in (d.get("matches") or {}).items():
+        bh, ba = x.get("board_home"), x.get("board_away")
+        if bh and ba:
+            out[(bh, ba)] = [x["p_home"], x["p_draw"], x["p_away"]]
+    return out

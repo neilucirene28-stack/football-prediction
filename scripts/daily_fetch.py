@@ -108,10 +108,13 @@ except Exception as e:
 #    时区：board 时间为北京时间，转 UTC 后对 AF（AF 用 UTC）；board 的"今日"横跨
 #    UTC 两天，故用 af_fixtures_today + af_fixtures_tomorrow 合并匹配。
 #    覆盖缺口：AF 免费档部分联赛/场次无数据（如巴西甲一线队），无数据则跳过记 missed。
-#    注意：意甲/巴西甲在AF都叫"Serie A"，靠开球时间区分（时区不同极少撞车）；
-#    predict时操作方按 kickoff+队名人工核对，afb_predictions.json 存全量元数据备查。
+#    注意：意甲/巴西甲在AF都叫"Serie A"，靠开球时间区分（时区不同极少撞车）。
+#    board 队名（okooo中文名）存入 board_home/board_away，供 predict 脚本按中文名查；
+#    同联赛同时开球的多场（如巴甲三场06:30）无法无歧义对齐时不存中文名、predict侧跳过，
+#    宁可漏标不 HardCode 错配（错配会产生假分歧信号）。
 try:
     from datetime import timezone as _tz, timedelta as _td
+    from collections import defaultdict as _dd
     from apifootball import get_status as af_get_status
     from apifootball_predictions import (
         get_predictions as af_get_predictions, BOARD_LEAGUE_TO_AF,
@@ -121,18 +124,29 @@ try:
 
     _board_html = okooo_get_html(f"{OKOOO_BASE}/jingcai/")
     _bj = _tz(_td(hours=8))
-    _board_utc = set()
+    _slot_teams = _dd(list)  # (af_league, utc_kickoff) -> [(home_zh, away_zh)]
     _unmapped_leagues = set()
-    for _lg_zh, _ko in zip(
-            _re.findall(r'class="saiming[^"]*"[^>]*?title="([^"]+)"', _board_html),
-            _re.findall(r"比赛时间:(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", _board_html)):
-        _af_lg = BOARD_LEAGUE_TO_AF.get(_lg_zh)
-        if _af_lg is None:
-            _unmapped_leagues.add(_lg_zh)
+    _seen_mid = set()
+    for _mm in _re.finditer(r'data-mid="(\d+)"', _board_html):
+        _mid = _mm.group(1)
+        if _mid in _seen_mid:
             continue
-        _dt_utc = datetime.strptime(_ko, "%Y-%m-%d %H:%M").replace(
+        _seen_mid.add(_mid)
+        _seg = _board_html[_mm.start():_mm.start() + 6000]
+        _lg = _re.search(r'class="saiming[^"]*"[^>]*?title="([^"]+)"', _seg)
+        _ko = _re.search(r"比赛时间:(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", _seg)
+        _teams = _re.findall(r'class="zhum[^"]*" title="([^"]+)"', _seg)
+        if not (_lg and _ko and len(_teams) >= 2):
+            continue
+        _af_lg = BOARD_LEAGUE_TO_AF.get(_lg.group(1))
+        if _af_lg is None:
+            _unmapped_leagues.add(_lg.group(1))
+            continue
+        _dt_utc = datetime.strptime(_ko.group(1), "%Y-%m-%d %H:%M").replace(
             tzinfo=_bj).astimezone(_tz.utc)
-        _board_utc.add((_af_lg, _dt_utc.strftime("%Y-%m-%d %H:%M")))
+        _slot_teams[(_af_lg, _dt_utc.strftime("%Y-%m-%d %H:%M"))].append(
+            (_teams[0], _teams[1]))
+    _board_utc = set(_slot_teams.keys())
 
     _af_all = []
     for _fn in ("af_fixtures_today.json", "af_fixtures_tomorrow.json"):
@@ -155,12 +169,14 @@ try:
         if len(_targets) >= _budget:
             break
 
-    afb_data, afb_miss = {}, []
+    afb_data, afb_miss, afb_ambiguous = {}, [], 0
     for fx in _targets:
         fid = fx["fixture_id"]
+        _ko = (fx.get("date") or "")[:16].replace("T", " ")
+        _slot_key = (fx.get("league", ""), _ko)
         pr = af_get_predictions(fid)  # 内部已吞异常，失败返回None
         if pr:
-            afb_data[str(fid)] = {
+            _entry = {
                 "kickoff": fx.get("date"),
                 "league": fx.get("league"),
                 "home": fx.get("home"),
@@ -171,10 +187,18 @@ try:
                 "advice": pr.get("advice"),
                 "source": "af_predictions",
             }
+            # 无歧义场次才存 board 中文名（同联赛同时开球的多场跳过，防错配）
+            _cands = _slot_teams.get(_slot_key, [])
+            if len(_cands) == 1:
+                _entry["board_home"], _entry["board_away"] = _cands[0]
+            else:
+                afb_ambiguous += 1
+            afb_data[str(fid)] = _entry
         else:
             afb_miss.append(fid)
     save("afb_predictions", {"matches": afb_data, "missed": afb_miss,
                              "quota_budget": _budget,
+                             "ambiguous_skipped": afb_ambiguous,
                              "unmapped_leagues": sorted(_unmapped_leagues)})
     _st2 = af_get_status()
     results["sources"]["af_predictions"] = {

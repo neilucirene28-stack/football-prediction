@@ -42,3 +42,14 @@
   - 与市场门控（含让球fallback）互斥：市场门控已触发时不再重复触发；
   - 方向一致或 gap<0.15 时静默；无 `af_pred` 时行为与 v2.5b 完全一致；
   - `af_pred` 残缺/非法/全零时不崩溃、不触发（内部归一化防脏数据）。
+- predict 脚本组装（2026-10-08补）：
+  ```python
+  from apifootball_predictions import load_afb_lookup
+  lk = load_afb_lookup("data/daily/2026-10-08")  # {(board_home, board_away): [pH,pD,pA]}
+  # board_home/board_away 是 okooo 中文名；与 500.com 名有细微差异时做模糊匹配
+  key = (home_zh, away_zh)  # 或模糊匹配后的键
+  if key in lk:
+      payload["af_pred"] = lk[key]
+  ```
+  只有无歧义对齐的条目才有 board_home/board_away（同联赛同时开球的多场在
+  daily_fetch 侧跳过中文名，`ambiguous_skipped` 计数）；查不到就静默不传。
