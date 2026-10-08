@@ -23,3 +23,22 @@
 2026-10-06 竞彩009（瑞士vs北马其顿）：模型让负(-2)84%，官方让球SP去水后
 让负仅25.3%，差59个点、方向完全相反，但原门控因胜平负未开售整段跳过、
 零标记。根因见 engine/predictor.py 第11b节注释。
+
+## af_pred（v2.6 新增，可选）
+
+- 含义：第三方独立模型三向概率（API-Football /predictions），
+  格式 `[pH, pD, pA]`（0-1），例如 `[0.10, 0.45, 0.45]`。
+- 来源：`collector/sources/apifootball_predictions.py::get_predictions(fixture_id)`；
+  daily_fetch.py 第4节每天批量拉取在售场次，存
+  `data/daily/YYYY-MM-DD/afb_predictions.json`（theopenmodel替代，2026-10-08起）。
+- 用途：独立模型信号分歧检测（模型 vs 模型，非市场分歧）。
+  在胜平负校准后（p_home/p_draw/p_away 终值）比较：引擎首选方向 vs AF首选方向，
+  不一致且 gap >= divergence_gate（默认0.15）→ 触发，沿用B补丁门控口径：
+  信心降一档、conf_score-15、risk+15。
+  触发时 `divergence` 记 `{"signal": "af_model", "model_direction": ...,
+  "af_direction": ..., "gap": ...}`，risk_factors 加"独立模型信号分歧（AF）"，
+  notes 文案与市场分歧区分（"独立模型信号分歧（本模型看X、AF模型看Y）"）。
+- 注意：
+  - 与市场门控（含让球fallback）互斥：市场门控已触发时不再重复触发；
+  - 方向一致或 gap<0.15 时静默；无 `af_pred` 时行为与 v2.5b 完全一致；
+  - `af_pred` 残缺/非法/全零时不崩溃、不触发（内部归一化防脏数据）。

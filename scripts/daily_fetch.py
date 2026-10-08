@@ -5,7 +5,7 @@
 - football-data.org: 当日赛程 (10次/分钟，约用2次)
 - The Odds API: 实时赔率快照 (500次/月，约用10-15次)
 - football-charts: 历史比分增量 (5000次/天，约用10次)
-- theopenmodel: 五大联赛预测 (免费)
+- AF predictions: 第三方独立模型三向概率（theopenmodel替代，2026-10-08起）
 - ESPN 隐藏 API: 实时比分/赛程 (免费无限制)
 - Matchbook: 交易量快照 (volume_weight 影子特征，只记录不进生产)
 - Transfermarkt: 伤停名单(每日) + 俱乐部身价(每周一)
@@ -100,62 +100,94 @@ except Exception as e:
     results["sources"]["the_odds_api"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] The Odds API: {e}")
 
-# 4. theopenmodel: 五大联赛预测（含新鲜度校验）
-#    防泄漏：只保留 kickoff > 抓取时刻的；快照过期（最新比赛距今>3天）标 stale
+# 4. AF predictions: 第三方独立模型信号（theopenmodel替代，2026-10-08起）
+#    theopenmodel 已死（2026-09-16后停更）且其输出从无下游消费，本节替换之。
+#    对当日竞彩在售场次批量拉取 AF 第三方模型三向概率。
+#    配额守卫：与 fixtures 共享100次/天，fixtures优先；本节每日上限40次，超限跳过。
+#    在售判定：board 中文联赛名→AF英文名映射 + 开球时间双重对齐（中英文队名不硬匹配）。
+#    时区：board 时间为北京时间，转 UTC 后对 AF（AF 用 UTC）；board 的"今日"横跨
+#    UTC 两天，故用 af_fixtures_today + af_fixtures_tomorrow 合并匹配。
+#    覆盖缺口：AF 免费档部分联赛/场次无数据（如巴西甲一线队），无数据则跳过记 missed。
+#    注意：意甲/巴西甲在AF都叫"Serie A"，靠开球时间区分（时区不同极少撞车）；
+#    predict时操作方按 kickoff+队名人工核对，afb_predictions.json 存全量元数据备查。
 try:
-    from openmodel import (
-        get_predictions, filter_upcoming, snapshot_is_stale,
+    from datetime import timezone as _tz, timedelta as _td
+    from apifootball import get_status as af_get_status
+    from apifootball_predictions import (
+        get_predictions as af_get_predictions, BOARD_LEAGUE_TO_AF,
     )
-    fetch_time = datetime.now(timezone.utc)
+    from okooo import _get_html as okooo_get_html, BASE_URL as OKOOO_BASE
+    import re as _re
 
-    # 全部未结算行 → 新鲜度检查 → 只要未来的
-    all_unsettled = get_predictions(only_upcoming=False)
-    future_preds = filter_upcoming(all_unsettled, asof=fetch_time)
-    stale = snapshot_is_stale(all_unsettled, asof=fetch_time, max_age_days=3)
+    _board_html = okooo_get_html(f"{OKOOO_BASE}/jingcai/")
+    _bj = _tz(_td(hours=8))
+    _board_utc = set()
+    _unmapped_leagues = set()
+    for _lg_zh, _ko in zip(
+            _re.findall(r'class="saiming[^"]*"[^>]*?title="([^"]+)"', _board_html),
+            _re.findall(r"比赛时间:(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", _board_html)):
+        _af_lg = BOARD_LEAGUE_TO_AF.get(_lg_zh)
+        if _af_lg is None:
+            _unmapped_leagues.add(_lg_zh)
+            continue
+        _dt_utc = datetime.strptime(_ko, "%Y-%m-%d %H:%M").replace(
+            tzinfo=_bj).astimezone(_tz.utc)
+        _board_utc.add((_af_lg, _dt_utc.strftime("%Y-%m-%d %H:%M")))
 
-    latest_ko = None
-    warning = ""
-    kos = [p["kickoff"] for p in all_unsettled if p.get("kickoff")]
-    if kos:
-        latest_ko = max(kos)
-        age_days = (fetch_time - latest_ko).days
-        if stale:
-            if age_days > 3:
-                warning = (
-                    f"最新预测比赛 {latest_ko.strftime('%Y-%m-%d')} 距今 {age_days} 天，"
-                    "数据源疑似停更，预测不可作为当前推荐使用"
-                )
-            else:
-                warning = "预测快照为空或无可用场次"
-    else:
-        warning = "预测文件为空或无可解析的开球时间"
+    _af_all = []
+    for _fn in ("af_fixtures_today.json", "af_fixtures_tomorrow.json"):
+        _fp = os.path.join(day_dir, _fn)
+        if os.path.exists(_fp):
+            _af_all.extend(json.load(open(_fp)))
 
-    # 转成可序列化格式
-    def _ser(o):
-        if isinstance(o, dict):
-            return {k: _ser(v) for k, v in o.items()}
-        if isinstance(o, (list, tuple)):
-            return [_ser(v) for v in o]
-        if hasattr(o, 'isoformat'):
-            return o.isoformat()
-        return o
-    preds_clean = _ser(future_preds)
-    save("openmodel_predictions", preds_clean)
-    n = len(preds_clean)
-    results["sources"]["theopenmodel"] = {
-        "ok": True,
-        "count": n,
-        "total_parsed": len(all_unsettled),
-        "latest_kickoff": latest_ko.isoformat() if latest_ko else None,
-        "stale": stale,
+    _st = af_get_status()
+    _used = _st.get("requests_used", 0) or 0
+    _budget = min(40, max(0, 100 - _used - 5))  # 留5次余量
+    _seen_fid, _targets = set(), []
+    for fx in _af_all:
+        _ko = (fx.get("date") or "")[:16].replace("T", " ")
+        _fid = fx.get("fixture_id")
+        if not _fid or _fid in _seen_fid:
+            continue
+        if (fx.get("league", ""), _ko) in _board_utc:
+            _seen_fid.add(_fid)
+            _targets.append(fx)
+        if len(_targets) >= _budget:
+            break
+
+    afb_data, afb_miss = {}, []
+    for fx in _targets:
+        fid = fx["fixture_id"]
+        pr = af_get_predictions(fid)  # 内部已吞异常，失败返回None
+        if pr:
+            afb_data[str(fid)] = {
+                "kickoff": fx.get("date"),
+                "league": fx.get("league"),
+                "home": fx.get("home"),
+                "away": fx.get("away"),
+                "p_home": pr["p_home"],
+                "p_draw": pr["p_draw"],
+                "p_away": pr["p_away"],
+                "advice": pr.get("advice"),
+                "source": "af_predictions",
+            }
+        else:
+            afb_miss.append(fid)
+    save("afb_predictions", {"matches": afb_data, "missed": afb_miss,
+                             "quota_budget": _budget,
+                             "unmapped_leagues": sorted(_unmapped_leagues)})
+    _st2 = af_get_status()
+    results["sources"]["af_predictions"] = {
+        "ok": True, "matches": len(afb_data), "missed": len(afb_miss),
+        "quota_used_after": _st2.get("requests_used"),
     }
-    if stale:
-        results["sources"]["theopenmodel"]["warning"] = warning
-        print(f"[WARN] theopenmodel 数据过期: {warning}")
-    print(f"[OK] theopenmodel: {n}条未来预测 (原始未结算{len(all_unsettled)}条)")
+    print(f"[OK] AF predictions: {len(afb_data)}场第三方模型信号 "
+          f"(在售对齐{len(_targets)}场，预算{_budget})")
+    if _unmapped_leagues:
+        print(f"  [WARN] 未映射联赛: {sorted(_unmapped_leagues)}")
 except Exception as e:
-    results["sources"]["theopenmodel"] = {"ok": False, "error": str(e)[:200]}
-    print(f"[FAIL] theopenmodel: {e}")
+    results["sources"]["af_predictions"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] AF predictions: {e}")
 
 # 5. football-charts: 历史比分增量 (J2/K1/K2)
 #    赛季探测：先试当年，不存在(unknown_season)则用 API 返回的可用赛季回退；

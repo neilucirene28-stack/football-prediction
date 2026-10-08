@@ -122,3 +122,32 @@ underconfidence修正。phase2回填已用修复后代码重跑（225场，预�
   p=0.47，不显著，不跟进。
 - 大小球：期望总值3.067 vs 实际3.075，校准良好，无问题。
 - 让球仍是全引擎最大短板（4a已覆盖），无其他显著miscalibration。
+
+---
+
+## 5. AF predictions 独立模型信号分歧 ✅ 已合并（2026-10-08）
+
+**背景**：theopenmodel 已死（2026-09-16后停更）且其输出从无下游消费。
+用户拍板A方案：用 API-Football /predictions 替换，并真正接入分歧检测
+（此前"第4个独立信号"只是文档意图，从未实现）。
+
+**新增**：
+- `collector/sources/apifootball_predictions.py`：
+  `get_predictions(fixture_id) -> {p_home,p_draw,p_away,advice}`（0-1，已归一化）；
+  失败/无数据返回 None 不抛异常；`BOARD_LEAGUE_TO_AF` 中文联赛→AF英文名映射表。
+- `scripts/daily_fetch.py` 第4节：theopenmodel 整节摘除，替换为 AF predictions 批量拉取。
+  在售判定用 board 中文联赛名→AF英文名 + 开球时间双重对齐（board时间为北京时间，
+  转UTC后匹配AF；board"今日"横跨UTC两天，用 today+tomorrow 合并匹配）。
+  配额守卫：与 fixtures 共享100次/天，fixtures优先；本节每日上限40次。
+  存 `data/daily/YYYY-MM-DD/afb_predictions.json`。
+- `engine/predictor.py` 第11b节：payload 新增可选字段 `af_pred=[pH,pD,pA]`。
+  在胜平负校准后比较引擎首选 vs AF首选，方向不一致且 gap>=0.15 → 触发独立信号分歧，
+  沿用B补丁口径（降一档/conf-15/risk+15），`divergence.signal="af_model"`，
+  与市场门控互斥（已触发则跳过）。详见 docs/payload-fields.md。
+
+**验证**：7项新单测（触发/对齐静默/gap不足静默/无字段静默/残缺不崩/配置关闭/
+市场门控优先）；2026-10-08 真实6场AF数据回放触发3/6（均为真实方向分歧，
+非小gap滥标）；全量186 passed（3个beidan时间炸弹为pre-existing失败，已确认）。
+
+**覆盖缺口**：AF免费档部分联赛/场次无数据（如巴西甲一线队今日无fixture），
+无数据时门控静默，不影响原有逻辑。

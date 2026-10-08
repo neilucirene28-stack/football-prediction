@@ -497,13 +497,41 @@ def predict(payload: dict, config: dict | None = None,
                 divergence["market"] = "handicap"
                 divergence["handicap_line"] = hcap.get("line")
 
+    # v2.6 独立模型信号分歧（AF predictions）：模型 vs 模型，非市场分歧。
+    # payload 可选字段 af_pred=[pH,pD,pA]（0-1，第三方模型三向概率）。
+    # 在胜平负校准后（p_home/p_draw/p_away 终值）比较：引擎首选 vs AF首选，
+    # 方向不一致且 gap>=gate → 触发，沿用B补丁门控口径（降一档/conf-15/risk+15）。
+    # 与市场门控互斥：市场门控（含让球fallback）已触发时不再重复触发。
+    if gate > 0 and divergence is None:
+        afp = payload.get("af_pred")
+        af = None
+        if afp:
+            try:
+                af = (float(afp[0]), float(afp[1]), float(afp[2]))
+            except (TypeError, ValueError, IndexError):
+                af = None
+        if af is not None and sum(af) > 0:
+            _t = sum(af)
+            af = (af[0] / _t, af[1] / _t, af[2] / _t)
+            d = _divergence_gate((p_home, p_draw, p_away), af)
+            if d is not None:
+                divergence = {
+                    "signal": "af_model",
+                    "model_direction": d["model_direction"],
+                    "af_direction": d["market_direction"],
+                    "gap": d["gap"],
+                }
+
     if divergence is not None:
         confidence = {"S": "A", "A": "B", "B": "C", "C": "C"}[confidence]
         conf_score = round(max(conf_score - 15.0, 0.0), 1)
         risk = round(min(risk + 15.0, 100.0), 1)
-        risk_factors.append("模型与让球市场严重背离"
-                            if divergence.get("market") == "handicap"
-                            else "模型与市场严重背离")
+        _sig = divergence.get("signal")
+        _mkt = divergence.get("market")
+        risk_factors.append(
+            "独立模型信号分歧（AF）" if _sig == "af_model"
+            else ("模型与让球市场严重背离" if _mkt == "handicap"
+                  else "模型与市场严重背离"))
 
     # ---- 12. Monte Carlo（门控） ----
     mc = maybe_simulate(lam_h, lam_a, completeness=score,
@@ -584,7 +612,17 @@ def predict(payload: dict, config: dict | None = None,
             else f"已应用伤停修正: {payload['injury']}",
         ] + (["已应用回测拟合的 Platt 概率校准。"] if platt_on else [])
         + (["一致性检查发现冲突，信心已下调。"] if issues else [])
-        + ([f"⚠️模型与市场严重背离（模型看{divergence['model_direction']}、"
-             f"市场看{divergence['market_direction']}），信心已自动下调；"
-             "背离时不硬扛。"] if divergence else []),
+        + ([_divergence_note(divergence)] if divergence else []),
     }
+
+
+def _divergence_note(d):
+    """divergence 展示文案：区分市场分歧 / 让球分歧 / 独立模型分歧。"""
+    if d.get("signal") == "af_model":
+        return (f"⚠️独立模型信号分歧（本模型看{d['model_direction']}、"
+                f"AF模型看{d['af_direction']}），信心已自动下调；"
+                "分歧时不硬扛。")
+    who = "让球市场" if d.get("market") == "handicap" else "市场"
+    return (f"⚠️模型与{who}严重背离（模型看{d['model_direction']}、"
+            f"{who}看{d['market_direction']}），信心已自动下调；"
+            "背离时不硬扛。")

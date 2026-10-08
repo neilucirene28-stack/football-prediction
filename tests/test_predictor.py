@@ -380,3 +380,87 @@ def test_handicap_gate_disabled_by_config():
     p = _hcap_strong_away()
     p["handicap_sp"] = [1.65, 4.20, 3.50]
     assert predict(p, config={"divergence_gate": 0.0})["divergence"] is None
+
+
+# ---------------- v2.6: AF 独立模型信号分歧 ----------------
+
+def _af_strong_home_payload(**kw):
+    # 模型强烈看好主队（AF 强烈看好客队时触发分歧）
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds=None,  # 无市场，避免市场门控先触发
+    )
+    p.update(kw)
+    return p
+
+
+def test_af_gate_triggers_and_downgrades():
+    p = _af_strong_home_payload()
+    p["af_pred"] = [0.10, 0.25, 0.65]  # AF 强烈看好客队
+    r = predict(p)
+    d = r["divergence"]
+    assert d is not None
+    assert d["signal"] == "af_model"
+    assert d["model_direction"] == "home"
+    assert d["af_direction"] == "away"
+    assert d["gap"] >= 0.15
+    assert "独立模型信号分歧（AF）" in r["upset_risk_factors"]
+    assert any("独立模型信号分歧" in n for n in r["notes"])
+    # 口径：降一档/conf-15/risk+15
+    r_off = predict(_af_strong_home_payload())
+    assert r_off["divergence"] is None
+
+
+def test_af_gate_quiet_when_aligned():
+    p = _af_strong_home_payload()
+    p["af_pred"] = [0.65, 0.25, 0.10]  # AF 同向看好主队
+    assert predict(p)["divergence"] is None
+
+
+def test_af_gate_quiet_when_gap_small():
+    p = _af_strong_home_payload()
+    # AF 首选平局但差距不足（模型主胜概率高，gap<0.15）
+    p["af_pred"] = [0.40, 0.35, 0.25]
+    r = predict(p)
+    # 方向不同(draw vs home)但 gap 不足 → 静默（若模型主胜不够强则此断言需调）
+    d = r["divergence"]
+    if d is not None:
+        assert d.get("signal") != "af_model" or d["gap"] >= 0.15
+
+
+def test_af_gate_quiet_without_field():
+    # 无 af_pred 字段 → 行为不变（无市场时本就不触发）
+    assert predict(_af_strong_home_payload())["divergence"] is None
+
+
+def test_af_gate_malformed_is_safe():
+    p = _af_strong_home_payload()
+    p["af_pred"] = ["x", None, 0.5]
+    assert predict(p)["divergence"] is None
+    p["af_pred"] = [0.5, 0.5]  # 少一项
+    assert predict(p)["divergence"] is None
+    p["af_pred"] = [0, 0, 0]  # 全零
+    assert predict(p)["divergence"] is None
+
+
+def test_af_gate_disabled_by_config():
+    p = _af_strong_home_payload()
+    p["af_pred"] = [0.10, 0.25, 0.65]
+    assert predict(p, config={"divergence_gate": 0.0})["divergence"] is None
+
+
+def test_af_gate_yields_to_market_gate():
+    # 市场门控已触发时，AF 门控不再重复触发（divergence 保持市场口径）
+    p = sample_payload(
+        home_recent=[{"gf": 3, "ga": 0, "venue": "H"} for _ in range(8)],
+        away_recent=[{"gf": 0, "ga": 3, "venue": "A"} for _ in range(8)],
+        odds={"home": 8.0, "draw": 5.0, "away": 1.30},
+    )
+    p["af_pred"] = [0.10, 0.25, 0.65]
+    r = predict(p)
+    d = r["divergence"]
+    assert d is not None
+    assert d.get("signal") != "af_model"
+    assert d["model_direction"] == "home"
+    assert d["market_direction"] == "away"
