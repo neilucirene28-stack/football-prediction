@@ -78,7 +78,7 @@ class PredictError(ValueError):
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
 # v2.7: B深修——比分矩阵 IPF 校准，所有全场衍生项从校准后矩阵计算。
-ENGINE_VERSION = "2.7"
+ENGINE_VERSION = "2.8"
 
 
 # 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
