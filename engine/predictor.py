@@ -389,10 +389,12 @@ def predict(payload: dict, config: dict | None = None,
                                      rho=cfg["rho"]),
         # 输出格式升级（对齐竞彩官方五大玩法）：半全场 9 种组合 + 总进球精确分布。
         # 纯输出项，不改变任何概率逻辑，ENGINE_VERSION 保持 2.5。
+        # P0 Bug4：传入IPF后矩阵，使半全场全场边际与最终胜平负一致
         "half_full_1x2": {k: round(v, 4) for k, v in
                           half_full_1x2(lam_h, lam_a,
                                         ht_factor=cfg["ht_factor"],
-                                        rho=cfg["rho"]).items()},
+                                        rho=cfg["rho"],
+                                        ft_matrix=matrix_cal).items()},
         "total_goals_exact": {str(k): round(v, 4) for k, v in
                               total_goals_exact(matrix_cal).items()},
     }

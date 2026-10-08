@@ -87,3 +87,39 @@ class TestBug3LetdrawInclusion:
         ch, cd, ca = calibrate_handicap_1x2(0.90, 0.05, 0.05, 1, strength=0.5,
                                             p_home=0.05, p_away=0.05)
         assert ca + cd <= 0.05 + 1e-9
+
+
+class TestBug4HalfFullMarginal:
+    """Bug4: 半全场9格聚合的全场边际必须等于最终胜平负（<0.5pp）。"""
+
+    def _payload(self):
+        from datetime import datetime, timedelta, timezone
+        now = datetime.now(timezone.utc)
+        return {
+            "home": "测试主", "away": "测试客",
+            "kickoff_at": (now + timedelta(hours=5)).isoformat(),
+            "snapshot_at": now.isoformat(),
+            "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
+            "away_recent": [{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)],
+            "league_avg_goals": 2.70,
+            "odds": {"home": 2.0, "draw": 3.4, "away": 3.6},
+            "handicap_line": -1,
+        }
+
+    def test_half_full_marginal_matches_final(self):
+        from engine.predictor import predict
+        res = predict(self._payload())
+        hf = res["derivatives"]["half_full_1x2"]
+        agg = [sum(v for k, v in hf.items() if k[1] == o) for o in ("胜", "平", "负")]
+        final = (res["p_home"], res["p_draw"], res["p_away"])
+        diff = max(abs(a - f) for a, f in zip(agg, final))
+        assert diff < 0.005, f"边际差{diff:.4%}超0.5pp"
+        assert abs(sum(hf.values()) - 1.0) < 0.01
+
+    def test_half_full_without_ft_matrix_keeps_old_behavior(self):
+        # ft_matrix=None 时保持原行为（向后兼容）
+        from engine.poisson import half_full_1x2
+        out = half_full_1x2(1.8, 1.1)
+        assert abs(sum(out.values()) - 1.0) < 1e-6
+        assert set(out.keys()) == {"胜胜", "胜平", "胜负", "平胜", "平平",
+                                    "平负", "负胜", "负平", "负负"}

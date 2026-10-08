@@ -188,7 +188,8 @@ def _outcome(h: int, a: int) -> str:
 
 def half_full_1x2(lambda_home: float, lambda_away: float,
                   ht_factor: float = 0.44,
-                  rho: float = 0.0) -> dict:
+                  rho: float = 0.0,
+                  ft_matrix=None) -> dict:
     """半全场胜平负：9 种组合概率（竞彩官方玩法）。
 
     推导：半场比分矩阵 M_ht（λ×ht_factor，Dixon-Coles 修正，与 half_time_probs
@@ -196,9 +197,17 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
     联合分布，再按（半场胜平负 × 全场胜平负）聚合为 9 种组合。
     注意半场与全场不是独立的，不能直接相乘边际概率。
 
+    ft_matrix: IPF校准后的全场比分矩阵（P0 Bug4修复新增）。
+        传入时，对联合分布做重要性重加权
+        w(fi,fj) = P_IPF(fi,fj) / P_J(fi,fj)，
+        使聚合的全场边际等于校准后胜平负。
+        ft_matrix网格外（>10球）的长尾保留原权重，重加权后重归一；
+        长尾质量<1e-5，边际误差可忽略。
+        为None时保持原行为（仅测试/兼容用途）。
+
     返回 {"胜胜": p, "胜平": p, "胜负": p,
            "平胜": p, "平平": p, "平负": p,
-           "负胜": p, "负平": p, "负负": p}，加总 ≈ 1。
+           "负胜": p, "负平": p, "负负": p}，加总 = 1。
     """
     m_ht = score_matrix(lambda_home * ht_factor, lambda_away * ht_factor,
                         rho=rho)
@@ -211,9 +220,41 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
     s_h, s_a = sum(pmf_h2), sum(pmf_a2)
     pmf_h2 = [v / s_h for v in pmf_h2]
     pmf_a2 = [v / s_a for v in pmf_a2]
+    n_ht = len(m_ht)
+    n_ft = len(ft_matrix) if ft_matrix is not None else 0
+
+    # Pass 1: 联合分布隐含的全场比分分布 P_J(fi,fj)
+    ft_j = {}
+    for i in range(n_ht):
+        for j in range(n_ht):
+            p_ht = m_ht[i][j]
+            if p_ht == 0.0:
+                continue
+            for dh in range(max_2h + 1):
+                ph2 = pmf_h2[dh]
+                if ph2 == 0.0:
+                    continue
+                fi = i + dh
+                for da in range(max_2h + 1):
+                    pa2 = pmf_a2[da]
+                    p = p_ht * ph2 * pa2
+                    if p == 0.0:
+                        continue
+                    key = (fi, j + da)
+                    ft_j[key] = ft_j.get(key, 0.0) + p
+
+    def _w(fi, fj):
+        # P0 Bug4: IPF重加权；网格外长尾权重=1
+        if ft_matrix is None or fi >= n_ft or fj >= n_ft:
+            return 1.0
+        pj = ft_j.get((fi, fj), 0.0)
+        if pj <= 0:
+            return 0.0
+        return ft_matrix[fi][fj] / pj
+
+    # Pass 2: 加权重聚为 9 种组合
     keys = ("胜胜", "胜平", "胜负", "平胜", "平平", "平负", "负胜", "负平", "负负")
     combos = {k: 0.0 for k in keys}
-    n_ht = len(m_ht)
     for i in range(n_ht):
         for j in range(n_ht):
             p_ht = m_ht[i][j]
@@ -224,11 +265,17 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
                 ph2 = pmf_h2[dh]
                 if ph2 == 0.0:
                     continue
+                fi = i + dh
                 for da in range(max_2h + 1):
-                    p = p_ht * ph2 * pmf_a2[da]
+                    pa2 = pmf_a2[da]
+                    p = p_ht * ph2 * pa2
                     if p == 0.0:
                         continue
-                    combos[ht_o + _outcome(i + dh, j + da)] += p
+                    fj = j + da
+                    combos[ht_o + _outcome(fi, fj)] += p * _w(fi, fj)
+    total = sum(combos.values())
+    if total > 0:
+        combos = {k: v / total for k, v in combos.items()}
     return combos
 
 
