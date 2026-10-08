@@ -55,15 +55,18 @@ def get_board_map(board="jingcai"):
     """当前对阵页全部场次 {(home, away): mid}，一次抓取供多次查询。"""
     html = _get_html(f"{BASE_URL}/{board}/")
     out = {}
+    seen = set()
     for m in re.finditer(r'data-mid="(\d+)"', html):
-        seg = html[m.start():m.start() + 4000]
-        titles = re.findall(r'title="([^"]+)"', seg)
-        teams = [t for t in titles
-                 if not re.match(r"^周[一二三四五六日]\d+$", t)
-                 and t not in ("欧国联", "欧罗巴", "世界杯", "亚洲杯")
-                 and not t.startswith("比赛时间")]
+        mid = m.group(1)
+        if mid in seen:
+            continue
+        seen.add(mid)
+        seg = html[m.start():m.start() + 6000]
+        # 主客队全名在 .zhum 的 title 里（主队在前、客队在后）；联赛名在 .saiming，
+        # 不再用联赛黑名单过滤（黑名单漏掉芬超/巴西甲等会导致联赛名被当成队名，2026-10-08实测）
+        teams = re.findall(r'class="zhum[^"]*" title="([^"]+)"', seg)
         if len(teams) >= 2:
-            out.setdefault((teams[0], teams[1]), m.group(1))
+            out[(teams[0], teams[1])] = mid
     return out
 
 
