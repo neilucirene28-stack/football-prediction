@@ -86,8 +86,14 @@ def attack_defense(recent: Iterable[Mapping], league_avg_goals: float,
     shrink_prior: 向 1.0 收缩的先验权重（场）。有效样本越少，评级越靠近
     联赛均值，抑制小样本噪声导致的 λ 过度离散。0 = 关闭。
     """
+    # P0 Bug1修复：venue缺失/非法值视为中性"N"，参与计算。
+    # 之前 r.get("venue","N")=="N" 只匹配显式"N"，无venue记录(r.get→None)
+    # 被主客场筛选静默排除→评级退回1.0，造成数据丢弃。
+    def _norm_venue(r):
+        v = r.get("venue")
+        return v if v in ("H", "A", "N") else "N"
     rows = [(i, r) for i, r in enumerate(recent)
-            if venue is None or r.get("venue", "N") == venue or r.get("venue") == "N"]
+            if venue is None or _norm_venue(r) == venue or _norm_venue(r) == "N"]
     if not rows or league_avg_goals <= 0:
         return 1.0, 1.0, {"n": 0, "opp_adjust_coverage": 0.0}
     team_avg = league_avg_goals / 2.0  # 每队场均进球（输入为全场总进球）
@@ -154,8 +160,12 @@ def estimate_lambdas(home_recent, away_recent, league_avg_goals: float,
     notes = {
         "attack_home": round(ah, 3), "defense_home": round(dh, 3),
         "attack_away": round(aa, 3), "defense_away": round(da, 3),
-        "home_sample": len([r for r in home_recent if r.get("venue") in ("H", "N", None)]),
-        "away_sample": len([r for r in away_recent if r.get("venue") in ("A", "N", None)]),
+        # P0 Bug1修复：sample计数必须等于attack_defense实际使用的记录数。
+        # 之前用独立的list comprehension重算，与筛选逻辑不一致
+        # （无venue记录被计入但未被使用），导致degraded谎报。
+        # dh_diag/da_diag["n"] 就是各自venue筛选后实际参与计算的记录数。
+        "home_sample": dh_diag.get("n", 0),
+        "away_sample": da_diag.get("n", 0),
         "home_effective_n": dh_diag.get("effective_n"),
         "away_effective_n": da_diag.get("effective_n"),
         # 对手强度修正的真实覆盖率：目前采集链路不提供 opp_attack/opp_defense，
