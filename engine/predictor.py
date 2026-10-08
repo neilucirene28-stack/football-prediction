@@ -425,9 +425,11 @@ def predict(payload: dict, config: dict | None = None,
         # 让球口径先从校准后矩阵算 raw 值，再走现有让平校准流程（顺序不变）
         h, d, a = handicap_1x2(matrix_cal, int(handicap))
         # v2.5：让平校准（修正矩阵系统性低估 P(让平)；见 engine/letdraw.py）
+        # P0 Bug3：传入IPF后全场胜平负作事件包含约束参照
         h2, d2, a2 = calibrate_handicap_1x2(
             h, d, a, int(handicap), league=competition,
-            strength=cfg.get("letdraw_strength", 0.5))
+            strength=cfg.get("letdraw_strength", 0.5),
+            p_home=p_final[0], p_away=p_final[2])
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),

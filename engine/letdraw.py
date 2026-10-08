@@ -61,11 +61,22 @@ def letdraw_prior(rq: int, league: str | None = None) -> float:
 
 def calibrate_handicap_1x2(p_h: float, p_d: float, p_a: float,
                             rq: int, league: str | None = None,
-                            strength: float = 0.5) -> tuple[float, float, float]:
+                            strength: float = 0.5,
+                            p_home: float | None = None,
+                            p_away: float | None = None) -> tuple[float, float, float]:
     """把模型让球 1X2 概率向经验先验混合，修正系统性低估。
 
     strength=0 时关闭（返回原值）；strength=1 时完全采用先验。
     混合后 H/A 按原比例重归一，保证三项和为 1。
+
+    p_home/p_away: IPF校准后的全场胜平负概率（事件包含约束参照）。
+        rq<0（主让球）时要求 P(让胜)+P(让平) ≤ p_home；
+        rq>0（主受让）时要求 P(让负)+P(让平) ≤ p_away。
+        （整数比分下 让胜+让平=P(净胜≥|rq|)⊆P(主胜)，raw矩阵恒取等号。）
+        混合后若违反约束，按比例缩放投影到可行域。
+        为None时跳过约束（仅测试/兼容用途，生产必须传入）。
+        P0 Bug3修复：之前混合后重归一完全不感知全场概率，
+        主胜仅3%时让平被抬到13%+，让胜+让平超出主胜11pp，不可能分布。
     """
     if strength <= 0:
         return p_h, p_d, p_a
@@ -79,6 +90,21 @@ def calibrate_handicap_1x2(p_h: float, p_d: float, p_a: float,
         pa2 = rest * p_a / s
     else:
         ph2 = pa2 = rest / 2.0
+    # P0 Bug3: 事件包含约束投影
+    if rq < 0 and p_home is not None:
+        tot = ph2 + pd2
+        if tot > p_home and tot > 0:
+            scale = p_home / tot
+            ph2 *= scale
+            pd2 *= scale
+            pa2 = 1.0 - ph2 - pd2
+    elif rq > 0 and p_away is not None:
+        tot = pa2 + pd2
+        if tot > p_away and tot > 0:
+            scale = p_away / tot
+            pa2 *= scale
+            pd2 *= scale
+            ph2 = 1.0 - pa2 - pd2
     return ph2, pd2, pa2
 
 
