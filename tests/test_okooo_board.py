@@ -54,6 +54,32 @@ def test_board_map_excludes_league_names():
     }, m
 
 
+# 过渡态行：联赛头混入 zhum（2026-10-08 08:15 实测曾出现 ("芬超","赫尔火花")）
+FIXTURE_TRANSITIONAL = """
+<div data-mid="1347927" data-morder="3001">
+  <div class="liansai">
+    <span class="xulie" title="周三001">001</span>
+    <a class="saiming" title="芬超">芬超</a>
+    <div class="zhum fff hui_colo" title="芬超">芬超</div>
+  </div>
+  <div class="shenpf">
+    <div class="zhu"><div class="zhum fff hui_colo" title="赫尔火花">赫尔火花</div></div>
+    <div class="zhum fff hui_colo" title="国际图尔">国际图尔</div>
+  </div>
+</div>
+"""
+
+
+def test_board_map_transitional_league_in_zhum():
+    orig = okooo._get_html
+    okooo._get_html = lambda url, retries=3: FIXTURE_TRANSITIONAL
+    try:
+        m = okooo.get_board_map("jingcai")
+    finally:
+        okooo._get_html = orig
+    assert m == {("赫尔火花", "国际图尔"): "1347927"}, m
+
+
 def test_board_map_no_league_contamination():
     orig = okooo._get_html
     okooo._get_html = _fake_get_html

@@ -68,6 +68,18 @@ _TRAD2SIMP = str.maketrans({
 TEAM_ALIASES = {
     "波斯尼亚": "波黑",
     "阿美尼亚": "亚美尼亚",
+    # 以下为 7M 港式译名，2026-10-08 按 search.7m.com.cn 实测逐条验证
+    # （7M 用繁体+港式音译，如山度士=桑托斯；norm_team 先繁→简再走本表）
+    "VPS华沙": "瓦萨",          # 7M: VPS華沙
+    "古比斯": "库奥皮奥",        # 7M: 古比斯 (KuPS)
+    "山度士": "桑托斯",          # 7M: 山度士 (Santos)
+    "法林明高": "弗拉门戈",      # 7M: 法林明高 (Flamengo)
+    "帕拉尼恩斯": "巴竞技",      # 7M: 帕拉尼恩斯 (Athletico Paranaense；澳客简称巴竞技)
+    "明尼路": "米竞技",          # 7M: 明尼路 (Atlético Mineiro；澳客简称米竞技)
+    "富明尼斯": "弗鲁米嫩",      # 7M: 富明尼斯 (Fluminense；澳客简称弗鲁米嫩)
+    "哥列迪巴": "科里蒂巴",      # 7M: 哥列迪巴 (Coritiba)
+    "彭美拉斯": "帕梅拉斯",      # 7M: 彭美拉斯 (Palmeiras；澳客简称帕梅拉斯)
+    "巴希亚": "巴伊亚",            # 7M: 巴希亞 (Bahia；澳客作巴伊亚)
 }
 
 
@@ -120,8 +132,24 @@ def find_mid(home, away):
     先用主队名搜，再用归一化队名精确匹配；过滤 U 系列/女足。
     找不到返回 None。
     """
-    cands = search_match(home)
+    cands = []
     nh, na = norm_team(home), norm_team(away)
+    # 搜索关键词：主客队名 + 其 7M 侧别名。7M 按关键词搜当日比赛，
+    # 主队名若是 7M 无结果的叫法（如巴竞技→帕拉尼恩斯），用别名/客队名补搜。
+    # 2026-10-08 加。
+    keywords = [home, away]
+    for alias_7m, std in TEAM_ALIASES.items():
+        if (std == nh or std == na) and alias_7m not in keywords:
+            keywords.append(alias_7m)
+    seen = set()
+    for kw in keywords:
+        try:
+            for r in search_match(kw):
+                if r["mid"] not in seen:
+                    seen.add(r["mid"])
+                    cands.append(r)
+        except Exception:
+            continue
     for r in cands:
         if not _is_senior(r):
             continue

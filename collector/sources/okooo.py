@@ -56,15 +56,29 @@ def get_board_map(board="jingcai"):
     html = _get_html(f"{BASE_URL}/{board}/")
     out = {}
     seen = set()
-    for m in re.finditer(r'data-mid="(\d+)"', html):
-        mid = m.group(1)
+    # 按行块切分：每场一行，行 div 带 data-morder（主客队全名在行内 .zhum 的 title，
+    # 主队在前、客队在后；联赛名在行内 .saiming）。
+    # 2026-10-08 修：此前用 data-mid 起 6000 字符窗口取前两个 zhum，页面过渡态下
+    # 联赛头曾混入 zhum（如 ("芬超","赫尔火花")），且窗口可跨行串到下一场，
+    # 导致 7M 整节 0 映射。行块内取 + 联赛名兜底剔除，不再依赖联赛黑名单。
+    row_starts = list(re.finditer(r'<div[^>]*data-morder="\d+"[^>]*>', html))
+    for i, rs in enumerate(row_starts):
+        block_end = row_starts[i + 1].start() if i + 1 < len(row_starts) else len(html)
+        block = html[rs.start():block_end]
+        mm = re.search(r'data-mid="(\d+)"', rs.group(0))
+        if not mm:
+            continue
+        mid = mm.group(1)
         if mid in seen:
             continue
         seen.add(mid)
-        seg = html[m.start():m.start() + 6000]
-        # 主客队全名在 .zhum 的 title 里（主队在前、客队在后）；联赛名在 .saiming，
-        # 不再用联赛黑名单过滤（黑名单漏掉芬超/巴西甲等会导致联赛名被当成队名，2026-10-08实测）
-        teams = re.findall(r'class="zhum[^"]*" title="([^"]+)"', seg)
+        teams = []
+        for t in re.findall(r'class="zhum[^"]*" title="([^"]+)"', block):
+            if t not in teams:
+                teams.append(t)
+        lg = re.search(r'class="saiming[^"]*"[^>]*title="([^"]+)"', block)
+        if lg and lg.group(1) in teams:
+            teams.remove(lg.group(1))
         if len(teams) >= 2:
             out[(teams[0], teams[1])] = mid
     return out
