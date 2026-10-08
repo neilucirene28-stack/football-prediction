@@ -19,7 +19,7 @@ from .poisson import (score_matrix, match_probs, btts_prob, over_under_prob,
                       asian_handicap_probs, handicap_1x2, top_scores,
                       total_goals_distribution, expected_total_goals,
                       main_goal_interval, half_time_probs,
-                      half_full_1x2, total_goals_exact)
+                      half_full_1x2, total_goals_exact, ipf_to_marginals)
 from .market import (implied_proportional, shin_probs, overround,
                      kelly_fraction, market_drift, fair_handicap,
                      handicap_movement)
@@ -77,7 +77,8 @@ class PredictError(ValueError):
 
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
-ENGINE_VERSION = "2.5"
+# v2.7: B深修——比分矩阵 IPF 校准，所有全场衍生项从校准后矩阵计算。
+ENGINE_VERSION = "2.7"
 
 
 # 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
@@ -342,6 +343,15 @@ def predict(payload: dict, config: dict | None = None,
             platt_on = True
     p_home, p_draw, p_away = (round(p, 4) for p in p_final)
 
+    # ---- 7c. 比分矩阵 IPF 校准（B深修） ----
+    # 使 matrix 的 1X2 边际与校准后 p_final 一致，后续所有全场衍生项
+    # （top_scores、handicap_1x2、total_goals、over_under、asian、btts 等）
+    # 全部从校准后矩阵计算，根治"胜平负首选与比分首选方向打架"。
+    # 注意用未 round 的 p_final，避免 4 位小数截断导致边际失真。
+    # 半场子模型（half_time_probs / half_full_1x2）是独立的 HT 口径，
+    # 其内部 1X2 与半场比分本就自洽，无校准目标，不做 IPF。
+    matrix_cal = ipf_to_marginals(matrix, p_final)
+
     # ---- 8. 价值检测 ----
     value = []
     if o and market:
@@ -353,19 +363,25 @@ def predict(payload: dict, config: dict | None = None,
             if edge > 0.05:
                 value.append({"outcome": name, "edge": edge, "kelly": kelly})
 
-    # ---- 9. 衍生市场（同一矩阵） ----
+    # ---- 9. 衍生市场（校准后矩阵；B深修） ----
+    # 全场衍生项全部从 matrix_cal 计算，与校准后 1X2 自洽。
+    # raw 矩阵的值保留为 *_raw 对比字段，便于回测诊断。
     ou_line = payload.get("ou_line")
-    fair = fair_handicap(matrix)
+    fair = fair_handicap(matrix_cal)
     deriv = {
-        "btts": round(btts_prob(matrix), 4),
+        "btts": round(btts_prob(matrix_cal), 4),
         "over_under": None,
         "asian": None,
         "handicap_1x2": None,
         "top_scores": [{"score": s, "prob": round(p, 4)}
-                       for s, p in top_scores(matrix)],
+                       for s, p in top_scores(matrix_cal)],
+        "top_scores_raw": [{"score": s, "prob": round(p, 4)}
+                           for s, p in top_scores(matrix)],
+        "p_1x2_raw": [round(p, 4) for p in p_model],
         "total_goals": {str(k): round(v, 4)
-                        for k, v in total_goals_distribution(matrix).items()},
-        "expected_goals": round(expected_total_goals(matrix), 2),
+                        for k, v in total_goals_distribution(matrix_cal).items()},
+        "expected_goals": round(expected_total_goals(matrix_cal), 2),
+        "expected_goals_raw": round(expected_total_goals(matrix), 2),
         "main_goal_interval": None,
         "fair_handicap": fair,
         "cards": _cards_block(payload),
@@ -378,18 +394,18 @@ def predict(payload: dict, config: dict | None = None,
                                         ht_factor=cfg["ht_factor"],
                                         rho=cfg["rho"]).items()},
         "total_goals_exact": {str(k): round(v, 4) for k, v in
-                              total_goals_exact(matrix).items()},
+                              total_goals_exact(matrix_cal).items()},
     }
-    interval, interval_p = main_goal_interval(matrix)
+    interval, interval_p = main_goal_interval(matrix_cal)
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
     if ou_line is not None:
-        over, under = over_under_prob(matrix, float(ou_line))
+        over, under = over_under_prob(matrix_cal, float(ou_line))
         deriv["over_under"] = {"line": ou_line, "over": round(over, 4),
                                "under": round(under, 4)}
     asian = payload.get("asian")
     movement = None
     if asian and asian.get("handicap") is not None:
-        win, push, lose = asian_handicap_probs(matrix, float(asian["handicap"]))
+        win, push, lose = asian_handicap_probs(matrix_cal, float(asian["handicap"]))
         deriv["asian"] = {"handicap": asian["handicap"],
                           "win": round(win, 4), "push": round(push, 4),
                           "lose": round(lose, 4),
@@ -406,7 +422,8 @@ def predict(payload: dict, config: dict | None = None,
             deriv["asian"]["movement"] = movement
     handicap = payload.get("handicap_line")
     if handicap is not None:
-        h, d, a = handicap_1x2(matrix, int(handicap))
+        # 让球口径先从校准后矩阵算 raw 值，再走现有让平校准流程（顺序不变）
+        h, d, a = handicap_1x2(matrix_cal, int(handicap))
         # v2.5：让平校准（修正矩阵系统性低估 P(让平)；见 engine/letdraw.py）
         h2, d2, a2 = calibrate_handicap_1x2(
             h, d, a, int(handicap), league=competition,
@@ -423,7 +440,7 @@ def predict(payload: dict, config: dict | None = None,
     order = sorted(range(3), key=lambda i: p_final[i], reverse=True)
     upset_outcome = order[1]
     all_scores = [({"score": s, "prob": round(p, 4)})
-                  for s, p in top_scores(matrix, n=12)]
+                  for s, p in top_scores(matrix_cal, n=12)]
     upset_cands = [s for s in all_scores
                    if _score_winner(s["score"]) == upset_outcome]
     deriv["upset_score"] = upset_cands[0] if upset_cands else None

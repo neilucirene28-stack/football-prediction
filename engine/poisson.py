@@ -36,6 +36,58 @@ def match_probs(matrix) -> tuple[float, float, float]:
     return ph, pd, pa
 
 
+def ipf_to_marginals(matrix, target) -> list[list[float]]:
+    """IPF（iterative proportional fitting / raking）：调整比分矩阵，
+    使其 1X2 边际分布等于目标分布。
+
+    主胜格 (i>j) / 平局格 (i==j) / 客胜格 (i<j) 构成矩阵的一个完备划分，
+    因此对每个区域做一次乘法缩放即可使边际精确等于目标（单步收敛，
+    保留迭代语义以应对数值边界）。区域内相对概率保持不变
+    （最小 KL 散度调整）。
+
+    用途（B深修）：predict() 先算 ensemble+Platt 校准得到 p_final，
+    再对 matrix 做 IPF，使后续所有衍生项（top_scores、handicap_1x2、
+    total_goals 等）都从与 p_final 自洽的矩阵计算，根治
+    "胜平负首选与比分首选方向打架"。
+
+    target: (p_home, p_draw, p_away)，内部归一化；请传入未 round 的值。
+    返回新矩阵，不修改输入。
+    """
+    n = len(matrix)
+    th, td, ta = (float(target[0]), float(target[1]), float(target[2]))
+    s = th + td + ta
+    if s <= 0:
+        raise ValueError("IPF target marginals sum to non-positive")
+    th, td, ta = th / s, td / s, ta / s
+
+    rh = sum(matrix[i][j] for i in range(n) for j in range(n) if i > j)
+    rd = sum(matrix[i][j] for i in range(n) for j in range(n) if i == j)
+    ra = sum(matrix[i][j] for i in range(n) for j in range(n) if i < j)
+
+    def _factor(t, r, name):
+        if r <= 0:
+            if t > 1e-12:
+                raise ValueError(
+                    f"IPF: raw {name} region empty but target={t}")
+            return 0.0
+        return t / r
+
+    fh = _factor(th, rh, "home")
+    fd = _factor(td, rd, "draw")
+    fa = _factor(ta, ra, "away")
+
+    new = [[0.0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            f = fh if i > j else (fd if i == j else fa)
+            v = matrix[i][j] * f
+            new[i][j] = v if v > 0 else 0.0
+    tot = sum(sum(row) for row in new)
+    if tot > 0:
+        new = [[v / tot for v in row] for row in new]
+    return new
+
+
 def btts_prob(matrix) -> float:
     n = len(matrix)
     return 1.0 - sum(matrix[i][0] for i in range(n)) - sum(matrix[0][j] for j in range(n)) + matrix[0][0]

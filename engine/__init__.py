@@ -9,7 +9,7 @@ from .poisson import (
     score_matrix, match_probs, btts_prob, over_under_prob,
     asian_handicap_probs, top_scores, total_goals_distribution,
     expected_total_goals, main_goal_interval, half_time_probs,
-    half_full_1x2, total_goals_exact,
+    half_full_1x2, total_goals_exact, ipf_to_marginals,
 )
 from .market import (implied_proportional, shin_probs, kelly_fraction,
                      market_drift, fair_handicap, handicap_movement)
@@ -32,7 +32,7 @@ __all__ = [
     "score_matrix", "match_probs", "btts_prob", "over_under_prob",
     "asian_handicap_probs", "top_scores", "total_goals_distribution",
     "expected_total_goals", "main_goal_interval", "half_time_probs",
-    "half_full_1x2", "total_goals_exact",
+    "half_full_1x2", "total_goals_exact", "ipf_to_marginals",
     "implied_proportional", "shin_probs", "kelly_fraction", "market_drift",
     "fair_handicap", "handicap_movement",
     "completeness_score", "fuse_probs", "model_weight_for_grade",
