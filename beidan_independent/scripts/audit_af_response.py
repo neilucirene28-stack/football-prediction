@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from beidan_bd1.snapshot import _datetime
+from beidan_bd1.af_history import _integer
 
 
 def main():
@@ -29,6 +30,10 @@ def main():
     seen, leagues, records = set(), {}, []
     for event in payload["response"]:
         f, l, t = event["fixture"], event["league"], event["teams"]
+        for value, label in ((f.get('id'), 'fixture.id'), (t['home'].get('id'), 'home.id'),
+                             (t['away'].get('id'), 'away.id'), (l.get('id'), 'league.id'),
+                             (l.get('season'), 'season')):
+            _integer(value, label, 1)
         if (isinstance(f.get("id"), bool) or not isinstance(f.get("id"), int)
                 or f["id"] in seen or t["home"]["id"] == t["away"]["id"]):
             raise ValueError("来源比赛ID重复/非法或主客ID相同")
@@ -49,6 +54,7 @@ def main():
         records.append({"provider_match_id": f["id"], "provider_home_id": t["home"]["id"],
             "provider_away_id": t["away"]["id"], "home":t["home"]["name"], "away":t["away"]["name"],
             "kickoff_at": kickoff.isoformat(), "status": f["status"]["short"], "league": identity,
+            "scheduled_status_eligible": f["status"]["short"] == "NS",
             "verified_at": now, "provider_capture_clock_independently_verified":False,
             "canonical_identity_approved":False, "beidan_fixture_binding":None,
             "production_eligible":False})

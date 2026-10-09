@@ -62,3 +62,16 @@ class AFHistoryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             predict_native_shadow(raw,receipt,verified_at='2026-10-09T11:01:00Z',
                   asof_at='2026-10-09T10:59:00Z',fixture=future)
+        for invalid_id in (False, 0, '99'):
+            invalid = copy.deepcopy(future)
+            invalid['fixture']['id'] = invalid_id
+            with self.subTest(fixture_id=invalid_id), self.assertRaises(ValueError):
+                predict_native_shadow(raw,receipt,verified_at='2026-10-09T11:01:00Z',
+                      asof_at='2026-10-09T11:02:00Z',fixture=invalid)
+
+    def test_invalid_league_or_season_query_id_rejects(self):
+        p=self.fixture();raw=json.dumps(p).encode()
+        with self.assertRaises(ValueError):
+            audit_history(raw,{},verified_at='2026-10-09T11:01:00Z',league_id=True,season=2026)
+        with self.assertRaises(ValueError):
+            audit_history(raw,{},verified_at='2026-10-09T11:01:00Z',league_id=79,season=0)

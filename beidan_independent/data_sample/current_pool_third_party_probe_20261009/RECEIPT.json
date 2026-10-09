@@ -1,0 +1,30 @@
+{
+  "url": "https://trade.500.com/bjdc/",
+  "start_utc": "2026-10-09T15:19:00.041654+00:00",
+  "end_utc": "2026-10-09T15:19:12.423287+00:00",
+  "http_status": 200,
+  "sha256": "226a34abe74ad7eda86f1c55a724f1749e1aa507e01058ff5c0bfd9f62dfa13e",
+  "bytes": 1366238,
+  "headers": {
+    "Server": "Byte-nginx",
+    "Content-Type": "text/html;charset=gb2312",
+    "Content-Length": "1366238",
+    "Connection": "close",
+    "Age": "22",
+    "Content-Security-Policy": "script-src 'self' *.500.com *.500wan.com *.500.cn *.500cache.com *.500cache.cn *.500wancache.com  *.jd.com *.baidustatic.com *.qq.com *.baidu.com *.bdstatic.com *.mediav.com *.doubleclick.net *.google-analytics.com apps.bdimg.com static.anquan.org *.opta.net  *.performgroup.com *.alicdn.com *.qihucdn.com *.qhimg.com *.qhres.com 'unsafe-eval' 'unsafe-inline'",
+    "Set-Cookie": "repeat69989f90223482523261fb81b7d63f18=5e647ef5514a8e651f38c6eeae23fb46; path=/; domain=500.com",
+    "Vary": "Accept-Encoding",
+    "Via": "pic09.sxmp,cache02.hbhuangshi-cu27",
+    "X-Bdcdn-Cache-Status": "TCP_MISS,TCP_HIT",
+    "X-Content-Type-Options": "nosniff",
+    "X-Request-Id": "b32c239dcf7956e2b1c3914fec1923bf",
+    "X-Request-Ip": "2a13:9500:1e4:a97::4cf:38",
+    "X-Response-Cache": "parent_hit",
+    "X-Response-Cinfo": "2a13:9500:1e4:a97::4cf:38",
+    "X-Tt-Trace-Tag": "id=5",
+    "X-Xss-Protection": "1;mode=block",
+    "Date": "Fri, 09 Oct 2026 15:19:10 GMT",
+    "Strict-Transport-Security": "max-age=2592000; includeSubDomains"
+  },
+  "official_source": false
+}

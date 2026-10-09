@@ -18,6 +18,8 @@ def audit_history(raw_bytes, receipt, *, verified_at, league_id, season):
     Provider-native consistency does not approve a Beidan fixture join.
     """
     now = _datetime(verified_at, "verified_at")
+    league_id = _integer(league_id, "league_id", 1)
+    season = _integer(season, "season", 1)
     sha = hashlib.sha256(raw_bytes).hexdigest()
     start = _datetime(receipt["start_utc"], "start_utc")
     end = _datetime(receipt["end_utc"], "end_utc")
@@ -90,6 +92,7 @@ def predict_native_shadow(raw_bytes, receipt, *, verified_at, asof_at, fixture,
     from .baseline import _history
     from .team_strength import _fit_rows
     asof = _datetime(asof_at, "asof_at")
+    fixture_id = _integer(fixture["fixture"].get("id"), "fixture.id", 1)
     kickoff = _datetime(fixture["fixture"]["date"], "fixture.date")
     if not _datetime(verified_at, "verified_at") <= asof < kickoff:
         raise ValueError("history is not available before forecast/kickoff")
@@ -123,6 +126,6 @@ def predict_native_shadow(raw_bytes, receipt, *, verified_at, asof_at, fixture,
     result.update({"route": "L1_provider_native_research", "family_status": "provider_native_only",
         "production_eligible": False, "canonical_identity_approved": False,
         "human_reviewed": False, "beidan_fixture_binding_approved": False,
-        "provider_match_id": fixture["fixture"]["id"], "source_audit": report,
+        "provider_match_id": fixture_id, "source_audit": report,
         "asof_at": asof_at, "verified_at": verified_at})
     return result
