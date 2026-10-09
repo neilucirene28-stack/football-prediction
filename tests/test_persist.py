@@ -38,7 +38,7 @@ def sample_payload(**kw):
 def test_model_version_deterministic():
     cfg = {"rho": -0.13, "decay": 0.9}
     assert model_version(cfg) == model_version(cfg)
-    assert model_version(cfg).startswith("v2.8+")
+    assert model_version(cfg).startswith("v2.9+")
 
 
 def test_model_version_changes_with_params():
@@ -50,7 +50,7 @@ def test_model_version_changes_with_params():
 def test_predict_result_carries_model_version():
     r = predict(sample_payload())
     assert r["status"] == "ok"
-    assert r["model_version"].startswith("v2.8+")
+    assert r["model_version"].startswith("v2.9+")
     # 同一 payload 同一版本
     assert predict(sample_payload())["model_version"] == r["model_version"]
 

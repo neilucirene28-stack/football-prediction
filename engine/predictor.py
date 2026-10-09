@@ -30,7 +30,7 @@ from .montecarlo import maybe_simulate
 from .cards import predict_cards
 from .market_flow import (flow_features, apply_volume_weight,
                           movement_features)
-from .letdraw import (calibrate_handicap_1x2, letdraw_guard)
+from .letdraw import (apply_letdraw_to_matrix, letdraw_guard)
 from .beidan_calibration import apply_beidan_calibration
 from .beidan_upset import upset_risk as beidan_upset_risk, risk_tier as beidan_risk_tier
 
@@ -78,7 +78,7 @@ class PredictError(ValueError):
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
 # v2.7: B深修——比分矩阵 IPF 校准，所有全场衍生项从校准后矩阵计算。
-ENGINE_VERSION = "2.8"
+ENGINE_VERSION = "2.9"
 
 
 # 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
@@ -424,14 +424,15 @@ def predict(payload: dict, config: dict | None = None,
             deriv["asian"]["movement"] = movement
     handicap = payload.get("handicap_line")
     if handicap is not None:
-        # 让球口径先从校准后矩阵算 raw 值，再走现有让平校准流程（顺序不变）
+        # 让球口径先从校准后矩阵算 raw 值
         h, d, a = handicap_1x2(matrix_cal, int(handicap))
-        # v2.5：让平校准（修正矩阵系统性低估 P(让平)；见 engine/letdraw.py）
-        # P0 Bug3：传入IPF后全场胜平负作事件包含约束参照
-        h2, d2, a2 = calibrate_handicap_1x2(
-            h, d, a, int(handicap), league=competition,
-            strength=cfg.get("letdraw_strength", 0.5),
-            p_home=p_final[0], p_away=p_final[2])
+        # v2.9：让平修正直接作用于矩阵（区域内重分配；见 engine/letdraw.py），
+        # 修正后让球概率从矩阵聚合，P(让胜)+P(让平)≡P(主胜)天然成立。
+        # GPT BD-1.0审计：事后投影只能保证≤，不能保证=（曾差1.85pp）。
+        matrix_ld = apply_letdraw_to_matrix(
+            matrix_cal, int(handicap), league=competition,
+            strength=cfg.get("letdraw_strength", 0.5))
+        h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),

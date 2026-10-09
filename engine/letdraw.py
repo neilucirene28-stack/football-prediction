@@ -59,12 +59,76 @@ def letdraw_prior(rq: int, league: str | None = None) -> float:
     return TIER_PRIOR[t]
 
 
+def apply_letdraw_to_matrix(matrix: list[list[float]], rq: int,
+                             league: str | None = None,
+                             strength: float = 0.5) -> list[list[float]]:
+    """在比分矩阵上做让平修正（区域内重分配），返回新矩阵。
+
+    数学（GPT BD-1.0设计 §6.2）：
+    - rq<0（主让球）：W=主胜区{i>j}，E={(i,j): i−j=−rq}（让平事件）
+    - rq>0（主受让）：W=客胜区{i<j}，E={(i,j): i−j=−rq}
+    - 目标：P_new(E) = (1−strength)·P_raw(E) + strength·prior（v2.5边际混合语义）
+    - 区域内重分配：E内各格乘 c/c0，W\\E内各格乘 (1−c)/(1−c0)，
+      其中 c0=P_raw(E)/P(W)，c=P_new(E)/P(W)
+    - P(W)严格不变 ⇒ rq<0时 P(让胜)+P(让平) ≡ P(主胜)（误差≤1e-12）
+
+    与 calibrate_handicap_1x2（事后投影）不同，此函数直接修正分布 Q，
+    让球概率从修正后矩阵聚合得到，天然满足概率恒等式。
+
+    物理约束：P_new(E) ≤ P(W)（E⊆W），超限时截断。
+
+    strength≤0 或 rq=0 时返回原矩阵的拷贝（不修正）。
+    退化保护：c0过小（<1e-12）或过大（>1−1e-12）时跳过修正。
+    返回新矩阵，不修改输入。
+    """
+    n = len(matrix)
+    rq = int(rq)
+    if rq == 0 or strength <= 0:
+        return [row[:] for row in matrix]
+    strength = min(max(strength, 0.0), 1.0)
+
+    if rq < 0:
+        def in_w(i, j): return i > j
+    else:
+        def in_w(i, j): return i < j
+    def in_e(i, j): return (i - j) == -rq
+
+    p_w = sum(matrix[i][j] for i in range(n) for j in range(n) if in_w(i, j))
+    p_e = sum(matrix[i][j] for i in range(n) for j in range(n)
+              if in_w(i, j) and in_e(i, j))
+    if p_w <= 0:
+        return [row[:] for row in matrix]
+    c0 = p_e / p_w
+    if c0 < 1e-12 or c0 > 1.0 - 1e-12:
+        return [row[:] for row in matrix]  # 退化：E区无质量可分配
+
+    # v2.5语义：边际P(让平)向先验收缩，再换算为条件概率
+    prior = letdraw_prior(rq, league)
+    p_e_new = (1.0 - strength) * p_e + strength * prior
+    p_e_new = min(p_e_new, p_w)  # 物理约束：E⊆W
+    c = p_e_new / p_w
+    f_e = c / c0
+    f_rest = (1.0 - c) / (1.0 - c0)
+
+    new = [row[:] for row in matrix]
+    for i in range(n):
+        for j in range(n):
+            if not in_w(i, j):
+                continue
+            new[i][j] = matrix[i][j] * (f_e if in_e(i, j) else f_rest)
+    return new
+
+
 def calibrate_handicap_1x2(p_h: float, p_d: float, p_a: float,
                             rq: int, league: str | None = None,
                             strength: float = 0.5,
                             p_home: float | None = None,
                             p_away: float | None = None) -> tuple[float, float, float]:
     """把模型让球 1X2 概率向经验先验混合，修正系统性低估。
+
+    【v2.9起生产路径已改用 apply_letdraw_to_matrix（矩阵级修正），
+    此函数保留作兼容/测试用途。事后投影只能保证 ≤ 约束，
+    不能保证 P(让胜)+P(让平) ≡ P(主胜)。】
 
     strength=0 时关闭（返回原值）；strength=1 时完全采用先验。
     混合后 H/A 按原比例重归一，保证三项和为 1。

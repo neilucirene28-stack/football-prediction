@@ -58,6 +58,7 @@ def test_platt_applied_in_predict():
     cal = predict(_payload(), config={"platt": platt})
     assert cal["calibrated"] is True
     assert base["calibrated"] is False
-    assert abs(cal["p_home"] + cal["p_draw"] + cal["p_away"] - 1.0) < 1e-6
+    # 输出为4位小数，round误差可达~1.5e-4；v2.9注：阈值放宽至1e-3
+    assert abs(cal["p_home"] + cal["p_draw"] + cal["p_away"] - 1.0) < 1e-3
     assert cal["p_home"] < base["p_home"]  # 过度自信被往下拉
     assert any("Platt" in n for n in cal["notes"])

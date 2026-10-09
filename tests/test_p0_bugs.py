@@ -54,6 +54,15 @@ class TestBug2Shin:
         exp = implied_proportional((2, 3, 6))
         assert all(abs(a - b) < 1e-6 for a, b in zip(out, exp))
 
+    def test_shin_matches_reference_with_booksum(self):
+        # GPT BD-1.0审计（v2.9）：根式内 qi² 必须除以 booksum B。
+        # 对照 mberk/shin 参考实现：赔率(2,3,4) → (0.469414, 0.306069, 0.224517)
+        from engine.market import shin_probs
+        out = shin_probs((2, 3, 4))
+        expected = (0.469414, 0.306069, 0.224517)
+        for a, b in zip(out, expected):
+            assert abs(a - b) < 1e-5, f"Shin输出{a:.6f}偏离参考值{b:.6f}"
+
 
 class TestBug3LetdrawInclusion:
     """Bug3: 让平校准不得违反 P(让胜)+P(让平) ≤ P(主胜)。"""
@@ -87,6 +96,82 @@ class TestBug3LetdrawInclusion:
         ch, cd, ca = calibrate_handicap_1x2(0.90, 0.05, 0.05, 1, strength=0.5,
                                             p_home=0.05, p_away=0.05)
         assert ca + cd <= 0.05 + 1e-9
+
+
+class TestBug2bLetdrawMatrixEquality:
+    """GPT BD-1.0审计（v2.9）：让平修正必须作用于矩阵，保证严格等式。
+
+    rq=-1时 P(让胜)+P(让平) ≡ P(主胜)；rq=+1时 P(让负)+P(让平) ≡ P(客胜)。
+    """
+
+    def test_matrix_letdraw_exact_equality_rq_minus1(self):
+        # GPT验收case：λ=(1.3,0.2)、ρ=-0.13，曾差1.85pp
+        from engine.poisson import score_matrix, match_probs, handicap_1x2
+        from engine.letdraw import apply_letdraw_to_matrix
+        mx = score_matrix(1.3, 0.2, rho=-0.13)
+        ph, _, _ = match_probs(mx)
+        mx_ld = apply_letdraw_to_matrix(mx, -1, strength=0.5)
+        h2, d2, a2 = handicap_1x2(mx_ld, -1)
+        assert abs((h2 + d2) - ph) < 1e-8, f"差{abs(h2+d2-ph):.2e}超1e-8"
+        assert abs(h2 + d2 + a2 - 1.0) < 1e-9
+
+    def test_matrix_letdraw_exact_equality_rq_plus1(self):
+        from engine.poisson import score_matrix, match_probs, handicap_1x2
+        from engine.letdraw import apply_letdraw_to_matrix
+        mx = score_matrix(0.4, 1.9, rho=-0.13)
+        _, _, pa = match_probs(mx)
+        mx_ld = apply_letdraw_to_matrix(mx, 1, strength=0.5)
+        h2, d2, a2 = handicap_1x2(mx_ld, 1)
+        assert abs((a2 + d2) - pa) < 1e-8
+
+    def test_matrix_letdraw_preserves_v25_effect(self):
+        # v2.5语义保留：边际P(让平)向先验收缩
+        from engine.poisson import score_matrix, handicap_1x2
+        from engine.letdraw import apply_letdraw_to_matrix, letdraw_prior
+        mx = score_matrix(1.3, 0.2, rho=-0.13)
+        _, d_raw, _ = handicap_1x2(mx, -1)
+        mx_ld = apply_letdraw_to_matrix(mx, -1, strength=0.5)
+        _, d2, _ = handicap_1x2(mx_ld, -1)
+        prior = letdraw_prior(-1)
+        # 修正值应在raw与先验之间（本例raw>prior，故下降）
+        assert min(d_raw, prior) - 1e-9 <= d2 <= max(d_raw, prior) + 1e-9
+        # 与旧事后混合的边际值一致（0.5*0.3219+0.5*0.25）
+        assert abs(d2 - (0.5 * d_raw + 0.5 * prior)) < 1e-9
+
+    def test_matrix_letdraw_preserves_region_mass(self):
+        from engine.poisson import score_matrix
+        from engine.letdraw import apply_letdraw_to_matrix
+        mx = score_matrix(1.8, 1.1, rho=-0.13)
+        mx_ld = apply_letdraw_to_matrix(mx, -1, strength=0.5)
+        n = len(mx)
+        pw0 = sum(mx[i][j] for i in range(n) for j in range(n) if i > j)
+        pw1 = sum(mx_ld[i][j] for i in range(n) for j in range(n) if i > j)
+        assert abs(pw0 - pw1) < 1e-12
+
+    def test_matrix_letdraw_strength_zero_is_identity(self):
+        from engine.poisson import score_matrix
+        from engine.letdraw import apply_letdraw_to_matrix
+        mx = score_matrix(1.8, 1.1, rho=-0.13)
+        mx_ld = apply_letdraw_to_matrix(mx, -1, strength=0.0)
+        assert all(abs(mx_ld[i][j] - mx[i][j]) < 1e-12
+                   for i in range(len(mx)) for j in range(len(mx)))
+
+    def test_predict_end_to_end_handicap_equality(self):
+        from datetime import datetime, timedelta, timezone
+        from engine.predictor import predict
+        now = datetime.now(timezone.utc)
+        res = predict({
+            "home": "测试主", "away": "测试客",
+            "kickoff_at": (now + timedelta(hours=5)).isoformat(),
+            "snapshot_at": now.isoformat(),
+            "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
+            "away_recent": [{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)],
+            "league_avg_goals": 2.70,
+            "handicap_line": -1,
+        })
+        hc = res["derivatives"]["handicap_1x2"]
+        # 4位round引入≤1e-4误差
+        assert abs((hc["p_home"] + hc["p_draw"]) - res["p_home"]) < 5e-4
 
 
 class TestBug4HalfFullMarginal:

@@ -19,21 +19,27 @@ def shin_probs(odds: tuple[float, float, float],
                tol: float = 1e-10, max_iter: int = 200) -> tuple[float, float, float]:
     """Shin 去水（Shin 1993）：认为水位主要加在热门身上，迭代求解 z。
 
-    用原始倒数赔率 qi=1/oi（Σqi=1+水位>1，不预归一），求解 z 使
-    Σ pi(z) = 1，其中 pi(z)=(sqrt(z²+4(1-z)qi²)-z)/(2(1-z))。
-    Σpi(z) 关于 z 单调递减（z=0时=booksum>1，z→1⁻时=Σqi²<1），
+    用原始倒数赔率 qi=1/oi（Σqi=B=1+水位>1，不预归一），求解 z 使
+    Σ pi(z) = 1，其中 pi(z)=(sqrt(z²+4(1-z)qi²/B)-z)/(2(1-z))。
+    （对照 mberk/shin 参考实现：根式内 qi² 必须除以 booksum B。）
+    Σpi(z) 关于 z 单调递减（z=0时=√B>1，z→1⁻时=Σqi²/B<1），
     故二分法保证收敛到唯一根。
 
-    P0 Bug2修复：之前 q 先做等比归一（Σq=1），导致 z=0 即为
+    P0 Bug2修复（v2.8）：之前 q 先做等比归一（Σq=1），导致 z=0 即为
     Σpi(z)=1 的精确解，牛顿法从 z=0.05 出发被拉回 z≈0，
     输出退化为等比去水，Shin 修正完全失效。
+    GPT BD-1.0审计（v2.9）：v2.8 去掉了预归一，但根式中仍缺 /B。
+    赔率(2,3,4)：v2.8输出(0.4776,0.3043,0.2181)，
+    修正后(0.4694,0.3061,0.2245)，与参考实现误差≤1e-8。
     """
     q = [1.0 / o for o in odds]  # 不预归一！
-    if sum(q) <= 1.0 + 1e-12:
+    B = sum(q)  # booksum
+    if B <= 1.0 + 1e-12:
         return implied_proportional(odds)  # 无水位时退化为等比
 
     def _pi_sum(z):
-        return sum((math.sqrt(z * z + 4 * (1 - z) * qi * qi) - z) / (2 * (1 - z))
+        return sum((math.sqrt(z * z + 4 * (1 - z) * qi * qi / B) - z)
+                   / (2 * (1 - z))
                    for qi in q)
 
     lo, hi = 0.0, 1.0 - 1e-9
@@ -46,7 +52,7 @@ def shin_probs(odds: tuple[float, float, float],
         if hi - lo < tol:
             break
     z = (lo + hi) / 2
-    probs = [(math.sqrt(z * z + 4 * (1 - z) * qi * qi) - z) / (2 * (1 - z))
+    probs = [(math.sqrt(z * z + 4 * (1 - z) * qi * qi / B) - z) / (2 * (1 - z))
              for qi in q]
     total = sum(probs)
     return tuple(p / total for p in probs)
