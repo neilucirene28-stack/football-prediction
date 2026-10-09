@@ -143,7 +143,7 @@ def test_format_five_playtypes():
     from jingcai_format import format_five_playtypes
     r = predict(_sample_payload())
     lines = format_five_playtypes(r)
-    assert len(lines) == 6  # 五大玩法 + 冷门比分
+    assert len(lines) == 7  # 五大玩法 + 进球区间 + 冷门比分
     assert lines[0].startswith("胜平负：")
     assert lines[1].startswith("让球胜平负")
     assert lines[2].startswith("比分：")
@@ -152,11 +152,14 @@ def test_format_five_playtypes():
     # 进球数：保持"期望+最可能区间"格式
     assert lines[3].startswith("进球数：")
     assert "期望" in lines[3] and "球(" in lines[3]
-    assert lines[4].startswith("半全场胜平负：")
-    assert lines[4].count("、") == 2
-    assert lines[5].startswith("冷门比分：")
+    # v2.10：进球区间行（三档分布呈现）
+    assert lines[4].startswith("进球区间：")
+    assert "0-1球(" in lines[4] and "2-3球(" in lines[4] and "4+球(" in lines[4]
+    assert lines[5].startswith("半全场胜平负：")
+    assert lines[5].count("、") == 2
+    assert lines[6].startswith("冷门比分：")
     # 半全场行应含 3 种组合
-    assert lines[4].count("、") == 2
+    assert lines[5].count("、") == 2
 
 
 def test_format_h2h_brief_no_scores():

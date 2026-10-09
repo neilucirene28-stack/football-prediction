@@ -78,7 +78,7 @@ class PredictError(ValueError):
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
 # v2.7: B深修——比分矩阵 IPF 校准，所有全场衍生项从校准后矩阵计算。
-ENGINE_VERSION = "2.9"
+ENGINE_VERSION = "2.10"
 
 
 # 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
@@ -113,6 +113,23 @@ def _recent_ok(rows) -> bool:
 def _score_winner(score: str) -> int:
     i, j = (int(x) for x in score.split("-"))
     return 0 if i > j else (1 if i == j else 2)
+
+
+def _goal_interval_probs(matrix) -> dict:
+    """总进球三档区间概率：0-1球 / 2-3球 / 4+球。
+
+    v2.10：比分分布呈现。Poisson众数天然偏小，单点比分误导性强；
+    三档区间展示分布形状，不改变任何概率计算。
+    """
+    dist = total_goals_distribution(matrix)
+    p01 = dist.get(0, 0.0) + dist.get(1, 0.0)
+    p23 = dist.get(2, 0.0) + dist.get(3, 0.0)
+    p4p = dist.get(4, 0.0) + dist.get("5+", 0.0)
+    return {
+        "0-1球": round(p01, 4),
+        "2-3球": round(p23, 4),
+        "4+球": round(p4p, 4),
+    }
 
 
 def consistency_check(p_final, top3, asian, ou) -> list[str]:
@@ -374,12 +391,15 @@ def predict(payload: dict, config: dict | None = None,
         "asian": None,
         "handicap_1x2": None,
         "top_scores": [{"score": s, "prob": round(p, 4)}
-                       for s, p in top_scores(matrix_cal)],
+                       for s, p in top_scores(matrix_cal, n=5)],
         "top_scores_raw": [{"score": s, "prob": round(p, 4)}
-                           for s, p in top_scores(matrix)],
+                           for s, p in top_scores(matrix, n=5)],
         "p_1x2_raw": [round(p, 4) for p in p_model],
         "total_goals": {str(k): round(v, 4)
                         for k, v in total_goals_distribution(matrix_cal).items()},
+        # v2.10：比分分布呈现——总进球三档区间概率（0-1球/2-3球/4+球），
+        # 替代"只看单点众数"的呈现方式。概率计算不动，只改输出。
+        "goal_interval_probs": _goal_interval_probs(matrix_cal),
         "expected_goals": round(expected_total_goals(matrix_cal), 2),
         "expected_goals_raw": round(expected_total_goals(matrix), 2),
         "main_goal_interval": None,

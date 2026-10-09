@@ -52,14 +52,23 @@ def format_handicap_1x2(pred: dict) -> str:
             f"/让负({h['p_away']:.3f})")
 
 
-def format_top_scores(pred: dict, n: int = 3) -> str:
-    """③比分：概率最高的 n 个，首选（概率最高）加粗标记。"""
+def format_top_scores(pred: dict, n: int = 5) -> str:
+    """③比分：概率最高的 n 个（v2.10：从3改成5，分布呈现），首选加粗标记。"""
     scores = pred["derivatives"]["top_scores"][:n]
     parts = []
     for idx, s in enumerate(scores):
         label = f"**{s['score']}**" if idx == 0 else s["score"]
         parts.append(f"{label}({s['prob']:.3f})")
     return "比分：" + "、".join(parts)
+
+
+def format_goal_intervals(pred: dict) -> str:
+    """总进球三档区间：0-1球 / 2-3球 / 4+球（v2.10新增，分布呈现）。"""
+    d = pred["derivatives"].get("goal_interval_probs") or {}
+    p01 = d.get("0-1球", 0)
+    p23 = d.get("2-3球", 0)
+    p4p = d.get("4+球", 0)
+    return f"进球区间：0-1球({p01:.3f})、2-3球({p23:.3f})、4+球({p4p:.3f})"
 
 
 def format_total_goals(pred: dict) -> str:
@@ -111,12 +120,13 @@ def format_h2h_brief(home: str, away: str,
 
 
 def format_five_playtypes(pred: dict) -> list[str]:
-    """返回五大玩法行 + 冷门比分补充行（共 6 行）。"""
+    """返回五大玩法行 + 进球区间行 + 冷门比分补充行（共 7 行，v2.10）。"""
     return [
         format_1x2(pred),
         format_handicap_1x2(pred),
         format_top_scores(pred),
         format_total_goals(pred),
+        format_goal_intervals(pred),
         format_half_full(pred),
         format_upset_score(pred),
     ]

@@ -39,7 +39,7 @@ def test_predict_ok_and_sums_to_one():
     assert abs(r["p_home"] + r["p_draw"] + r["p_away"] - 1.0) < 5e-4  # 4位小数舍入容差
     assert r["grade"] in ("A", "B", "C")
     assert r["derivatives"]["over_under"] is not None
-    assert len(r["derivatives"]["top_scores"]) == 3
+    assert len(r["derivatives"]["top_scores"]) == 5  # v2.10: Top5
 
 
 def test_predict_rejects_past_match():
