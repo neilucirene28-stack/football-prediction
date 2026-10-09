@@ -39,7 +39,13 @@ def _dc_correct(m, lam_h, lam_a, rho):
 
 
 def mixture_matrix(lam_h, lam_a, delta, rho=-0.13):
-    """实验A：双Poisson混合原始矩阵。返回 (Q, max_goals)。"""
+    """实验A：双Poisson混合原始矩阵。返回 (Q, max_goals)。
+
+    共享比赛节奏的两状态（GPT审计修复）：
+      Q(i,j) = 0.5·Pois(i;(1-δ)λH)·Pois(j;(1-δ)λA)
+             + 0.5·Pois(i;(1+δ)λH)·Pois(j;(1+δ)λA)
+    注意：不是边际混合再乘积（那会消掉正相关，变成4个交叉状态）。
+    """
     d = min(max(float(delta), 0.0), 0.35)
     slow_h, slow_a = lam_h * (1 - d), lam_a * (1 - d)
     fast_h, fast_a = lam_h * (1 + d), lam_a * (1 + d)
@@ -48,12 +54,17 @@ def mixture_matrix(lam_h, lam_a, delta, rho=-0.13):
         lambda k: poisson_pmf(k, slow_a) * 0.5 + poisson_pmf(k, fast_a) * 0.5,
     )
     n = mg + 1
+    # 预计算各状态的单队 pmf
+    ph_slow = [poisson_pmf(i, slow_h) for i in range(n)]
+    pa_slow = [poisson_pmf(j, slow_a) for j in range(n)]
+    ph_fast = [poisson_pmf(i, fast_h) for i in range(n)]
+    pa_fast = [poisson_pmf(j, fast_a) for j in range(n)]
     m = [[0.0] * n for _ in range(n)]
     for i in range(n):
-        pi = 0.5 * poisson_pmf(i, slow_h) + 0.5 * poisson_pmf(i, fast_h)
         for j in range(n):
-            pj = 0.5 * poisson_pmf(j, slow_a) + 0.5 * poisson_pmf(j, fast_a)
-            m[i][j] = pi * pj
+            # 共享两状态：慢状态联合 + 快状态联合
+            m[i][j] = (0.5 * ph_slow[i] * pa_slow[j]
+                       + 0.5 * ph_fast[i] * pa_fast[j])
     m = _dc_correct(m, lam_h, lam_a, rho)
     return m, mg
 
