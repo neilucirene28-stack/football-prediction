@@ -72,7 +72,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
                    input_sources: dict[str, str] | None = None,
                    competition_family: str | None = None,
                    synthetic_sample: bool = False,
-                   training_lineage: dict | None = None) -> dict:
+                   training_lineage: dict | None = None,
+                   identity_ids: dict[str, str] | None = None) -> dict:
     """建立逐场证据记录。asof_at 是预测请求的时点，不冒充来源采集时间。
 
     ``sources`` 每项仅允许 name、source_match_id、available_at、status。
@@ -102,6 +103,15 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         not isinstance(competition_family, str) or not _MATCH_ID.fullmatch(competition_family)
     ):
         raise ValueError("赛事族必须是规范名称或 null")
+    if identity_ids is not None:
+        if not isinstance(identity_ids, dict) or set(identity_ids) != {"home_id", "away_id", "competition_id"}:
+            raise ValueError("L1规范ID字段不完整")
+        if any(not isinstance(v, str) or not _MATCH_ID.fullmatch(v) for v in identity_ids.values()):
+            raise ValueError("L1规范ID非法")
+        if identity_ids["home_id"] == identity_ids["away_id"]:
+            raise ValueError("L1对阵双方规范ID相同")
+    if model_version.startswith("bd1-l1-") and identity_ids is None:
+        raise ValueError("L1快照缺少规范ID")
     if not isinstance(sources, list) or not sources:
         raise ValueError("必须列出实际使用的数据源")
     clean_sources = []
@@ -139,6 +149,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         required.add("family")
     if handicap is not None:
         required.add("handicap")
+    if identity_ids is not None:
+        required.update(identity_ids)
     if input_sources is None:
         verified = False
         clean_input_sources = None
@@ -248,6 +260,7 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         "lambda_home": _positive_lambda(lambda_home, "lambda_home"),
         "lambda_away": _positive_lambda(lambda_away, "lambda_away"),
         "handicap": handicap, "competition_family": competition_family,
+        "identity_ids": dict(identity_ids) if identity_ids is not None else None,
         "sources": clean_sources, "vectors": clean_vectors,
         "input_sources": clean_input_sources,
         "training_lineage": clean_lineage,

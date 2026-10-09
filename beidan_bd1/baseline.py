@@ -52,6 +52,13 @@ def _root_matrix(rows: list[dict], tolerance: float = 1e-8) -> list[list[float]]
     lam_h = (sum(r["ft_home"] for r in rows) + .5) / n
     lam_a = (sum(r["ft_away"] for r in rows) + .5) / n
     bound = max(10, max(max(r["ft_home"], r["ft_away"]) for r in rows))
+    return _poisson_matrix(lam_h, lam_a, bound, tolerance)
+
+
+def _poisson_matrix(lam_h: float, lam_a: float, bound: int = 10,
+                    tolerance: float = 1e-8) -> list[list[float]]:
+    if not all(math.isfinite(x) and 0 < x <= 8 for x in (lam_h, lam_a)):
+        raise ValueError("进球强度超出影子模型数值预算")
     while True:
         ph = [poisson_pmf(i, lam_h) for i in range(bound + 1)]
         pa = [poisson_pmf(i, lam_a) for i in range(bound + 1)]
@@ -101,6 +108,32 @@ def _half_full(matrix: list[list[float]], qh: float, qa: float) -> dict[str, flo
     return out
 
 
+def _vectors_from_matrix(matrix: list[list[float]], qh: float, qa: float,
+                         handicap: int | None) -> tuple[dict, dict]:
+    """All six markets are derived from the same joint score distribution."""
+    wdl = dict(zip(("胜", "平", "负"), match_probs(matrix)))
+    handicap_wdl = (dict(zip(("胜", "平", "负"), handicap_1x2(matrix, handicap)))
+                    if handicap is not None else None)
+    score = {f"{i}-{j}": p for i, row in enumerate(matrix) for j, p in enumerate(row)}
+    total = {str(i): 0.0 for i in range(7)}
+    total["7+"] = 0.0
+    odd_even = {k: 0.0 for k in ("上单", "上双", "下单", "下双")}
+    for i, row in enumerate(matrix):
+        for j, p in enumerate(row):
+            t = i + j
+            total[str(t) if t < 7 else "7+"] += p
+            odd_even[("上" if t >= 3 else "下") + ("单" if t % 2 else "双")] += p
+    score31 = {k: score.get(k, 0.0) for k in (*_SCORE_HOME, *_SCORE_DRAW, *_SCORE_AWAY)}
+    score31.update({"胜其他": 0.0, "平其他": 0.0, "负其他": 0.0})
+    for i, row in enumerate(matrix):
+        for j, p in enumerate(row):
+            if f"{i}-{j}" not in score31:
+                score31["胜其他" if i > j else ("平其他" if i == j else "负其他")] += p
+    return ({"wdl": wdl, "handicap_wdl": handicap_wdl, "score": score,
+             "total_goals": total, "half_full": _half_full(matrix, qh, qa),
+             "odd_even": odd_even}, score31)
+
+
 def predict_l3(history: list[dict], *, asof_at: str, kickoff_at: str,
                competition_family: str | None, handicap: int | None,
                kappa: float = 50.0, min_history: int = 30) -> dict:
@@ -129,24 +162,7 @@ def predict_l3(history: list[dict], *, asof_at: str, kickoff_at: str,
     qa = (sum(r["ht_away"] for r in rows) + .5) / (total_a + 1)
     root = _root_matrix(rows)
     matrix, family_n = _family_matrix(rows, competition_family, root, kappa)
-    wdl = dict(zip(("胜", "平", "负"), match_probs(matrix)))
-    handicap_wdl = (dict(zip(("胜", "平", "负"), handicap_1x2(matrix, handicap)))
-                    if handicap is not None else None)
-    score = {f"{i}-{j}": p for i, row in enumerate(matrix) for j, p in enumerate(row)}
-    total = {str(i): 0.0 for i in range(7)}
-    total["7+"] = 0.0
-    odd_even = {k: 0.0 for k in ("上单", "上双", "下单", "下双")}
-    for i, row in enumerate(matrix):
-        for j, p in enumerate(row):
-            t = i + j
-            total[str(t) if t < 7 else "7+"] += p
-            odd_even[("上" if t >= 3 else "下") + ("单" if t % 2 else "双")] += p
-    score31 = {k: score.get(k, 0.0) for k in (*_SCORE_HOME, *_SCORE_DRAW, *_SCORE_AWAY)}
-    score31.update({"胜其他": 0.0, "平其他": 0.0, "负其他": 0.0})
-    for i, row in enumerate(matrix):
-        for j, p in enumerate(row):
-            if f"{i}-{j}" not in score31:
-                score31["胜其他" if i > j else ("平其他" if i == j else "负其他")] += p
+    vectors, score31 = _vectors_from_matrix(matrix, qh, qa, handicap)
     return {
         "status": "shadow", "model_version": SHADOW_MODEL_VERSION,
         "route": "L3_prior_only", "parameters_unvalidated": True,
@@ -159,8 +175,6 @@ def predict_l3(history: list[dict], *, asof_at: str, kickoff_at: str,
         "kappa": kappa, "ht_fractions": {"home": qh, "away": qa},
         "lambda_home": None, "lambda_away": None,
         "handicap": handicap,
-        "vectors": {"wdl": wdl, "handicap_wdl": handicap_wdl,
-                    "score": score, "total_goals": total,
-                    "half_full": _half_full(matrix, qh, qa), "odd_even": odd_even},
+        "vectors": vectors,
         "score_31": score31,
     }

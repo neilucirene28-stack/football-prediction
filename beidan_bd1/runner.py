@@ -16,6 +16,7 @@ from pathlib import Path
 import re
 
 from .baseline import predict_l3
+from .team_strength import predict_l1
 from .history_import import load_verified_history
 from .snapshot import _datetime, build_snapshot, save_snapshot
 
@@ -28,7 +29,8 @@ def _available_history_time(history: list[dict], used_ids: list[str]) -> str:
     stamps = []
     for match_id in used_ids:
         row = lookup[match_id]
-        stamps.extend(_datetime(row[key], key) for key in ("result_available_at", "verified_at")
+        stamps.extend(_datetime(row[key], key) for key in (
+            "result_available_at", "verified_at", "identity_verified_at")
                       if row.get(key) is not None)
     return max(stamps).isoformat()
 
@@ -111,10 +113,41 @@ def run_shadow_pool(*, fixtures: list[dict], history: list[dict],
                 handicap = None
             if family is not None and (input_sources is None or "family" not in input_sources):
                 family = None
-            prediction = predict_l3(
-                history, asof_at=asof.isoformat(), kickoff_at=kickoff.isoformat(),
-                competition_family=family, handicap=handicap,
-            )
+            identity = {k: row.get(k) for k in ("home_id", "away_id", "competition_id")}
+            id_bound = (row.get("identity_verified") is True
+                        and input_sources is not None
+                        and all(k in input_sources for k in identity)
+                        and all(isinstance(v, str) and _SAFE_ID.fullmatch(v)
+                                for v in identity.values())
+                        and isinstance(row.get("identity_source"), str)
+                        and row["identity_source"] in {s.get("name") for s in supplied_sources
+                                                       if isinstance(s, dict)}
+                        and all(input_sources[k] == row["identity_source"] for k in identity)
+                        and row.get("identity_verified_at") is not None
+                        and _datetime(row["identity_verified_at"], "identity_verified_at") <= asof
+                        and any(s.get("name") == row["identity_source"]
+                                and s.get("available_at") is not None
+                                and _datetime(s["available_at"], "available_at")
+                                >= _datetime(row["identity_verified_at"], "identity_verified_at")
+                                for s in supplied_sources if isinstance(s, dict)))
+            fallback_reason = None
+            prediction = None
+            if id_bound:
+                try:
+                    prediction = predict_l1(
+                        history, asof_at=asof.isoformat(), kickoff_at=kickoff.isoformat(),
+                        home_id=identity["home_id"], away_id=identity["away_id"],
+                        competition_id=identity["competition_id"], handicap=handicap,
+                    )
+                except ValueError as exc:
+                    fallback_reason = str(exc)
+            else:
+                fallback_reason = "规范ID或赛前身份来源绑定缺失"
+            if prediction is None:
+                prediction = predict_l3(
+                    history, asof_at=asof.isoformat(), kickoff_at=kickoff.isoformat(),
+                    competition_family=family, handicap=handicap,
+                )
             history_source = {"name": "verified_result_export", "source_match_id": None,
                               "available_at": _available_history_time(
                                   history, prediction["training_match_ids"]), "status": "ok"}
@@ -133,12 +166,15 @@ def run_shadow_pool(*, fixtures: list[dict], history: list[dict],
                 model_version=prediction["model_version"],
                 vectors=prediction["vectors"], sources=sources,
                 input_sources=mapping, competition_family=family,
-                lambda_home=None, lambda_away=None, handicap=handicap,
+                lambda_home=prediction["lambda_home"],
+                lambda_away=prediction["lambda_away"], handicap=handicap,
+                identity_ids=identity if prediction["route"] == "L1_team_strength" else None,
                 synthetic_sample=synthetic_at is not None,
                 training_lineage=training_lineage,
             )
             saved = save_snapshot(root / "snapshots", snapshot)
             entry.update(status="saved", route=prediction["route"],
+                         fallback_reason=fallback_reason,
                          family_status=prediction["family_status"],
                          training_n=prediction["training_n"],
                          snapshot_path=str(saved.relative_to(root)),

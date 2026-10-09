@@ -1,6 +1,6 @@
 # BD-1 独立北单影子基线（P0）
 
-状态：**已实现可执行的 L3 根/赛事族先验、开售池只读导入和赛前快照；未训练生产参数，未做真实北单赛前 walk-forward，禁止上线**。包仅用 Python 标准库，不导入竞彩 `engine.predict()`。设计全文见 `docs/beidan-independent-model-v1-design.md`。
+状态：**已实现可执行的 L3 根/赛事族先验、受身份门控的 L1 球队攻防影子候选、开售池只读导入和赛前快照；未训练生产参数，未做真实北单赛前 walk-forward，禁止上线**。包仅用 Python 标准库，不导入竞彩 `engine.predict()`。设计全文见 `docs/beidan-independent-model-v1-design.md`。
 
 ## 输入
 
@@ -24,9 +24,15 @@ Muse 在 GitHub v2 提交 `82286b1` 导出 1665 条历史赛果。`load_verified
 - `handicap=None` 时，让球向量返回 `null`；不会把未知线当零线。
 - 输出 `parameters_unvalidated=true`，不会调用旧北单 Platt 负斜率、旧弱赛事封顶、市场融合或阵容修正。
 
+## L1 球队强度影子候选
+
+L1 需要赛程的规范 `home_id`、`away_id`、`competition_id`，以及 `identity_verified=true`、`identity_source`、`identity_verified_at` 和这三个 ID 的逐项赛前来源绑定。训练历史每场还需这些规范 ID、真实赛果可用时间及身份核验来源和时间；同赛事至少30场、双方各至少5场。
+
+对同赛事历史以惩罚 Poisson 攻防效应拟合 `log λ_h=log μ_h+a_h+d_a`、`log λ_a=log μ_a+a_a+d_h`。默认 `ridge=5` 是未验证候选；六玩法从同一比分矩阵导出。任一门控失败即记录原因并回退 L3。当前1665场导出缺少可审计的规范 ID，**实际样本不会触发 L1**。不能凭同名球队推断身份；来源字段仍须审核采集日志。
+
 ## 保存快照
 
-`build_snapshot(...)` 要求模型版本、六玩法完整向量、逐场开球/请求/生成时间和实际使用来源。v4增加 `input_sources` 与 `training_lineage`，将实际用到的 `fixture`、`history`，以及适用的 `family`、`handicap` 字段绑定到来源名称；缺绑定的旧格式只能标为仅观察。来源时间缺失时自动记为 `observation_only=true`、`as_of_backtest_eligible=false`。来源时间晚于请求时点、预测生成晚于开球、概率不归一或衍生向量与比分不一致则报错。`save_snapshot(directory, record)` 用独占创建写盘；同场更新首发后可用新的真实生成时间另存一版，旧版不能覆盖。仅允许来源名称、来源比赛 ID、可用时间和状态，拒绝来源结构中额外密钥等字段。
+`build_snapshot(...)` 要求模型版本、六玩法完整向量、逐场开球/请求/生成时间和实际使用来源。v4增加 `input_sources` 与 `training_lineage`，将实际用到的 `fixture`、`history`，以及适用的 `family`、`handicap`、L1 三个规范 ID 字段绑定到来源名称；缺绑定的旧格式只能标为仅观察。来源时间缺失时自动记为 `observation_only=true`、`as_of_backtest_eligible=false`。来源时间晚于请求时点、预测生成晚于开球、概率不归一或衍生向量与比分不一致则报错。`save_snapshot(directory, record)` 用独占创建写盘；同场更新首发后可用新的真实生成时间另存一版，旧版不能覆盖。仅允许来源名称、来源比赛 ID、可用时间和状态，拒绝来源结构中额外密钥等字段。
 
 调用方必须从可信时钟传入真实当前 `generated_at`（生产调用省略参数自动使用 UTC 当前时间），并从采集日志提供真实 `available_at`。旧文件 mtime 不等于数据采集时间。
 
@@ -45,4 +51,4 @@ Muse 在 GitHub v2 提交 `82286b1` 导出 1665 条历史赛果。`load_verified
 PYTHONPATH=. python -m unittest discover -s tests -p 'test_beidan_*.py' -v
 ```
 
-29 项检查覆盖未来赛果隔离、常规时间筛选、历史导入的时间门控、无历史拒绝、六向量自洽、输入字段来源绑定、旧赛程合并、训练历史血缘、合成时间门控、完整赛程运行账本、来源时间缺失降级、赛后生成拒绝、不可覆盖写入及成对 Brier 审计。`audit_frozen_pair()` 要求两个模型在同一赛前决策时点和相同场次上计分，输出全开售池覆盖率；该函数只评估冻结预测，明确标为 `paired_asof_audit_not_walk_forward`，不会把一次计分冒充参数训练的滚动验证。上线仍需真实赛前快照的赛事族分层滚动验证，比较冻结基线的三分类 Brier（不得恶化）、比分 log loss、让平/平局校准以及全开售池覆盖；当前没有可复跑的北单赛前 payload，不能报告模型收益。
+31 项检查覆盖未来赛果隔离、常规时间筛选、历史导入的时间门控、无历史拒绝、六向量自洽、输入字段来源绑定、旧赛程合并、训练历史血缘、合成时间门控、完整赛程运行账本、L1 攻防路径和身份回退、来源时间缺失降级、赛后生成拒绝、不可覆盖写入及成对 Brier 审计。`audit_frozen_pair()` 要求两个模型在同一赛前决策时点和相同场次上计分，输出全开售池覆盖率；该函数只评估冻结预测，明确标为 `paired_asof_audit_not_walk_forward`，不会把一次计分冒充参数训练的滚动验证。上线仍需真实赛前快照的赛事族分层滚动验证，比较冻结基线的三分类 Brier（不得恶化）、比分 log loss、让平/平局校准以及全开售池覆盖；当前没有可复跑的北单赛前 payload，不能报告模型收益。
