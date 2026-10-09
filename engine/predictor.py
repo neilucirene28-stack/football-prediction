@@ -615,7 +615,7 @@ def predict(payload: dict, config: dict | None = None,
         beidan_out["upset_risk_tier"] = beidan_risk_tier(b_risk)
         beidan_out["playtypes"] = ["胜平负", "让球胜平负", "比分", "总进球", "半全场", "上下单双"]
 
-    return {
+    out = {
         "status": "ok",
         "model": model,
         "model_version": version,
@@ -656,6 +656,11 @@ def predict(payload: dict, config: dict | None = None,
         + (["一致性检查发现冲突，信心已下调。"] if issues else [])
         + ([_divergence_note(divergence)] if divergence else []),
     }
+    # 北单快照链路：仅 model='beidan' 时输出全比分矩阵（校准后），
+    # 供 engine/beidan_snapshot.py 聚合25类比分分布。竞彩流程不受影响。
+    if model == "beidan":
+        out["score_matrix_full"] = [list(row) for row in matrix_cal]
+    return out
 
 
 def _divergence_note(d):
