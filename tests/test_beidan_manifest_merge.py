@@ -108,19 +108,24 @@ def test_scope_partial_with_incomplete_coverage():
 
 
 def test_scope_full_pool_only_at_100pct():
-    """只有schedule提供且覆盖率=100%才能标full_pool。"""
+    """只有schedule提供且覆盖率=100%才能标full_pool（未知期号+来源证据）。"""
     with tempfile.TemporaryDirectory() as td:
-        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+        c1 = _write_chunk(td, "m1.json", "26199", "2026-10-09T06:00:00+00:00",
                           [{"seq": "1", "status": "ok"},
                            {"seq": "2", "status": "ok"}])
         sched = os.path.join(td, "sched.json")
         with open(sched, "w", encoding="utf-8") as f:
-            json.dump({"matches": [{"seq": "1"}, {"seq": "2"}]}, f)
-        r = _run_merge(td, [c1], "26103",
+            json.dump({
+                "source_url": "https://www.okooo.com/BJBet/",
+                "fetched_at": "2026-10-09T06:00:00+00:00",
+                "matches": [{"seq": "1"}, {"seq": "2"}],
+            }, f)
+        r = _run_merge(td, [c1], "26199",
                        ["--run-id", "scope3", "--schedule", sched])
         assert r.returncode == 0, r.stderr
         out = os.path.join(os.path.dirname(__file__), "..",
-                           "data", "manifests", "beidan", "26103", "scope3.json")
+                           "data", "manifests", "beidan", "26199",
+                           "scope3.json")
         try:
             with open(out, encoding="utf-8") as f:
                 m = json.load(f)
@@ -128,6 +133,13 @@ def test_scope_full_pool_only_at_100pct():
         finally:
             if os.path.exists(out):
                 os.remove(out)
+            # 清理空目录
+            d = os.path.join(os.path.dirname(__file__), "..",
+                             "data", "manifests", "beidan", "26199")
+            try:
+                os.rmdir(d)
+            except OSError:
+                pass
 
 
 def test_run_id_rejects_path_traversal():
@@ -170,6 +182,123 @@ def test_manual_run_id_collision_errors():
                 pp = os.path.join(base, p)
                 if os.path.exists(pp):
                     os.remove(pp)
+def test_schedule_subset_cannot_claim_full_pool():
+    """48场子集当schedule传48场chunk：48/48=100%但不得标full_pool（schedule本身不完整）。"""
+    with tempfile.TemporaryDirectory() as td:
+        # chunk含48场
+        matches = [{"seq": str(i), "status": "ok"} for i in range(1, 49)]
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          matches)
+        # schedule只有这48场（子集），权威值应为193
+        sched = os.path.join(td, "sched_subset.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({"matches": [{"seq": str(i)} for i in range(1, 49)]}, f)
+        r = _run_merge(td, [c1], "26103",
+                       ["--run-id", "schedsubset", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103",
+                           "schedsubset.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "partial_pool", \
+                f"48场子集schedule即使48/48也不得标full_pool，实际={m['scope']}"
+            # schedule证据必须记录
+            se = m.get("schedule_evidence") or {}
+            assert se.get("sha256"), "必须记录schedule文件SHA256"
+            assert se.get("expected_total") == 193 or \
+                "schedule不完整" in str(m), \
+                "必须核验权威场数或注明schedule不完整"
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_schedule_evidence_recorded():
+    """manifest必须记录schedule文件的SHA256哈希、来源、期号。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        sched = os.path.join(td, "sched.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({"matches": [{"seq": "1"}]}, f)
+        r = _run_merge(td, [c1], "26103",
+                       ["--run-id", "schedev", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103",
+                           "schedev.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            se = m.get("schedule_evidence")
+            assert se is not None, "必须有schedule_evidence字段"
+            assert len(se.get("sha256", "")) == 64, "SHA256必须64位hex"
+            assert se.get("lottery_no") == "26103", "必须记录期号"
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_unknown_lottery_requires_schedule_source_evidence():
+    """未知期号无权威场数时：schedule无来源证据只能partial_pool。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26104", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        # schedule无来源证据（无source_url/fetched_at）
+        sched = os.path.join(td, "sched.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({"matches": [{"seq": "1"}]}, f)
+        r = _run_merge(td, [c1], "26104",
+                       ["--run-id", "unklot", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26104",
+                           "unklot.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "partial_pool", \
+                f"未知期号且schedule无来源证据时只能partial_pool，实际={m['scope']}"
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_known_lottery_full_pool_with_evidence():
+    """已知期号（26103=193场）：schedule完整193场+覆盖率100%才能full_pool。"""
+    with tempfile.TemporaryDirectory() as td:
+        matches = [{"seq": str(i), "status": "ok"} for i in range(1, 194)]
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          matches)
+        sched = os.path.join(td, "sched_full.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({
+                "lottery_no": "26103",
+                "source_url": "https://www.okooo.com/BJBet/",
+                "fetched_at": "2026-10-09T06:00:00+00:00",
+                "matches": [{"seq": str(i)} for i in range(1, 194)],
+            }, f)
+        r = _run_merge(td, [c1], "26103",
+                       ["--run-id", "fullok", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103",
+                           "fullok.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "full_pool", \
+                f"193场完整schedule+100%覆盖应为full_pool，实际={m['scope']}"
+            se = m.get("schedule_evidence") or {}
+            assert se.get("expected_total") == 193
+            assert se.get("source_url"), "应记录schedule来源URL"
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
 def test_merge_wrong_lottery_skipped():
     """期号不一致的chunk被跳过。"""
     with tempfile.TemporaryDirectory() as td:

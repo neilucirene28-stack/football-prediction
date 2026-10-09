@@ -17,6 +17,7 @@
 - 不为凑数赛后重跑冒充赛前：本脚本只合并已有清单，不生成新预测。
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -27,6 +28,12 @@ OUT_BASE = "data/manifests/beidan"
 
 # run_id 只允许安全字符：字母数字下划线连字符（防路径遍历）
 RUN_ID_RE = re.compile(r"^[A-Za-z0-9_-]+$")
+
+# 权威期号场数：已核验的开售全池场数。schedule_total 必须等于此值才能考虑 full_pool。
+# 26103 = 193场（data/predictions/2026-10-09-beidan.json，2026-10-09核验）。
+AUTHORITATIVE_TOTALS = {
+    "26103": 193,
+}
 
 
 def validate_run_id(run_id):
@@ -52,6 +59,15 @@ def atomic_write_excl(path, data_bytes):
 def load_chunk(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def sha256_file(path):
+    """计算文件SHA256（schedule证据）。"""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def main():
@@ -97,10 +113,12 @@ def main():
                 n_sk += 1
         chunk_stats.append({"path": path, "ok": n_ok, "skipped": n_sk})
 
-    # 覆盖率对照
+    # 覆盖率对照 + schedule证据
     schedule_total = None
     coverage = None
+    schedule_evidence = None
     if args.schedule:
+        sched_sha = sha256_file(args.schedule)
         with open(args.schedule, encoding="utf-8") as f:
             sched = json.load(f)
         sched_matches = sched.get("matches", sched) if isinstance(sched, dict) else sched
@@ -116,6 +134,19 @@ def main():
             "extra_not_in_schedule": sorted(merged_keys - sched_keys),
             "coverage_rate": (len(merged_keys & sched_keys) / schedule_total
                               if schedule_total else None),
+        }
+        # schedule证据：SHA256、来源、期号、权威场数核验
+        sched_dict = sched if isinstance(sched, dict) else {}
+        expected_total = AUTHORITATIVE_TOTALS.get(lottery_no)
+        schedule_evidence = {
+            "sha256": sched_sha,
+            "lottery_no": lottery_no,
+            "source_url": sched_dict.get("source_url"),
+            "fetched_at": sched_dict.get("fetched_at"),
+            "expected_total": expected_total,   # 权威场数；未知期号为null
+            "schedule_total": schedule_total,
+            "schedule_complete": (expected_total is not None
+                                  and schedule_total == expected_total),
         }
 
     # skip原因汇总
@@ -137,25 +168,48 @@ def main():
     out_dir = os.path.join(OUT_BASE, lottery_no)
     os.makedirs(out_dir, exist_ok=True)
 
-    # scope：只有schedule提供且覆盖率=100%才能标full_pool
-    # 否则partial_pool，并标denominator/coverage
+    # scope：只有同时满足以下才能标full_pool，否则partial_pool
+    #   1) schedule提供
+    #   2) 覆盖率=100%（合并场数覆盖schedule全部）
+    #   3) schedule本身完整：已知期号要求schedule_total=权威场数；
+    #      未知期号要求schedule附带来源证据（source_url+fetched_at）
+    # 否则partial_pool，并标denominator/coverage及原因
     coverage_rate = (coverage["coverage_rate"]
                      if coverage and coverage["coverage_rate"] is not None
                      else None)
-    if args.schedule and coverage_rate == 1.0:
-        scope = "full_pool"
-    else:
-        scope = "partial_pool"
+    scope = "partial_pool"
+    scope_reason = None
+    if args.schedule and coverage_rate == 1.0 and schedule_evidence:
+        se = schedule_evidence
+        if se["schedule_complete"]:
+            scope = "full_pool"
+        elif se["expected_total"] is None:
+            # 未知期号：要求来源证据
+            if se.get("source_url") and se.get("fetched_at"):
+                scope = "full_pool"
+                scope_reason = ("未知期号但schedule有来源证据"
+                                f"({se['source_url']})，暂标full_pool")
+            else:
+                scope_reason = "未知期号且schedule无来源证据，只能partial_pool"
+        else:
+            scope_reason = (f"schedule不完整：schedule_total={se['schedule_total']}，"
+                            f"权威场数={se['expected_total']}")
+    elif args.schedule and coverage_rate != 1.0:
+        scope_reason = f"覆盖率不足100%（{coverage_rate}）"
+    elif not args.schedule:
+        scope_reason = "未提供schedule"
     denominator = coverage["schedule_total"] if coverage else None
     covered_n = coverage["covered"] if coverage else None
 
     manifest = {
         "scope": scope,
+        "scope_reason": scope_reason,  # partial_pool时注明原因
         "denominator": denominator,   # 赛程总场数；无schedule时为null
         "coverage": covered_n,        # 已覆盖场数；无schedule时为null
         "lottery_no": lottery_no,
         "run_id": run_id,
         "merged_at": datetime.now(timezone.utc).isoformat(),
+        "schedule_evidence": schedule_evidence,  # schedule文件SHA256/来源/期号/权威核验
         "chunks": chunk_stats,
         "conflicts": conflicts,
         "pool_total": len(merged),
@@ -195,6 +249,13 @@ def main():
 
     print(f"{'全池' if scope == 'full_pool' else '部分'}manifest已写: {out_path}")
     print(f"  scope={scope}, denominator={denominator}, coverage={covered_n}")
+    if scope_reason:
+        print(f"  scope原因: {scope_reason}")
+    if schedule_evidence:
+        print(f"  schedule证据: sha256={schedule_evidence['sha256'][:16]}..., "
+              f"schedule_total={schedule_evidence['schedule_total']}, "
+              f"expected_total={schedule_evidence['expected_total']}, "
+              f"complete={schedule_evidence['schedule_complete']}")
     print(f"  合并场数: {len(merged)} (ok={n_ok}, skipped={len(merged)-n_ok})")
     print(f"  冲突: {len(conflicts)}")
     if coverage:

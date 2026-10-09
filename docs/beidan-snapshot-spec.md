@@ -123,6 +123,16 @@
      校验 (lottery_no, seq) 唯一、对照开售赛程集合报告覆盖率，
      输出带 `run_id` 的只追加文件 `data/manifests/beidan/<lottery_no>/<run_id>.json`，
      **不覆盖**先前run。
+   - **schedule完整性验证（v4新增，GPT复核56cee7c）**：
+     即使覆盖率=100%，若误传子集当schedule仍会误标full_pool。规则：
+     1) manifest 记录 schedule 证据：`schedule_evidence={sha256, source_url,
+        fetched_at, lottery_no, expected_total, schedule_total, schedule_complete}`。
+     2) 已知期号（如 26103=193场，见 AUTHORITATIVE_TOTALS）要求
+        `schedule_total == 权威场数`，否则标 partial_pool 并注明"schedule不完整"。
+     3) 未知期号要求 schedule 附带来源证据（source_url + fetched_at），
+        否则只能 partial_pool。
+     4) 当前 0 个真实全池 manifest：没有实际 chunk 文件就不宣布全池完成，
+        不回填赛前预测。
 
 ## 不可覆盖规则
 
