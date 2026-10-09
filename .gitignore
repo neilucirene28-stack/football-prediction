@@ -9,3 +9,5 @@ __pycache__/
 *.pyc
 data/daily/
 data/backfill/
+data/football.db/
+data/football.json/

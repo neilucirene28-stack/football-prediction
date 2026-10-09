@@ -20,6 +20,7 @@
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.expanduser("~/workspace/football-prediction-v2")
@@ -170,7 +171,9 @@ try:
             break
 
     afb_data, afb_miss, afb_ambiguous = {}, [], 0
-    for fx in _targets:
+    for i, fx in enumerate(_targets):
+        if i > 0:
+            time.sleep(7)  # AF免费档限10次/分钟：节流防rateLimit（2026-10-09首跑踩坑）
         fid = fx["fixture_id"]
         _ko = (fx.get("date") or "")[:16].replace("T", " ")
         _slot_key = (fx.get("league", ""), _ko)
@@ -557,6 +560,144 @@ try:
 except Exception as e:
     results["sources"]["beidan_sp"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] 北单SP: {e}")
+
+# 15. soccerdata: Understat xG + ClubElo（2026-10-09 接入）
+#     Understat 覆盖5联赛（英超/西甲/意甲/德甲/法甲）；ClubElo本机被墙，失败跳过
+try:
+    from soccerdata import get_understat_xg, get_club_elo
+    sc_report, sc_data = {}, {}
+    for lg in ["英超", "西甲", "意甲", "德甲", "法甲"]:
+        try:
+            xg = get_understat_xg(lg, refresh=True)
+            sc_data[lg] = xg
+            sc_report[lg] = {"ok": True, "teams": len(xg)}
+        except Exception as e:
+            sc_report[lg] = {"ok": False, "error": str(e)[:150]}
+            print(f"  - soccerdata {lg} xG失败: {e}")
+    try:
+        elo = get_club_elo(refresh=True)
+        sc_report["_elo"] = {"ok": True, "teams": len(elo)}
+    except Exception as e:
+        elo = []
+        sc_report["_elo"] = {"ok": False, "error": str(e)[:150]}
+        print(f"  - soccerdata ClubElo失败: {e}")
+    save("soccerdata_xg", {"leagues": sc_data, "elo": elo})
+    sc_ok = sum(1 for k, v in sc_report.items()
+                if k != "_elo" and v.get("ok"))
+    results["sources"]["soccerdata"] = {
+        "ok": sc_ok > 0, "leagues": sc_report,
+        "note": "Understat xG(5联赛)；ClubElo本机被墙，仅阿里云可用",
+    }
+    print(f"[OK] soccerdata: {sc_ok}/5联赛xG，ClubElo"
+          f"{'OK' if sc_report['_elo']['ok'] else '失败(被墙)'}")
+except Exception as e:
+    results["sources"]["soccerdata"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] soccerdata: {e}")
+
+# 16. OddsPapi: 350+博彩公司赔率（2026-10-09 接入）
+#     免费250req/月；历史赔率端点免费不计配额。无key时整节跳过（用户需注册）。
+try:
+    _op_key = os.environ.get("ODDSPAPI_KEY")
+    if not _op_key:
+        results["sources"]["oddspapi"] = {
+            "ok": False, "skipped": True,
+            "error": "ODDSPAPI_KEY 未设置（oddspapi.io注册→Secure Vault授权）",
+        }
+        print("[SKIP] OddsPapi: 无key，跳过（用户注册后启用）")
+    else:
+        from oddspapi import get_fixtures as op_fixtures, get_odds as op_odds, \
+            get_quota as op_quota
+        op_fx = op_fixtures()
+        op_odds_data, op_n = {}, 0
+        for fx in op_fx[:20]:  # 每日上限20场，省配额
+            try:
+                od = op_odds(fx["fixture_id"])
+                if od:
+                    op_odds_data[str(fx["fixture_id"])] = od
+                    op_n += 1
+            except Exception as e:
+                print(f"  - OddsPapi fixture {fx['fixture_id']}失败: {e}")
+        save("oddspapi_snapshot", op_odds_data)
+        _q = op_quota()
+        results["sources"]["oddspapi"] = {
+            "ok": True, "fixtures": len(op_fx), "with_odds": op_n,
+            "quota_used": _q.get("used"), "quota_remaining": _q.get("remaining"),
+        }
+        print(f"[OK] OddsPapi: {len(op_fx)}场赛程，{op_n}场有赔率，"
+              f"本月已用{_q.get('used')}剩{_q.get('remaining')}")
+except Exception as e:
+    results["sources"]["oddspapi"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] OddsPapi: {e}")
+
+# 17. premierinjuries: 英超伤病/停赛/复出（2026-10-09 接入，静态无反爬）
+try:
+    from premierinjuries import get_injuries
+    pi_rows = get_injuries()
+    save("premierinjuries", pi_rows)
+    pi_status = {}
+    for r in pi_rows:
+        pi_status[r["status"]] = pi_status.get(r["status"], 0) + 1
+    results["sources"]["premierinjuries"] = {
+        "ok": True, "records": len(pi_rows), "by_status": pi_status,
+    }
+    print(f"[OK] premierinjuries: {len(pi_rows)}条 ({pi_status})")
+except Exception as e:
+    results["sources"]["premierinjuries"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] premierinjuries: {e}")
+
+# 18. openfootball: 免费历史比分库（2026-10-09 接入；本地git仓库，每周同步）
+try:
+    from openfootball import sync as of_sync, get_results as of_results, \
+        list_leagues as of_leagues
+    _sync = of_sync()
+    of_leagues = of_leagues()
+    of_data, of_report = {}, {}
+    for lg in ["巴甲", "英超", "西甲", "意甲", "德甲", "法甲"]:
+        try:
+            rs = of_results(lg, str(datetime.now().year))
+            of_data[lg] = rs
+            of_report[lg] = {"ok": True, "matches": len(rs)}
+        except Exception as e:
+            of_report[lg] = {"ok": False, "error": str(e)[:120]}
+    save("openfootball_results", {"leagues": of_data, "sync": _sync})
+    results["sources"]["openfootball"] = {
+        "ok": True, "leagues": of_report, "sync": _sync,
+        "note": "本地仓库，每周一cron同步即可，无需每日git pull",
+    }
+    print(f"[OK] openfootball: {len(of_leagues)}联赛可用，"
+          f"同步{_sync.get('football.json', {}).get('updated', '?')}")
+except Exception as e:
+    results["sources"]["openfootball"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] openfootball: {e}")
+
+# 19. ESPN summary: 单场阵容/事件/技术统计（2026-10-09 接入，espn.py扩展）
+#     对当日board在售场次拉阵容（赛前约1小时放出，未公布返回空）
+try:
+    from espn import get_summary, LEAGUE_CODES as _ESPN_LC
+    from okooo import get_board_map as _ok_bm2
+    _bm = _ok_bm2("jingcai")
+    es_out, es_n = {}, 0
+    for (home, away), _mid in list(_bm.items())[:30]:  # 上限30场
+        try:
+            sm = get_summary(_mid, "eng.1")  # event_id跨联赛通用
+            if sm.get("lineups", {}).get("home"):
+                es_n += 1
+            es_out[f"{home}vs{away}"] = {
+                "lineups": sm.get("lineups"),
+                "events": sm.get("events"),
+                "stats": sm.get("stats"),
+            }
+        except Exception as e:
+            print(f"  - ESPN summary {home}vs{away}失败: {e}")
+    save("espn_lineups", es_out)
+    results["sources"]["espn_summary"] = {
+        "ok": True, "matches": len(es_out), "with_lineups": es_n,
+        "note": "赛前约1小时放出阵容，未公布返回空列表",
+    }
+    print(f"[OK] ESPN summary: {len(es_out)}场，{es_n}场有阵容")
+except Exception as e:
+    results["sources"]["espn_summary"] = {"ok": False, "error": str(e)[:200]}
+    print(f"[FAIL] ESPN summary: {e}")
 
 # 保存汇总
 save("_summary", results)
