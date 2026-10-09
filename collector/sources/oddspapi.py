@@ -41,6 +41,7 @@ The Odds API：500 credits/月，但按“市场数×地区”扣费（一次多
 """
 import json
 import os
+import sys
 from datetime import datetime, timedelta, timezone
 
 from _http import fetch_with_retry
@@ -67,17 +68,38 @@ OUTCOME_1X2 = {"101": "home", "102": "draw", "103": "away"}
 
 
 # ---------------- key 管理 ----------------
+# 优先级：Secure Vault（custom.oddspapi，经 surrogate 注入，不接触明文）
+#      > 环境变量 ODDSPAPI_KEY（本地调试用）
 def _get_key():
     key = os.environ.get("ODDSPAPI_KEY", "").strip()
-    if not key:
-        raise RuntimeError(
-            "ODDSPAPI_KEY 环境变量未设置。注册流程：\n"
-            "1) 打开 https://oddspapi.io/ 免费注册（无需信用卡）\n"
-            "2) 在 Dashboard 复制 API key\n"
-            "3) 通过 Muse Secure Vault 授权（custom.oddspapi），由授权方把 key 注入 ODDSPAPI_KEY\n"
-            "本模块只从环境变量读 key，不接触明文，不写文件，不进 git。"
-        )
-    return key
+    if key:
+        return key
+    # 尝试 Secure Vault（cron/生产环境）
+    try:
+        sys.path.insert(0, "/opt/hatch/skills/skill-creator/bin")
+        from dynamic_credentials import url_with_surrogate_query_param
+        # 返回哨兵标记，调用方用 vault 路径
+        return "__VAULT__"
+    except Exception:
+        pass
+    raise RuntimeError(
+        "ODDSPAPI_KEY 环境变量未设置且 Secure Vault 无 custom.oddspapi。注册流程：\n"
+        "1) 打开 https://oddspapi.io/ 免费注册（无需信用卡）\n"
+        "2) 在 Dashboard 复制 API key\n"
+        "3) 通过 Muse Secure Vault 授权（custom.oddspapi）\n"
+        "本模块不写死 key、不落文件、不进 git。"
+    )
+
+
+def _vault_url(endpoint, params):
+    """用 Secure Vault surrogate 构造带 apiKey 的 URL（不接触明文）。"""
+    sys.path.insert(0, "/opt/hatch/skills/skill-creator/bin")
+    from dynamic_credentials import url_with_surrogate_query_param
+    qs = "&".join("%s=%s" % (k, v) for k, v in (params or {}).items())
+    base = "%s%s?%s" % (BASE_URL, endpoint, qs) if qs else "%s%s" % (BASE_URL, endpoint)
+    return url_with_surrogate_query_param(
+        base, "custom.oddspapi", allowed_hosts=["api.oddspapi.io"]
+    )
 
 
 # ---------------- 配额计数器（自然月） ----------------
@@ -124,11 +146,17 @@ def _check_quota(n=1):
 # ---------------- 请求封装 ----------------
 def _request(endpoint, params=None, billable=True):
     params = dict(params or {})
-    params["apiKey"] = _get_key()
+    key = _get_key()
     if billable:
         _check_quota(1)
-    qs = "&".join("%s=%s" % (k, v) for k, v in params.items())
-    data = fetch_with_retry("%s%s?%s" % (BASE_URL, endpoint, qs), timeout=25)
+    if key == "__VAULT__":
+        # Secure Vault 路径：surrogate 注入 apiKey，不接触明文
+        url = _vault_url(endpoint, params)
+    else:
+        params["apiKey"] = key
+        qs = "&".join("%s=%s" % (k, v) for k, v in params.items())
+        url = "%s%s?%s" % (BASE_URL, endpoint, qs)
+    data = fetch_with_retry(url, timeout=25)
     if billable:
         # 官方口径：请求到达服务端即计费（200/4xx/5xx 都计），网络层失败不计
         _charge(1)
