@@ -469,10 +469,14 @@ def main():
               ensure_ascii=False, indent=1)
     print("已写 /tmp/beidan_result1.json")
 
-    # ---- 全池 manifest（含 skipped，coverage 分母可靠） ----
+    # ---- chunk1 运行清单（含 skipped，chunk内分母可靠） ----
+    # 注意：这只是 chunk1（48场）的运行清单，不是26103全池193场的manifest。
+    # 全池manifest需用 scripts/beidan_manifest_merge.py 合并各chunk后生成。
     # 每场一行：ok 与 skipped 都记录，避免只统计成功场导致分母失真。
     from engine.beidan_snapshot import get_write_stats
     manifest = {
+        "scope": "chunk1",  # 仅chunk1运行清单，非全池manifest
+        "chunk_id": "chunk1",
         "lottery_no": matches[0].get("lottery_no", "unknown") if matches else "unknown",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "engine_version": "2.10",
@@ -499,7 +503,7 @@ def main():
     }
     json.dump(manifest, open("/tmp/beidan_manifest1.json", "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
-    print("已写 /tmp/beidan_manifest1.json（全池 manifest，含 skipped）")
+    print("已写 /tmp/beidan_manifest1.json（chunk1运行清单，48场，非全池）")
 
 
 if __name__ == "__main__":

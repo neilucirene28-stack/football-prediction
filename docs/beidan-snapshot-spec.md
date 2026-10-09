@@ -113,10 +113,16 @@
    `available_at` 一致（容差300秒）且 `<= asof`，且该源确实是赔率输入来源。
    不一致/晚于asof/无对应源 → `observation_only=true`。
 4. **禁止替代**：不准用文件mtime、战绩采集时间（t_data_ready）替代盘口/赔率的采集时间。
-5. **全池manifest**：runner 必须输出完整全池 manifest（含 skipped），否则 coverage
-   分母不可靠。manifest 字段：lottery_no, generated_at, pool_total, predicted_ok,
-   skipped, skip_reasons, snapshot_write_stats, matches[]（每场 seq/status/reason/
-   snapshot_id/snapshot_observation_only）。
+5. **运行清单与全池manifest**：
+   - 各chunk runner 输出**chunk运行清单**（如 chunk1 的48场），含 skipped，字段：
+     lottery_no, chunk_id, scope="chunk", generated_at, pool_total(本chunk场数),
+     predicted_ok, skipped, skip_reasons, snapshot_write_stats,
+     matches[]（每场 seq/status/reason/snapshot_id/snapshot_observation_only）。
+     **禁止**把单个chunk的清单称为"全池manifest"。
+   - 全池manifest 由 `scripts/beidan_manifest_merge.py` 合并各chunk清单生成：
+     校验 (lottery_no, seq) 唯一、对照开售赛程集合报告覆盖率，
+     输出带 `run_id` 的只追加文件 `data/manifests/beidan/<lottery_no>/<run_id>.json`，
+     **不覆盖**先前run。
 
 ## 不可覆盖规则
 
