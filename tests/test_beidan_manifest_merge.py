@@ -49,7 +49,7 @@ def test_merge_dedup_keeps_earliest():
         try:
             with open(out, encoding="utf-8") as f:
                 m = json.load(f)
-            assert m["scope"] == "full_pool"
+            assert m["scope"] == "partial_pool"  # 无schedule不得标full_pool
             assert m["pool_total"] == 3
             # seq=2 保留最早的（chunk1的skipped版本）
             by_seq = {x["seq"]: x for x in m["matches"]}
@@ -61,6 +61,115 @@ def test_merge_dedup_keeps_earliest():
                 os.remove(out)
 
 
+def test_scope_partial_without_schedule():
+    """无--schedule时scope必须为partial_pool，不能冒充full_pool。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        r = _run_merge(td, [c1], "26103", ["--run-id", "scope1"])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103", "scope1.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "partial_pool", \
+                f"无schedule时scope应为partial_pool，实际={m['scope']}"
+            assert m["denominator"] is None
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_scope_partial_with_incomplete_coverage():
+    """有schedule但覆盖率<100%时scope必须为partial_pool，并标denominator/coverage。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        sched = os.path.join(td, "sched.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({"matches": [{"seq": "1"}, {"seq": "2"}, {"seq": "3"},
+                                    {"seq": "4"}]}, f)
+        r = _run_merge(td, [c1], "26103",
+                       ["--run-id", "scope2", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103", "scope2.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "partial_pool", \
+                f"覆盖率1/4时scope应为partial_pool，实际={m['scope']}"
+            assert m["denominator"] == 4
+            assert m["coverage"] == 1
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_scope_full_pool_only_at_100pct():
+    """只有schedule提供且覆盖率=100%才能标full_pool。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"},
+                           {"seq": "2", "status": "ok"}])
+        sched = os.path.join(td, "sched.json")
+        with open(sched, "w", encoding="utf-8") as f:
+            json.dump({"matches": [{"seq": "1"}, {"seq": "2"}]}, f)
+        r = _run_merge(td, [c1], "26103",
+                       ["--run-id", "scope3", "--schedule", sched])
+        assert r.returncode == 0, r.stderr
+        out = os.path.join(os.path.dirname(__file__), "..",
+                           "data", "manifests", "beidan", "26103", "scope3.json")
+        try:
+            with open(out, encoding="utf-8") as f:
+                m = json.load(f)
+            assert m["scope"] == "full_pool"
+        finally:
+            if os.path.exists(out):
+                os.remove(out)
+
+
+def test_run_id_rejects_path_traversal():
+    """--run-id含路径遍历必须被拒绝，不能写到目录外。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        evil = os.path.join(td, "evil.json")
+        r = _run_merge(td, [c1], "26103", ["--run-id", "../evil"])
+        assert r.returncode != 0, "路径遍历run_id应被拒绝"
+        assert not os.path.exists(evil), "恶意文件不应被创建"
+
+
+def test_run_id_rejects_unsafe_chars():
+    """--run-id只允许字母数字下划线连字符。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        for bad in ["a b", "a/b", "a\\b", "a:b", "a*b", ".hidden", "../x"]:
+            r = _run_merge(td, [c1], "26103", ["--run-id", bad])
+            assert r.returncode != 0, f"run_id={bad!r}应被拒绝"
+
+
+def test_manual_run_id_collision_errors():
+    """手工run_id冲突时必须报错退出，不能静默改名覆盖。"""
+    with tempfile.TemporaryDirectory() as td:
+        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
+                          [{"seq": "1", "status": "ok"}])
+        base = os.path.join(os.path.dirname(__file__), "..",
+                            "data", "manifests", "beidan", "26103")
+        r1 = _run_merge(td, [c1], "26103", ["--run-id", "collide1"])
+        assert r1.returncode == 0, r1.stderr
+        r2 = _run_merge(td, [c1], "26103", ["--run-id", "collide1"])
+        try:
+            assert r2.returncode != 0, "同名手工run_id第二次应报错退出"
+            assert not os.path.exists(os.path.join(base, "collide1_1.json")), \
+                "不应静默生成改名文件"
+        finally:
+            for p in ["collide1.json", "collide1_1.json"]:
+                pp = os.path.join(base, p)
+                if os.path.exists(pp):
+                    os.remove(pp)
 def test_merge_wrong_lottery_skipped():
     """期号不一致的chunk被跳过。"""
     with tempfile.TemporaryDirectory() as td:
@@ -82,24 +191,9 @@ def test_merge_wrong_lottery_skipped():
                 os.remove(out)
 
 
-def test_merge_run_id_no_overwrite():
-    """同名run_id不覆盖已有文件。"""
-    with tempfile.TemporaryDirectory() as td:
-        c1 = _write_chunk(td, "m1.json", "26103", "2026-10-09T06:00:00+00:00",
-                          [{"seq": "1", "status": "ok"}])
-        r1 = _run_merge(td, [c1], "26103", ["--run-id", "test3"])
-        r2 = _run_merge(td, [c1], "26103", ["--run-id", "test3"])
-        assert r1.returncode == 0 and r2.returncode == 0
-        base = os.path.join(os.path.dirname(__file__), "..",
-                            "data", "manifests", "beidan", "26103")
-        try:
-            assert os.path.exists(os.path.join(base, "test3.json"))
-            assert os.path.exists(os.path.join(base, "test3_1.json"))
-        finally:
-            for p in ["test3.json", "test3_1.json"]:
-                pp = os.path.join(base, p)
-                if os.path.exists(pp):
-                    os.remove(pp)
+def test_merge_run_id_no_overwrite_removed():
+    """旧行为（静默改名test3_1.json）已废弃，见test_manual_run_id_collision_errors。"""
+    pass
 
 
 def test_merge_coverage_against_schedule():
@@ -120,7 +214,7 @@ def test_merge_coverage_against_schedule():
         try:
             with open(out, encoding="utf-8") as f:
                 m = json.load(f)
-            cov = m["coverage"]
+            cov = m["coverage_detail"]
             assert cov["schedule_total"] == 3
             assert cov["covered"] == 2
             assert abs(cov["coverage_rate"] - 2 / 3) < 1e-9

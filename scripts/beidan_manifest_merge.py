@@ -19,10 +19,34 @@
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 
 OUT_BASE = "data/manifests/beidan"
+
+# run_id 只允许安全字符：字母数字下划线连字符（防路径遍历）
+RUN_ID_RE = re.compile(r"^[A-Za-z0-9_-]+$")
+
+
+def validate_run_id(run_id):
+    """校验手工run_id；非法则返回错误信息，否则返回None。"""
+    if not run_id or not RUN_ID_RE.match(run_id):
+        return (f"非法run_id {run_id!r}：只允许字母、数字、下划线、连字符，"
+                f"不能为空")
+    if run_id in (".", ".."):
+        return f"非法run_id {run_id!r}"
+    return None
+
+
+def atomic_write_excl(path, data_bytes):
+    """O_EXCL原子独占写入；文件已存在则抛FileExistsError，不覆盖。"""
+    fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+    try:
+        os.write(fd, data_bytes)
+        os.fsync(fd)
+    finally:
+        os.close(fd)
 
 
 def load_chunk(path):
@@ -100,23 +124,35 @@ def main():
                       if m.get("status") != "ok")
     n_ok = sum(1 for m in merged.values() if m.get("status") == "ok")
 
-    # run_id：UTC时间戳，防碰撞
-    if args.run_id:
+    # run_id：手工指定必须过安全校验；默认UTC时间戳（含微秒防碰撞）
+    manual_run_id = bool(args.run_id)
+    if manual_run_id:
+        err = validate_run_id(args.run_id)
+        if err:
+            print(f"错误: {err}", file=sys.stderr)
+            sys.exit(2)
         run_id = args.run_id
     else:
-        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     out_dir = os.path.join(OUT_BASE, lottery_no)
     os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, f"{run_id}.json")
-    suffix = 1
-    while os.path.exists(out_path):
-        out_path = os.path.join(out_dir, f"{run_id}_{suffix}.json")
-        suffix += 1
-    # 最终run_id取文件名
-    run_id = os.path.splitext(os.path.basename(out_path))[0]
+
+    # scope：只有schedule提供且覆盖率=100%才能标full_pool
+    # 否则partial_pool，并标denominator/coverage
+    coverage_rate = (coverage["coverage_rate"]
+                     if coverage and coverage["coverage_rate"] is not None
+                     else None)
+    if args.schedule and coverage_rate == 1.0:
+        scope = "full_pool"
+    else:
+        scope = "partial_pool"
+    denominator = coverage["schedule_total"] if coverage else None
+    covered_n = coverage["covered"] if coverage else None
 
     manifest = {
-        "scope": "full_pool",
+        "scope": scope,
+        "denominator": denominator,   # 赛程总场数；无schedule时为null
+        "coverage": covered_n,        # 已覆盖场数；无schedule时为null
         "lottery_no": lottery_no,
         "run_id": run_id,
         "merged_at": datetime.now(timezone.utc).isoformat(),
@@ -126,21 +162,39 @@ def main():
         "predicted_ok": n_ok,
         "skipped": len(merged) - n_ok,
         "skip_reasons": dict(reasons),
-        "coverage": coverage,
+        "coverage_detail": coverage,
         "matches": [
             {k: v for k, v in m.items() if not k.startswith("_")}
             for _, m in sorted(merged.items())
         ],
     }
-    # 原子写入：临时文件 + rename
-    tmp_path = out_path + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(manifest, f, ensure_ascii=False, indent=1)
-        f.flush()
-        os.fsync(f.fileno())
-    os.replace(tmp_path, out_path)
+    payload = json.dumps(manifest, ensure_ascii=False, indent=1).encode("utf-8")
 
-    print(f"全池manifest已写: {out_path}")
+    # O_EXCL原子独占写入；同名则报错不覆盖（不用exists+replace，防竞态）
+    out_path = os.path.join(out_dir, f"{run_id}.json")
+    try:
+        atomic_write_excl(out_path, payload)
+    except FileExistsError:
+        if manual_run_id:
+            print(f"错误: manifest已存在 {out_path}，拒绝覆盖。"
+                  f"请换run_id后重试。", file=sys.stderr)
+            sys.exit(3)
+        # 自动run_id极小概率碰撞：重生成一次再试
+        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") \
+            + "_r"
+        manifest["run_id"] = run_id
+        payload = json.dumps(manifest, ensure_ascii=False,
+                             indent=1).encode("utf-8")
+        out_path = os.path.join(out_dir, f"{run_id}.json")
+        try:
+            atomic_write_excl(out_path, payload)
+        except FileExistsError:
+            print(f"错误: manifest已存在 {out_path}，拒绝覆盖。",
+                  file=sys.stderr)
+            sys.exit(3)
+
+    print(f"{'全池' if scope == 'full_pool' else '部分'}manifest已写: {out_path}")
+    print(f"  scope={scope}, denominator={denominator}, coverage={covered_n}")
     print(f"  合并场数: {len(merged)} (ok={n_ok}, skipped={len(merged)-n_ok})")
     print(f"  冲突: {len(conflicts)}")
     if coverage:
@@ -149,6 +203,8 @@ def main():
         if coverage["missing_from_merge"]:
             print(f"  未覆盖场次: {len(coverage['missing_from_merge'])}")
     print("  注意: 本manifest只合并已有chunk清单，不生成新预测；不为凑数赛后重跑。")
+    if scope == "partial_pool":
+        print("  注意: scope=partial_pool，不可称为全池manifest。")
 
 
 if __name__ == "__main__":
