@@ -52,3 +52,13 @@ PYTHONPATH=. python -m unittest discover -s tests -p 'test_beidan_*.py' -v
 ```
 
 31 项检查覆盖未来赛果隔离、常规时间筛选、历史导入的时间门控、无历史拒绝、六向量自洽、输入字段来源绑定、旧赛程合并、训练历史血缘、合成时间门控、完整赛程运行账本、L1 攻防路径和身份回退、来源时间缺失降级、赛后生成拒绝、不可覆盖写入及成对 Brier 审计。`audit_frozen_pair()` 要求两个模型在同一赛前决策时点和相同场次上计分，输出全开售池覆盖率；该函数只评估冻结预测，明确标为 `paired_asof_audit_not_walk_forward`，不会把一次计分冒充参数训练的滚动验证。上线仍需真实赛前快照的赛事族分层滚动验证，比较冻结基线的三分类 Brier（不得恶化）、比分 log loss、让平/平局校准以及全开售池覆盖；当前没有可复跑的北单赛前 payload，不能报告模型收益。
+
+## 规范 ID 归档与滚动复核（v5）
+
+`python -m beidan_bd1.identity_import --kind history --input normalized-history.jsonl --evidence audited-identity.jsonl --out enriched-history.jsonl`；`--kind fixtures` 可处理未来赛程，输出必须为新文件。身份记录包括比赛ID、来源名/来源比赛ID、采集时间、人工审核人/审核时间/approved 状态、原始归档 payload 和其 SHA-256。payload 必须有与旧记录完全一致的主客名称、赛事名、开球时刻，以及来源规范 ID。历史身份可以赛后审核，但仅从真实审核时刻之后用于 L1；赛程身份必须在开球前审核。对账不通过就报错，没身份记录的比赛原样保留 L3。摘要保证归档载荷在导入时未漂移，**不能证明提供商或审核声明的真实性**；外部审核还需检查归档原件及采集日志。旧 249 条未审核映射不可直接使用。
+
+`audit_chronological_replay(folds=..., history=..., evaluated_at=..., frozen_models=...)` 接受至少两期独立测试池与冻结快照，核对训练比赛ID及实际赛果/身份可用时间、完整池内统一赛前决策时点、模型版本和冻结制品文件 SHA-256，聚合成对三分类 Brier 与覆盖率。它仍返回 `production_gate_passed=false`；还需核对官方完整开售池、归档不可篡改性、参数选择与测试期隔离和样本量。v5 快照另存 L1 身份来源/核验时刻；旧 v4 快照不会被误算进新审计。
+
+## 同事件市场与三向校准候选（独立影子函数）
+
+`probability_chain.market_wdl()` 仅接受来源和赛前可用时间已标注的**无让球、全场、欧洲十进制赔率**三向事件，按倒数归一得到参考向量；北单带线参考 SP 和开奖 SP 会被拒绝，不能错当无让球赔率。`shadow_adjust()` 可用过去数据拟合后指定的权重 `w∈[0,1]`、平局偏置及正温度，把三向目标对比分矩阵做一次区域重分配，重新生成六玩法与前后总进球均值。默认 `w=0, δ=0, T=1` 完全保留原分布。当前没有历史赛前市场 payload 和独立滚动验证，**非身份参数不进入 runner 默认路由或生产**，输出始终标记 `parameters_unvalidated=true`。

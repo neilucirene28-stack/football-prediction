@@ -14,7 +14,7 @@ import re
 from typing import Any
 
 
-SCHEMA_VERSION = "bd1-snapshot-4"  # v4: retain the training result lineage
+SCHEMA_VERSION = "bd1-snapshot-5"  # v5: bind canonical identity evidence
 _MATCH_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 _TRAIN_ID = re.compile(r"^[A-Za-z0-9_:-]{1,80}$")
 _THREE = ("胜", "平", "负")
@@ -73,7 +73,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
                    competition_family: str | None = None,
                    synthetic_sample: bool = False,
                    training_lineage: dict | None = None,
-                   identity_ids: dict[str, str] | None = None) -> dict:
+                   identity_ids: dict[str, str] | None = None,
+                   identity_provenance: dict[str, str] | None = None) -> dict:
     """建立逐场证据记录。asof_at 是预测请求的时点，不冒充来源采集时间。
 
     ``sources`` 每项仅允许 name、source_match_id、available_at、status。
@@ -112,6 +113,16 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
             raise ValueError("L1对阵双方规范ID相同")
     if model_version.startswith("bd1-l1-") and identity_ids is None:
         raise ValueError("L1快照缺少规范ID")
+    if (identity_ids is None) != (identity_provenance is None):
+        raise ValueError("规范ID与核验证据必须同时提供")
+    if identity_provenance is not None:
+        if not isinstance(identity_provenance, dict) or set(identity_provenance) != {"source", "verified_at"}:
+            raise ValueError("规范ID核验证据字段不完整")
+        if (not isinstance(identity_provenance["source"], str)
+                or not _MATCH_ID.fullmatch(identity_provenance["source"])):
+            raise ValueError("规范ID核验来源非法")
+        if _datetime(identity_provenance["verified_at"], "identity_verified_at") > asof:
+            raise ValueError("规范ID身份核验晚于预测时点")
     if not isinstance(sources, list) or not sources:
         raise ValueError("必须列出实际使用的数据源")
     clean_sources = []
@@ -144,6 +155,15 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
             "available_at": available,
             "status": src.get("status", "ok"),
         })
+    if identity_provenance is not None:
+        identity_source = next((s for s in clean_sources
+                                if s["name"] == identity_provenance["source"]), None)
+        if identity_source is None:
+            raise ValueError("规范ID核验来源不在来源清单")
+        if (identity_source["available_at"] is None
+                or _datetime(identity_source["available_at"], "available_at")
+                < _datetime(identity_provenance["verified_at"], "identity_verified_at")):
+            raise ValueError("规范ID来源早于身份核验")
     required = {"fixture", "history"}
     if competition_family is not None:
         required.add("family")
@@ -166,6 +186,10 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
                or by_name[name]["available_at"] is None
                for name in input_sources.values()):
             verified = False
+        if identity_ids is not None and any(
+            input_sources[k] != identity_provenance["source"] for k in identity_ids
+        ):
+            raise ValueError("规范ID字段未绑定身份核验来源")
         clean_input_sources = dict(input_sources)
     if training_lineage is None:
         verified = False
@@ -261,6 +285,7 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         "lambda_away": _positive_lambda(lambda_away, "lambda_away"),
         "handicap": handicap, "competition_family": competition_family,
         "identity_ids": dict(identity_ids) if identity_ids is not None else None,
+        "identity_provenance": dict(identity_provenance) if identity_provenance is not None else None,
         "sources": clean_sources, "vectors": clean_vectors,
         "input_sources": clean_input_sources,
         "training_lineage": clean_lineage,

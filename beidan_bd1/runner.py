@@ -24,13 +24,14 @@ from .snapshot import _datetime, build_snapshot, save_snapshot
 _SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 
 
-def _available_history_time(history: list[dict], used_ids: list[str]) -> str:
+def _available_history_time(history: list[dict], used_ids: list[str], *,
+                            include_identity: bool = False) -> str:
     lookup = {row["match_id"]: row for row in history}
     stamps = []
     for match_id in used_ids:
         row = lookup[match_id]
-        stamps.extend(_datetime(row[key], key) for key in (
-            "result_available_at", "verified_at", "identity_verified_at")
+        keys = ("result_available_at", "verified_at", "identity_verified_at") if include_identity else ("result_available_at", "verified_at")
+        stamps.extend(_datetime(row[key], key) for key in keys
                       if row.get(key) is not None)
     return max(stamps).isoformat()
 
@@ -150,7 +151,9 @@ def run_shadow_pool(*, fixtures: list[dict], history: list[dict],
                 )
             history_source = {"name": "verified_result_export", "source_match_id": None,
                               "available_at": _available_history_time(
-                                  history, prediction["training_match_ids"]), "status": "ok"}
+                                  history, prediction["training_match_ids"],
+                                  include_identity=prediction["route"] == "L1_team_strength"),
+                              "status": "ok"}
             training_lineage = {
                 "match_ids": prediction["training_match_ids"],
                 "latest_available_at": history_source["available_at"],
@@ -169,6 +172,10 @@ def run_shadow_pool(*, fixtures: list[dict], history: list[dict],
                 lambda_home=prediction["lambda_home"],
                 lambda_away=prediction["lambda_away"], handicap=handicap,
                 identity_ids=identity if prediction["route"] == "L1_team_strength" else None,
+                identity_provenance=(
+                    {"source": row["identity_source"],
+                     "verified_at": row["identity_verified_at"]}
+                    if prediction["route"] == "L1_team_strength" else None),
                 synthetic_sample=synthetic_at is not None,
                 training_lineage=training_lineage,
             )

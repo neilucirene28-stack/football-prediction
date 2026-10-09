@@ -41,8 +41,14 @@ def convert_export_row(row: dict) -> dict:
     ht_h, ht_a = _score(row.get("half_score"), "half_score")
     if ht_h > ft_h or ht_a > ft_a:
         raise ValueError("半场进球超过全场")
+    for key in ("home", "away", "league"):
+        if not isinstance(row.get(key), str) or not row[key].strip():
+            raise ValueError(f"原始{key}缺失，无法进行身份对账")
     return {
         "match_id": f"{row['lottery_no']}:{row['seq']}",
+        # Names are audit join keys, never an inferred team identity or L1 feature.
+        "observed_home": row["home"], "observed_away": row["away"],
+        "observed_competition": row["league"],
         "competition_family": None,  # 尚无经过核验的赛事族映射
         "kickoff_at": kickoff.isoformat(),
         "result_available_at": None,

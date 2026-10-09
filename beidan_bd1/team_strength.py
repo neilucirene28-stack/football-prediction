@@ -109,5 +109,6 @@ def predict_l1(history: list[dict], *, asof_at: str, kickoff_at: str,
         "competition_id": competition_id, "home_id": home_id,
         "away_id": away_id, "ridge": ridge,
         "lambda_home": lam_h, "lambda_away": lam_a,
+        "ht_fractions": {"home": qh, "away": qa},
         "handicap": handicap, "vectors": vectors, "score_31": score31,
     }

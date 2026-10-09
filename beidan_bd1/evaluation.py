@@ -61,6 +61,8 @@ def _forecast(row: dict, cutoff: str, kickoff: str) -> dict:
         competition_family=row.get("competition_family"),
         synthetic_sample=row.get("synthetic_sample", False),
         training_lineage=row.get("training_lineage"),
+        identity_ids=row.get("identity_ids"),
+        identity_provenance=row.get("identity_provenance"),
     )
     if rebuilt["as_of_backtest_eligible"] is not True:
         raise ValueError("来源未核验")
@@ -91,6 +93,10 @@ def audit_frozen_pair(*, baseline: list[dict], candidate: list[dict],
     for key, result in pool.items():
         if key not in base:
             continue
+        if _datetime(base[key].get("asof_at"), "asof_at") != _datetime(
+            challenger[key].get("asof_at"), "asof_at"
+        ):
+            raise ValueError("成对预测的赛前 as-of 时点不一致")
         ko = _datetime(result.get("kickoff_at"), "kickoff_at")
         observed = [_datetime(result[k], k) for k in ("result_available_at", "verified_at")
                     if result.get(k) is not None]
