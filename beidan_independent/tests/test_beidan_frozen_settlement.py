@@ -42,6 +42,46 @@ def make_bundle(path, blocked=False):
 
 
 class FrozenSettlementTests(unittest.TestCase):
+    def expire_blocked_row(self):
+        folds=json.loads((self.path/'folds.json').read_bytes())
+        folds[0]['fixtures'][1]['kickoff_at']='2026-10-07T09:00:00+08:00'
+        self.report['folds'][0]['matches'][1]['kickoff_at']='2026-10-07T09:00:00+08:00'
+        (self.path/'folds.json').write_text(json.dumps(folds))
+        (self.path/'report.json').write_text(json.dumps(self.report))
+        (self.path/'freeze_manifest.json').unlink()
+
+    def test_expired_blocked_row_keeps_full_pool_without_creating_past_prediction(self):
+        self.expire_blocked_row()
+        with patch('beidan_bd1.frozen_settlement._utc_now',return_value=SEALED):
+            sealed=seal_bundle(self.path)
+        self.digest=sealed['manifest_sha256']
+        self.assertEqual(sealed['expired_blocked_n'],1)
+        out=self.settle([])
+        self.assertEqual((out['offered_n'],out['predicted_n'],out['blocked_n']),(2,1,1))
+        self.assertEqual(out['matches'][1]['status'],'blocked_in_original_freeze')
+
+    def test_blocked_row_cannot_hide_a_probability_payload(self):
+        self.expire_blocked_row()
+        self.report['folds'][0]['matches'][1]['candidate']=self.report['folds'][0]['matches'][0]['candidate']
+        (self.path/'report.json').write_text(json.dumps(self.report))
+        with patch('beidan_bd1.frozen_settlement._utc_now',return_value=SEALED):
+            with self.assertRaises(ValueError):seal_bundle(self.path)
+
+    def test_legacy_protocol_retains_strict_whole_pool_time_rule(self):
+        self.expire_blocked_row()
+        with patch('beidan_bd1.frozen_settlement._utc_now',return_value=SEALED):seal_bundle(self.path)
+        p=self.path/'freeze_manifest.json';manifest=json.loads(p.read_bytes())
+        manifest['schema']='bd1-frozen-bundle-1';manifest.pop('expired_blocked_n')
+        p.write_text(json.dumps(manifest));self.digest=hashlib.sha256(p.read_bytes()).hexdigest()
+        with self.assertRaises(ValueError):self.settle([])
+
+    def test_expired_blocked_count_tampering_rejected_even_with_new_digest(self):
+        self.expire_blocked_row()
+        with patch('beidan_bd1.frozen_settlement._utc_now',return_value=SEALED):seal_bundle(self.path)
+        p=self.path/'freeze_manifest.json';manifest=json.loads(p.read_bytes());manifest['expired_blocked_n']=0
+        p.write_text(json.dumps(manifest));self.digest=hashlib.sha256(p.read_bytes()).hexdigest()
+        with self.assertRaises(ValueError):self.settle([])
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)

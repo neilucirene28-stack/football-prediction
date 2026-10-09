@@ -19,7 +19,8 @@ from .snapshot import _datetime, build_snapshot
 from .walk_forward import _fixture_source, _fixture_identity, _observed_result, summarize_pairs, summarize_goal_means
 
 
-SCHEMA = "bd1-frozen-bundle-1"
+SCHEMA = "bd1-frozen-bundle-2"
+LEGACY_SCHEMA = "bd1-frozen-bundle-1"
 FILES = ("history.jsonl", "folds.json", "report.json", "results.jsonl")
 NATIVE_IDS = ("provider_match_id", "provider_home_id", "provider_away_id",
               "provider_league_id", "season_year", "season_type")
@@ -67,7 +68,7 @@ def _check_forecast(value, fixture, cutoff, generated):
     return value
 
 
-def _validate_archive(history, folds, report):
+def _validate_archive(history, folds, report, *, allow_expired_blocked=False):
     freeze = report.get("prospective_freeze")
     if (not isinstance(freeze, dict) or report.get("paired_n") != 0
             or report.get("brier_baseline") is not None or report.get("brier_candidate") is not None
@@ -108,12 +109,18 @@ def _validate_archive(history, folds, report):
                     or saved.get("match_id") != identity or saved.get("period") != fixture["period"]
                     or _datetime(saved.get("kickoff_at"), "saved.kickoff_at") != ko
                     or _datetime(saved.get("decision_at"), "saved.decision_at") != cutoff
-                    or not started <= cutoff <= generated < ko):
+                    or not started <= cutoff <= generated):
                 raise ValueError("冻结比赛身份、顺序或实际生成时间非法")
             pool[identity] = fixture
             football_n += fixture.get("sport") == "football"
             if saved.get("status") == "blocked":
+                if not allow_expired_blocked and generated >= ko:
+                    raise ValueError("旧协议要求完整池在生成时尚未开球")
+                if any(k in saved for k in ('alternatives','baseline','candidate','vectors','score_31')):
+                    raise ValueError("阻断记录不得携带预测概率")
                 continue
+            if generated >= ko:
+                raise ValueError("实际预测生成完成时已开球")
             if saved.get("status") != "predicted_research" or fixture.get("sport") != "football":
                 raise ValueError("未知冻结状态或非足球预测")
             _fixture_source(fixture, cutoff)
@@ -149,14 +156,16 @@ def _validate_archive(history, folds, report):
 def seal_bundle(bundle):
     """Add an exclusive digest manifest using the actual current clock."""
     raw, history, folds, report = _archive(bundle)
-    pool, predictions, generated = _validate_archive(history, folds, report)
+    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=True)
     sealed = _utc_now()
-    if sealed < generated or any(sealed >= _datetime(f["kickoff_at"], "kickoff_at") for f in pool.values()):
-        raise ValueError("只能在完整输入池开球之前封存；不能补造旧赛前封存时间")
+    if sealed < generated or any(sealed >= _datetime(pool[mid]["kickoff_at"], "kickoff_at") for mid in predictions):
+        raise ValueError("每条实际预测必须在开球前封存；不能补造旧赛前封存时间")
     manifest = {"schema": SCHEMA, "sealed_at": sealed.isoformat(),
                 "generation_completed_at": generated.isoformat(),
                 "files": {name: {"sha256": _digest(data), "size_bytes": len(data)} for name, data in raw.items()},
                 "offered_n": len(pool), "predicted_n": len(predictions),
+                "expired_blocked_n": sum(sealed >= _datetime(f["kickoff_at"], "kickoff_at")
+                                         for mid,f in pool.items() if mid not in predictions),
                 "production_gate_passed": False,
                 "independent_clock_authentication": False}
     data = (json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode()
@@ -171,18 +180,24 @@ def load_bundle(bundle, *, manifest_sha256, evaluated_at):
     if not _sha(manifest_sha256) or _digest(data) != manifest_sha256:
         raise ValueError("冻结清单与独立保留的SHA256不一致")
     manifest = json.loads(data)
-    if manifest.get("schema") != SCHEMA or set(manifest.get("files", {})) != set(FILES):
+    if manifest.get("schema") not in (SCHEMA,LEGACY_SCHEMA) or set(manifest.get("files", {})) != set(FILES):
         raise ValueError("冻结清单协议或文件集合不正确")
     raw, history, folds, report = _archive(bundle)
     for name, content in raw.items():
         if manifest["files"][name] != {"sha256": _digest(content), "size_bytes": len(content)}:
             raise ValueError("冻结文件字节改变: " + name)
-    pool, predictions, generated = _validate_archive(history, folds, report)
+    modern = manifest["schema"] == SCHEMA
+    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=modern)
     sealed = _datetime(manifest.get("sealed_at"), "sealed_at")
     now = _datetime(evaluated_at, "evaluated_at")
     if (not generated <= sealed <= now
             or manifest.get("generation_completed_at") != generated.isoformat()
-            or any(sealed >= _datetime(f["kickoff_at"], "kickoff_at") for f in pool.values())
+            or any(sealed >= _datetime(pool[mid]["kickoff_at"], "kickoff_at")
+                   for mid in (predictions if modern else pool))
+            or (modern and (type(manifest.get('expired_blocked_n')) is not int
+                            or manifest.get('expired_blocked_n') != sum(
+                                sealed >= _datetime(f['kickoff_at'],'kickoff_at')
+                                for mid,f in pool.items() if mid not in predictions)))
             or manifest.get("offered_n") != len(pool) or manifest.get("predicted_n") != len(predictions)):
         raise ValueError("冻结清单时钟或统计矛盾")
     return report, pool, predictions

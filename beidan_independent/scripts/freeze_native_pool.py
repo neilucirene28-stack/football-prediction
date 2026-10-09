@@ -10,6 +10,7 @@ from pathlib import Path
 from beidan_bd1.native_pool import collect_batches
 from beidan_bd1.walk_forward import run_walk_forward
 from beidan_bd1.frozen_settlement import seal_bundle
+from beidan_bd1.snapshot import _datetime
 
 root=Path(__file__).resolve().parents[1]
 now=datetime.now(timezone.utc).isoformat()
@@ -42,7 +43,8 @@ for r in roster:
 folds=[{'period':'26103','cutoff_at':now,'expected_total':179,'fixtures':fixtures}]
 report=run_walk_forward(history=history,folds=folds,results=[],evaluated_at=now,
         model_family='l1_team_strength',identity_mode='provider_native_espn')
-if (report['offered_n']!=179 or report['predicted_n']!=len(research) or report['paired_n']!=0
+future_research_n=sum(_datetime(bindings[seq]['binding']['kickoff_at'],'kickoff') > _datetime(now,'now') for seq in research)
+if (report['offered_n']!=179 or report['predicted_n']!=future_research_n or report['paired_n']!=0
         or report['brier_candidate'] is not None or report['production_gate_passed'] is not False):
     raise ValueError('prospective freeze coverage or pending-only gate differs')
 report['prospective_freeze']={'generated_at':now,'original_roster_sha256':hashlib.sha256(pool_path.read_bytes()).hexdigest(),
