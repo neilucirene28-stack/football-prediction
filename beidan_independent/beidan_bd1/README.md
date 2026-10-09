@@ -2,6 +2,10 @@
 
 状态：**已实现可执行的 L3 根/赛事族先验、受身份门控的 L1 球队攻防影子候选、开售池只读导入和赛前快照；未训练生产参数，未做真实北单赛前 walk-forward，禁止上线**。包仅用 Python 标准库，不导入竞彩 `engine.predict()`。设计全文见 `docs/beidan-independent-model-v1-design.md`。
 
+## v20 跨版本唯一赛事结算
+
+新增`unique_settlement`，重新校验四份原冻结并采用每场最早合格封存；同一ESPN event_id不能通过换期号或阶段重复计分。179完整池、57唯一预测、122阻断，107条后续版本排除，0成对赛果/Brier为空。133项测试通过；命令及真实采集检查见`docs/beidan-v20-unique-settlement.md`。中文身份未批准，生产资格仍为false。
+
 ## v19 法乙历史扩充与冻结结算
 
 新增119份原始响应、89场显式半场历史，合并565场。新冻结为179场全池、57场研究候选、122场阻断；德甲双方样本不足继续阻断。补齐实际赛后采集器与最早封存去重登记，排除107条跨版本重复预测，127项测试通过。详见`docs/beidan-v19-prospective-collection.md`和`outputs/predictions_20261010_v19.md`。0实战结算、Brier为空，中文绑定未批准，生产门槛未通过。

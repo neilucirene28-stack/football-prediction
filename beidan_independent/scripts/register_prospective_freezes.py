@@ -30,8 +30,8 @@ def build(entries):
             chosen[key] = {'period':key[0], 'match_id':mid, 'bundle':path, 'manifest_sha256':digest,
                            'sealed_at':sealed, 'physical_identity':physical}
     # Do not let duplicate pool labels multiply the same provider fixture.
-    physical = [tuple(row['physical_identity'][:6]) for row in chosen.values()]
-    if len(physical) != len(set(physical)):
+    provider_events = [row['physical_identity'][0] for row in chosen.values()]
+    if len(provider_events) != len(set(provider_events)):
         raise ValueError('provider fixture appears under multiple pool identities')
     return {'policy':'earliest_qualified_sealed_forecast_per_unique_fixture', 'created_at':now,
             'bundles':bundles, 'unique_predictions_n':len(chosen), 'later_duplicate_predictions_excluded_n':duplicates,

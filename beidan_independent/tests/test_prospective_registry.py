@@ -11,6 +11,15 @@ spec.loader.exec_module(registry)
 
 
 class RegistryTests(unittest.TestCase):
+    def test_same_provider_event_cannot_be_counted_twice_under_different_stage_labels(self):
+        fixture = dict(period='p', provider_match_id='1', provider_home_id='2', provider_away_id='3',
+                       provider_league_id='4', season_year=2026, season_type=5, kickoff_at='2026-10-10T00:00:00Z')
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp);(folder/'freeze_manifest.json').write_text(json.dumps({'sealed_at':'2026-10-09T01:00:00Z'}))
+            pool={'first':fixture,'second':{**fixture,'period':'another','season_type':999}}
+            with patch.object(registry,'load_bundle',return_value=({},pool,{'first':{},'second':{}})):
+                with self.assertRaises(ValueError):registry.build([(str(folder),'digest')])
+
     def test_earliest_forecast_wins_even_if_input_is_reversed(self):
         fixture = dict(period='p', provider_match_id='1', provider_home_id='2', provider_away_id='3',
                        provider_league_id='4', season_year=2026, season_type=5, kickoff_at='2026-10-10T00:00:00Z')
