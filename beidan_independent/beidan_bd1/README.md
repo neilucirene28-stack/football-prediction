@@ -94,3 +94,7 @@ v6 快照对非身份市场候选强制保存 `market_provenance`（赔率来源
 ### v15：直接结算冻结概率
 
 `python -m beidan_bd1.frozen_settlement`提供赛前封存和赛后原概率结算，必须核对独立保留的清单SHA256；不会重拟合或在赛后重选参数。`python -m beidan_bd1.frozen_results`核验新的ESPN常规时间原件并绑定冻结比赛，显式半场缺失保留null。规范身份导入字段与walk-forward门控已经统一。104项测试通过，实际新冻结179池17场候选、162场阻断、0场结算；具体命令见 `docs/beidan-v15-frozen-settlement.md`。
+
+### v16：Muse资料核验与比分数据挖掘
+
+新增英冠95、英乙102场ESPN原始FT/HT核验，来源历史达到341场；新的179场前瞻冻结有40场来源ID研究候选、139场阻断、0场成对赛果。另取得10个联赛3336场公开CSV比分观察，标明为连接器提取文本，原HTTP字节未核验，身份与时区未绑定，暂不接入L1。110项测试通过；中文身份审批仍为false，Brier为空。详见 `docs/beidan-v16-data-mining.md`。

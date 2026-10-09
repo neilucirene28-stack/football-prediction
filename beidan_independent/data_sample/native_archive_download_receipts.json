@@ -1,0 +1,2248 @@
+{
+  "source_commit": "373be6b66f916fa5940dd5a5de50cf21e56bb901",
+  "repository": "neilucirene28-stack/football-prediction",
+  "files": [
+    {
+      "path": "data/exports/raw/eng2_true/MANIFEST_schedule.json",
+      "git_blob_sha": "6767dc8d3bde5397ca6a5d55484034f66d69e659",
+      "sha256": "deee35d0f0275767525cee5891589d06015f2d4ab63cadbbe1b19069461ad796",
+      "bytes": 9176,
+      "repository_download_started_at": "2026-10-09T14:25:15.027656+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.157188+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/MANIFEST_summaries.json",
+      "git_blob_sha": "518d7c4d101ee104a8c314bfed7e6b1949500168",
+      "sha256": "cdb745b482133220b6849f139a89f1ceb276b417a101adb43286319ff52df7e0",
+      "bytes": 42657,
+      "repository_download_started_at": "2026-10-09T14:25:15.031356+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.145735+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_314.json",
+      "git_blob_sha": "690d078677a7633543cfb5890260e054675bda88",
+      "sha256": "c103f47751ee92f038b86e11fbac3eaca9e0663d8ba051a7e7d2d9be0cf4ccad",
+      "bytes": 73303,
+      "repository_download_started_at": "2026-10-09T14:25:15.038387+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.182725+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_318.json",
+      "git_blob_sha": "8deb79b4692d17cfbadb6e9db1ed317b2aeedbc5",
+      "sha256": "9b6587938e3b4408b80283a5735fe958619d720daf39c6854b7a77f80296a17e",
+      "bytes": 73269,
+      "repository_download_started_at": "2026-10-09T14:25:15.041334+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.251725+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_333.json",
+      "git_blob_sha": "a8ef4cf64cef51ac1a33e9a498268e0011d359fa",
+      "sha256": "41ab1c12d2f8be3700c1eef9b7d35bef7023a65f1ec0d63b9bb71119bfdf7e9f",
+      "bytes": 73247,
+      "repository_download_started_at": "2026-10-09T14:25:15.044566+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.151580+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_334.json",
+      "git_blob_sha": "b49918cfbfd6f665ddcee56c394a9afc9b94a70d",
+      "sha256": "ed908c7a1b7535ff82906999b120476dfcfd6cce5f18cb3ce2ee9a4796b6ae10",
+      "bytes": 74141,
+      "repository_download_started_at": "2026-10-09T14:25:15.054206+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:20.199099+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_336.json",
+      "git_blob_sha": "ee2791c10a951a6a191c6709d2099d63b8afe5f9",
+      "sha256": "cf2e433c29e9582bd6cc60dcb8046275eb3b77d1ce36de461e89eca997f75d45",
+      "bytes": 73452,
+      "repository_download_started_at": "2026-10-09T14:25:20.146274+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.721646+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_347.json",
+      "git_blob_sha": "127ec5081e9d913fec821371adbf5ea04eb6ece8",
+      "sha256": "31ee96065a8ee788f9118a6a47d1b0736902945f7dfcc58963f0af9f1840215a",
+      "bytes": 73594,
+      "repository_download_started_at": "2026-10-09T14:25:20.151797+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.705694+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_352.json",
+      "git_blob_sha": "1e99f79cc3409e010f6e5ce8c0136e88c70f7d81",
+      "sha256": "8d95702989ceaf8131ee67e9e6f35d5e0f0c8a5581f005c5d4f3cc6b6bcede0b",
+      "bytes": 74769,
+      "repository_download_started_at": "2026-10-09T14:25:20.157254+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.794589+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_358.json",
+      "git_blob_sha": "531c3f910bf6f8d94869a3e3add8613d48701a51",
+      "sha256": "55018790cd1b1c14db3b44e01cce17e3a0a97c7ad000df2cdf7abde60ff78c17",
+      "bytes": 73539,
+      "repository_download_started_at": "2026-10-09T14:25:20.182855+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.770640+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_365.json",
+      "git_blob_sha": "f34e4e861a8baf5a515cf88d169e4326b9d7e146",
+      "sha256": "b5b76a885276081c2ea84f370e8f6ed842d4462307e8a84059bd83f068897fda",
+      "bytes": 73829,
+      "repository_download_started_at": "2026-10-09T14:25:20.199198+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.836168+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_369.json",
+      "git_blob_sha": "f0d6d3b9f1f6c64f12b6cd89d31c2d1dd7eb3121",
+      "sha256": "8ae5fbb81f306a1e860915d21425625b3b426b1a6a06bb331ffb3fc6be972063",
+      "bytes": 74043,
+      "repository_download_started_at": "2026-10-09T14:25:20.251877+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:24.765197+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_371.json",
+      "git_blob_sha": "342d468717965359c068fc7219058ef4415eaad2",
+      "sha256": "ee9340178f99d69509b7440445ddf34ec0744d27b2442219a00edd10b392388e",
+      "bytes": 74229,
+      "repository_download_started_at": "2026-10-09T14:25:24.705939+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.650433+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_372.json",
+      "git_blob_sha": "8d01d81145fa9e2056ad2f4e2488acd564e5d914",
+      "sha256": "b1b68c503505c9b7722872deca4d39ccd86f13d6856e127c7dd347e825f9b28c",
+      "bytes": 73749,
+      "repository_download_started_at": "2026-10-09T14:25:24.721847+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.641164+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_374.json",
+      "git_blob_sha": "539ae42d335bec255d8a2f51b03fd3b92761adc0",
+      "sha256": "abc5dfc071e57080ade935c7b55014b69aa9cc517bebc7b935a31146c16b8e36",
+      "bytes": 73348,
+      "repository_download_started_at": "2026-10-09T14:25:24.765337+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.732884+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_379.json",
+      "git_blob_sha": "11deb9ea8b8a1b5f59983749780c336a4079e4a0",
+      "sha256": "f1ef0f830d5a5d4ba43ec482447f4e352d3aa73422df82dcd02481c4095baea9",
+      "bytes": 73890,
+      "repository_download_started_at": "2026-10-09T14:25:24.770956+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.675462+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_380.json",
+      "git_blob_sha": "7675117f85bdaa54a605793db04b80eefd1f30b4",
+      "sha256": "2c125d5c1393e15c0c79567d21e951c6beec7b55a5fd3d0ae92168f599effaca",
+      "bytes": 66034,
+      "repository_download_started_at": "2026-10-09T14:25:24.795272+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.660844+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_381.json",
+      "git_blob_sha": "0963e1aa6196747e782c156b8fdbc8493fe5295a",
+      "sha256": "fb9d04914cf50565d9802b11ec98a794e460e785ea6f565e208155859f691e2e",
+      "bytes": 73756,
+      "repository_download_started_at": "2026-10-09T14:25:24.836900+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:29.702320+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_383.json",
+      "git_blob_sha": "1dcbcf629028952687a4b9d6f680c2ae2a9f25a8",
+      "sha256": "739a92a5109b8279211c58df0a7a3eeb2753130477ff5417c7ba7f3a3db33f39",
+      "bytes": 74414,
+      "repository_download_started_at": "2026-10-09T14:25:29.645604+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.422640+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_391.json",
+      "git_blob_sha": "63525afa8a40427cf249301c5fbe3dfc2f483066",
+      "sha256": "4d4cfe49102e03c90a6f9de6d3d6e1189b5000781d4017bc02332557be4f0afd",
+      "bytes": 73322,
+      "repository_download_started_at": "2026-10-09T14:25:29.650763+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.290211+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_392.json",
+      "git_blob_sha": "a7a29687ba07ffaa5436bef2f343b2fa1bd79515",
+      "sha256": "95da20312d7cd8c88ae6f1cc7f918665174024c09256d024aa342d9232e044a2",
+      "bytes": 74272,
+      "repository_download_started_at": "2026-10-09T14:25:29.661534+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.383434+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_394.json",
+      "git_blob_sha": "63f42119e7c62f170bc8aca1279d3fe2b60988d3",
+      "sha256": "412761efe90c04757749669ae9d9b351cd8b1ce33f86b3f8742c3b969caea8be",
+      "bytes": 73955,
+      "repository_download_started_at": "2026-10-09T14:25:29.676362+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.358110+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_395.json",
+      "git_blob_sha": "c3c4e67c01098a8e4e73a14f9a0bcde2403ba312",
+      "sha256": "cc8cbf739b4073a70aab614ae159cf66c725963332c720408532e4bb6990048e",
+      "bytes": 73400,
+      "repository_download_started_at": "2026-10-09T14:25:29.702418+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.415499+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_398.json",
+      "git_blob_sha": "968a6ae644aa49811ef4aa4d600c82581489e7e7",
+      "sha256": "3107af2ece44d1dfd5371b3858d34e9c43cac2f8a5d5357f468b21ba863a9013",
+      "bytes": 73928,
+      "repository_download_started_at": "2026-10-09T14:25:29.733003+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:34.376294+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/ft_event_ids.json",
+      "git_blob_sha": "25206288b762ad25e346d8787e2cf4baecaafc09",
+      "sha256": "b5d6c9f89ef54e1aac4e17e0fd323f2a5fe92907b32cd2bfe9a4fd62aa2957f9",
+      "bytes": 1427,
+      "repository_download_started_at": "2026-10-09T14:25:34.291012+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.382247+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880245.json",
+      "git_blob_sha": "a4d145151f028f027da539ff343294c9dff973b7",
+      "sha256": "3f6d1e124b09b0f4b0997eaa12a421953144ac4c1e2756fec65d5f64c9a466ab",
+      "bytes": 385598,
+      "repository_download_started_at": "2026-10-09T14:25:34.361161+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.585355+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880246.json",
+      "git_blob_sha": "ed7d6a9fc77606c22b7b5d2262319b25a93e2167",
+      "sha256": "eac319e903ee8679f1d0c546a90a9a883ff8289c95690529c269c129a370b228",
+      "bytes": 419278,
+      "repository_download_started_at": "2026-10-09T14:25:34.377867+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.463162+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880247.json",
+      "git_blob_sha": "cf6c6681d8c83aa3ee6cce5d109c27952ce60519",
+      "sha256": "53a8adec944e867974693c9d8f194042acd90e6817343d1849a9a455685388ba",
+      "bytes": 413011,
+      "repository_download_started_at": "2026-10-09T14:25:34.383520+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.605089+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880248.json",
+      "git_blob_sha": "ca0c0322bf2484a0184a76f5fe5c262f896595e1",
+      "sha256": "b7b6c274f942cc8adaeb39fc8f14bbdd47c5c2ef7a6e4236766497dbd0bd91cd",
+      "bytes": 418648,
+      "repository_download_started_at": "2026-10-09T14:25:34.415631+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.562513+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880249.json",
+      "git_blob_sha": "1c349b4bd3c21adddb4abf5996195d07af4ccd5c",
+      "sha256": "1fc20e04f2198e8d7d14068e67f57fd53a1e80cd1e5e282d9984a6f52fda40f2",
+      "bytes": 418291,
+      "repository_download_started_at": "2026-10-09T14:25:34.422775+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:38.470770+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880250.json",
+      "git_blob_sha": "d3fcae9a433d37efa9aca9e83b000f46b6c7c8cd",
+      "sha256": "470f4dca994705b905391d5d6670a3fb3a77380091873d69ef5dd2c3458f7b18",
+      "bytes": 403142,
+      "repository_download_started_at": "2026-10-09T14:25:38.383020+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.433108+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880251.json",
+      "git_blob_sha": "5a4ac3f84d28cfc8afd37f0fa6fbefb9d26792a0",
+      "sha256": "cc5a7a39a0def71e5607727e85e0e1a9db5742041e679b0404c7a30b1e9f601b",
+      "bytes": 432673,
+      "repository_download_started_at": "2026-10-09T14:25:38.463571+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.471383+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880252.json",
+      "git_blob_sha": "4ba18aaf909d8eb521e849e3369eaa8fc86c9ca4",
+      "sha256": "b39f8e59d2a4e01026e3aa0b5081663b44dc9fe42ef50259131684807ba44ebd",
+      "bytes": 394643,
+      "repository_download_started_at": "2026-10-09T14:25:38.470925+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.284402+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880253.json",
+      "git_blob_sha": "17e75310af73d1f75db800b68eeba79e770be605",
+      "sha256": "fb65975100e1cf71747270bc480e6c89d83f246d2a422585ceaff7b354febfc9",
+      "bytes": 423901,
+      "repository_download_started_at": "2026-10-09T14:25:38.562762+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.270402+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880254.json",
+      "git_blob_sha": "2a9acfeaac2080af0b7eaae1a5c96e2df5cf1df8",
+      "sha256": "543ca800f52426d0c5df3de514219ff84aea76348149061d1ad9c4c8ba4cdc9d",
+      "bytes": 401828,
+      "repository_download_started_at": "2026-10-09T14:25:38.585463+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.454419+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880255.json",
+      "git_blob_sha": "1290c131f02163a72c3bc5d6440cadad96a60ebb",
+      "sha256": "1672187f3e0a9676324171beae0086071b71eede35a343783edd8f105818299d",
+      "bytes": 402290,
+      "repository_download_started_at": "2026-10-09T14:25:38.605183+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:43.374397+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880256.json",
+      "git_blob_sha": "cef79b617999c5c014ea71f7f1c18e520b9ebb2d",
+      "sha256": "e2436d4131a764bf2c6abf1fca6696c598045025155d34d3a7f3419eaf85e9a2",
+      "bytes": 397587,
+      "repository_download_started_at": "2026-10-09T14:25:43.270919+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.176230+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880257.json",
+      "git_blob_sha": "cd8b39f368f37aa1eb65e5ea0fc61fd5df406272",
+      "sha256": "2b8fe77588a97859c8b4e769029fc7747db5643f95c55fd56001c28d0962cc5d",
+      "bytes": 390693,
+      "repository_download_started_at": "2026-10-09T14:25:43.284490+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.308299+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880258.json",
+      "git_blob_sha": "2d4fe521130b55f1551e12cb879f1905e5ea71be",
+      "sha256": "575cf7633df71e437c8709ee4ee42b3da21cb9ee6a5568c16ba120e6b2735cfe",
+      "bytes": 403010,
+      "repository_download_started_at": "2026-10-09T14:25:43.374516+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.294074+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880259.json",
+      "git_blob_sha": "a8109e22d97d08089d020b6703015b59d8e1bf9a",
+      "sha256": "0bbc8ed50f247e18c9e9f35254311f609dee3bef9b8fcf750c57f943f9d2fe7b",
+      "bytes": 401398,
+      "repository_download_started_at": "2026-10-09T14:25:43.433219+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.206164+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880260.json",
+      "git_blob_sha": "4b6a2e0cb5408740b387a2c944abbe6699fec771",
+      "sha256": "d71f9602f4f041e9faaf24bc601a2cf1248cdcb93e3f41fd5790336d22e020f8",
+      "bytes": 406056,
+      "repository_download_started_at": "2026-10-09T14:25:43.454633+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.285984+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880261.json",
+      "git_blob_sha": "efa2a309f2ee605c14761a8c740f9b40e4271d26",
+      "sha256": "60f8f389d5f3ec079493eb810292a67833a8c3df7a758f78088bb4e992d19b63",
+      "bytes": 402484,
+      "repository_download_started_at": "2026-10-09T14:25:43.471554+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:47.281193+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880262.json",
+      "git_blob_sha": "29b73f7a9cdee70899decb68f709394698cf8d03",
+      "sha256": "f691d73e7996ddd3e063b471a1ce57b41c2bff6372fad32148c4799a90c38e65",
+      "bytes": 411797,
+      "repository_download_started_at": "2026-10-09T14:25:47.176393+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:51.081881+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880263.json",
+      "git_blob_sha": "9ed9fe93b7577bea2062facc350eb8d8e7c1bfca",
+      "sha256": "d02020d6edc0a27fe65e6ce558073593f172c2805eff782ab2c86f3f16fd0bbf",
+      "bytes": 378969,
+      "repository_download_started_at": "2026-10-09T14:25:47.206341+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:51.043706+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880264.json",
+      "git_blob_sha": "8536a3613acd9e5e7f2702b45fa5ac347f6caf91",
+      "sha256": "7775bca1909a0210ae6433aa6124ca18f118c28318e4957303a711f3960e8a5b",
+      "bytes": 412319,
+      "repository_download_started_at": "2026-10-09T14:25:47.281316+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:50.977454+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880265.json",
+      "git_blob_sha": "9e29b58fcc6a67a7e4512d0818051f18c008a87f",
+      "sha256": "53cba104da61d174d5cdf81be70d68997f63805ea29e2c3346052fea86bda966",
+      "bytes": 419498,
+      "repository_download_started_at": "2026-10-09T14:25:47.286245+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:51.065652+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880266.json",
+      "git_blob_sha": "8a6c4bdccc26036217a616de930d4b6267a6c810",
+      "sha256": "5ccfebb09df2df556d123d32e694571427cad61515550591d14a94a147ce2585",
+      "bytes": 380044,
+      "repository_download_started_at": "2026-10-09T14:25:47.294521+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:50.901143+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880267.json",
+      "git_blob_sha": "8d3fb4e101dfe561c7c7ec2d0e8c107620e6df93",
+      "sha256": "ec5df9a7be2d55b797caf7d8451c9740e5efb2ee08b2960e6d78b6988165631a",
+      "bytes": 373897,
+      "repository_download_started_at": "2026-10-09T14:25:47.308387+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:51.034477+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880268.json",
+      "git_blob_sha": "93ad4d81be5941c1507262badbb9c09cab302a54",
+      "sha256": "95ceca85400a47d695b95ddc094b03dd41b9b21fcbf230df9b6f4f23604f2d2e",
+      "bytes": 427884,
+      "repository_download_started_at": "2026-10-09T14:25:50.901261+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.116908+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880269.json",
+      "git_blob_sha": "726acc41ae149207aa7184c4f60fe0bc18cc50b9",
+      "sha256": "c15dc4c7a3078e13f7e9c751c0dd58837619966dfc3790e7c850dd034c7cb692",
+      "bytes": 410459,
+      "repository_download_started_at": "2026-10-09T14:25:50.978115+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.088548+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880270.json",
+      "git_blob_sha": "8b7581c0029689fad13086bbbd158aa4954ff7bc",
+      "sha256": "8af97cbdce363688189778c333c02a5ce9d8bd3da25cc2fa3e840be58cb9a0c8",
+      "bytes": 410107,
+      "repository_download_started_at": "2026-10-09T14:25:51.034744+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.126903+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880271.json",
+      "git_blob_sha": "72f9b9967c5272b624133f07eea16f7f8992e52b",
+      "sha256": "a6b0056290e1c597e25eb737411977639563ae28b7825641025ba009e4b4652a",
+      "bytes": 394109,
+      "repository_download_started_at": "2026-10-09T14:25:51.043788+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.107899+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880272.json",
+      "git_blob_sha": "eeff6a91d21090209f65d1a75442829af54a3ba3",
+      "sha256": "1720a481d555000e10c969d3eb866a5b7cbf06c9b4118d9aa2281722a9b58eb6",
+      "bytes": 392914,
+      "repository_download_started_at": "2026-10-09T14:25:51.065740+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.115089+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880273.json",
+      "git_blob_sha": "108f02b832445a035f5b523c80bb629bd1bdf4be",
+      "sha256": "a1bd1d5809893c62a3dc86f7bf052bb4f1b9565db19f6f85fa0ea9e0b9435f4d",
+      "bytes": 408047,
+      "repository_download_started_at": "2026-10-09T14:25:51.081966+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:55.142210+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880274.json",
+      "git_blob_sha": "3562aa098be8b452482e1a50915f55a53cfabdbb",
+      "sha256": "f27cbb597ae58cabbe2cf552102bf31f5581f8786dc629ce9d98c7c2bc5f007a",
+      "bytes": 406132,
+      "repository_download_started_at": "2026-10-09T14:25:55.088886+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.169362+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880275.json",
+      "git_blob_sha": "e6d93c9b621f41fb5077c5f3ff0262b4ec3ea987",
+      "sha256": "8bcdc7679daf3ef5afc39add73f8e9135ebbefb189d753c3587a5b70b0d69ed9",
+      "bytes": 355209,
+      "repository_download_started_at": "2026-10-09T14:25:55.108339+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.139356+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880276.json",
+      "git_blob_sha": "a07e99c4b3b4510b4fa354744f68ab9bbae3bf58",
+      "sha256": "e70b54950a3512e22b0af88bcd1f833232de6f80a60e3a1b755cb89bdb84cc08",
+      "bytes": 401671,
+      "repository_download_started_at": "2026-10-09T14:25:55.115183+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.143116+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880278.json",
+      "git_blob_sha": "952d93bcd398ba071d2e02b78b0ae4d1216c513f",
+      "sha256": "c25b2852c3724cd173ee31a04ff2d0e839b09ac6f3c1d3b2984020809f57c8f8",
+      "bytes": 395322,
+      "repository_download_started_at": "2026-10-09T14:25:55.117222+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.162841+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880279.json",
+      "git_blob_sha": "be078b45cc7c059422ec53c0930b4127e13f4595",
+      "sha256": "5e0e28b5a86fb9a74e5a669c44c25d7c985318f1ed278f4b7090693fb3597839",
+      "bytes": 399693,
+      "repository_download_started_at": "2026-10-09T14:25:55.126968+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.043935+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880280.json",
+      "git_blob_sha": "39c19a48ddc23b24041e43c5c96f006bd8d97385",
+      "sha256": "c8dac81b5932b32b7daf81f7dc297a4123f43c5054ea71546a42b789f832f04e",
+      "bytes": 405194,
+      "repository_download_started_at": "2026-10-09T14:25:55.142292+00:00",
+      "repository_download_verified_at": "2026-10-09T14:25:59.166372+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880281.json",
+      "git_blob_sha": "b0dc3d00709807d9d8a881922f7963be4bde578e",
+      "sha256": "4004b41c6e0b4ceaf7a61022b8b54683425ae021218db8f2399463ed59018927",
+      "bytes": 401692,
+      "repository_download_started_at": "2026-10-09T14:25:59.045021+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:02.879411+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880282.json",
+      "git_blob_sha": "9c8167c6415ac7a176a7c23a19e84e7f75d755bc",
+      "sha256": "c136dd880b750bcd4791e177f10e915a8e15e623f8fa8e562a644067df0a300c",
+      "bytes": 408382,
+      "repository_download_started_at": "2026-10-09T14:25:59.139886+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:02.976928+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880283.json",
+      "git_blob_sha": "e64a06f2e4214708441c38fddb8e7f2e6541cfb0",
+      "sha256": "a24704ca66fcf0ac47fa68c4911bcdf49a6e423c2357f02b4bc2c4ced581e14f",
+      "bytes": 398593,
+      "repository_download_started_at": "2026-10-09T14:25:59.144049+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:03.108121+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880284.json",
+      "git_blob_sha": "a084ad3cd1f826f916a01f63714f03a2f07b8010",
+      "sha256": "b941257b3dc22116a816804e676adc5811e09337c88cca0c700b2dc5ac323e2a",
+      "bytes": 432479,
+      "repository_download_started_at": "2026-10-09T14:25:59.163270+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:03.128318+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880285.json",
+      "git_blob_sha": "f1daee6626492a22d2e5d811d4b0d2ebfc2d2120",
+      "sha256": "8561e857bcfbb155ba38e165877fff856da9ed5e0a7458c99be1f35307703476",
+      "bytes": 425739,
+      "repository_download_started_at": "2026-10-09T14:25:59.166449+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:02.909315+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880286.json",
+      "git_blob_sha": "a4ccbdf46fa9611f5e0d0674be480494a289833a",
+      "sha256": "1ba93bd5a078da6ad3ddc0743d9ed48b7761c4ed089f753174ad34c5264b1f9d",
+      "bytes": 409077,
+      "repository_download_started_at": "2026-10-09T14:25:59.169505+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:03.139303+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880287.json",
+      "git_blob_sha": "106b5f9b733454e31c7e17e4368b487c61002bb1",
+      "sha256": "595bd2d8948b76b6df8e1838199adc7314f34c351cdc5d0f997be981ae6410a5",
+      "bytes": 403374,
+      "repository_download_started_at": "2026-10-09T14:26:02.879535+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:07.087453+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880288.json",
+      "git_blob_sha": "f9f0443f68620f96322ca679baf82e221dfc1499",
+      "sha256": "dd58161f4df61e59582e494f750cb19a0a89c4b0a16b38d884db0282a6761408",
+      "bytes": 416812,
+      "repository_download_started_at": "2026-10-09T14:26:02.909432+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:07.050297+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880289.json",
+      "git_blob_sha": "5913f377ac4ed34344ed0abf94e23b2e9b20151a",
+      "sha256": "75411a62307126de03d0eb93212a82b58af21aa9980e2bcd6a0d2bdd96e0897b",
+      "bytes": 412884,
+      "repository_download_started_at": "2026-10-09T14:26:02.977037+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:07.038338+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880290.json",
+      "git_blob_sha": "b0c382ab888cd2696786d4b075711cc624b5b880",
+      "sha256": "121c16a52a12b8ca82d4fea07ddef9c7ef651820fc57342fe9b19354431987e0",
+      "bytes": 400004,
+      "repository_download_started_at": "2026-10-09T14:26:03.108551+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:06.945717+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880291.json",
+      "git_blob_sha": "8fc2c88085641ed76b72887e4d465ff3784229e8",
+      "sha256": "f28d1ad44b39760b7507a011aeb3a8d1c9ec05ec3e5aec1987aff12f00e68302",
+      "bytes": 397656,
+      "repository_download_started_at": "2026-10-09T14:26:03.128451+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:07.073113+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880292.json",
+      "git_blob_sha": "b49148f8e396e78497342a203af3b4cd7adaa07e",
+      "sha256": "a8da4fad4d40df0b0a2b177bbbe8c0377743a1a3576bc0a02783bddd52d0da6d",
+      "bytes": 423379,
+      "repository_download_started_at": "2026-10-09T14:26:03.139379+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:06.922148+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880293.json",
+      "git_blob_sha": "26fd0d124a7569e6261f9567fa4e515a277b748d",
+      "sha256": "fc525de3e13663d8e64999912ee820860e9e7a33a88a61defdedc67f6ff808ac",
+      "bytes": 384356,
+      "repository_download_started_at": "2026-10-09T14:26:06.922959+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.744147+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880294.json",
+      "git_blob_sha": "4c2c91a9e344439756e2b7c3e81023f1879b3a80",
+      "sha256": "6036f10246cd1cd5403baba15e915591b1711565a39cec690541cf3d3711ecfb",
+      "bytes": 402346,
+      "repository_download_started_at": "2026-10-09T14:26:06.946702+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.731665+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880295.json",
+      "git_blob_sha": "e299f6d1f80b760c41095d59cfe4640d801d04e3",
+      "sha256": "4695628e1e473dce4fe82efab5ddbfb53edbbe244d31e50600ce030e319a59c0",
+      "bytes": 394385,
+      "repository_download_started_at": "2026-10-09T14:26:07.038438+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.583427+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880296.json",
+      "git_blob_sha": "48e4c65f9033dd90c5079d1da47a1ea49b0b35dc",
+      "sha256": "b1e329c2e99ead833ac074fc224d3a38067b4332dda45f2278dd217b25988622",
+      "bytes": 396664,
+      "repository_download_started_at": "2026-10-09T14:26:07.050421+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.733694+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880297.json",
+      "git_blob_sha": "4de6eb6c3253900b762746c1be6b65e04450cda0",
+      "sha256": "8136eb4f682779ded0549c1bae5f10f683a63f7a18a44e1e3e2e05fddd16f99e",
+      "bytes": 368763,
+      "repository_download_started_at": "2026-10-09T14:26:07.074649+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.660679+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880298.json",
+      "git_blob_sha": "541b7e53a649f4904ba3ea512bdbcef732a24250",
+      "sha256": "17af5a994e1d009388c29eea362e8974203df748ca7b4ac09883902be2da39ec",
+      "bytes": 398362,
+      "repository_download_started_at": "2026-10-09T14:26:07.088699+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:10.645891+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880299.json",
+      "git_blob_sha": "ef754f0847bd18d9d3c492a27ecdf29a0a9459ee",
+      "sha256": "e009d901eb987809c7a857bec0ffa737b8a36a8a2239f5b650f759b3051617b2",
+      "bytes": 403228,
+      "repository_download_started_at": "2026-10-09T14:26:10.583865+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.219335+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880300.json",
+      "git_blob_sha": "cc2e0cc9e8f78d9fd9b951ed58456a17725f170b",
+      "sha256": "8c38dbf1a2af749d17fb46f0a315d71944a4abd198287c5967480d3db451f849",
+      "bytes": 410988,
+      "repository_download_started_at": "2026-10-09T14:26:10.646002+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.308301+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880301.json",
+      "git_blob_sha": "f2fbe4833b517d06643f468115acc57c873b3041",
+      "sha256": "fc04eb0529f6c91333468d33b483266f7e106c7d191c21fac9e45aadfcb97b3e",
+      "bytes": 406598,
+      "repository_download_started_at": "2026-10-09T14:26:10.660771+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.316955+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880302.json",
+      "git_blob_sha": "a5590a706bd2db3582dc7912854800e1c41f028e",
+      "sha256": "5dc406b46c28322f195af121da382b93fa331ec6d607ef61cb46a1bd6f79d1e9",
+      "bytes": 414610,
+      "repository_download_started_at": "2026-10-09T14:26:10.731899+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.279011+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880303.json",
+      "git_blob_sha": "2153928e8eb92ff27861c1a5664c79e370531a08",
+      "sha256": "f8d2b659373d1b3efc954b4dc717e204805a6e535cd807e4b211aaa323b02f75",
+      "bytes": 386626,
+      "repository_download_started_at": "2026-10-09T14:26:10.733788+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.462323+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880304.json",
+      "git_blob_sha": "4503b8cda85367d089d60c2fcd71b0cc74c80e7a",
+      "sha256": "cb2fad3fe3572d6b5b36a052a68fc1f828918f3deec69ebb0f7bda4f10279af1",
+      "bytes": 397848,
+      "repository_download_started_at": "2026-10-09T14:26:10.745487+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:14.356897+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880305.json",
+      "git_blob_sha": "6e170e462c8b3a030dea8d1f723ec93295b9afd1",
+      "sha256": "e172ec443b94ed730c1c48f26f1db128ebdb61ae9d670a5e54744f2bcbbbb18f",
+      "bytes": 412635,
+      "repository_download_started_at": "2026-10-09T14:26:14.219548+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.343427+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880306.json",
+      "git_blob_sha": "baa246f3f826bfba0068d3fda7406ef873ca3c98",
+      "sha256": "5473fec014a7bae5717ac29b6bedcdd7763852779d764aababb21312ffd206ef",
+      "bytes": 418404,
+      "repository_download_started_at": "2026-10-09T14:26:14.279211+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.263981+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880307.json",
+      "git_blob_sha": "513a3620ecdaecfc6505c43363d4115ec8463372",
+      "sha256": "65e9c9c201271db75233e4444d7bd2b68c230980ba8c5df9f4ac0b64d3078328",
+      "bytes": 390961,
+      "repository_download_started_at": "2026-10-09T14:26:14.308707+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.340508+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880308.json",
+      "git_blob_sha": "efe6417ca2bdd0fb28a2145c6c6257ba505ef577",
+      "sha256": "881911f82f69b7e58a5f961650616575e41b17bee26f8f630bce038ac69a089d",
+      "bytes": 414000,
+      "repository_download_started_at": "2026-10-09T14:26:14.317124+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.339325+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880309.json",
+      "git_blob_sha": "bb37711dcbfe46c7ab283aa910224ad53ff54843",
+      "sha256": "171f234f78b2d69f1559ef625341fb72d378218b3b206d03ccbcdbb57744e02b",
+      "bytes": 429446,
+      "repository_download_started_at": "2026-10-09T14:26:14.357004+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.366370+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880310.json",
+      "git_blob_sha": "a64007327eb3c887730501742b47771b361bb0d9",
+      "sha256": "f3ef5165a317b2acf709ae987aa49c15cb8e24257797d5ba581f6a659d7fd192",
+      "bytes": 400108,
+      "repository_download_started_at": "2026-10-09T14:26:14.462455+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:18.337036+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880311.json",
+      "git_blob_sha": "1054c64974ae790a7ab23774dd44b816f959e692",
+      "sha256": "a5dd82356defed771cd063d568c04282b6be4d9f590ce8949a090061d3473db5",
+      "bytes": 410925,
+      "repository_download_started_at": "2026-10-09T14:26:18.264130+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:22.117243+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880312.json",
+      "git_blob_sha": "d1547f2a87ed6f9b3dfa6fa2b4140639cac67ea8",
+      "sha256": "10f53f6b568e66a9b4aa96952f79fd378816da5648be956d4591ffe259212e24",
+      "bytes": 411441,
+      "repository_download_started_at": "2026-10-09T14:26:18.337155+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:21.921957+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880313.json",
+      "git_blob_sha": "3d17eb39659c72fac41dba9dd75cc77833b65c21",
+      "sha256": "119197800b04d79aba1b5de83aeed5cc8eb5f4e7dab8f3c9012877b268ad8cea",
+      "bytes": 417148,
+      "repository_download_started_at": "2026-10-09T14:26:18.340229+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:22.070151+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880314.json",
+      "git_blob_sha": "d80efec6830b4afc775b3776d0aab0c12ad20e8a",
+      "sha256": "9528a018532fe790798152aad3d23d2c8a20bff2fd1489da4a78394badc00580",
+      "bytes": 398731,
+      "repository_download_started_at": "2026-10-09T14:26:18.340958+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:22.057730+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880315.json",
+      "git_blob_sha": "e15651aec1a6d5d47d10d6d6f1c974dd023c2acc",
+      "sha256": "7432b75af2ed09972e0219fdaf01b2f0ac0a9d48a3d478ed1d6c52e940daa24f",
+      "bytes": 360817,
+      "repository_download_started_at": "2026-10-09T14:26:18.343485+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:22.103505+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880316.json",
+      "git_blob_sha": "78a60c7129be36cad60702178d6bff7fc4567172",
+      "sha256": "b119b524ecf3df949240f80de39c2045751f262bdae21efdf1cd1d3fa5ef10f1",
+      "bytes": 403325,
+      "repository_download_started_at": "2026-10-09T14:26:18.366465+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:22.115959+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880317.json",
+      "git_blob_sha": "1ee4ffc065cbcabbd0360cdd85859cbf0b6f3bcc",
+      "sha256": "c49f757bf8c632d7f9960c768e01ce7481169539a0636668bf86fabb96b53763",
+      "bytes": 398901,
+      "repository_download_started_at": "2026-10-09T14:26:21.922144+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.299859+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880318.json",
+      "git_blob_sha": "5fbc5f1521b4d7f2cdf01387d5d446bf3b718245",
+      "sha256": "2c35adf616c928b33ffe4c37cfa4d519b6fd3bec2b75fa39251552a69f4b1480",
+      "bytes": 404259,
+      "repository_download_started_at": "2026-10-09T14:26:22.058427+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.275168+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880319.json",
+      "git_blob_sha": "5745c35629ecbc27b4e7a56c125b8c3fd44f7810",
+      "sha256": "4c94758b9ccb456fe1111c4ec861c4ece4e3284de3e325b50d32898c52fa38b1",
+      "bytes": 400439,
+      "repository_download_started_at": "2026-10-09T14:26:22.070246+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.338226+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880320.json",
+      "git_blob_sha": "c62cd231212fd6c5170702269a51e2eb6d425e46",
+      "sha256": "7525cbcb16aa8ab41ec548e7877c11616dea3c32319b78cf1c2193a9cc1b65c5",
+      "bytes": 389688,
+      "repository_download_started_at": "2026-10-09T14:26:22.107211+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.301097+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880321.json",
+      "git_blob_sha": "ebb08f88363bf28ae98b98bb4a4c8dc66662f3df",
+      "sha256": "2070300d0fa499cbe5343c1dbb281ebf0aadab95b2194c22e33c309ebe7a5eea",
+      "bytes": 421243,
+      "repository_download_started_at": "2026-10-09T14:26:22.116131+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.341499+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880322.json",
+      "git_blob_sha": "1cc73a5654835dee7726fb9e48fbcd1c62e2ae82",
+      "sha256": "2ebb69b39313d0eeba4c040961e7b52c2d8f071fc56e6c06cef28c1f81f4fecc",
+      "bytes": 377399,
+      "repository_download_started_at": "2026-10-09T14:26:22.117366+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:28.265905+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880323.json",
+      "git_blob_sha": "58d3f75005162895401beebe844a0dd9e7303493",
+      "sha256": "56e13bdc2b4d0abe0e51e8be4a5279fe4591d88b27b4760602595fbb20213f71",
+      "bytes": 413568,
+      "repository_download_started_at": "2026-10-09T14:26:28.266129+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:33.937694+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880324.json",
+      "git_blob_sha": "6557e7970c6df89af6e3657eab7ab571578368f0",
+      "sha256": "2a9f883a0ff0a40b23a010510b33c43677f5cbc1703e8b6793c1a1f2af99aeb0",
+      "bytes": 407944,
+      "repository_download_started_at": "2026-10-09T14:26:28.275525+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:34.038773+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880325.json",
+      "git_blob_sha": "aad815d7d34dda557b861e425a82bcb8ea742ece",
+      "sha256": "8ca6c22c6f8775143d0e0d2796d6ba41bafe66c518b033690b22f085d2304763",
+      "bytes": 430840,
+      "repository_download_started_at": "2026-10-09T14:26:28.300050+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:34.077219+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880326.json",
+      "git_blob_sha": "7772a0c7b48ed7c0cfb8aaf762c8efb8e9e5af2c",
+      "sha256": "e876fd4bcd2a4482941a7153c5f59c150294192afeefd63e9fc1b77dd2bbe835",
+      "bytes": 411619,
+      "repository_download_started_at": "2026-10-09T14:26:28.301655+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:33.761872+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880327.json",
+      "git_blob_sha": "112a595db462cfa6bb1c98eec08ceb12885c7a87",
+      "sha256": "f9ce49b75f533fd50effb733cb8195359f828051fe906018a27c1f8665a93281",
+      "bytes": 408263,
+      "repository_download_started_at": "2026-10-09T14:26:28.339944+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:34.097075+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880328.json",
+      "git_blob_sha": "226c3bff4d4c65f7b51ef57dcb50182d412c8e0e",
+      "sha256": "badd96eb9a4009c8945eeb69627829e899ff6d1fc98f7c8a6b40f3fe00751d09",
+      "bytes": 398288,
+      "repository_download_started_at": "2026-10-09T14:26:28.341575+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:34.110556+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880329.json",
+      "git_blob_sha": "12b0c47b2125467e97805896cdac928c4ffeb6f0",
+      "sha256": "9a7d1bb0365a8183306cdb1a8fbbf1652a96e7cdb49a03109e24caf9448b3724",
+      "bytes": 417084,
+      "repository_download_started_at": "2026-10-09T14:26:33.762036+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:37.985484+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880330.json",
+      "git_blob_sha": "1b01111eff91e2601431013f84a2e1138e8ea087",
+      "sha256": "2edbbc29a0d1c0c8dd2acfc88cea53531c570cf434012d95c46e0ac978a0aef4",
+      "bytes": 401474,
+      "repository_download_started_at": "2026-10-09T14:26:33.941662+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:37.859971+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880331.json",
+      "git_blob_sha": "a72635847ef85042b9f8308d26568fd4a8f49d76",
+      "sha256": "0a6eaebc9454966c9ff341aaff8d6ed43cefb21665bee41330f6e421b8b9ad5a",
+      "bytes": 413366,
+      "repository_download_started_at": "2026-10-09T14:26:34.038920+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:38.001738+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880332.json",
+      "git_blob_sha": "3926109c8dd2645c2fa699c5a376a7e587707e65",
+      "sha256": "b876cf6758f4fbf0c6856f350940fa7d1c473880629c9e87be6d7a80bfc0cf01",
+      "bytes": 382875,
+      "repository_download_started_at": "2026-10-09T14:26:34.081685+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:37.734537+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880333.json",
+      "git_blob_sha": "7053238be4016974d1ee0c13d20bbc871a87f975",
+      "sha256": "bf5ed954f8299df57f6d2d5fa72f03f345cdc458059afaafda0381201e6cb383",
+      "bytes": 389015,
+      "repository_download_started_at": "2026-10-09T14:26:34.097173+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:38.055189+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880334.json",
+      "git_blob_sha": "fe42ef69c941d4b8b8f3cd974a1b8d075d6d3fc9",
+      "sha256": "4876bdeff0243ab4b4c812aca13d113d1d068bc2faccda52cad51d1d9ff5c836",
+      "bytes": 420065,
+      "repository_download_started_at": "2026-10-09T14:26:34.110770+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:37.973852+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880335.json",
+      "git_blob_sha": "f33d090c08aa86dd2773c3e561dc0007c04daa9b",
+      "sha256": "28e1dd1e41785abc97ba57f6506b30803297df268784c7bee3e98da3b8884b16",
+      "bytes": 412323,
+      "repository_download_started_at": "2026-10-09T14:26:37.735155+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.327704+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880336.json",
+      "git_blob_sha": "49025ad2c8cebf150edf9f071baaac7590cd2ebc",
+      "sha256": "56d501e0054031c9e0f78945b85f16b4fed9715afa982f333879040e73966600",
+      "bytes": 394340,
+      "repository_download_started_at": "2026-10-09T14:26:37.860102+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.356094+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880337.json",
+      "git_blob_sha": "f6345dafc19d5542e637f998f7b98b3cefd9640f",
+      "sha256": "653b04e9ea4fae6fa1b4d562d7e419c05a4a4b29b79b28f6e1457dc841b26ec1",
+      "bytes": 403238,
+      "repository_download_started_at": "2026-10-09T14:26:37.974790+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.211931+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880338.json",
+      "git_blob_sha": "4956cbb29cc3be7e7bb66849a51e390593cd5e60",
+      "sha256": "6fe4db2dccd4ae8124e9e9c4ab419bb2254c8203b64b10529710415d952a01c5",
+      "bytes": 405930,
+      "repository_download_started_at": "2026-10-09T14:26:37.985757+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.123787+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880339.json",
+      "git_blob_sha": "161227e2fd23d9b3cf09682e5c71abe56078fd9c",
+      "sha256": "85cb68207711c7ad562d2e5a3f9bb296ddd286f5d157851ec604ccbebc6b8b01",
+      "bytes": 409396,
+      "repository_download_started_at": "2026-10-09T14:26:38.002370+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.120260+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880340.json",
+      "git_blob_sha": "09f639deb92e0aacf5649873471e6fc38d9bbe1b",
+      "sha256": "3069499897a887502b511719991e42ff90d605893fd82affefe823a6017e20b9",
+      "bytes": 412594,
+      "repository_download_started_at": "2026-10-09T14:26:38.062849+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:42.362882+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/MANIFEST_schedule.json",
+      "git_blob_sha": "d590f804b05d7abca7c6a91c8d474ffdd6cedac8",
+      "sha256": "45302c1241142d4a9ce43832b4dd14e9c7f4f2a8d86bdc126fe583198065a744",
+      "bytes": 10022,
+      "repository_download_started_at": "2026-10-09T14:26:42.120532+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.256134+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/MANIFEST_summaries.json",
+      "git_blob_sha": "a28f777378675d7b2a2fee0512268a0e1e868e3e",
+      "sha256": "1860bb1632b6267d006102a1a28665704cf1752370580bf8bcebec0c4cedb725",
+      "bytes": 45800,
+      "repository_download_started_at": "2026-10-09T14:26:42.127067+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.203042+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_2594.json",
+      "git_blob_sha": "d299c621d87b1d73c50b204562e6c8cda98d1f65",
+      "sha256": "88f06b4d228f6f1a55d953135c3572e7a073db8f6e26e1bc4847a19696c94a6e",
+      "bytes": 62924,
+      "repository_download_started_at": "2026-10-09T14:26:42.212033+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.222329+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_2731.json",
+      "git_blob_sha": "9caa5db4f420bce3cc3cc27e94bff9ee5e4e6509",
+      "sha256": "c5d57fd6d44241f43b34d1d9ac853f27fcbd12eb59f1d25f76541efbd68bd939",
+      "bytes": 79482,
+      "repository_download_started_at": "2026-10-09T14:26:42.331285+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.228107+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_280.json",
+      "git_blob_sha": "de8e57e1d2e4d4851d3b92366672b6fb87d856c9",
+      "sha256": "f6460ecd72822ada440b6448dd6e97aae7b2e3e6db46f7fc5be8752b587c9711",
+      "bytes": 61248,
+      "repository_download_started_at": "2026-10-09T14:26:42.361715+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.277529+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_302.json",
+      "git_blob_sha": "b6f47344725cadadca07145c323f2143dfbf13a7",
+      "sha256": "0e0cfe0a412d923d278846e7505c3f38a92cba0ce4cbc1911f0fad98516320f5",
+      "bytes": 79710,
+      "repository_download_started_at": "2026-10-09T14:26:42.365880+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:46.182784+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_303.json",
+      "git_blob_sha": "153d8d2ed820a69aefa9568e18e2848d43edf6ee",
+      "sha256": "a4484d6a489edb4b75e29f927ee6d8902a9532f16864888c509692c8ae4bb5f6",
+      "bytes": 80275,
+      "repository_download_started_at": "2026-10-09T14:26:46.183670+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.226251+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_308.json",
+      "git_blob_sha": "50565a48f6ca274d64ec8220fe7987c047b1f886",
+      "sha256": "a8e424704433f295f8db6888db49af6370dcc9d4ac47b071687e2178808c9efc",
+      "bytes": 79656,
+      "repository_download_started_at": "2026-10-09T14:26:46.203198+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.410443+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_315.json",
+      "git_blob_sha": "6cfa472966b72bc92733a9e33ef28a2ed04323d5",
+      "sha256": "ab4b85458c6337cad7c0e944e5a749c505d24096e7c69391e81f9371c1574da8",
+      "bytes": 71394,
+      "repository_download_started_at": "2026-10-09T14:26:46.222419+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.306034+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_320.json",
+      "git_blob_sha": "0e3cd4f78c0375ab69883dd9a13be16a1b9e6a95",
+      "sha256": "837e2109a5be2d6e0ccff0baa8d99fc6d37a05bddbc7d030d4def25cceb129d4",
+      "bytes": 79624,
+      "repository_download_started_at": "2026-10-09T14:26:46.228195+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.383098+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_324.json",
+      "git_blob_sha": "dbd1ec817491d6bab1a388075ab9daa56112082a",
+      "sha256": "3e166173ad83da4a81ca18d4d37860c0acd0de6f0694864e2eded7ab50206a77",
+      "bytes": 79030,
+      "repository_download_started_at": "2026-10-09T14:26:46.256237+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.450890+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_332.json",
+      "git_blob_sha": "33268887a4962118f4ead382addcab86af17f379",
+      "sha256": "7a116bb40c8352d2aa83674a216687e498fe77254b906e7dfeecddfda2d4421e",
+      "bytes": 72060,
+      "repository_download_started_at": "2026-10-09T14:26:46.278073+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:51.347897+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_339.json",
+      "git_blob_sha": "952ad3e71f4d9874ad3ec771189894d853ee3689",
+      "sha256": "eeb0a43aeca10c2fce9c65208eb37fa53c041e8f8ffb87ae72ff87f9856a4057",
+      "bytes": 70958,
+      "repository_download_started_at": "2026-10-09T14:26:51.226618+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:55.010558+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_341.json",
+      "git_blob_sha": "674e7bf77a3fcedc2c59860b5195428c1210d0ff",
+      "sha256": "f92c6133c714dc080505bea380278f7772c78b3201579a6e4e347240a9dbc99f",
+      "bytes": 79639,
+      "repository_download_started_at": "2026-10-09T14:26:51.306156+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:54.952865+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_343.json",
+      "git_blob_sha": "bdc0d8da81a92d7684c1927c2d98be6b7f892988",
+      "sha256": "bb4f81af1185b7ed9acaced3c268ee90d68e78cb3c65f0cfcec81eae58aab7fd",
+      "bytes": 79706,
+      "repository_download_started_at": "2026-10-09T14:26:51.348320+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:54.981351+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_345.json",
+      "git_blob_sha": "61e3222948222c5c33951c0ba1a705d5c395fd26",
+      "sha256": "7fa6b1687724aa560e6b16000c12ea1819ec920f9be3530d883b84b97b6525fa",
+      "bytes": 80911,
+      "repository_download_started_at": "2026-10-09T14:26:51.383186+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:54.992772+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_348.json",
+      "git_blob_sha": "bac22b76f53a52fcd7ef593c4c6a4ef6da5c4fa3",
+      "sha256": "4592318c7bff3cd2a8614a82dd89a3fee6203fa973222c6ad868ce70c0e740ca",
+      "bytes": 61643,
+      "repository_download_started_at": "2026-10-09T14:26:51.413952+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:54.921604+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_353.json",
+      "git_blob_sha": "599b4a9dc3d513751d1ae57bf984350d112018a5",
+      "sha256": "a18b9453714f59b047236702db2667365ca6cdeb8ebc3cf2d2e9e7027e4ac2cf",
+      "bytes": 63315,
+      "repository_download_started_at": "2026-10-09T14:26:51.450990+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:55.036072+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_386.json",
+      "git_blob_sha": "5b513faafec8dfeec2d504fd4f580c1f493a9494",
+      "sha256": "6ff26e63885315ecb11a4879096f66ac797d02bc4fc163b8ff5437f3fcf20b54",
+      "bytes": 79149,
+      "repository_download_started_at": "2026-10-09T14:26:54.921725+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:59.137034+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_389.json",
+      "git_blob_sha": "016a95451bb89c18906869fd47d65462eedbce83",
+      "sha256": "79094b166ca695bfba650d995306febd98128fd82e0eeaaa9afce940ad574b4d",
+      "bytes": 79431,
+      "repository_download_started_at": "2026-10-09T14:26:54.954097+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:58.936463+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_3891.json",
+      "git_blob_sha": "60368f8d27da26d8274fd2a1e1a4d36adcb6b9a1",
+      "sha256": "ea4bdafec9d8476043810ed7a8b98d6fb41be0ca5cdcbaed3ab3bc1b55441d0d",
+      "bytes": 79501,
+      "repository_download_started_at": "2026-10-09T14:26:54.981445+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:59.100993+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_396.json",
+      "git_blob_sha": "a129a9675a5cdf673f372e97d4dd31c2e99dda8d",
+      "sha256": "f67a5ea140b3f217304781418d00d6c26cd78c3ecc038a6ed61f9006a3526539",
+      "bytes": 79697,
+      "repository_download_started_at": "2026-10-09T14:26:54.992867+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:59.087792+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_401.json",
+      "git_blob_sha": "769bc223eaa971592ea44b20b72fd9de1f3e33b8",
+      "sha256": "30f41d52251c82f54ec03218fb8e508f9e045821a81ec656bfa64da90dde8631",
+      "bytes": 70015,
+      "repository_download_started_at": "2026-10-09T14:26:55.010671+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:59.050014+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_402.json",
+      "git_blob_sha": "79c5e7528997551e1c2d0905d27776fef3731d45",
+      "sha256": "dd2067eb2a0187ac2d6311526fc2beb54cd7d68f50a6e6b1606e7874aa08435e",
+      "bytes": 81286,
+      "repository_download_started_at": "2026-10-09T14:26:55.036176+00:00",
+      "repository_download_verified_at": "2026-10-09T14:26:58.957382+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_4703.json",
+      "git_blob_sha": "f2d79c017c3ce415bc2f24b9879b72b6dc18ec55",
+      "sha256": "db494490d5424c91f255641f4e615351c004bf080e7653c866def4a1f7ce3c8c",
+      "bytes": 80680,
+      "repository_download_started_at": "2026-10-09T14:26:58.937535+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:04.018139+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_635.json",
+      "git_blob_sha": "9b43c5cad09870ba78f9b762c731d66b0b2f23d7",
+      "sha256": "f1dd9f4795a8185e1bdbe94b81f559e35d6f3ece4c5ef5435d04dcf10226df44",
+      "bytes": 80894,
+      "repository_download_started_at": "2026-10-09T14:26:58.957469+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:03.922386+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/ft_event_ids.json",
+      "git_blob_sha": "9c2d5e1bf71396b6c1bb2c10f9b135891bae6219",
+      "sha256": "dea4f5bdf960d8202883809372dc7aeb861fe068565ea539d39497fc178f2448",
+      "bytes": 1532,
+      "repository_download_started_at": "2026-10-09T14:26:59.050142+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:03.786327+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881338.json",
+      "git_blob_sha": "d70411cdf07f8ec53e33a5dbaf48e7df1f806973",
+      "sha256": "703f7c97d950ad9951f74a591686299d10c8c649b67b9c1e497bfe9d0b889fae",
+      "bytes": 315980,
+      "repository_download_started_at": "2026-10-09T14:26:59.088494+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:03.900906+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881339.json",
+      "git_blob_sha": "13d841d09ca4d9a3a5e3476f81a773bcec340e8b",
+      "sha256": "39883b94a335b85b20c75d7f29240021b69e1d9ed69188ba92e583b377b22159",
+      "bytes": 320413,
+      "repository_download_started_at": "2026-10-09T14:26:59.101724+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:03.944025+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881341.json",
+      "git_blob_sha": "8fef1c8f377ed5759c4bc9d450de0a33ad309646",
+      "sha256": "daeaa853188eeb6e390c63137a3fc1ccd31de760d3dd1cdc5e4ac62e04cbc936",
+      "bytes": 318809,
+      "repository_download_started_at": "2026-10-09T14:26:59.137144+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:03.973875+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881342.json",
+      "git_blob_sha": "61933891d200592ada77c518f56e1f904a84e53e",
+      "sha256": "186e355758f173b6ae9ceed99ee89d2d393167d9828cf64980351090aa9e4ed0",
+      "bytes": 320749,
+      "repository_download_started_at": "2026-10-09T14:27:03.788703+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:07.791955+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881343.json",
+      "git_blob_sha": "5569dff6f49e9ea33c85df4ed69c83725f87a9fc",
+      "sha256": "06ea26608922e5715f8ea91be9ea0be76c0bf9d748c5befd464f0f97308106c5",
+      "bytes": 270995,
+      "repository_download_started_at": "2026-10-09T14:27:03.901278+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:07.966181+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881344.json",
+      "git_blob_sha": "d89ca1823ffda8eaefbd38cea613afc7a2580531",
+      "sha256": "c092e43c41cb1f26953a14162080645b5735f4903483f15c75edee16cc9a0edf",
+      "bytes": 320150,
+      "repository_download_started_at": "2026-10-09T14:27:03.922500+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:08.028530+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881346.json",
+      "git_blob_sha": "accc965278c4e6df49e2489297065db039ddabdd",
+      "sha256": "6001dd4490e0d49f0a4f5f5fef7f16824289e57b2de35731c4c46362e2ec6b0d",
+      "bytes": 330505,
+      "repository_download_started_at": "2026-10-09T14:27:03.944345+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:07.953070+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881348.json",
+      "git_blob_sha": "918a3a1fec0ffe22f10719fc67cd8ca39d10d87b",
+      "sha256": "6d7b0db5716e3cb5096ea20dc86d11ac4c6227adb06d8676c8fbebc326160390",
+      "bytes": 315597,
+      "repository_download_started_at": "2026-10-09T14:27:03.974209+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:07.972678+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881349.json",
+      "git_blob_sha": "7a58c09612694a773e6e483847fc8fe8c4622477",
+      "sha256": "f3876ce6611d56396115f86eb43d4693b622ad8d4174db15a19c13075a98c261",
+      "bytes": 321005,
+      "repository_download_started_at": "2026-10-09T14:27:04.020216+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:07.768608+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881350.json",
+      "git_blob_sha": "aa1025fe9422ee5d0a2f4481b56b9a0d8dfdaa44",
+      "sha256": "ed85e4ed1f39c86c792b4d23a0138d92468f94a9ea271be9dbd3357e38cb32ee",
+      "bytes": 320349,
+      "repository_download_started_at": "2026-10-09T14:27:07.792130+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.264714+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881351.json",
+      "git_blob_sha": "4d8f20b8cd4590742c369233e1326e6727e74649",
+      "sha256": "6908e2d494fd4793bb23fa1ed7a66a490332991599e93e07ae28c85ef83fad62",
+      "bytes": 323668,
+      "repository_download_started_at": "2026-10-09T14:27:07.826543+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.398394+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881352.json",
+      "git_blob_sha": "a2d2caa7605bc15ac552e847fe1248eb127092ab",
+      "sha256": "9642e92a0c53a70b27d62525a1a037b97f9840aa518a8e7e6ca4fa5363340982",
+      "bytes": 309988,
+      "repository_download_started_at": "2026-10-09T14:27:07.953450+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.294350+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881353.json",
+      "git_blob_sha": "a28d2b92ee2155d026f23e9ea92b0938a1523fdc",
+      "sha256": "091389b50a192952967f3ca29a3519d577417218be26c5c8046005a2fe742a9e",
+      "bytes": 314984,
+      "repository_download_started_at": "2026-10-09T14:27:07.966279+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.261517+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881355.json",
+      "git_blob_sha": "adb8ef6648be91a1a60ef06ba779acab2510cf71",
+      "sha256": "411faea312db7642a9f2c756615250c0c0f7379db4e890be7349c86161b37237",
+      "bytes": 321614,
+      "repository_download_started_at": "2026-10-09T14:27:07.972754+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.439789+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881356.json",
+      "git_blob_sha": "d4bbd0e024e158668aa079ee31a0b0d12b842ca0",
+      "sha256": "174c2d38810f53f7a7666ee55ae22366afccbed6a3647e29461059fb790f4c5b",
+      "bytes": 325167,
+      "repository_download_started_at": "2026-10-09T14:27:08.035085+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:12.462246+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881357.json",
+      "git_blob_sha": "cad3802cca5f7bef122d906633d4c890c921e3f3",
+      "sha256": "98905cbffcb45d6509d31f4a6d33bc6289e43a26ccc7396f019d1ccec3f1c202",
+      "bytes": 319672,
+      "repository_download_started_at": "2026-10-09T14:27:12.262071+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:17.051343+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881359.json",
+      "git_blob_sha": "309761794024b657c56ed69006af681993dcd3f1",
+      "sha256": "6a49d0babf0c35d93907141c5dc3a4d318540b44c0e6ef5688902f5dcce6c34d",
+      "bytes": 323165,
+      "repository_download_started_at": "2026-10-09T14:27:12.264998+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:16.958255+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881360.json",
+      "git_blob_sha": "6ca61ceeacddd161a37a5bce9983ff6978897295",
+      "sha256": "92e066e6bb95e0a377db126a40b030e59183b2471d152fd2491510856a466745",
+      "bytes": 310431,
+      "repository_download_started_at": "2026-10-09T14:27:12.321022+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:17.309054+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881361.json",
+      "git_blob_sha": "91dfbfc1cc9e149e22ea195acfbd6b93ce0f74f4",
+      "sha256": "b90505dd9afa195ede5e9c77e5f4026b0a4fc01e9af57ceaad9e2feb91f1b251",
+      "bytes": 321539,
+      "repository_download_started_at": "2026-10-09T14:27:12.399515+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:17.104571+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881362.json",
+      "git_blob_sha": "454a96f92bb9850a076fc8750dfd8031c9d578fd",
+      "sha256": "f7c24bcf4514d545d66b0a28be3716ec002b2163197791d10bf1f9a2df128cf6",
+      "bytes": 321655,
+      "repository_download_started_at": "2026-10-09T14:27:12.440006+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:17.144075+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881363.json",
+      "git_blob_sha": "4ff9a5224a8b419030177a94c1f4e496ba44d337",
+      "sha256": "530ff14f2b259a68ab65b0ced32cd6da1358d9432b12a7b1dc3d0e07f7d462a7",
+      "bytes": 313538,
+      "repository_download_started_at": "2026-10-09T14:27:12.476386+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:17.174142+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881364.json",
+      "git_blob_sha": "41d2273c17669cd0366292e31f6c848bd54322f0",
+      "sha256": "6438b1fb3fbae37c5ec93e9225d5a64f7e4159af686f505f4f42cc6e1480dfcf",
+      "bytes": 287021,
+      "repository_download_started_at": "2026-10-09T14:27:16.963255+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.319550+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881365.json",
+      "git_blob_sha": "06c1c5a0dd6db8425a2388beae71e12265d0b86a",
+      "sha256": "cd5b49a289e20c86e8b1e7b580433d0434961b3517b7da5da1916203f6467380",
+      "bytes": 329516,
+      "repository_download_started_at": "2026-10-09T14:27:17.053698+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.617006+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881366.json",
+      "git_blob_sha": "6e370bd8afcd77c797ee58cb5927f5c006d3a64c",
+      "sha256": "4e969a476ea6dee86e8a764dcc7addc62aa9d2bdb1e834f8ed0f1aaf4032d68a",
+      "bytes": 316141,
+      "repository_download_started_at": "2026-10-09T14:27:17.107772+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.716966+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881367.json",
+      "git_blob_sha": "54ebae7d7241d89f812d6eccac1fa48950d9af26",
+      "sha256": "584501bf53e24839717b42e83ce9ba6fc09db342f1d8fcaba99977beeaeb4b73",
+      "bytes": 316635,
+      "repository_download_started_at": "2026-10-09T14:27:17.180129+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.569702+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881368.json",
+      "git_blob_sha": "3d6451f793581915d1a0ab9e0e9a12bef3af7396",
+      "sha256": "04952fda994ca4f1df33e40aeb10b7adb59fbc535da45c6e7165f19aa5abdbf5",
+      "bytes": 315350,
+      "repository_download_started_at": "2026-10-09T14:27:17.186589+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.564017+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881369.json",
+      "git_blob_sha": "827a4ab9379ae55d66e1214ff75073d715cd310a",
+      "sha256": "4dd5184b6df2b63fde46ac562258105adadb970718d90b85e37886518052add9",
+      "bytes": 315119,
+      "repository_download_started_at": "2026-10-09T14:27:17.342203+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:21.674674+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881370.json",
+      "git_blob_sha": "6f5baa9977ad883464fa1c12365cef43e4175246",
+      "sha256": "967b9de925f87ae5c621d65c3611a690ff62e5d0fb14456aa268aa11db83159e",
+      "bytes": 322268,
+      "repository_download_started_at": "2026-10-09T14:27:21.321081+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:25.788023+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881371.json",
+      "git_blob_sha": "190dbd9028da75239d4d98d86f74223c9ed8f4dc",
+      "sha256": "a3c80d9991f038e2ff4aa0a3ecdd2ce4f8b9c1dbeefe0ecce5c7dfe7e58f2bb3",
+      "bytes": 322139,
+      "repository_download_started_at": "2026-10-09T14:27:21.564140+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:25.818584+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881372.json",
+      "git_blob_sha": "d16dd0a15f6f7a7ae02ef4c252cd625a8825877a",
+      "sha256": "224b4809840d33f881203bf8009278a86309eb9016f1f701acede2cc725c7d84",
+      "bytes": 312877,
+      "repository_download_started_at": "2026-10-09T14:27:21.569787+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:25.959094+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881373.json",
+      "git_blob_sha": "37d219e701f5276461f2ef959cbae473887be927",
+      "sha256": "05226d01026b88243196e1fa8ed3d4bcfa63bbf493e121d031f0412be5eb6d39",
+      "bytes": 318609,
+      "repository_download_started_at": "2026-10-09T14:27:21.625751+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:26.031128+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881374.json",
+      "git_blob_sha": "c5a0d628aeb1aeab117d3a0427addf2477fe47e3",
+      "sha256": "b1560be37b8b6610dd0ca239967ed1d5b3c578c26395cad00cecafbb5c09a07f",
+      "bytes": 317005,
+      "repository_download_started_at": "2026-10-09T14:27:21.674832+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:25.901862+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881375.json",
+      "git_blob_sha": "cf1139df3cb4f11f8ae5a71c275e92f38d5d07e9",
+      "sha256": "d367257303fed853538883f0e871938fe00d14fd9cb4461873074cdd2940f23e",
+      "bytes": 316492,
+      "repository_download_started_at": "2026-10-09T14:27:21.717080+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:26.018369+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881376.json",
+      "git_blob_sha": "fe438428c6a770b90832a75899d40c004306ab81",
+      "sha256": "51346772f07f6ac66373fa8c8c0890551c46274931841c1d4e1d01ae25b3201a",
+      "bytes": 332180,
+      "repository_download_started_at": "2026-10-09T14:27:25.788134+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.346222+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881377.json",
+      "git_blob_sha": "12f8be2f7bc0fa794f2ab5e1a7e8a9a00e7d0842",
+      "sha256": "5af86c6fa0d8573a67f6c4404f35f960eb042c34ef7123ddef0228e0109306de",
+      "bytes": 279290,
+      "repository_download_started_at": "2026-10-09T14:27:25.819532+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.317044+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881378.json",
+      "git_blob_sha": "b0bffca29e383f7e6b2384d50a81341841c6890f",
+      "sha256": "6aa6ef40fb4eebe25d041656e81f8fc4981c0636a80ea81389da219c3086eaef",
+      "bytes": 329160,
+      "repository_download_started_at": "2026-10-09T14:27:25.906764+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.036188+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881379.json",
+      "git_blob_sha": "4dd891a5d8a19dea4670827b4e89fd759de554b5",
+      "sha256": "0e881992d4579ce7a210808c387b8ac947116bc207984318efd08302fefa60e8",
+      "bytes": 325059,
+      "repository_download_started_at": "2026-10-09T14:27:25.960889+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.320236+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881380.json",
+      "git_blob_sha": "74034510e156b9639609695125eaea104228be2c",
+      "sha256": "0f2ef90393abdbf8a407ed995ea91abe73ac2db3952898c2e3e21d5c312b7684",
+      "bytes": 326688,
+      "repository_download_started_at": "2026-10-09T14:27:26.018490+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.224763+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881381.json",
+      "git_blob_sha": "8cf9f0f856fefb9dbab145c104020fc914e3ae3c",
+      "sha256": "1816f87b89539361d76e6db80d93b4d5d185c1ac2f2106f0a47529ce6c21b658",
+      "bytes": 326593,
+      "repository_download_started_at": "2026-10-09T14:27:26.066784+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:30.214215+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881382.json",
+      "git_blob_sha": "33e6c81fe359cf8ae1e2a3e548d104977dead948",
+      "sha256": "e672207889a0655670bf8864d68f1fd5c987ca68eb65d4d7bbce2662373c53ae",
+      "bytes": 324331,
+      "repository_download_started_at": "2026-10-09T14:27:30.038322+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:34.545357+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881383.json",
+      "git_blob_sha": "ea2451d804eb8f25ddd141941025174cf45dcba9",
+      "sha256": "3f101ff629e16bc63d4025e82ad212a1e18b362a64af080d50f7ae9d058237da",
+      "bytes": 313156,
+      "repository_download_started_at": "2026-10-09T14:27:30.214324+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:34.911706+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881384.json",
+      "git_blob_sha": "0d7341e57af523f06ce71cd034e861548e8a5e48",
+      "sha256": "61c5f4de8282cded60beb6025eeaaa309a16729d72554fbfbadaaffdceca8647",
+      "bytes": 326502,
+      "repository_download_started_at": "2026-10-09T14:27:30.226421+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:35.012601+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881385.json",
+      "git_blob_sha": "3770daf49884246078583e8614ae5560397f0c8b",
+      "sha256": "3c4965b22917bb39b9e59074c0dbc40e53e137844de9228c51a8799a15db9e20",
+      "bytes": 333138,
+      "repository_download_started_at": "2026-10-09T14:27:30.317168+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:34.876839+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881386.json",
+      "git_blob_sha": "9ed8b70e5a1073bcf05c8df309ad2b339bfe3c9f",
+      "sha256": "033c24a5b1f726177067102facce71b27ec385baf40e32ea4bba42bc53d3534e",
+      "bytes": 320409,
+      "repository_download_started_at": "2026-10-09T14:27:30.320305+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:34.826008+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881387.json",
+      "git_blob_sha": "0d7e1ce3eacc766fb1417f8ece09a8a40436b001",
+      "sha256": "f2769b2f7af5534b4b49eedddd53199bd714abdfd4a23ac3a5743e7d43017e93",
+      "bytes": 326453,
+      "repository_download_started_at": "2026-10-09T14:27:30.346319+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:34.797212+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881388.json",
+      "git_blob_sha": "df3461b8fb2610af3b286296baedae2c330037c8",
+      "sha256": "bd0fc9ca3f24f5fa40ee7303057041635bfe1fb9c9aad42ed524baea51206d38",
+      "bytes": 321947,
+      "repository_download_started_at": "2026-10-09T14:27:34.545715+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.775142+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881389.json",
+      "git_blob_sha": "2941c63b0e7db16e79efcd33ea662f6ded22b4ab",
+      "sha256": "4e9a4bd1167f36023c023bb2b4cce5f068233471b31af1f4ba7185c5dcf1c40c",
+      "bytes": 324627,
+      "repository_download_started_at": "2026-10-09T14:27:34.797348+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.870589+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881390.json",
+      "git_blob_sha": "41fe066af599ac1662b6fed52b0683f5ce8610c2",
+      "sha256": "154e4c7972c8ebde34f078aebf91d6c03a6dedab5c11e6d2fc54720843f21c00",
+      "bytes": 313485,
+      "repository_download_started_at": "2026-10-09T14:27:34.826788+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.952931+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881391.json",
+      "git_blob_sha": "3582498bde02421160ab16e366d81f1c8a6a68b6",
+      "sha256": "0c37939ee2f626480bb36a53c3527f4c4364a3a5cfd1002da7753ae3a67520ca",
+      "bytes": 315381,
+      "repository_download_started_at": "2026-10-09T14:27:34.876955+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.945440+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881392.json",
+      "git_blob_sha": "98f50f1f3ea6bf5b3487dfe7d453d1c280c5cf9c",
+      "sha256": "b21c41c1f6865b3719eede60c10dee2591af5998c6e0863464b5cafcfa4ce02f",
+      "bytes": 325732,
+      "repository_download_started_at": "2026-10-09T14:27:34.912506+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.880663+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881393.json",
+      "git_blob_sha": "7c736d4732232f375fb53c52dd4ecc0e74ff5896",
+      "sha256": "f11143dc56d79a95e622d485cb16ff5cbcc1578e84ed5fef9729364c5efee3d0",
+      "bytes": 319441,
+      "repository_download_started_at": "2026-10-09T14:27:35.013474+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:38.914563+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881394.json",
+      "git_blob_sha": "3004afc3c56b95d0fc2a8ab47eccbd63ed784a61",
+      "sha256": "7fa490ad8a33f45f8294747906f8db4d59cd31b4b0186616fdab17f00549ac4b",
+      "bytes": 320972,
+      "repository_download_started_at": "2026-10-09T14:27:38.775287+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:43.220272+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881395.json",
+      "git_blob_sha": "3b08b88790bd12f40868540ff630e9747c76d979",
+      "sha256": "294c16208e89dfb59f643a4fa59c3c16566d736decb51f171d59bdedd75b7faf",
+      "bytes": 329495,
+      "repository_download_started_at": "2026-10-09T14:27:38.870930+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:43.181939+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881396.json",
+      "git_blob_sha": "10c4a508682dce008d6c1f479a94a2b1f3456517",
+      "sha256": "421d1cd2fc64e2e486f724b5685f9887c0567262d9e8d07aacaaffee0679a13d",
+      "bytes": 316749,
+      "repository_download_started_at": "2026-10-09T14:27:38.881858+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:43.201225+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881397.json",
+      "git_blob_sha": "a1c738003f70ca07df766959fc3e6de9baad6d1c",
+      "sha256": "640ed0a867df3c0cb211f7cd459178f5bfb241c65b9916e41294e46881ac6dd8",
+      "bytes": 331564,
+      "repository_download_started_at": "2026-10-09T14:27:38.917907+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:43.237365+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881398.json",
+      "git_blob_sha": "1838d4b2d30cc48e7334055e1740398369c6cd48",
+      "sha256": "152aa4e4366103507cb408cd43bb47cfaec2dc6e0feaf3bad92f0203159a36f2",
+      "bytes": 322356,
+      "repository_download_started_at": "2026-10-09T14:27:38.947850+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:42.961093+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881399.json",
+      "git_blob_sha": "0aedac1d40d27c52d097015de21714cf9fbda607",
+      "sha256": "1db31ce7b37b99b937ac7940ca7e6076e3fdc92e294824e9bbd8d9eda9e02622",
+      "bytes": 318586,
+      "repository_download_started_at": "2026-10-09T14:27:38.953044+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:43.044123+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881400.json",
+      "git_blob_sha": "ad00b99efe13ea16ae5f38da0dab184ca558f8eb",
+      "sha256": "564cfdb58bc3be78c22244edc3766cfe70eb8be00495e28932a4ddcb89602343",
+      "bytes": 318980,
+      "repository_download_started_at": "2026-10-09T14:27:42.961257+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:47.037705+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881401.json",
+      "git_blob_sha": "2f11affe09836fbd354d97d5931edd59f20e9163",
+      "sha256": "0bc0baf55ae464d8e630b08bbe698f238760ef17ad0406a6b7adaf66fac5271f",
+      "bytes": 319679,
+      "repository_download_started_at": "2026-10-09T14:27:43.049134+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:47.160992+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881402.json",
+      "git_blob_sha": "ef01b5190fc3984ea5f67e54f02e62c1fa2a7350",
+      "sha256": "74d245542f639be0a13870a4b6210362c3bb178a4689e71a8504e331b98c8237",
+      "bytes": 311498,
+      "repository_download_started_at": "2026-10-09T14:27:43.185450+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:47.067652+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881403.json",
+      "git_blob_sha": "dbd2c369dbdd2c18d8220fc769896b769c2f883d",
+      "sha256": "fba48e89a5c6046eb63dc884b645b044897edc3848b68e69b3b583ddf45d41f2",
+      "bytes": 316275,
+      "repository_download_started_at": "2026-10-09T14:27:43.201329+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:46.968286+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881404.json",
+      "git_blob_sha": "0f541a3cdf852f885192cbc03ecf71b5983dee25",
+      "sha256": "26ba458892107021fee77dabe453069909bc8b59de7deb07598dd3212d2db059",
+      "bytes": 319057,
+      "repository_download_started_at": "2026-10-09T14:27:43.221098+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:47.063134+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881405.json",
+      "git_blob_sha": "c52ece35246d03f6ad2c3807a659efc408c917f3",
+      "sha256": "90377377891ae9235852b1be77714d2856003872477af00b7cc104e21fd10194",
+      "bytes": 313540,
+      "repository_download_started_at": "2026-10-09T14:27:43.239119+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:47.104063+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881406.json",
+      "git_blob_sha": "47b59de09ca988271d8c16648c9e3516dd15719a",
+      "sha256": "9add251e839082d87f4652d20e1b447d15e6d17474cf697a741edc825ba88e5f",
+      "bytes": 323837,
+      "repository_download_started_at": "2026-10-09T14:27:46.968577+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.221081+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881407.json",
+      "git_blob_sha": "7c4f10a593695f9c4ae72ed3f9bb4266a92e5f81",
+      "sha256": "d85036c82deaba1f9d7289fc1ac3c7a24f66765b1ab90e64c6cfaf7e40005830",
+      "bytes": 319050,
+      "repository_download_started_at": "2026-10-09T14:27:47.037854+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.356983+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881408.json",
+      "git_blob_sha": "9c137555d25c20af0e3b9a5aea5d09c5db16a14e",
+      "sha256": "3b8f6ba709e8a5731763143913fb7103b46f9bfffac6951afd6b678f885815f2",
+      "bytes": 327216,
+      "repository_download_started_at": "2026-10-09T14:27:47.063234+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.309685+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881409.json",
+      "git_blob_sha": "f58c7bbff101bdd9bc720ef29773e26103bcd788",
+      "sha256": "223c5c45841da3e49d310eeecec192f8d5ed63a847bc0683e6a9392401381fee",
+      "bytes": 283810,
+      "repository_download_started_at": "2026-10-09T14:27:47.068373+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.296046+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881410.json",
+      "git_blob_sha": "32347d084928b708e1ef5264b0d3fe3a1ef9edc2",
+      "sha256": "5c077da0329d685aceb011e81f04a48fa14e8444f1068564e7abcc32f3b501a4",
+      "bytes": 325269,
+      "repository_download_started_at": "2026-10-09T14:27:47.104181+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.260043+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881411.json",
+      "git_blob_sha": "617b363730f692b67f6c76c07498513bc136672e",
+      "sha256": "66efefa20144a0f15d96b45d072d3028ecb5f3c4c26623baa9610276becf3156",
+      "bytes": 307885,
+      "repository_download_started_at": "2026-10-09T14:27:47.161120+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:55.412354+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881412.json",
+      "git_blob_sha": "68a70a5835b843d3c7c0b94370148a7b66f61ddd",
+      "sha256": "9937bc0b600c8874674f4bd1a314e394cf4c132f3bc8d83bdb014aa48b5c30c5",
+      "bytes": 325102,
+      "repository_download_started_at": "2026-10-09T14:27:55.221223+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:59.917805+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881413.json",
+      "git_blob_sha": "04e61944c813dd76968dd09b65fd9a1d11d34914",
+      "sha256": "5d1a8a5b37391c513a95bc753c3259a9e34318edf024b77653d1c62da52339ff",
+      "bytes": 310148,
+      "repository_download_started_at": "2026-10-09T14:27:55.260744+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:00.031951+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881414.json",
+      "git_blob_sha": "d49eceb86492dd994be6513779d9a26cb1b67fe9",
+      "sha256": "8e8a4e3afbcd660e4f7c791ad553fafb0131e241a5f1bc022f2dc6e89ae180be",
+      "bytes": 318954,
+      "repository_download_started_at": "2026-10-09T14:27:55.296637+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:00.001294+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881415.json",
+      "git_blob_sha": "9487cd62aabdab2f01b9dcb886d0fa799aed73d5",
+      "sha256": "f3cfd5037ededabc6d7a33b4638ed5ddd285a251bd4075af0a6f9b5736df81f1",
+      "bytes": 323945,
+      "repository_download_started_at": "2026-10-09T14:27:55.309773+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:59.978772+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881416.json",
+      "git_blob_sha": "a687ce1e7641541b870713bd144641073c323a81",
+      "sha256": "49e222ff3ffabfe112bfcb3be525a0741a9c0cd249a2583404c34fe0214dfa6b",
+      "bytes": 316495,
+      "repository_download_started_at": "2026-10-09T14:27:55.357090+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:59.973935+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881417.json",
+      "git_blob_sha": "9d48ca77f7cd1e3dfd71c76236f58f1c48b8bb54",
+      "sha256": "5e23febac39ebf7096c37ce4d1416ace4acbc36020974ea3e0d5295fd3e91555",
+      "bytes": 317816,
+      "repository_download_started_at": "2026-10-09T14:27:55.424798+00:00",
+      "repository_download_verified_at": "2026-10-09T14:27:59.968421+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881418.json",
+      "git_blob_sha": "eec7ca2c2871b24c8a795d3d452ad26f00d1c42b",
+      "sha256": "24e54f5f60932a6f004c3e0eff9aeacd3665b02109db31a18f8659ed604d971d",
+      "bytes": 318452,
+      "repository_download_started_at": "2026-10-09T14:27:59.919785+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:04.128236+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881419.json",
+      "git_blob_sha": "fc08434360c648cc3ac04d01e19e6a6f35b4668f",
+      "sha256": "33ad45984c656c0e6b4c8fce78e2a646a5302a8db70e4ec1f5502d60d29f3368",
+      "bytes": 313431,
+      "repository_download_started_at": "2026-10-09T14:27:59.969094+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:03.970622+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881420.json",
+      "git_blob_sha": "3f4d95f5cbf7db57b14c4965f0c9e0fb85ff3be6",
+      "sha256": "c80145b4cca9702c50857966e4e86c71e8b9b8598f48b938a32a61b84bf421e6",
+      "bytes": 315319,
+      "repository_download_started_at": "2026-10-09T14:27:59.974009+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:04.119598+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881421.json",
+      "git_blob_sha": "a46a376aa7ebd3805d5bbf0d380beefe19900d55",
+      "sha256": "df489088fd5278556721434671f3892cf70ae6e9f0630766e3db22860101dcb9",
+      "bytes": 306994,
+      "repository_download_started_at": "2026-10-09T14:27:59.979969+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:04.088712+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881422.json",
+      "git_blob_sha": "584f9d2381ccb641b536fb102770e19f97d8edc6",
+      "sha256": "f761c4ee257c8e134dac4922fb1cb3241bb06db1bfe7254ad0f5ab4fd67a2719",
+      "bytes": 314823,
+      "repository_download_started_at": "2026-10-09T14:28:00.001389+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:04.030790+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881423.json",
+      "git_blob_sha": "366014ed317f5d2f015915bbb1268fbf0d4d0e27",
+      "sha256": "3c2779aa129852226d7aac6dcbe92f9d39aa480f528930517002fb89608d2f02",
+      "bytes": 316964,
+      "repository_download_started_at": "2026-10-09T14:28:00.032923+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:04.113429+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881424.json",
+      "git_blob_sha": "b642b2ac8040431b5d0a8be0dd9ec31ecc1630e1",
+      "sha256": "0ee0f960f6530cacac37071e6a93ea669c7eaa3682bad2d66e988fd03f040cdc",
+      "bytes": 322653,
+      "repository_download_started_at": "2026-10-09T14:28:03.970754+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:08.878243+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881425.json",
+      "git_blob_sha": "6c8580eaa28f87bd967cb83ca8a78dbd83d22eb6",
+      "sha256": "50a772b6fd75675a681166b94cf2d9331640e6459edde4bb63c47bd89e910fd3",
+      "bytes": 279305,
+      "repository_download_started_at": "2026-10-09T14:28:04.030923+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:09.017977+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881426.json",
+      "git_blob_sha": "68d9ee2ba7995243d1a2f9c0b695c28d0216fb65",
+      "sha256": "fdd87abc956fc7248375eb30f649ca6f2e2e094b8788b6fcca32c3c9c92a1d8d",
+      "bytes": 321919,
+      "repository_download_started_at": "2026-10-09T14:28:04.088959+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:08.933323+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881427.json",
+      "git_blob_sha": "9db3ff2e719cd028c3ad1929d06cb33f30d744bb",
+      "sha256": "40146459d2e0ae1a2fea91b2dc9ab905e6e3124b121efa157cceb63fa95fd7fa",
+      "bytes": 318491,
+      "repository_download_started_at": "2026-10-09T14:28:04.114154+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:09.011289+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881428.json",
+      "git_blob_sha": "b6c122ad979748eef6e6800f02a79959e1ba252a",
+      "sha256": "5ff4371987cf992c0d34a49a54ec174bdf2ca06b11adf986e8b275d0c1f9e7e2",
+      "bytes": 306835,
+      "repository_download_started_at": "2026-10-09T14:28:04.120167+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:08.886142+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881429.json",
+      "git_blob_sha": "dec017fc9830da2890b5e93a217af9175e38f85c",
+      "sha256": "a38576365ccc4ae5c9a7ba640059a33a3388bce759ff0cf67f1dea300e1a53a2",
+      "bytes": 325081,
+      "repository_download_started_at": "2026-10-09T14:28:04.128310+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:08.945384+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881430.json",
+      "git_blob_sha": "ddaafa2f291cc45a1865c775ec07a101a727460f",
+      "sha256": "50efddac322e5120d4568a701ac7af23a03a15eacd9a91a0239e469a975a4f73",
+      "bytes": 307265,
+      "repository_download_started_at": "2026-10-09T14:28:08.878397+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.286464+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881431.json",
+      "git_blob_sha": "e4656f5d42ddea2ccdb9c5c8f2a6661a80998ab3",
+      "sha256": "5991850aa9d6ce0fc6e83965ab6cf034904c98933d7c52a4d3cfe0cf792fbd25",
+      "bytes": 325943,
+      "repository_download_started_at": "2026-10-09T14:28:08.886229+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.339416+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881432.json",
+      "git_blob_sha": "2689c8bb3e62c619d05ff96209d85611af93267f",
+      "sha256": "dca721c0a48b6e8e81d4ddf11fe5d9394a1ab8c66df79221227b78b48e0ab822",
+      "bytes": 327084,
+      "repository_download_started_at": "2026-10-09T14:28:08.933570+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.290754+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881433.json",
+      "git_blob_sha": "bc38b492a2b61026014ab60e253046c110ff2ac0",
+      "sha256": "a2b3d568de40f8b9dcdaa9e5419a1970dec93daa8ae0936ece7b9a09cec15369",
+      "bytes": 317742,
+      "repository_download_started_at": "2026-10-09T14:28:08.945470+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.244300+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881434.json",
+      "git_blob_sha": "3b3ef82ce80b602611f27964ecb5a3d41dc7bfa3",
+      "sha256": "eb2e68d1db0508a068a1234db3c059e78e43eab24ec353ed72fd2fe6b96f0da2",
+      "bytes": 315995,
+      "repository_download_started_at": "2026-10-09T14:28:09.011619+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.367714+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881435.json",
+      "git_blob_sha": "7714683a4c873733dd647947ed7e4ed3b20dce53",
+      "sha256": "0d23f0e6ce78b1f9c874669de00d99564edc9c56a2e00dfa14bb20f9de099d4e",
+      "bytes": 309653,
+      "repository_download_started_at": "2026-10-09T14:28:09.020094+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:14.347468+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881436.json",
+      "git_blob_sha": "0df4666085033709ce210d12220ca13f2b13e098",
+      "sha256": "296e2e85d6786cf42b952f283313f2170132c5a95652e2f4d6445d7be079e9e6",
+      "bytes": 312759,
+      "repository_download_started_at": "2026-10-09T14:28:14.244565+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:21.069122+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881437.json",
+      "git_blob_sha": "898ecb6ee2a561217c41db1acd9739ad6efd56e8",
+      "sha256": "6478684c8241d6c5ed72a330370f7f113cf26ad3a3b27ff08a15a4024eb39e5d",
+      "bytes": 322343,
+      "repository_download_started_at": "2026-10-09T14:28:14.286667+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:20.887053+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881438.json",
+      "git_blob_sha": "cdbcd5012bd1519da29ac31961f688109fe732cf",
+      "sha256": "4fbc82251564041f47b9420ba61caf8c3e8497856106de26607037d55c387f1b",
+      "bytes": 320044,
+      "repository_download_started_at": "2026-10-09T14:28:14.290828+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:20.979750+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881439.json",
+      "git_blob_sha": "f2f5eefa0eb1a952a9bdc5a376f43d1adbf912c9",
+      "sha256": "df54b4de857c5aedc284c85275d965108a2d7a4d8d21ead24570836ec18532bb",
+      "bytes": 313198,
+      "repository_download_started_at": "2026-10-09T14:28:14.339521+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:20.973796+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881440.json",
+      "git_blob_sha": "ac02855cbe1231cad6e792127f33b83b068ccbee",
+      "sha256": "d0005cc77313d65d9e0d9083cc6ef191494c6f350929915069db627fb57d1846",
+      "bytes": 319209,
+      "repository_download_started_at": "2026-10-09T14:28:14.347699+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:21.087631+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881441.json",
+      "git_blob_sha": "e62d5b7311ddc044786c03b76c595e0519c26baa",
+      "sha256": "00ecd19db0ca914e5bc29fe27f62a6dc476f87daf46d7ffcf470830293d1b5bd",
+      "bytes": 318592,
+      "repository_download_started_at": "2026-10-09T14:28:14.368285+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:21.027586+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881442.json",
+      "git_blob_sha": "395e6679c1999fd840ca58922f431a5bafcffc5c",
+      "sha256": "068f1fc05c0a48fa939d3bfc52479d2fa4cde86ca0bf33ee0eab9c500c05df38",
+      "bytes": 315047,
+      "repository_download_started_at": "2026-10-09T14:28:20.887172+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:24.681392+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881443.json",
+      "git_blob_sha": "6ad5ec8d2be972527912bb8f2ec618da7af870b9",
+      "sha256": "3ffff3b68448115bc7eb5e6b4e28e94ee716d94d549778b7cbf6eaa5da89e88e",
+      "bytes": 313052,
+      "repository_download_started_at": "2026-10-09T14:28:20.974240+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:24.542920+00:00",
+      "cached": false
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881444.json",
+      "git_blob_sha": "7254c287de44a010097165737682e6adba263fb3",
+      "sha256": "3ec432f2da1bef2ba58dad32a76850f4a67648f6ea62d598910ec56842262a84",
+      "bytes": 317958,
+      "repository_download_started_at": "2026-10-09T14:28:20.979859+00:00",
+      "repository_download_verified_at": "2026-10-09T14:28:24.684556+00:00",
+      "cached": false
+    }
+  ],
+  "errors": []
+}
