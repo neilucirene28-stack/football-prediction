@@ -1777,7 +1777,24 @@
     "btts": 0.5688,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": 1,
+     "p_home": 0.5586,
+     "p_draw": 0.2034,
+     "p_away": 0.238,
+     "p_home_raw": 0.5586,
+     "p_draw_raw": 0.2219,
+     "p_away_raw": 0.2195,
+     "letdraw_guard": {
+      "top": "让胜",
+      "top_prob": 0.5586,
+      "gap": 0.3206,
+      "flags": [
+       "防让平"
+      ],
+      "downgrade": false
+     }
+    },
     "top_scores": [
      {
       "score": "1-1",
@@ -1913,7 +1930,8 @@
    ],
    "no": "周五005",
    "home": "布兰",
-   "away": "维京"
+   "away": "维京",
+   "handicap_line": 1
   },
   {
    "status": "ok",
@@ -1993,7 +2011,22 @@
     "btts": 0.787,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": -2,
+     "p_home": 0.1882,
+     "p_draw": 0.1921,
+     "p_away": 0.6197,
+     "p_home_raw": 0.1967,
+     "p_draw_raw": 0.1742,
+     "p_away_raw": 0.6291,
+     "letdraw_guard": {
+      "top": "让负",
+      "top_prob": 0.6197,
+      "gap": 0.4276,
+      "flags": [],
+      "downgrade": false
+     }
+    },
     "top_scores": [
      {
       "score": "2-1",
@@ -2126,7 +2159,8 @@
    ],
    "no": "周五006",
    "home": "埃因霍温",
-   "away": "海伦芬"
+   "away": "海伦芬",
+   "handicap_line": -2
   },
   {
    "status": "ok",
@@ -2200,7 +2234,25 @@
     "btts": 0.6228,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": -1,
+     "p_home": 0.4426,
+     "p_draw": 0.2515,
+     "p_away": 0.3059,
+     "p_home_raw": 0.4501,
+     "p_draw_raw": 0.244,
+     "p_away_raw": 0.3059,
+     "letdraw_guard": {
+      "top": "让胜",
+      "top_prob": 0.4426,
+      "gap": 0.1367,
+      "flags": [
+       "防让平",
+       "概率接近建议降档"
+      ],
+      "downgrade": true
+     }
+    },
     "top_scores": [
      {
       "score": "2-1",
@@ -2331,7 +2383,8 @@
    ],
    "no": "周五007",
    "home": "赫拉克勒",
-   "away": "瓦尔韦克"
+   "away": "瓦尔韦克",
+   "handicap_line": -1
   },
   {
    "status": "ok",
@@ -2411,7 +2464,25 @@
     "btts": 0.5627,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": -1,
+     "p_home": 0.3648,
+     "p_draw": 0.2065,
+     "p_away": 0.4287,
+     "p_home_raw": 0.4083,
+     "p_draw_raw": 0.163,
+     "p_away_raw": 0.4287,
+     "letdraw_guard": {
+      "top": "让负",
+      "top_prob": 0.4287,
+      "gap": 0.0639,
+      "flags": [
+       "防让平",
+       "概率接近建议降档"
+      ],
+      "downgrade": true
+     }
+    },
     "top_scores": [
      {
       "score": "1-1",
@@ -2548,7 +2619,8 @@
    "no": "周五008",
    "data_note": "德甲4场+上赛季末6场",
    "home": "多特蒙德",
-   "away": "不来梅"
+   "away": "不来梅",
+   "handicap_line": -1
   },
   {
    "status": "ok",
@@ -2628,7 +2700,25 @@
     "btts": 0.4727,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": -1,
+     "p_home": 0.3342,
+     "p_draw": 0.2646,
+     "p_away": 0.4012,
+     "p_home_raw": 0.3196,
+     "p_draw_raw": 0.2793,
+     "p_away_raw": 0.4012,
+     "letdraw_guard": {
+      "top": "让负",
+      "top_prob": 0.4012,
+      "gap": 0.0669,
+      "flags": [
+       "防让平",
+       "概率接近建议降档"
+      ],
+      "downgrade": true
+     }
+    },
     "top_scores": [
      {
       "score": "1-0",
@@ -2762,7 +2852,8 @@
    "no": "周五009",
    "data_note": "法甲5场+上赛季末6场",
    "home": "朗斯",
-   "away": "里昂"
+   "away": "里昂",
+   "handicap_line": -1
   },
   {
    "status": "ok",
@@ -2842,7 +2933,24 @@
     "btts": 0.6135,
     "over_under": null,
     "asian": null,
-    "handicap_1x2": null,
+    "handicap_1x2": {
+     "line": -1,
+     "p_home": 0.265,
+     "p_draw": 0.208,
+     "p_away": 0.527,
+     "p_home_raw": 0.307,
+     "p_draw_raw": 0.166,
+     "p_away_raw": 0.527,
+     "letdraw_guard": {
+      "top": "让负",
+      "top_prob": 0.527,
+      "gap": 0.262,
+      "flags": [
+       "防让平"
+      ],
+      "downgrade": false
+     }
+    },
     "top_scores": [
      {
       "score": "1-1",
@@ -2986,7 +3094,8 @@
    "no": "周五010",
    "data_note": "英联杯，联赛近况",
    "home": "西汉姆联",
-   "away": "女王公园巡游者"
+   "away": "女王公园巡游者",
+   "handicap_line": -1
   },
   {
    "no": "周五011",
