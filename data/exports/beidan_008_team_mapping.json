@@ -1,0 +1,18 @@
+{
+  "柏太阳神": {
+    "cn": "柏太阳神",
+    "okooo_name": "柏太阳神",
+    "team_id_map_hit": false,
+    "espn_id": "7476",
+    "espn_id_verified": false,
+    "note": "ESPN ID来自先前审计，未人工核验"
+  },
+  "神户胜利": {
+    "cn": "神户胜利船",
+    "okooo_name": "神户胜利",
+    "team_id_map_hit": false,
+    "espn_id": "7477",
+    "espn_id_verified": false,
+    "note": "okooo源站名为神户胜利（省略船）；ESPN ID未人工核验"
+  }
+}
