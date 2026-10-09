@@ -279,8 +279,10 @@ def hf_label(key):
 def predict_one(m):
     seq, home, away = m["seq"], m["home"], m["away"]
     league, kickoff = m["league"], m["kickoff"]
+    # Fix 2: 让球线缺失时保持None，不默认成0（0是有含义的让球线）
+    _hc_raw = m.get("handicap")
     base = {"seq": seq, "home": home, "away": away, "kickoff": kickoff,
-            "league": league, "handicap": m.get("handicap") if m.get("handicap") is not None else 0}
+            "league": league, "handicap": _hc_raw}
 
     if league in NON_FOOTBALL:
         return {**base, "status": "skipped", "reason": "非足球赛事(冰球)，足球引擎不适用"}
@@ -329,8 +331,8 @@ def predict_one(m):
         "home_recent": [{"gf": r["gf"], "ga": r["ga"], "venue": r["venue"]} for r in hr],
         "away_recent": [{"gf": r["gf"], "ga": r["ga"], "venue": r["venue"]} for r in ar],
         "odds": odds,
-        "handicap": hc,
-        "handicap_line": int(hc),
+        "handicap": hc,  # None=缺失，不默认0
+        "handicap_line": int(hc) if hc is not None else None,
         "league_avg_goals": 2.70,
     }
     try:
@@ -397,8 +399,10 @@ def predict_one(m):
             "kickoff": kickoff_bj.isoformat(),
             "generated_at": t_generated,
             "available_at": {form_source: t_data_ready} if form_source else {},
-            "handicap_line": hc,
-            "sp_snapshot": {"sp_wdl": sp, "collected_at": t_data_ready} if sp else None,
+            "handicap_line": hc,  # None=缺失，不默认0
+            # Fix 1: sp collected_at=null（无SP源真实采集证据，不准用t_data_ready替代）
+            # write_snapshot 会因无SP证据自动标 observation_only=true
+            "sp_snapshot": {"sp_wdl": sp, "collected_at": None} if sp else None,
             "data_completeness": {"form_source": form_source},
             "skipped": False,
         }

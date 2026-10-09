@@ -325,3 +325,86 @@ daily_fetch.py：新增 EXPANDED_LEAGUES（15 联赛），第 8/9/10 节循环�
     且开球前 14h 首发未公布，属合理缺失）。
   - 大小球/初盘：vip.titan007.com（亚让13家/大小球16家）本机仍 000 不通；
     500/澳客对应页静态不可抓 → 需浏览器单次抓取，或接受缺失。
+
+---
+
+## 二、theopenmodel 替代源调研（2026-10-08）
+
+> 背景：theopenmodel（Hicruben，Elo+Dixon-Coles+Monte Carlo，五大联赛赛前三向概率CSV，CC BY 4.0）
+> 已连续4天停更；主页时间冻结在2026-09-09（"Forecast saved Sep 9"），CSV可下载但最新kickoff为2026-09-16，
+> 系作者弃更，非临时故障。按"先搜GitHub、三选一对比"规矩找替代。
+>
+> ⚠️ 诚实注（先于候选）：`openmodel_predictions.json` 经查**从未被任何下游消费**
+> （只有 daily_fetch.py 自己写文件，engine/scripts/report 均未读取）。
+> "第4个独立信号/分歧检测"只是文档意图，从未真正接入。因此先有决策①：是真正把替代源接入分歧检测，
+> 还是承认不需要这个槽位、直接摘掉。以下对比按"决定要"的前提写。
+
+### 候选1：API-Football /predictions ⭐（推荐：直接用）
+
+- **地址**: `GET https://v3.football.api-sports.io/predictions?fixture={id}`（key 已在 `.af_key`，无需新申请）
+- **实测**（2026-10-08，本机代理）：200，结构化JSON；`predictions.percent={home,draw,away}` 直接给三向概率
+  （实测 Cruzeiro vs Sao Paulo：`{home:10%, draw:45%, away:45%}`），另有 winner/advice/goals 字段
+- **覆盖**：API-Football全联赛（远超 theopenmodel 的五大联赛）
+- **更新频率**：赛前持续更新（商业服务）
+- **费用/配额**：免费档 100次/天（实测 header：`x-ratelimit-requests-limit: 100`）；每次预测=1次调用，
+  20–40场/天的批次 ≈ 20–40% 配额，**与现有 fixtures 抓取共享同一配额池**
+- **稳定性**：api-sports.io 商业服务，持续维护；本机代理链路通
+- **独立性**：第三方组织、方法学不公开；是"组织独立"非"方法独立"（与咱们Elo+Dixon-Coles可能同宗）
+- **接入成本**：低——复用现有 `collector/sources/apifootball.py` 的 key 与 client 模式
+- **最简接入方案**（不写代码，等拍板）：
+  1. `collector/sources/` 新增 `apifootball_predictions.py`（或并入 apifootball.py）：
+     `get_predictions(fixture_id) -> {p_home, p_draw, p_away, advice}`
+  2. `daily_fetch.py` 新增一节：对当日重点场次批量拉取，
+     存 `data/daily/YYYY-MM-DD/afb_predictions.json`，沿用 openmodel 的 schema
+    （kickoff/league/home/away/p_home/p_draw/p_away/source），保证下游无缝替换
+  3. 配额守卫：每日上限40次，超限跳过并记录；fixtures 抓取优先
+  4. 下游（此前openmodel没做到的）：真正接入分歧检测——与引擎v2.6三向概率对照，
+     首选方向不一致且 gap≥0.15 标独立信号分歧（沿用B补丁门控口径）
+
+### 候选2：自建轻量Elo第二意见（备选：自己搭）
+
+- **做法**：用已在管线的 football-data.co.uk 17联赛历史比分，跑独立轻量Elo
+  （固定 K=20、HFA=100，不做市场融合），Elo差 → 标准logistic转1X2；
+  可再叠一层 Understat xG Poisson（xG数据已有，每周任务在抓）做方法学对冲
+- **费用**：零配额、零key、永不死
+- **覆盖**：17个欧洲联赛（小于API-Football，但覆盖咱们15联赛管线的主体）
+- **更新频率**：随 daily_fetch 每天更新
+- **稳定性**：自己拥有，~80行代码，无外部依赖
+- **独立性**：⚠️ 部分——同数据源 lineage（football-data.co.uk），但方法与主引擎
+  （Dixon-Coles+市场融合+校准层）不同；"独立性"更多是心理安慰，实质是第二套参数
+- **接入成本**：中——要写Elo模块+回测验证（按纪律需walk-forward证明有增量才进生产）
+- **结论**：可做，但优先级低于候选1；适合作为"无配额压力时的影子信号"
+
+### 候选3：已排除项（实测否决）
+
+| 候选 | 否决原因（本机实测） |
+|---|---|
+| ClubElo API | `/Fixtures`（预计算胜平负概率）返回 "Fixtures API deactivated"；其余端点 502/空响应；仅主站存活。API实质已死 |
+| Forebet | 本机 `403`（反爬）；无公开API；违反"稳定、不墙机房IP"规则 |
+| Polymarket Gamma API | `/events` 可达、免key，但本质是第4个**市场**源（已有Odds API/Matchbook/Smarkets三个），非独立模型，边际价值低 |
+| ESPN predictor | 足球scoreboard无predictor字段（仅美式足球有），此路不通 |
+| GitHub每日预测CSV项目 | 搜到的多为世界杯专项或自建dashboard（如 amozaffari/PL2026 仅英超），无 theopenmodel 式的多联赛每日CSV发布者 |
+
+### 对比总表
+
+| 维度 | API-Football predictions | 自建轻量Elo | Forebet/ClubElo |
+|---|---|---|---|
+| 第三方模型独立性 | ✅ | ⚠️（同源） | ❌（已死/被墙） |
+| 三向概率直接可用 | ✅ percent字段 | 需自己转 | — |
+| 联赛覆盖 | 全（>五大联赛） | 17欧洲联赛 | — |
+| 更新频率 | 赛前持续 | 每天 | — |
+| 接入成本 | 低 | 中（需回测） | — |
+| 费用/配额 | 100/天共享 | 零 | — |
+| 本机实测 | ✅ 200 | —（自建） | ❌ |
+
+### 建议
+
+**直接用 API-Football /predictions**（候选1），理由：
+1. 实测下来它是**唯一存活、免新申请、结构化**的第三方模型三向概率源
+   （theopenmodel死、ClubElo API死、Forebet墙、GitHub无同类发布者）
+2. Key已有、client模式可复用，接入成本最低；覆盖反超 theopenmodel 的五大联赛
+3. 唯一成本是配额：与fixtures共享100/天。缓解：只对重点场次调用（建议日上限40次），
+   fixtures优先；配额用满则降级跳过
+
+但先请用户拍板决策①：**替代源是否真正接入分歧检测**，还是直接摘掉 theopenmodel 槽位。
+theopenmodel 的文件4天来写了没人读——如果只是"补上一个没人用的槽位"，不如摘掉省配额。

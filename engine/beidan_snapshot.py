@@ -164,6 +164,22 @@ def build_six_play_vector(predict_result: dict) -> dict:
     half_full_raw = deriv.get("half_full_1x2") or {}
     half_full = {k: half_full_raw.get(k, 0.0) for k in HALF_FULL_9}
 
+    # Fix 5: 半全场对全场1X2的边际一致性校验
+    # 全场胜 = 胜胜+平胜+负胜（半场X、全场胜的三种组合）
+    # 全场平 = 胜平+平平+负平；全场负 = 胜负+平负+负负
+    _marg_home = half_full["胜胜"] + half_full["平胜"] + half_full["负胜"]
+    _marg_draw = half_full["胜平"] + half_full["平平"] + half_full["负平"]
+    _marg_away = half_full["胜负"] + half_full["平负"] + half_full["负负"]
+    _p1x2 = (predict_result["p_home"], predict_result["p_draw"], predict_result["p_away"])
+    for _got, _exp, _name in ((_marg_home, _p1x2[0], "全场胜"),
+                              (_marg_draw, _p1x2[1], "全场平"),
+                              (_marg_away, _p1x2[2], "全场负")):
+        if abs(_got - _exp) > PROB_TOL:
+            raise ValueError(
+                f"快照拒绝写入：半全场边际不一致：{_name}边际={_got:.6f} "
+                f"vs 全场概率={_exp:.6f}，偏离超过容差{PROB_TOL}"
+            )
+
     # 6. 上下单双4类
     ou = aggregate_ou_4(matrix)
 
@@ -300,33 +316,45 @@ def write_snapshot(match_data: dict, predict_result: dict) -> dict:
     # 时间证据校验：顺序 available_at <= asof <= generated_at < kickoff
     time_violation = _check_time_ordering(match_data)
     observation_only = time_violation is not None
+    observation_reasons = [time_violation] if time_violation else []
+
+    # Fix 4: 合成样本强制 observation_only=true
+    if match_data.get("synthetic_sample"):
+        observation_only = True
+        observation_reasons.append("synthetic_sample=true：合成样本，防误入回测")
+
+    # Fix 1: SP时间证据校验
+    # sp_snapshot.collected_at 若无对应的SP源 available_at 真实证据，
+    # 则视为冒充（不准用战绩抓取完成时刻替代），标 observation_only
+    sp_snap = match_data.get("sp_snapshot")
+    if sp_snap and isinstance(sp_snap, dict) and sp_snap.get("collected_at"):
+        sp_evidence = False
+        available_at = match_data.get("available_at") or {}
+        for src, v in available_at.items():
+            if "sp" in src.lower() or "odd" in src.lower():
+                if _has_real_time_evidence(v):
+                    sp_evidence = True
+                    break
+        if not sp_evidence:
+            observation_only = True
+            observation_reasons.append(
+                "sp_snapshot.collected_at无SP源真实采集证据（不准用t_data_ready替代）"
+            )
+            # 无证据时 collected_at 置 null，不保留冒充值
+            sp_snap = dict(sp_snap)
+            sp_snap["collected_at"] = None
+            match_data = dict(match_data)
+            match_data["sp_snapshot"] = sp_snap
 
     six = build_six_play_vector(predict_result)
 
     os.makedirs(SNAPSHOT_DIR, exist_ok=True)
     path = os.path.join(SNAPSHOT_DIR, f"{lottery_no}.jsonl")
 
-    # rerun_of 链：同一 lottery_no:seq 重复写入时指向实际存在的前一条
-    # 第一条 snapshot_id="26103:1"（无后缀），第二条 rerun_of 必须指向它
-    existing_ids: list[str] = []
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    rec = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                if rec.get("lottery_no") == lottery_no and str(rec.get("seq")) == seq:
-                    existing_ids.append(rec.get("snapshot_id", ""))
-
-    rerun_of = existing_ids[-1] if existing_ids else None
-    if existing_ids:
-        snapshot_id = f"{lottery_no}:{seq}#r{len(existing_ids) + 1}"
-    else:
-        snapshot_id = f"{lottery_no}:{seq}"
+    # rerun_of 初值（锁内会重算修正，防并发下预读过期）
+    # 第一条 snapshot_id="{lottery_no}:{seq}"（无后缀）
+    rerun_of = None
+    snapshot_id = f"{lottery_no}:{seq}"
 
     generated_at = match_data.get("generated_at")
     record = {
@@ -354,32 +382,46 @@ def write_snapshot(match_data: dict, predict_result: dict) -> dict:
         "skipped": bool(match_data.get("skipped", False)),
         "skip_reason": match_data.get("skip_reason"),
         "observation_only": observation_only,
-        "observation_reason": time_violation,
+        "observation_reason": "; ".join(observation_reasons) if observation_reasons else None,
         "provenance_unverified": observation_only,
+        "synthetic_sample": bool(match_data.get("synthetic_sample", False)),
     }
 
-    # 原子写入：临时文件 + fsync + rename
-    import tempfile
+    # 并发安全写入：O_APPEND + fcntl独占锁 + fsync
+    # 旧记录路径/字节不变，只追加。锁保护下读-算rerun_of-追加是原子的。
+    import fcntl
     line = json.dumps(record, ensure_ascii=False) + "\n"
-    fd, tmp_path = tempfile.mkstemp(
-        dir=os.path.dirname(path) or ".",
-        prefix=".snapshot_tmp_",
-    )
+    # 注意：rerun_of 需要在锁内重新计算（上面的预读可能已过期）
+    fd = os.open(path, os.O_RDWR | os.O_CREAT | os.O_APPEND, 0o644)
     try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            # 追加模式语义：先读旧内容再整体写回（保证单次rename原子性）
-            if os.path.exists(path):
-                with open(path, "r", encoding="utf-8") as old:
-                    f.write(old.read())
-            f.write(line)
-            f.flush()
-            os.fsync(f.fileno())
-        os.replace(tmp_path, path)
-    except BaseException:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        # 锁内重读，确定最新的 rerun_of（防并发下预读过期）
+        os.lseek(fd, 0, os.SEEK_SET)
+        existing_ids = []
+        with os.fdopen(os.dup(fd), "r", encoding="utf-8", closefd=False) as rf:
+            for rline in rf:
+                rline = rline.strip()
+                if not rline:
+                    continue
+                try:
+                    rec = json.loads(rline)
+                except json.JSONDecodeError:
+                    continue
+                if rec.get("lottery_no") == lottery_no and str(rec.get("seq")) == seq:
+                    existing_ids.append(rec.get("snapshot_id", ""))
+        if existing_ids:
+            # 锁内修正 rerun_of / snapshot_id（覆盖锁外预读的值）
+            record["rerun_of"] = existing_ids[-1]
+            record["snapshot_id"] = f"{lottery_no}:{seq}#r{len(existing_ids) + 1}"
+            line = json.dumps(record, ensure_ascii=False) + "\n"
+        os.lseek(fd, 0, os.SEEK_END)
+        os.write(fd, line.encode("utf-8"))
+        os.fsync(fd)
+    finally:
         try:
-            os.unlink(tmp_path)
+            fcntl.flock(fd, fcntl.LOCK_UN)
         except OSError:
             pass
-        raise
+        os.close(fd)
 
     return record

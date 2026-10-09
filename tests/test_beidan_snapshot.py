@@ -28,8 +28,28 @@ def _mock_predict_result(lam_h=1.8, lam_a=1.2):
     # 让球1x2（简化：用矩阵直接算）
     from engine.poisson import handicap_1x2
     h, d, a = handicap_1x2(mc, 0)
-    # 半全场9类（均匀占位，测试用）
-    hf = {k: 1/9 for k in bs.HALF_FULL_9}
+    # 半全场9类：边际必须与全场1X2一致（GPT审计要求）
+    # 全场胜=胜胜+平胜+负胜，以此类推
+    hf = {
+        "胜胜": ph * 0.6, "胜平": pd * 0.4, "胜负": pa * 0.4,
+        "平胜": ph * 0.25, "平平": pd * 0.35, "平负": pa * 0.25,
+        "负胜": ph * 0.15, "负平": pd * 0.25, "负负": pa * 0.35,
+    }
+    # 归一化到和为1（保持边际比例）
+    s = sum(hf.values())
+    hf = {k: v / s for k, v in hf.items()}
+    # 按边际缩放以精确匹配 p_1x2
+    # 先算当前边际
+    m_h = hf["胜胜"] + hf["平胜"] + hf["负胜"]
+    m_d = hf["胜平"] + hf["平平"] + hf["负平"]
+    m_a = hf["胜负"] + hf["平负"] + hf["负负"]
+    # 缩放每列
+    for k in ("胜胜", "平胜", "负胜"):
+        hf[k] = hf[k] / m_h * ph if m_h else 0
+    for k in ("胜平", "平平", "负平"):
+        hf[k] = hf[k] / m_d * pd if m_d else 0
+    for k in ("胜负", "平负", "负负"):
+        hf[k] = hf[k] / m_a * pa if m_a else 0
     return {
         "p_home": ph, "p_draw": pd, "p_away": pa,
         "lambda_home": lam_h, "lambda_away": lam_a,
@@ -302,12 +322,17 @@ def test_rerun_of_points_to_existing(tmp_path, monkeypatch):
 
 
 def test_atomic_write_uses_temp_and_fsync(tmp_path, monkeypatch):
-    """原子写入：必须用临时文件+rename+fsync。"""
+    """并发安全写入：必须用 O_APPEND + fcntl独占锁 + fsync（GPT审计要求）。
+
+    旧的 read-all + os.replace 模式在并发下丢记录，已废弃。
+    """
     import inspect
     src = inspect.getsource(bs.write_snapshot)
-    assert "mkstemp" in src or "NamedTemporaryFile" in src, "应使用临时文件"
-    assert "os.replace" in src or "os.rename" in src, "应使用原子rename"
+    assert "O_APPEND" in src, "应使用 O_APPEND 追加模式"
+    assert "flock" in src, "应使用 fcntl 文件锁"
     assert "fsync" in src, "应调用fsync"
+    # 不得再使用 read-all + replace 模式
+    assert "old.read()" not in src, "不得使用 read-all + replace 模式"
 
 
 def test_handicap_missing_returns_none():

@@ -105,3 +105,15 @@
 - [x] `scripts/beidan_chunk1_run.py` 调用（快照失败不阻断预测）
 - [x] `tests/test_beidan_snapshot.py`（8项测试）
 - [ ] 回测消费方的时间门控校验（待BD-1实现时做）
+
+## v3 审计修正（GPT复核，2026-10-09）
+
+1. **SP时间证据**：`sp_snapshot.collected_at` 必须有SP源真实采集证据；
+   无证据时置 null 并标 `observation_only=true`。**严禁**用战绩抓取完成时刻
+   （t_data_ready）替代。
+2. **让球线缺失**：`handicap_line`/`handicap_wdl` 缺失时为 null，
+   不默认成0，不参与预测。
+3. **并发安全**：O_APPEND + fcntl独占锁 + fsync；旧记录路径/字节不变。
+   `rerun_of` 在锁内重算，指向实际存在的前一条。
+4. **合成样本**：`synthetic_sample=true` 的记录强制 `observation_only=true`。
+5. **半全场边际**：9项对全场1X2的边际必须一致（容差1e-6），否则拒绝写入。

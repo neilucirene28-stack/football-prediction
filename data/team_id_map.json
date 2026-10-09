@@ -554,5 +554,577 @@
  "ponte preta": {
   "name": "Ponte Preta",
   "fotmob_id": "8630"
+ },
+ "kagoshima united": {
+  "name": "Kagoshima United",
+  "fotmob_id": "584867"
+ },
+ "ehime": {
+  "name": "Ehime FC",
+  "fotmob_id": "162198"
+ },
+ "renofa yamaguchi": {
+  "name": "Renofa Yamaguchi",
+  "fotmob_id": "614556"
+ },
+ "nara club": {
+  "name": "Nara Club",
+  "fotmob_id": "584746"
+ },
+ "fc osaka": {
+  "name": "FC Osaka",
+  "fotmob_id": "614335"
+ },
+ "sc sagamihara": {
+  "name": "SC Sagamihara",
+  "fotmob_id": "422974"
+ },
+ "roasso kumamoto": {
+  "name": "Roasso Kumamoto",
+  "fotmob_id": "162196"
+ },
+ "fc gifu": {
+  "name": "FC Gifu",
+  "fotmob_id": "162197"
+ },
+ "zweigen kanazawa": {
+  "name": "Zweigen Kanazawa",
+  "fotmob_id": "194023"
+ },
+ "reilac shiga": {
+  "name": "Reilac Shiga",
+  "fotmob_id": "194013"
+ },
+ "gainare tottori": {
+  "name": "Gainare Tottori",
+  "fotmob_id": "194010"
+ },
+ "nagano parceiro": {
+  "name": "Nagano Parceiro",
+  "fotmob_id": "243586"
+ },
+ "fc ryūkyū": {
+  "name": "FC Ryūkyū",
+  "fotmob_id": "194021"
+ },
+ "tochigi": {
+  "name": "Tochigi SC",
+  "fotmob_id": "164738"
+ },
+ "giravanz kitakyushu": {
+  "name": "Giravanz Kitakyushu",
+  "fotmob_id": "193858"
+ },
+ "matsumoto yamaga": {
+  "name": "Matsumoto Yamaga",
+  "fotmob_id": "194022"
+ },
+ "fukushima united": {
+  "name": "Fukushima United",
+  "fotmob_id": "408082"
+ },
+ "thespa gunma": {
+  "name": "Thespa Gunma",
+  "fotmob_id": "162194"
+ },
+ "kamatamare sanuki": {
+  "name": "Kamatamare Sanuki",
+  "fotmob_id": "243585"
+ },
+ "kochi united": {
+  "name": "Kochi United SC",
+  "fotmob_id": "860937"
+ },
+ "suwon samsung bluewings": {
+  "name": "Suwon Samsung Bluewings",
+  "fotmob_id": "88517"
+ },
+ "suwon": {
+  "name": "Suwon FC",
+  "fotmob_id": "187951"
+ },
+ "seoul e-land": {
+  "name": "Seoul E-Land FC",
+  "fotmob_id": "616212"
+ },
+ "daegu": {
+  "name": "Daegu FC",
+  "fotmob_id": "133897"
+ },
+ "hwaseong": {
+  "name": "Hwaseong FC",
+  "fotmob_id": "739800"
+ },
+ "busan i'park": {
+  "name": "Busan I'Park",
+  "fotmob_id": "6092"
+ },
+ "gimpo": {
+  "name": "Gimpo FC",
+  "fotmob_id": "833649"
+ },
+ "chungnam asan": {
+  "name": "Chungnam Asan FC",
+  "fotmob_id": "429442"
+ },
+ "gyeongnam": {
+  "name": "Gyeongnam FC",
+  "fotmob_id": "133899"
+ },
+ "seongnam": {
+  "name": "Seongnam FC",
+  "fotmob_id": "6614"
+ },
+ "cheongju": {
+  "name": "Cheongju FC",
+  "fotmob_id": "833651"
+ },
+ "paju frontier": {
+  "name": "Paju Frontier",
+  "fotmob_id": "739803"
+ },
+ "yongin": {
+  "name": "Yongin FC",
+  "fotmob_id": "1897657"
+ },
+ "cheonan city": {
+  "name": "Cheonan City",
+  "fotmob_id": "187960"
+ },
+ "ansan greeners": {
+  "name": "Ansan Greeners",
+  "fotmob_id": "821875"
+ },
+ "jeonnam dragons": {
+  "name": "Jeonnam Dragons",
+  "fotmob_id": "109377"
+ },
+ "gimhae fc 2008": {
+  "name": "Gimhae FC 2008",
+  "fotmob_id": "187953"
+ },
+ "siheung citizen": {
+  "name": "Siheung Citizen",
+  "fotmob_id": "930090"
+ },
+ "pocheon citizen": {
+  "name": "Pocheon Citizen FC",
+  "fotmob_id": "739791"
+ },
+ "daejeon korail": {
+  "name": "Daejeon Korail",
+  "fotmob_id": "187954"
+ },
+ "busan transport corp": {
+  "name": "Busan Transport Corp",
+  "fotmob_id": "187955"
+ },
+ "gyeongju h and n": {
+  "name": "Gyeongju H & N",
+  "fotmob_id": "187959"
+ },
+ "dangjin citizen": {
+  "name": "Dangjin Citizen",
+  "fotmob_id": "1335275"
+ },
+ "chuncheon": {
+  "name": "Chuncheon FC",
+  "fotmob_id": "833668"
+ },
+ "changwon city": {
+  "name": "Changwon City",
+  "fotmob_id": "187943"
+ },
+ "ulsan citizen": {
+  "name": "Ulsan Citizen",
+  "fotmob_id": "1150506"
+ },
+ "yeoju": {
+  "name": "Yeoju FC",
+  "fotmob_id": "930076"
+ },
+ "gangneung city": {
+  "name": "Gangneung City",
+  "fotmob_id": "187952"
+ },
+ "fc mokpo": {
+  "name": "FC Mokpo",
+  "fotmob_id": "195451"
+ },
+ "yangpyeong": {
+  "name": "Yangpyeong",
+  "fotmob_id": "739797"
+ },
+ "jeonbuk hyundai motors fc reserves": {
+  "name": "Jeonbuk Hyundai Motors FC Reserves",
+  "fotmob_id": "1713984"
+ },
+ "fk haugesund": {
+  "name": "FK Haugesund",
+  "fotmob_id": "8512"
+ },
+ "kongsvinger": {
+  "name": "Kongsvinger",
+  "fotmob_id": "8179"
+ },
+ "strømsgodset": {
+  "name": "Strømsgodset",
+  "fotmob_id": "8180"
+ },
+ "stabæk": {
+  "name": "Stabæk",
+  "fotmob_id": "9918"
+ },
+ "odds ballklubb": {
+  "name": "Odds Ballklubb",
+  "fotmob_id": "7988"
+ },
+ "bryne": {
+  "name": "Bryne",
+  "fotmob_id": "8531"
+ },
+ "hødd": {
+  "name": "Hødd",
+  "fotmob_id": "7937"
+ },
+ "ranheim": {
+  "name": "Ranheim",
+  "fotmob_id": "6563"
+ },
+ "egersund": {
+  "name": "Egersund",
+  "fotmob_id": "4722"
+ },
+ "lyn": {
+  "name": "Lyn",
+  "fotmob_id": "10224"
+ },
+ "strømmen": {
+  "name": "Strømmen",
+  "fotmob_id": "4249"
+ },
+ "sandnes ulf": {
+  "name": "Sandnes Ulf",
+  "fotmob_id": "8133"
+ },
+ "moss": {
+  "name": "Moss",
+  "fotmob_id": "8405"
+ },
+ "sogndal": {
+  "name": "Sogndal",
+  "fotmob_id": "8616"
+ },
+ "åsane": {
+  "name": "Åsane",
+  "fotmob_id": "10021"
+ },
+ "raufoss": {
+  "name": "Raufoss",
+  "fotmob_id": "9812"
+ },
+ "ifk norrköping": {
+  "name": "IFK Norrköping",
+  "fotmob_id": "8449"
+ },
+ "falkenbergs ff": {
+  "name": "Falkenbergs FF",
+  "fotmob_id": "6545"
+ },
+ "varbergs bois": {
+  "name": "Varbergs BoIS FC",
+  "fotmob_id": "6692"
+ },
+ "östersunds fk": {
+  "name": "Östersunds FK",
+  "fotmob_id": "2004"
+ },
+ "landskrona bois": {
+  "name": "Landskrona BoIS",
+  "fotmob_id": "8511"
+ },
+ "sandvikens if": {
+  "name": "Sandvikens IF",
+  "fotmob_id": "6241"
+ },
+ "ik oddevold": {
+  "name": "IK Oddevold",
+  "fotmob_id": "6160"
+ },
+ "östers if": {
+  "name": "Östers IF",
+  "fotmob_id": "8641"
+ },
+ "nordic united": {
+  "name": "Nordic United FC",
+  "fotmob_id": "1144284"
+ },
+ "helsingborg": {
+  "name": "Helsingborg",
+  "fotmob_id": "9859"
+ },
+ "ifk värnamo": {
+  "name": "IFK Värnamo",
+  "fotmob_id": "6181"
+ },
+ "ljungskile": {
+  "name": "Ljungskile",
+  "fotmob_id": "8500"
+ },
+ "norrby": {
+  "name": "Norrby",
+  "fotmob_id": "2014"
+ },
+ "örebro": {
+  "name": "Örebro",
+  "fotmob_id": "8527"
+ },
+ "ik brage": {
+  "name": "IK Brage",
+  "fotmob_id": "6690"
+ },
+ "gif sundsvall": {
+  "name": "GIF Sundsvall",
+  "fotmob_id": "8359"
+ },
+ "jerv": {
+  "name": "Jerv",
+  "fotmob_id": "2303"
+ },
+ "brattvåg": {
+  "name": "Brattvåg",
+  "fotmob_id": "47403"
+ },
+ "bjarg": {
+  "name": "Bjarg",
+  "fotmob_id": "161378"
+ },
+ "mjøndalen": {
+  "name": "Mjøndalen",
+  "fotmob_id": "6541"
+ },
+ "sotra sportsklubb": {
+  "name": "Sotra Sportsklubb",
+  "fotmob_id": "189420"
+ },
+ "notodden": {
+  "name": "Notodden",
+  "fotmob_id": "9929"
+ },
+ "kvik halden": {
+  "name": "Kvik Halden",
+  "fotmob_id": "5734"
+ },
+ "træff": {
+  "name": "Træff",
+  "fotmob_id": "6115"
+ },
+ "pors": {
+  "name": "Pors",
+  "fotmob_id": "8111"
+ },
+ "arendal fotball": {
+  "name": "Arendal Fotball",
+  "fotmob_id": "257932"
+ },
+ "sandviken": {
+  "name": "Sandviken",
+  "fotmob_id": "6242"
+ },
+ "lysekloster": {
+  "name": "Lysekloster",
+  "fotmob_id": "413468"
+ },
+ "eik-tønsberg": {
+  "name": "Eik-Tønsberg",
+  "fotmob_id": "1899"
+ },
+ "vidar": {
+  "name": "Vidar",
+  "fotmob_id": "6123"
+ },
+ "eidsvold tf": {
+  "name": "Eidsvold TF",
+  "fotmob_id": "8292"
+ },
+ "kjelsås": {
+  "name": "Kjelsås",
+  "fotmob_id": "6560"
+ },
+ "levanger": {
+  "name": "Levanger",
+  "fotmob_id": "6561"
+ },
+ "hønefoss": {
+  "name": "Hønefoss",
+  "fotmob_id": "8067"
+ },
+ "grorud": {
+  "name": "Grorud",
+  "fotmob_id": "4201"
+ },
+ "stjørdals blink": {
+  "name": "Stjørdals Blink",
+  "fotmob_id": "4393"
+ },
+ "lørenskog": {
+  "name": "Lørenskog",
+  "fotmob_id": "8077"
+ },
+ "tromsdalen": {
+  "name": "Tromsdalen",
+  "fotmob_id": "8617"
+ },
+ "junkeren": {
+  "name": "Junkeren",
+  "fotmob_id": "4320"
+ },
+ "rana fk": {
+  "name": "Rana FK",
+  "fotmob_id": "1004501"
+ },
+ "skeid": {
+  "name": "Skeid",
+  "fotmob_id": "8421"
+ },
+ "follo": {
+  "name": "Follo",
+  "fotmob_id": "7963"
+ },
+ "ull/kisa": {
+  "name": "Ull/Kisa",
+  "fotmob_id": "10232"
+ },
+ "trygg/lade": {
+  "name": "Trygg/Lade",
+  "fotmob_id": "525114"
+ },
+ "fc stockholm": {
+  "name": "FC Stockholm",
+  "fotmob_id": "1011931"
+ },
+ "fc arlanda": {
+  "name": "FC Arlanda",
+  "fotmob_id": "841094"
+ },
+ "afc eskilstuna": {
+  "name": "AFC Eskilstuna",
+  "fotmob_id": "6238"
+ },
+ "hammarby tff": {
+  "name": "Hammarby TFF",
+  "fotmob_id": "4438"
+ },
+ "fbk karlstad": {
+  "name": "FBK Karlstad",
+  "fotmob_id": "627694"
+ },
+ "enköping": {
+  "name": "Enköping",
+  "fotmob_id": "8425"
+ },
+ "if karlstad": {
+  "name": "IF Karlstad",
+  "fotmob_id": "191433"
+ },
+ "assyriska ff": {
+  "name": "Assyriska FF",
+  "fotmob_id": "10225"
+ },
+ "umeå": {
+  "name": "Umeå",
+  "fotmob_id": "8601"
+ },
+ "karlbergs bk": {
+  "name": "Karlbergs BK",
+  "fotmob_id": "303472"
+ },
+ "gefle": {
+  "name": "Gefle",
+  "fotmob_id": "7997"
+ },
+ "vasalunds if": {
+  "name": "Vasalunds IF",
+  "fotmob_id": "1967"
+ },
+ "sollentuna fk": {
+  "name": "Sollentuna FK",
+  "fotmob_id": "111120"
+ },
+ "piteå": {
+  "name": "Piteå",
+  "fotmob_id": "2006"
+ },
+ "fc järfälla": {
+  "name": "FC Järfälla",
+  "fotmob_id": "1225382"
+ },
+ "ifk stocksund": {
+  "name": "IFK Stocksund",
+  "fotmob_id": "916701"
+ },
+ "trelleborgs ff": {
+  "name": "Trelleborgs FF",
+  "fotmob_id": "8333"
+ },
+ "åtvidaberg": {
+  "name": "Åtvidaberg",
+  "fotmob_id": "6622"
+ },
+ "hässleholms if": {
+  "name": "Hässleholms IF",
+  "fotmob_id": "418688"
+ },
+ "lunds bk": {
+  "name": "Lunds BK",
+  "fotmob_id": "6174"
+ },
+ "afc malmoe": {
+  "name": "AFC Malmoe",
+  "fotmob_id": "1331261"
+ },
+ "trollhättan": {
+  "name": "Trollhättan FC",
+  "fotmob_id": "6183"
+ },
+ "fc rosengård": {
+  "name": "FC Rosengård",
+  "fotmob_id": "6170"
+ },
+ "jönköping s.": {
+  "name": "Jönköping S.",
+  "fotmob_id": "8510"
+ },
+ "tvååkers if": {
+  "name": "Tvååkers IF",
+  "fotmob_id": "241285"
+ },
+ "skövde aik": {
+  "name": "Skövde AIK",
+  "fotmob_id": "6153"
+ },
+ "eskilsminne if": {
+  "name": "Eskilsminne IF",
+  "fotmob_id": "303470"
+ },
+ "bk olympic": {
+  "name": "BK Olympic",
+  "fotmob_id": "241064"
+ },
+ "kristianstad": {
+  "name": "Kristianstad FC",
+  "fotmob_id": "1965"
+ },
+ "laholms fk": {
+  "name": "Laholms FK",
+  "fotmob_id": "6173"
+ },
+ "ängelholms ff": {
+  "name": "Ängelholms FF",
+  "fotmob_id": "8189"
+ },
+ "utsiktens bk": {
+  "name": "Utsiktens BK",
+  "fotmob_id": "73158"
  }
 }
