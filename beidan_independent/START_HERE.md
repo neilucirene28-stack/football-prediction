@@ -10,9 +10,9 @@ v14新增英甲90场显式FT/HT历史，经Codex独立核验；179场中17场来
 
 ---
 
-# BD-1 v11 可复跑交付
+# BD-1 v15 可复跑交付
 
-模型开发、参数与验证由Codex负责；Muse只提供数据。所有新路径维持研究/影子状态，production=false。本包不表示已写入GitHub或上线。
+模型开发、参数与验证由Codex负责；Muse提供数据。所有新路径维持研究/影子状态，production=false。当前入口见 `docs/beidan-v15-frozen-settlement.md`；仓库草稿PR #2承载独立研究目录。
 
 ## 当前已完成
 
@@ -62,7 +62,7 @@ PYTHONPATH=. python scripts/audit_179_fixed_mean.py
 | 新近况数据 | 269条加工近况已隔离；30场J1原件FT/HT结构核验通过；新增AF真正1450条未来fixture通过结构与摘要核验 | 未批准身份、未导入L1；不得回填为旧赛前输入 |
 | 历史验证 | 1665场今日才批量核验，无旧赛前payload；旧折可得历史为0 | 消费真实新增历史及冻结未来预测，等待结算配对验证 |
 | 新候选效果 | 软件与数值检查通过，不等于Brier不恶化 | 真实walk-forward与覆盖、比分、校准审核通过后再上线 |
-| 仓库同步 | 写入已获用户授权，但自动审批拒绝了create_tree | 当前交付可审阅包；没有伪称已推送 |
+| 仓库同步 | v13/v14已经写入草稿PR #2；独立目录与原生产代码分开 | 后续更改以实际提交摘要核验为准 |
 
 完整算法与实施设计见docs/beidan-independent-model-v1-design.md；v11协议及本轮数据审计见docs/beidan-v11-walk-forward.md。原179场观察预测位于outputs/20261010_179_shadow.json，保持原版；其旧无约束重加权曾改变均值，不能作为固定均值新实现的证据。
 
@@ -75,3 +75,9 @@ MANIFEST.json仅证明本包字节与记录摘要一致，不认证提供商采�
 ## v13 当前验证入口
 
 新增 `docs/beidan-v13-l1-walk-forward.md`。80项独立测试通过；球队强度每折重拟合、历史已结算参数选择、进球均值偏差资格门槛已经实现。最新前瞻冻结为 `outputs/l1_prospective/20261009T113314682461Z/`：179场完整账本，5场来源球队候选、174场阻断，当前无赛果/Brier。v12的179场研究输出仍保留作参考，不能误解为完整L1覆盖。
+
+## v15 当前冻结与结算入口
+
+104项标准库测试通过。`frozen_settlement`直接读取原冻结概率并核对独立保留的清单摘要，结算时不会重训或按赛果重选参数。`frozen_results`核验新的ESPN常规时间赛果并绑定冻结主客/赛事阶段；半场缺失保留空值。规范身份导入格式与walk-forward已统一，审批时间及逐项来源继续检查。
+
+新冻结为 `outputs/l1_prospective/20261009T135028491435Z/`，自动生成 `freeze_manifest.json`。179场输入池中17场有完整研究候选、162场阻断、17场待结算、0成对赛果，Brier仍为空。`outputs/v15_pending_settlement.json`展示完整池的真实待结算状态。冷启动选None，研究ridge=5表与已选候选仍分别记录。复盘命令和具体证据见v15文档。

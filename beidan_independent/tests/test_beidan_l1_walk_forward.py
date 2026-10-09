@@ -27,6 +27,26 @@ def run(h,f,r):
 
 
 class L1WalkTests(unittest.TestCase):
+    def test_canonical_import_format_is_accepted_with_all_source_bindings(self):
+        from test_beidan_team_strength import samples, ASOF, KICKOFF
+        history = samples()
+        source = {"name": "audited_team_map", "status": "ok", "available_at": "2026-10-09T14:00:00+08:00"}
+        fixture = {"match_id": "canonical-1", "period": "canonical", "sport": "football", "kickoff_at": KICKOFF,
+            "fixture_source": source, "identity_verified": True, "identity_source": source["name"],
+            "identity_verified_at": source["available_at"], "sources": [source],
+            "input_sources": {k: source["name"] for k in ("home_id", "away_id", "competition_id")},
+            "home_id": "strong", "away_id": "weak", "competition_id": "league-1"}
+        fold = {"period": "canonical", "cutoff_at": ASOF, "expected_total": 1, "fixtures": [fixture]}
+        def check():
+            return run_walk_forward(history=history, folds=[fold], results=[], evaluated_at=ASOF,
+                                    model_family="l1_team_strength", identity_mode="canonical")
+        self.assertEqual(check()["predicted_n"], 1)
+        fixture["identity_verified_at"] = "2026-10-09T16:00:00+08:00"
+        self.assertEqual(check()["predicted_n"], 0)
+        fixture["identity_verified_at"] = source["available_at"]
+        fixture["input_sources"]["away_id"] = "unrelated"
+        self.assertEqual(check()["predicted_n"], 0)
+
     def test_team_refits_train_only_before_cutoff_and_use_earlier_selection(self):
         h,f,r=native_case();out=run(h,f,r)
         self.assertEqual([x['selection_n'] for x in out['selections']],[0,1,2])

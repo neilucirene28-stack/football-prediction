@@ -26,13 +26,35 @@ KAPPAS = (None, 25., 50., 100.)  # None is exact identity, the safe cold start.
 RIDGES = (None, 2., 5., 10., 20.)  # None retains L3 until earlier results select L1.
 
 
+def _fixture_identity(fixture, cutoff, identity_mode):
+    """Check native clocks or canonical import evidence without mixing formats."""
+    if identity_mode == "provider_native_espn":
+        _fixture_source({"fixture_source": fixture.get("identity_source")}, cutoff)
+        return
+    source = fixture.get("identity_source")
+    audited = fixture.get("identity_verified_at")
+    bindings = fixture.get("input_sources")
+    sources = fixture.get("sources")
+    if (fixture.get("identity_verified") is not True or not isinstance(source, str) or not source
+            or audited is None or not isinstance(bindings, dict) or not isinstance(sources, list)
+            or any(bindings.get(k) != source for k in ("home_id", "away_id", "competition_id"))):
+        raise ValueError("规范身份审批或逐项来源绑定缺失")
+    verified = _datetime(audited, "identity_verified_at")
+    matches = [s for s in sources if isinstance(s, dict) and s.get("name") == source]
+    if verified > cutoff or len(matches) != 1:
+        raise ValueError("规范身份尚不可得或来源不唯一")
+    _fixture_source({"fixture_source": matches[0]}, cutoff)
+    if _datetime(matches[0]["available_at"], "identity_source.available_at") < verified:
+        raise ValueError("规范身份来源时间早于审批时间")
+
+
 def _team_candidate(prior, train, fixture, ridge, cutoff, min_history, identity_mode):
     if ridge is None:
         return {"vectors": prior["vectors"], "score_31": prior["score_31"],
                 "status": "identity", "mean_drift": 0.}
     # Team/stage features have their own archive clock; a kickoff source alone
     # must not silently approve team IDs or present-day season assignments.
-    _fixture_source({"fixture_source": fixture.get("identity_source")}, _datetime(cutoff, "cutoff"))
+    _fixture_identity(fixture, _datetime(cutoff, "cutoff"), identity_mode)
     if identity_mode == "provider_native_espn":
         from .provider_native import predict_espn_native
         fitted = predict_espn_native(train, asof_at=cutoff, kickoff_at=fixture["kickoff_at"],

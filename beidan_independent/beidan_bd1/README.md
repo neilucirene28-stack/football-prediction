@@ -90,3 +90,7 @@ v6 快照对非身份市场候选强制保存 `market_provenance`（赔率来源
 ### v13：L1 walk-forward与进球均值资格
 
 `run_walk_forward(model_family="l1_team_strength", identity_mode="provider_native_espn")` 可执行来源ID球队候选的每折重拟合与过去已结算参数选择；默认L3入口兼容。新增进球均值绝对偏差及块bootstrap非恶化检查，不能借用共享模型-0.008。80项测试通过；前瞻179池5场可运行、174场阻断，尚无生产Brier证据。参见 `docs/beidan-v13-l1-walk-forward.md`。
+
+### v15：直接结算冻结概率
+
+`python -m beidan_bd1.frozen_settlement`提供赛前封存和赛后原概率结算，必须核对独立保留的清单SHA256；不会重拟合或在赛后重选参数。`python -m beidan_bd1.frozen_results`核验新的ESPN常规时间原件并绑定冻结比赛，显式半场缺失保留null。规范身份导入字段与walk-forward门控已经统一。104项测试通过，实际新冻结179池17场候选、162场阻断、0场结算；具体命令见 `docs/beidan-v15-frozen-settlement.md`。

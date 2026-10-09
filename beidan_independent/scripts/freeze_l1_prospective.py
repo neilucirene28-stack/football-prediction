@@ -7,6 +7,7 @@ from datetime import datetime,timezone
 import hashlib,json
 from pathlib import Path
 from beidan_bd1.walk_forward import run_walk_forward
+from beidan_bd1.frozen_settlement import seal_bundle
 
 root=Path(__file__).resolve().parents[1]
 now=datetime.now(timezone.utc).isoformat()
@@ -54,6 +55,8 @@ for name,data in [('history.jsonl',history),('results.jsonl',[])]:
         for row in data:fh.write(json.dumps(row,ensure_ascii=False)+'\n')
 (bundle/'folds.json').write_text(json.dumps(folds,ensure_ascii=False,indent=2))
 (bundle/'report.json').write_text(json.dumps(report,ensure_ascii=False,allow_nan=False))
+sealed=seal_bundle(bundle)
 print(json.dumps({'path':str(bundle),'cutoff_at':now,'full_pool_n':179,'native_candidate_n':5,
       'blocked_n':174,'pending_n':len(report['pending_ids']),'paired_n':0,'brier':None,
-      'selected_ridge':report['selections'][0]['selected_ridge'],'production_gate_passed':False}))
+      'selected_ridge':report['selections'][0]['selected_ridge'],'production_gate_passed':False,
+      'manifest_sha256':sealed['manifest_sha256'],'sealed_at':sealed['sealed_at']}))
