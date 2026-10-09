@@ -402,6 +402,8 @@ def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
     # 漏洞修复：原检查只在 collected_at 为真时触发；现改为：
     # 只要 sp_wdl 有数值（参与了预测），就必须有SP源的 available_at 真实证据，
     # 无论 collected_at 是否为 null。无证据 → observation_only=true。
+    # 新增：collected_at 若存在，必须与对应SP源的 available_at 一致（容差5分钟）
+    # 且 <= asof，且该源确实是赔率输入来源。
     sp_snap = match_data.get("sp_snapshot")
     if sp_snap and isinstance(sp_snap, dict):
         sp_wdl = sp_snap.get("sp_wdl") or {}
@@ -410,6 +412,8 @@ def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
         ) if isinstance(sp_wdl, dict) else bool(sp_wdl)
         if has_sp_values:
             sp_evidence = False
+            sp_src_name = None
+            sp_src_time = None
             available_at = match_data.get("available_at") or {}
             for src, v in available_at.items():
                 # 精确匹配SP/赔率源：避免"espn"误命中"sp"子串
@@ -426,6 +430,8 @@ def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
                 if is_sp_src:
                     if _has_real_time_evidence(v):
                         sp_evidence = True
+                        sp_src_name = src
+                        sp_src_time = v
                         break
             if not sp_evidence:
                 observation_only = True
@@ -439,6 +445,64 @@ def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
                 sp_snap["collected_at"] = None
                 match_data = dict(match_data)
                 match_data["sp_snapshot"] = sp_snap
+            else:
+                # collected_at 若存在，必须与SP源的available_at对应
+                sp_collected = sp_snap.get("collected_at")
+                if sp_collected is not None:
+                    c_dt = _parse_evidence_time(sp_collected)
+                    s_dt = _parse_evidence_time(sp_src_time)
+                    asof_raw = match_data.get("asof", match_data.get("generated_at"))
+                    a_dt = _parse_evidence_time(asof_raw)
+                    _mismatch = False
+                    _reason = ""
+                    if c_dt is None:
+                        _mismatch, _reason = True, "collected_at时间格式无效"
+                    elif s_dt is None:
+                        _mismatch, _reason = True, "SP源available_at时间格式无效"
+                    elif abs((c_dt - s_dt).total_seconds()) > 300:
+                        _mismatch, _reason = True, (
+                            f"collected_at({sp_collected})与"
+                            f"available_at[{sp_src_name}]({sp_src_time})不一致"
+                            f"（差{abs((c_dt - s_dt).total_seconds()):.0f}s>300s）"
+                        )
+                    elif a_dt is not None and c_dt > a_dt:
+                        _mismatch, _reason = True, (
+                            f"collected_at({sp_collected})晚于asof({asof_raw})"
+                        )
+                    if _mismatch:
+                        observation_only = True
+                        observation_reasons.append(
+                            f"SP时间证据不对应：{_reason}"
+                        )
+
+    # 来源门控：让球线参与预测必须有独立采集证据
+    # runner的 hc=m.get("handicap") 直接进 payload.handicap_line，
+    # 但 available_at 只记战绩源时间。无让球源证据 → observation_only=true。
+    # 禁止用战绩采集时间/文件mtime替代。
+    hc_line = match_data.get("handicap_line")
+    if hc_line is not None:
+        hc_evidence = False
+        available_at = match_data.get("available_at") or {}
+        for src, v in available_at.items():
+            s = src.lower().replace("-", "_")
+            tokens = s.split("_")
+            is_hc_src = (
+                "handicap" in tokens or "rangqiu" in tokens
+                or "rq" in tokens
+                or s.startswith("handicap_") or s.endswith("_handicap")
+                or s == "handicap"
+            )
+            if is_hc_src and _has_real_time_evidence(v):
+                hc_evidence = True
+                break
+        if not hc_evidence:
+            observation_only = True
+            observation_reasons.append(
+                "handicap_line=%s参与预测但无让球源available_at真实采集证据"
+                "（不准用战绩采集时间/文件mtime替代）" % hc_line
+            )
+    # 注：handicap_line=None 时不触发门控。predictor内 upset_risk 用0是既有模型行为，
+    # 属诊断字段默认值，不影响六玩法核心概率；快照中 handicap_wdl 保持 None。
 
     six = build_six_play_vector(predict_result)
 

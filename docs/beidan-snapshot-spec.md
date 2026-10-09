@@ -98,6 +98,26 @@
    - null来源不被忽略：任一源为null即证据不足。
 8. 概率校验：每类和为1（容差1e-6），每项0<=p<=1且有限（非NaN/Inf）。
 
+## 来源门控规则（v3新增，GPT复核24d63ac）
+
+**核心原则：每个实际参与预测的输入字段，必须有独立的采集时间证据。**
+
+1. **让球线门控**：`handicap_line` 非空（参与了预测）时，`available_at` 中必须有
+   让球源的时间证据（源名含 handicap/rangqiu/rq 独立token）。无证据 →
+   `observation_only=true`。**禁止用战绩采集时间替代**。
+   - `handicap_line=None` 时不触发门控（predictor内 upset_risk 用0是既有模型
+     行为，属诊断字段默认值，不影响六玩法核心概率；快照中 handicap_wdl 保持 None）。
+2. **SP门控**：`sp_snapshot.sp_wdl` 有数值时，`available_at` 中必须有SP/赔率源的
+   时间证据。无证据 → `observation_only=true`，且 `sp_snapshot.collected_at` 置 null。
+3. **collected_at对应性**：`sp_snapshot.collected_at` 若非空，必须与对应SP源的
+   `available_at` 一致（容差300秒）且 `<= asof`，且该源确实是赔率输入来源。
+   不一致/晚于asof/无对应源 → `observation_only=true`。
+4. **禁止替代**：不准用文件mtime、战绩采集时间（t_data_ready）替代盘口/赔率的采集时间。
+5. **全池manifest**：runner 必须输出完整全池 manifest（含 skipped），否则 coverage
+   分母不可靠。manifest 字段：lottery_no, generated_at, pool_total, predicted_ok,
+   skipped, skip_reasons, snapshot_write_stats, matches[]（每场 seq/status/reason/
+   snapshot_id/snapshot_observation_only）。
+
 ## 不可覆盖规则
 
 1. 快照写入后**永不修改、永不删除**。同一 `{lottery_no}:{seq}` 如需重跑，

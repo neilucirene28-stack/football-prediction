@@ -389,7 +389,18 @@ def predict_one(m):
 
     # ---- 北单快照链路（append-only，不影响预测逻辑） ----
     # 快照失败不阻断预测，只打印警告。
+    # 来源门控：盘口/让球/SP 每个实际参与预测的字段必须有独立采集证据。
+    # 上游输入 m 若带 handicap_collected_at / sp_collected_at 则透传；
+    # 无证据时不编造（available_at 不含该源 → write_snapshot 自动标 observation_only）。
+    # 禁止用 t_data_ready（战绩采集时间）/文件mtime 替代盘口/赔率采集时间。
     try:
+        _avail = {form_source: t_data_ready} if form_source else {}
+        _hc_collected = m.get("handicap_collected_at")
+        if hc is not None and _hc_collected:
+            _avail["handicap_line"] = _hc_collected
+        _sp_collected = m.get("sp_collected_at")
+        if sp and _sp_collected:
+            _avail["sp_odds"] = _sp_collected
         snap_match = {
             "lottery_no": m.get("lottery_no", "unknown"),
             "seq": seq,
@@ -398,18 +409,20 @@ def predict_one(m):
             "away": away,
             "kickoff": kickoff_bj.isoformat(),
             "generated_at": t_generated,
-            "available_at": {form_source: t_data_ready} if form_source else {},
+            "available_at": _avail,
             "handicap_line": hc,  # None=缺失，不默认0
-            # Fix 1: sp collected_at=null（无SP源真实采集证据，不准用t_data_ready替代）
-            # write_snapshot 会因无SP证据自动标 observation_only=true
-            "sp_snapshot": {"sp_wdl": sp, "collected_at": None} if sp else None,
+            # sp collected_at：有上游真实采集时间才填，否则 null
+            # write_snapshot 会校验其与 available_at[sp_odds] 的对应关系
+            "sp_snapshot": {"sp_wdl": sp, "collected_at": _sp_collected} if sp else None,
             "data_completeness": {"form_source": form_source},
             "skipped": False,
         }
         snap_rec = write_snapshot(snap_match, res)
         snapshot_id = snap_rec["snapshot_id"]
+        snapshot_observation_only = snap_rec.get("observation_only")
     except Exception as e:
         snapshot_id = None
+        snapshot_observation_only = None
         print(f"[snapshot] seq={seq} 写入失败（不阻断预测）: {e}", flush=True)
 
     return {
@@ -429,6 +442,7 @@ def predict_one(m):
         "冷门风险档": bd.get("upset_risk_tier"),
         "sp_wdl": sp,
         "snapshot_id": snapshot_id,
+        "snapshot_observation_only": snapshot_observation_only,
     }
 
 
@@ -454,6 +468,38 @@ def main():
     json.dump(results, open("/tmp/beidan_result1.json", "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
     print("已写 /tmp/beidan_result1.json")
+
+    # ---- 全池 manifest（含 skipped，coverage 分母可靠） ----
+    # 每场一行：ok 与 skipped 都记录，避免只统计成功场导致分母失真。
+    from engine.beidan_snapshot import get_write_stats
+    manifest = {
+        "lottery_no": matches[0].get("lottery_no", "unknown") if matches else "unknown",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "engine_version": "2.10",
+        "pool_total": len(matches),
+        "predicted_ok": ok,
+        "skipped": len(sk),
+        "skip_reasons": dict(reasons),
+        "snapshot_write_stats": get_write_stats(),
+        "matches": [
+            {
+                "seq": r.get("seq"),
+                "league": r.get("league"),
+                "home": r.get("home"),
+                "away": r.get("away"),
+                "kickoff": r.get("kickoff"),
+                "status": r["status"],
+                "reason": r.get("reason"),
+                "form_source": r.get("form_source"),
+                "snapshot_id": r.get("snapshot_id"),
+                "snapshot_observation_only": r.get("snapshot_observation_only"),
+            }
+            for r in results
+        ],
+    }
+    json.dump(manifest, open("/tmp/beidan_manifest1.json", "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    print("已写 /tmp/beidan_manifest1.json（全池 manifest，含 skipped）")
 
 
 if __name__ == "__main__":

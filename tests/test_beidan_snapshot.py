@@ -437,7 +437,8 @@ def test_integration_real_predict_write_snapshot(tmp_path, monkeypatch):
 
     md = _mock_match_data(
         seq="integ1",
-        available_at={"espn": now},
+        # 来源门控：handicap_line=-1参与预测，必须有让球源时间证据
+        available_at={"espn": now, "handicap_line": now},
         handicap_line=-1,
     )
     # 真实写入，不应因舍入误差被拒
