@@ -52,7 +52,9 @@ def _mock_predict_result(lam_h=1.8, lam_a=1.2):
         hf[k] = hf[k] / m_a * pa if m_a else 0
     return {
         "p_home": ph, "p_draw": pd, "p_away": pa,
+        "p_final_full": [ph, pd, pa],
         "lambda_home": lam_h, "lambda_away": lam_a,
+        "lambda_home_full": lam_h, "lambda_away_full": lam_a,
         "model_version": "2.10",
         "score_matrix_full": mc,
         "derivatives": {

@@ -21,7 +21,24 @@
 | **generated_at** | string (ISO8601) | **本场预测生成的时刻**（引擎跑完的时间，不是文件写入时间） |
 | **available_at** | object | **各源数据可用时间**：`{source_name: ISO8601}`，如 `{"espn": "...", "7m": "...", "okooo_sp": "..."}`；某源缺失则该key为null并记原因 |
 | **lambda_home / lambda_away** | float | 赛前 λ_H / λ_A（进入比分矩阵前的值） |
+| **lambda_home_full / lambda_away_full** | float | **全精度λ**（predictor仅model='beidan'时输出）；快照优先用全精度，回退时`lambda_is_display_rounded=true` |
 | **p_1x2** | [float×3] | 完整胜平负概率向量（校准后最终值） |
+| **p_final_full** | [float×3] | **未舍入的p_final**（predictor仅model='beidan'时输出）；快照的wdl/p_1x2/半全场目标统一用此值 |
+
+### P0数值一致性规则（b1dd256后续修复）
+
+`predictor.py` 的 `p_home/p_draw/p_away` 是 `round(p_final,4)` 展示值，
+但 `matrix_cal` 用未舍入的 `p_final` 做IPF校准。若快照用舍入值：
+- WDL总和可能偏0.0001，被1e-6容差拒写
+- 即使和为1，也与 `score_31` 从矩阵聚合的值不一致
+
+**硬规则**：
+1. 快照的 `wdl`、`p_1x2`、半全场9项的列目标必须用 `p_final_full`（未舍入），
+   与 `score_matrix_full` 同源。`p_home/p_draw/p_away` 仅作展示。
+2. `score_31` 三方向聚合必须等于 `wdl`（容差1e-9），由测试强制。
+3. `lambda_home/away` 快照用 `lambda_home_full/lambda_away_full`（全精度）；
+   若缺失则回退到round(3)值并标 `lambda_is_display_rounded=true`。
+4. 竞彩流程不受影响（只新增字段，不改现有行为）。
 | **six_play_vector** | object | 完整六玩法概率向量（见下）。**score_top5仅为展示字段，不作为概率依据** |
 | **score_matrix_full** | [[float]] | 全比分矩阵（n×n，每个格子概率），或由其聚合的31类分布。六玩法所有概率必须从同一矩阵聚合 |
 | model_version | string | 模型版本（如 `2.10`） |

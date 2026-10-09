@@ -663,10 +663,16 @@ def predict(payload: dict, config: dict | None = None,
         + (["一致性检查发现冲突，信心已下调。"] if issues else [])
         + ([_divergence_note(divergence)] if divergence else []),
     }
-    # 北单快照链路：仅 model='beidan' 时输出全比分矩阵（校准后），
-    # 供 engine/beidan_snapshot.py 聚合25类比分分布。竞彩流程不受影响。
+    # 北单快照链路：仅 model='beidan' 时输出全精度字段，
+    # 供 engine/beidan_snapshot.py 聚合31类比分分布。竞彩流程不受影响。
+    # P0数值一致性：p_home/p_draw/p_away 是 round(4) 展示值，
+    # score_matrix_full 用未舍入 p_final 校准；快照必须用 p_final_full
+    # 统一 wdl/p_1x2/半全场目标，避免舍入导致的不一致。
     if model == "beidan":
         out["score_matrix_full"] = [list(row) for row in matrix_cal]
+        out["p_final_full"] = [float(p) for p in p_final]
+        out["lambda_home_full"] = float(lam_h)
+        out["lambda_away_full"] = float(lam_a)
     return out
 
 

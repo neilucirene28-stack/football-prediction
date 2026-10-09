@@ -150,6 +150,9 @@ def build_six_play_vector(predict_result: dict) -> dict:
     """从predict()结果构建完整六玩法概率向量。
 
     要求 predict_result 含 score_matrix_full（model='beidan'时predictor输出）。
+    P0数值一致性：wdl、p_1x2、半全场目标必须用 p_final_full（未舍入），
+    与 score_matrix_full（matrix_cal，未舍入p_final校准）同源。
+    p_home/p_draw/p_away 是 round(4) 展示值，不可用于快照。
     所有概率从同一矩阵聚合；score_top5仅作展示。
     """
     matrix = predict_result.get("score_matrix_full")
@@ -159,11 +162,21 @@ def build_six_play_vector(predict_result: dict) -> dict:
         )
     deriv = predict_result.get("derivatives", {})
 
-    # 1. 胜平负
+    # 1. 胜平负：必须用 p_final_full（未舍入），与矩阵同源
+    pff = predict_result.get("p_final_full")
+    if pff and len(pff) == 3:
+        _p1x2_full = (float(pff[0]), float(pff[1]), float(pff[2]))
+    else:
+        # 回退：从矩阵边际聚合（保证与score_31一致）
+        n = len(matrix)
+        _ph = sum(matrix[h][a] for h in range(n) for a in range(len(matrix[h])) if h > a)
+        _pd = sum(matrix[h][a] for h in range(n) for a in range(len(matrix[h])) if h == a)
+        _pa = sum(matrix[h][a] for h in range(n) for a in range(len(matrix[h])) if h < a)
+        _p1x2_full = (_ph, _pd, _pa)
     wdl = {
-        "胜": predict_result["p_home"],
-        "平": predict_result["p_draw"],
-        "负": predict_result["p_away"],
+        "胜": _p1x2_full[0],
+        "平": _p1x2_full[1],
+        "负": _p1x2_full[2],
     }
 
     # 2. 让球胜平负：缺失时统一返回None，不返回零概率/None混合dict
@@ -199,7 +212,7 @@ def build_six_play_vector(predict_result: dict) -> dict:
     # 使聚合边际精确等于校准后胜平负（IPF哲学），再做1e-6校验。
     # 但只对齐微小误差（<1e-3）： gross矛盾（如均匀1/9 vs .5/.25/.25）
     # 必须拒绝，不能静默"修复"。
-    _p1x2 = (predict_result["p_home"], predict_result["p_draw"], predict_result["p_away"])
+    _p1x2 = _p1x2_full  # 半全场目标用全精度，与wdl/矩阵同源
     _cols = [("胜胜", "平胜", "负胜"), ("胜平", "平平", "负平"), ("胜负", "平负", "负负")]
     for _keys, _target in zip(_cols, _p1x2):
         _s = sum(half_full[k] for k in _keys)
@@ -450,10 +463,14 @@ def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
         "generated_at": generated_at,
         "available_at": match_data.get("available_at") or {},
         "asof": match_data.get("asof", generated_at),
-        "lambda_home": predict_result.get("lambda_home"),
-        "lambda_away": predict_result.get("lambda_away"),
-        "p_1x2": [predict_result["p_home"], predict_result["p_draw"],
-                  predict_result["p_away"]],
+        # P0数值一致性：lambda用全精度（lambda_*_full），回退到round(3)展示值并标注
+        "lambda_home": predict_result.get("lambda_home_full",
+                                         predict_result.get("lambda_home")),
+        "lambda_away": predict_result.get("lambda_away_full",
+                                         predict_result.get("lambda_away")),
+        "lambda_is_display_rounded": "lambda_home_full" not in predict_result,
+        # p_1x2 与 six_play_vector.wdl 同源（p_final_full未舍入）
+        "p_1x2": [six["wdl"]["胜"], six["wdl"]["平"], six["wdl"]["负"]],
         "six_play_vector": six,
         "score_matrix_full": predict_result.get("score_matrix_full"),
         "model_version": predict_result.get("model_version"),

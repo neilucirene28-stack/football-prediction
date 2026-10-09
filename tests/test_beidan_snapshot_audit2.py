@@ -34,12 +34,16 @@ def _mk_match(**kw):
 
 def _mk_predict():
     # 构造一个边际一致的预测结果
+    # P0数值一致性修复后：predict()输出 p_final_full（未舍入）供快照使用
     return {
         "p_home": 0.5,
         "p_draw": 0.25,
         "p_away": 0.25,
+        "p_final_full": [0.5, 0.25, 0.25],
         "lambda_home": 1.8,
         "lambda_away": 1.2,
+        "lambda_home_full": 1.8,
+        "lambda_away_full": 1.2,
         "model_version": "2.10",
         "score_matrix_full": [[0.357, 0.214], [0.286, 0.143]],
         "derivatives": {
