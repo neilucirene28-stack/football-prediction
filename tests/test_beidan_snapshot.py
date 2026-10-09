@@ -327,7 +327,8 @@ def test_atomic_write_uses_temp_and_fsync(tmp_path, monkeypatch):
     旧的 read-all + os.replace 模式在并发下丢记录，已废弃。
     """
     import inspect
-    src = inspect.getsource(bs.write_snapshot)
+    # 实现已拆分为 write_snapshot（统计wrapper）+ _write_snapshot_impl
+    src = inspect.getsource(bs._write_snapshot_impl)
     assert "O_APPEND" in src, "应使用 O_APPEND 追加模式"
     assert "flock" in src, "应使用 fcntl 文件锁"
     assert "fsync" in src, "应调用fsync"
@@ -348,3 +349,139 @@ def test_handicap_missing_returns_none():
         assert hw["handicap_line"] is not None, "有dict就必须有line"
         for k in ("让胜", "让平", "让负"):
             assert hw[k] is not None
+
+
+# ============ SP无采集时间漏洞测试（P0追加）============
+
+def test_sp_values_without_collection_evidence_marks_observation_only(tmp_path, monkeypatch):
+    """SP数值存在但collected_at=null、available_at只有form_source（无sp/odds源）
+    → 必须 observation_only=true（漏洞：原检查只在collected_at为真时触发）。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    now = datetime.now(timezone.utc).isoformat()
+    md = _mock_match_data(
+        seq="sp1",
+        available_at={"espn": now},  # 只有战绩源，无SP源
+        sp_snapshot={
+            "sp_wdl": {"胜": 2.0, "平": 3.0, "负": 4.0},  # SP数值存在
+            "collected_at": None,  # 但无采集时间
+        },
+    )
+    r = bs.write_snapshot(md, pr)
+    assert r["observation_only"] is True, \
+        "SP数值参与预测但无采集时间证据，必须标observation_only"
+    assert "sp" in r["observation_reason"].lower() or "SP" in r["observation_reason"]
+
+
+def test_sp_with_real_evidence_not_observation_only(tmp_path, monkeypatch):
+    """SP有真实采集证据（available_at含sp源+有效时间）→ 可observation_only=false。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    now = datetime.now(timezone.utc).isoformat()
+    md = _mock_match_data(
+        seq="sp2",
+        available_at={"espn": now, "okooo_sp": now},  # 有SP源
+        sp_snapshot={
+            "sp_wdl": {"胜": 2.0, "平": 3.0, "负": 4.0},
+            "collected_at": now,  # 有采集时间
+        },
+    )
+    r = bs.write_snapshot(md, pr)
+    assert r["observation_only"] is False
+
+
+def test_no_sp_values_no_sp_check(tmp_path, monkeypatch):
+    """无SP数值时不触发SP检查（不误伤）。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    md = _mock_match_data(seq="sp3", sp_snapshot=None)
+    r = bs.write_snapshot(md, pr)
+    assert r["observation_only"] is False
+
+
+# ============ 真实predict集成测试（GPT追加要求）============
+
+def test_integration_real_predict_write_snapshot(tmp_path, monkeypatch):
+    """用真实 predict(payload, model='beidan')（含真实让球线），
+    验证 write_snapshot 成功及六玩法一致性。
+
+    关键：predictor的derivatives做了round(v,4)，快照必须用未舍入全精度，
+    否则概率和/边际校验（1e-6）会失败导致写入被拒。
+    """
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    bs.reset_write_stats()
+    from engine.predictor import predict
+
+    now = datetime.now(timezone.utc).isoformat()
+    payload = {
+        "home": "阿森纳", "away": "切尔西",
+        "kickoff_at": "2026-10-10T19:00:00+08:00",
+        "snapshot_at": now,
+        "competition": "英超",
+        "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(10)],
+        "away_recent": [{"gf": 1, "ga": 1, "venue": "A"} for _ in range(10)],
+        "handicap": -1,
+        "handicap_line": -1,
+        "league_avg_goals": 2.70,
+    }
+    res = predict(payload, model="beidan")
+    assert res.get("status") != "insufficient_data", "测试payload应能预测"
+
+    # 验证predictor输出了未舍入全精度字段
+    h1x2 = res["derivatives"]["handicap_1x2"]
+    assert "p_home_full" in h1x2, "predictor应输出未舍入的p_home_full"
+    assert "half_full_1x2_full" in res["derivatives"], \
+        "predictor应输出未舍入的half_full_1x2_full"
+
+    md = _mock_match_data(
+        seq="integ1",
+        available_at={"espn": now},
+        handicap_line=-1,
+    )
+    # 真实写入，不应因舍入误差被拒
+    r = bs.write_snapshot(md, res)
+    assert r["observation_only"] is False
+
+    # 六玩法一致性：每类概率和≈1（1e-6）
+    six = r["six_play_vector"]
+    for name, vec in [("wdl", six["wdl"]),
+                      ("score_31", six["score_31"]),
+                      ("total_goals", six["total_goals"]),
+                      ("half_full", six["half_full"]),
+                      ("ou", six["ou"])]:
+        s = sum(vec.values())
+        assert abs(s - 1.0) < 1e-6, f"{name}概率和={s}，偏离1超过1e-6"
+    hw = six["handicap_wdl"]
+    assert hw is not None
+    s_hw = hw["让胜"] + hw["让平"] + hw["让负"]
+    assert abs(s_hw - 1.0) < 1e-6, f"handicap_wdl概率和={s_hw}"
+
+    # 半全场边际 = 全场1X2
+    hf = six["half_full"]
+    assert abs((hf["胜胜"] + hf["平胜"] + hf["负胜"]) - r["p_1x2"][0]) < 1e-6
+    assert abs((hf["胜平"] + hf["平平"] + hf["负平"]) - r["p_1x2"][1]) < 1e-6
+    assert abs((hf["胜负"] + hf["平负"] + hf["负负"]) - r["p_1x2"][2]) < 1e-6
+
+    # 统计
+    stats = bs.get_write_stats()
+    assert stats["success"] >= 1
+    assert stats["failed"] == 0
+
+
+def test_write_failure_counted(tmp_path, monkeypatch):
+    """写入失败要计数，不能静默丢（影响分母统计）。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    bs.reset_write_stats()
+    pr = _mock_predict_result()
+    # 构造必失败的输入：缺少score_matrix_full
+    bad_pr = dict(pr)
+    bad_pr["score_matrix_full"] = None
+    md = _mock_match_data(seq="fail1")
+    try:
+        bs.write_snapshot(md, bad_pr)
+        assert False, "应抛出异常"
+    except ValueError:
+        pass
+    stats = bs.get_write_stats()
+    assert stats["failed"] == 1, "失败必须计数"
+    assert stats["success"] == 0

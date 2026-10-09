@@ -39,6 +39,32 @@ _LOSE_SCORES = set(BEIDAN_SCORE_31["lose"][:-1])
 HALF_FULL_9 = ["胜胜", "胜平", "胜负", "平胜", "平平", "平负", "负胜", "负平", "负负"]
 OU_4 = ["上单", "上双", "下单", "下双"]
 
+# 写入统计（进程内累计，供调用方上报分母）
+# 成功/失败计数，避免静默丢记录导致分母统计失真
+_write_stats = {"success": 0, "failed": 0, "failed_reasons": {}}
+
+
+def get_write_stats() -> dict:
+    """返回写入统计快照（含失败原因分布）。"""
+    return {
+        "success": _write_stats["success"],
+        "failed": _write_stats["failed"],
+        "failed_reasons": dict(_write_stats["failed_reasons"]),
+    }
+
+
+def reset_write_stats():
+    """重置统计（测试用）。"""
+    _write_stats["success"] = 0
+    _write_stats["failed"] = 0
+    _write_stats["failed_reasons"] = {}
+
+
+def _record_write_failure(reason: str):
+    _write_stats["failed"] += 1
+    _write_stats["failed_reasons"][reason] = \
+        _write_stats["failed_reasons"].get(reason, 0) + 1
+
 PROB_TOL = 1e-6
 
 
@@ -53,7 +79,7 @@ def score_to_beidan_class(h: int, a: int) -> str:
 
 
 def aggregate_31class(matrix: list[list[float]]) -> dict[str, float]:
-    """从全比分矩阵聚合北单官方31类分布。"""
+    """从全比分矩阵聚合北单官方31类分布（全精度，不舍入）。"""
     dist = {c: 0.0 for grp in BEIDAN_SCORE_31.values() for c in grp}
     n = len(matrix)
     for h in range(n):
@@ -62,7 +88,7 @@ def aggregate_31class(matrix: list[list[float]]) -> dict[str, float]:
             p = row[a]
             if p:
                 dist[score_to_beidan_class(h, a)] += p
-    return {k: round(v, 6) for k, v in dist.items()}
+    return dist
 
 
 # 兼容别名（旧名保留，指向31类）
@@ -72,7 +98,7 @@ def aggregate_25class(matrix):
 
 
 def aggregate_total_goals_8(matrix: list[list[float]]) -> dict[str, float]:
-    """从矩阵聚合总进球8类：0,1,2,3,4,5,6,7+。"""
+    """从矩阵聚合总进球8类：0,1,2,3,4,5,6,7+（全精度，不舍入）。"""
     dist = {str(k): 0.0 for k in range(7)}
     dist["7+"] = 0.0
     n = len(matrix)
@@ -84,11 +110,11 @@ def aggregate_total_goals_8(matrix: list[list[float]]) -> dict[str, float]:
             t = h + a
             key = str(t) if t < 7 else "7+"
             dist[key] += p
-    return {k: round(v, 6) for k, v in dist.items()}
+    return dist
 
 
 def aggregate_ou_4(matrix: list[list[float]]) -> dict[str, float]:
-    """从矩阵聚合上下单双4类。上=总进球≥3，下=总进球≤2（北单官方口径）。"""
+    """从矩阵聚合上下单双4类。上=总进球≥3，下=总进球≤2（北单官方口径，全精度）。"""
     dist = {k: 0.0 for k in OU_4}
     n = len(matrix)
     for h in range(n):
@@ -100,7 +126,7 @@ def aggregate_ou_4(matrix: list[list[float]]) -> dict[str, float]:
             ou = "上" if t >= 3 else "下"
             oe = "单" if t % 2 == 1 else "双"
             dist[ou + oe] += p
-    return {k: round(v, 6) for k, v in dist.items()}
+    return dist
 
 
 def _check_prob_sum(dist: dict, name: str) -> None:
@@ -141,12 +167,16 @@ def build_six_play_vector(predict_result: dict) -> dict:
     }
 
     # 2. 让球胜平负：缺失时统一返回None，不返回零概率/None混合dict
+    # 优先使用未舍入全精度（p_*_full），展示层再round；回退到舍入值
     h1x2 = deriv.get("handicap_1x2")
     if h1x2 and h1x2.get("line") is not None:
+        ph_full = h1x2.get("p_home_full", h1x2["p_home"])
+        pd_full = h1x2.get("p_draw_full", h1x2["p_draw"])
+        pa_full = h1x2.get("p_away_full", h1x2["p_away"])
         handicap_wdl = {
-            "让胜": h1x2["p_home"],
-            "让平": h1x2["p_draw"],
-            "让负": h1x2["p_away"],
+            "让胜": ph_full,
+            "让平": pd_full,
+            "让负": pa_full,
             "handicap_line": h1x2["line"],
         }
     else:
@@ -160,17 +190,37 @@ def build_six_play_vector(predict_result: dict) -> dict:
     # 4. 总进球8类
     total_goals = aggregate_total_goals_8(matrix)
 
-    # 5. 半全场9类
-    half_full_raw = deriv.get("half_full_1x2") or {}
+    # 5. 半全场9类：优先使用未舍入全精度（half_full_1x2_full）
+    half_full_raw = deriv.get("half_full_1x2_full") or deriv.get("half_full_1x2") or {}
     half_full = {k: half_full_raw.get(k, 0.0) for k in HALF_FULL_9}
 
-    # Fix 5: 半全场对全场1X2的边际一致性校验
-    # 全场胜 = 胜胜+平胜+负胜（半场X、全场胜的三种组合）
-    # 全场平 = 胜平+平平+负平；全场负 = 胜负+平负+负负
+    # 边际对齐：半全场9项的列边际必须等于全场1X2。
+    # half_full_1x2 模型本身有约1e-5的长尾截断误差，此处做列内重归一，
+    # 使聚合边际精确等于校准后胜平负（IPF哲学），再做1e-6校验。
+    # 但只对齐微小误差（<1e-3）： gross矛盾（如均匀1/9 vs .5/.25/.25）
+    # 必须拒绝，不能静默"修复"。
+    _p1x2 = (predict_result["p_home"], predict_result["p_draw"], predict_result["p_away"])
+    _cols = [("胜胜", "平胜", "负胜"), ("胜平", "平平", "负平"), ("胜负", "平负", "负负")]
+    for _keys, _target in zip(_cols, _p1x2):
+        _s = sum(half_full[k] for k in _keys)
+        _dev = abs(_s - _target)
+        if _dev > 1e-3:
+            raise ValueError(
+                f"快照拒绝写入：半全场列 {_keys} 边际 {_s:.6f} vs "
+                f"全场概率 {_target:.6f}，偏离 {_dev:.2e} 超过1e-3（非浮点误差）"
+            )
+        if _s > 0:
+            for k in _keys:
+                half_full[k] = half_full[k] / _s * _target
+        elif _target > 0:
+            raise ValueError(
+                f"快照拒绝写入：半全场列 {_keys} 全零但全场概率 {_target:.6f} 非零"
+            )
+
+    # Fix 5: 半全场对全场1X2的边际一致性校验（对齐后应精确成立）
     _marg_home = half_full["胜胜"] + half_full["平胜"] + half_full["负胜"]
     _marg_draw = half_full["胜平"] + half_full["平平"] + half_full["负平"]
     _marg_away = half_full["胜负"] + half_full["平负"] + half_full["负负"]
-    _p1x2 = (predict_result["p_home"], predict_result["p_draw"], predict_result["p_away"])
     for _got, _exp, _name in ((_marg_home, _p1x2[0], "全场胜"),
                               (_marg_draw, _p1x2[1], "全场平"),
                               (_marg_away, _p1x2[2], "全场负")):
@@ -299,7 +349,7 @@ def _existing_seqs(path: str, lottery_no: str) -> dict[str, int]:
 
 
 def write_snapshot(match_data: dict, predict_result: dict) -> dict:
-    """写入一条北单预测快照（append-only）。
+    """写入一条北单预测快照（append-only）。带写入统计。
 
     match_data 需含：lottery_no, seq, league, home, away, kickoff,
         generated_at（真实生成时刻）, available_at（各源可用时间dict，可选）,
@@ -309,7 +359,19 @@ def write_snapshot(match_data: dict, predict_result: dict) -> dict:
 
     返回写入的记录（含 snapshot_id / rerun_of / observation_only）。
     时间证据缺失时自动标 observation_only=true。
+    写入失败时计入 _write_stats（不静默丢），并重新抛出。
     """
+    try:
+        record = _write_snapshot_impl(match_data, predict_result)
+    except Exception as e:
+        _record_write_failure(f"{type(e).__name__}:{str(e)[:80]}")
+        raise
+    _write_stats["success"] += 1
+    return record
+
+
+def _write_snapshot_impl(match_data: dict, predict_result: dict) -> dict:
+    """write_snapshot 的实际实现（统计由外层 wrapper 负责）。"""
     lottery_no = str(match_data["lottery_no"])
     seq = str(match_data["seq"])
 
@@ -323,28 +385,47 @@ def write_snapshot(match_data: dict, predict_result: dict) -> dict:
         observation_only = True
         observation_reasons.append("synthetic_sample=true：合成样本，防误入回测")
 
-    # Fix 1: SP时间证据校验
-    # sp_snapshot.collected_at 若无对应的SP源 available_at 真实证据，
-    # 则视为冒充（不准用战绩抓取完成时刻替代），标 observation_only
+    # Fix 1 (revised P0): SP时间证据校验
+    # 漏洞修复：原检查只在 collected_at 为真时触发；现改为：
+    # 只要 sp_wdl 有数值（参与了预测），就必须有SP源的 available_at 真实证据，
+    # 无论 collected_at 是否为 null。无证据 → observation_only=true。
     sp_snap = match_data.get("sp_snapshot")
-    if sp_snap and isinstance(sp_snap, dict) and sp_snap.get("collected_at"):
-        sp_evidence = False
-        available_at = match_data.get("available_at") or {}
-        for src, v in available_at.items():
-            if "sp" in src.lower() or "odd" in src.lower():
-                if _has_real_time_evidence(v):
-                    sp_evidence = True
-                    break
-        if not sp_evidence:
-            observation_only = True
-            observation_reasons.append(
-                "sp_snapshot.collected_at无SP源真实采集证据（不准用t_data_ready替代）"
-            )
-            # 无证据时 collected_at 置 null，不保留冒充值
-            sp_snap = dict(sp_snap)
-            sp_snap["collected_at"] = None
-            match_data = dict(match_data)
-            match_data["sp_snapshot"] = sp_snap
+    if sp_snap and isinstance(sp_snap, dict):
+        sp_wdl = sp_snap.get("sp_wdl") or {}
+        has_sp_values = bool(sp_wdl) and any(
+            v is not None for v in sp_wdl.values()
+        ) if isinstance(sp_wdl, dict) else bool(sp_wdl)
+        if has_sp_values:
+            sp_evidence = False
+            available_at = match_data.get("available_at") or {}
+            for src, v in available_at.items():
+                # 精确匹配SP/赔率源：避免"espn"误命中"sp"子串
+                # 匹配规则：源名含独立token "sp"/"odds"/"odd"（如下划线/连字符分隔），
+                # 或以 "sp"/"odds" 开头/结尾的复合名（如 okoo_sp, sp_source）
+                s = src.lower().replace("-", "_")
+                tokens = s.split("_")
+                is_sp_src = (
+                    "sp" in tokens or "odds" in tokens or "odd" in tokens
+                    or s.startswith("sp_") or s.endswith("_sp")
+                    or s.startswith("odds_") or s.endswith("_odds")
+                    or s == "sp" or s == "odds"
+                )
+                if is_sp_src:
+                    if _has_real_time_evidence(v):
+                        sp_evidence = True
+                        break
+            if not sp_evidence:
+                observation_only = True
+                observation_reasons.append(
+                    "sp_wdl数值参与预测但无SP源available_at真实采集证据"
+                    "（collected_at=%s；不准用t_data_ready/战绩时间替代）"
+                    % sp_snap.get("collected_at")
+                )
+                # 无证据时 collected_at 置 null，不保留冒充值
+                sp_snap = dict(sp_snap)
+                sp_snap["collected_at"] = None
+                match_data = dict(match_data)
+                match_data["sp_snapshot"] = sp_snap
 
     six = build_six_play_vector(predict_result)
 

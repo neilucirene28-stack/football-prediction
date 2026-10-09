@@ -410,11 +410,15 @@ def predict(payload: dict, config: dict | None = None,
         # 输出格式升级（对齐竞彩官方五大玩法）：半全场 9 种组合 + 总进球精确分布。
         # 纯输出项，不改变任何概率逻辑，ENGINE_VERSION 保持 2.5。
         # P0 Bug4：传入IPF后矩阵，使半全场全场边际与最终胜平负一致
+        # 未舍入全精度存 half_full_1x2_full（供北单快照使用）
         "half_full_1x2": {k: round(v, 4) for k, v in
                           half_full_1x2(lam_h, lam_a,
                                         ht_factor=cfg["ht_factor"],
                                         rho=cfg["rho"],
                                         ft_matrix=matrix_cal).items()},
+        "half_full_1x2_full": half_full_1x2(
+            lam_h, lam_a, ht_factor=cfg["ht_factor"],
+            rho=cfg["rho"], ft_matrix=matrix_cal),
         "total_goals_exact": {str(k): round(v, 4) for k, v in
                               total_goals_exact(matrix_cal).items()},
     }
@@ -458,6 +462,9 @@ def predict(payload: dict, config: dict | None = None,
                                  "p_home_raw": round(h, 4),
                                  "p_draw_raw": round(d, 4),
                                  "p_away_raw": round(a, 4),
+                                 # 未舍入全精度（供北单快照使用，展示层再round）
+                                 "p_home_full": h2, "p_draw_full": d2,
+                                 "p_away_full": a2,
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
 
