@@ -4,6 +4,7 @@ from collections import Counter
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from beidan_bd1.frozen_settlement import load_bundle
 
 
@@ -47,7 +48,8 @@ def main():
         if row['match_id'] not in predicted: continue
         saved=predicted[row['match_id']]; chosen=saved['candidate']['vectors']; diag=saved['alternatives']['5.0']['vectors']
         scores='、'.join(f"{k} ({p*100:.1f}%)" for k,p in sorted(diag['score'].items(),key=lambda kv:-kv[1])[:3])
-        lines.append(f"| {row['seq']} | {row['league']} | {row['home']} vs {row['away']} | {row['kickoff_at']} | {percent(chosen['wdl'])} | {percent(diag['wdl'])} | {scores} |")
+        kickoff = datetime.fromisoformat(row['kickoff_at'].replace('Z', '+00:00')).astimezone(ZoneInfo('Asia/Shanghai')).strftime('%m-%d %H:%M')
+        lines.append(f"| {row['seq']} | {row['league']} | {row['home']} vs {row['away']} | {kickoff} | {percent(chosen['wdl'])} | {percent(diag['wdl'])} | {scores} |")
     lines.extend(['', '尚无成对已结算赛果，Brier 为空。旧冻结文件保留，新表只读取本次已封存的概率。', '',
                   f"独立保留的冻结清单 SHA256：`{args.manifest_sha256}`。", '',
                   '## 完整池缺口', '', '| 联赛 | 在售场数 | 研究候选 | 阻断 |', '|---|---|---|---|'])
