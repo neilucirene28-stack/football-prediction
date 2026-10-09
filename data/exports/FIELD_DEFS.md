@@ -4,12 +4,19 @@
 期号：26102 / 26103
 模型：26102用v2.5，26103用v2.9
 
-## ⚠️ 时间戳修正记录（2026-10-09，GPT核验发现）
+## ⚠️ 时间戳修正记录（2026-10-09，GPT核验发现，两次修正）
 
+### 第一次修正（已作废）
 - 原 `collected_at` 全为 `2026-10-09T14:30:00+08:00`，系原始JSON内预设的 `generated_at` 值，**并非真实写入时间**
-- 原始预测文件 `data/predictions/2026-10-09-beidan.json` 实际mtime：`2026-10-09T14:20:16+08:00`（UTC 06:20:16）
-- 已修正为文件实际写入时间，并新增 `provenance_unverified=true` 标记
-- **结论**：这批数据仅作观察（observation_only），不可用于 as-of 回测
+- 曾改为文件实际mtime `2026-10-09T14:20:16+08:00`，但GPT指出：mtime也不能冒充采集时间
+
+### 第二次修正（当前，严格口径）
+- `collected_at=null`、`generated_at=null`、`available_at=null`——**无证据的时间一律null，不填**
+- `original_file_mtime="2026-10-09T14:20:16+08:00"`——单独字段，仅注明文件写入时间
+- `provenance_unverified=true`、`observation_only=true`、`as_of_backtest=false`
+- **已核验**：111场status=ok的kickoff全部晚于文件mtime（14:20:16），**0场赛后记录**
+- 但这只能证明文件写入早于开球，**不能证明每条SP在此前已采集**——仍标unverified
+- 将来有逐场原始生成日志，再据证据填真实时间
 
 ## 文件清单
 
@@ -38,10 +45,13 @@
 | league | string | 联赛中文名 |
 | home / away | string | 主客队名（比赛必需信息，保留） |
 | kickoff | string | 开球时间（北京时间） |
-| collected_at | string | **已修正**：原始预测文件实际写入时间 `2026-10-09T14:20:16+08:00`（原14:30:00为预设值，已作废） |
-| provenance_unverified | bool | true：采集时间未经核验，仅为文件写入时间 |
-| provenance_note | string | 说明文字：collected_at为文件写入时间，非经核验的赛前生成时刻 |
-| usage | string | "observation_only"：仅作观察 |
+| collected_at | null | **无证据，一律null**（原14:30:00为预设值已作废；mtime也不能冒充采集时间） |
+| generated_at | null | 无逐场原始生成日志，一律null |
+| available_at | null | 无每源可用时间记录，一律null |
+| original_file_mtime | string | `"2026-10-09T14:20:16+08:00"`——文件写入时间，**非采集时间** |
+| original_file_mtime_note | string | "文件写入时间，非采集时间" |
+| provenance_unverified | bool | true：采集时间未经核验 |
+| observation_only | bool | true：仅作观察 |
 | as_of_backtest | bool | false：不可用于 as-of 回测 |
 | form_source | string | 近况数据源（7m/espn等） |
 | n_home_recent / n_away_recent | int | 主客近况场次 |
