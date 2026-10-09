@@ -1,0 +1,3715 @@
+{
+ "generated_at": "2026-10-09T13:34:47.171850+08:00",
+ "model_version": "2.9",
+ "matches": [
+  {
+   "no": "周五001",
+   "mid": "周五001",
+   "home": "仁川联",
+   "away": "浦项制铁",
+   "kickoff_beijing": "2026-10-09T15:30:00+08:00",
+   "league": "韩职",
+   "handicap_line": -1,
+   "official_sp": {
+    "3": 2.28,
+    "1": 2.85,
+    "0": 2.94
+   },
+   "official_handicap_sp": {
+    "3": 5.85,
+    "1": 3.65,
+    "0": 1.46
+   },
+   "payload": {
+    "home": "仁川联",
+    "away": "浦项制铁",
+    "kickoff_at": "2026-10-09T15:30:00+08:00",
+    "snapshot_at": "2026-10-09T13:24:48.121829+08:00",
+    "competition": "韩职",
+    "home_recent": [
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-27",
+      "opp": "Gangwon"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-20",
+      "opp": "Daejeon"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-12",
+      "opp": "Ulsan HD"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-08",
+      "opp": "Bucheon FC 1995"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-05",
+      "opp": "Seoul"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-30",
+      "opp": "Jeonbuk"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-08-26",
+      "opp": "Anyang"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-23",
+      "opp": "Gwangju FC"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-16",
+      "opp": "Gimcheon Sangmu"
+     },
+     {
+      "gf": 3,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-08-02",
+      "opp": "Jeju SK"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-07-26",
+      "opp": "Bucheon FC 1995"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-07-21",
+      "opp": "Ulsan HD"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-07-18",
+      "opp": "Jeonbuk"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-07-12",
+      "opp": "Anyang"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-07-05",
+      "opp": "Seoul"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-20",
+      "opp": "Seoul"
+     },
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-12",
+      "opp": "Daejeon"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-09",
+      "opp": "Gimcheon Sangmu"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-05",
+      "opp": "Jeonbuk"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-30",
+      "opp": "Gangwon"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-25",
+      "opp": "Jeju SK"
+     },
+     {
+      "gf": 0,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-08-22",
+      "opp": "Bucheon FC 1995"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-15",
+      "opp": "Gwangju FC"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-08",
+      "opp": "Ulsan HD"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-01",
+      "opp": "Gimcheon Sangmu"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-07-25",
+      "opp": "Jeonbuk"
+     },
+     {
+      "gf": 1,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-07-22",
+      "opp": "Seoul"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-07-18",
+      "opp": "Jeju SK"
+     },
+     {
+      "gf": 3,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-07-11",
+      "opp": "Gwangju FC"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-07-04",
+      "opp": "Anyang"
+     }
+    ],
+    "h2h": [
+     {
+      "gf": 0,
+      "ga": 1
+     },
+     {
+      "gf": 1,
+      "ga": 1
+     }
+    ],
+    "odds": {
+     "home": 2.28,
+     "draw": 2.85,
+     "away": 2.94
+    },
+    "handicap_line": -1,
+    "handicap_sp": [
+     5.85,
+     3.65,
+     1.46
+    ],
+    "league_avg_goals": 2.7
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "仁川联",
+     "away": "浦项制铁",
+     "competition": "韩职",
+     "kickoff_at": "2026-10-09T15:30:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 1.518,
+    "lambda_away": 1.053,
+    "lambda_notes": {
+     "attack_home": 0.914,
+     "defense_home": 0.828,
+     "attack_away": 0.933,
+     "defense_away": 1.11,
+     "home_sample": 7,
+     "away_sample": 10,
+     "home_effective_n": 3.54,
+     "away_effective_n": 4.96,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": false,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false,
+     "h2h_adjust": -0.01
+    },
+    "p_home": 0.4279,
+    "p_draw": 0.2989,
+    "p_away": 0.2732,
+    "signals": {
+     "model": [
+      0.464,
+      0.2889,
+      0.2471
+     ],
+     "market": [
+      0.3935,
+      0.3085,
+      0.2981
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      2.28,
+      2.85,
+      2.94
+     ],
+     "overround": 0.1296,
+     "implied": [
+      0.3935,
+      0.3085,
+      0.2981
+     ]
+    },
+    "value": [],
+    "derivatives": {
+     "btts": 0.5277,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": -1,
+      "p_home": 0.2009,
+      "p_draw": 0.227,
+      "p_away": 0.5721,
+      "p_home_raw": 0.2239,
+      "p_draw_raw": 0.204,
+      "p_away_raw": 0.5721,
+      "letdraw_guard": {
+       "top": "让负",
+       "top_prob": 0.5721,
+       "gap": 0.3451,
+       "flags": [
+        "防让平"
+       ],
+       "downgrade": false
+      }
+     },
+     "top_scores": [
+      {
+       "score": "1-1",
+       "prob": 0.1429
+      },
+      {
+       "score": "0-0",
+       "prob": 0.0955
+      },
+      {
+       "score": "1-0",
+       "prob": 0.0924
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "1-1",
+       "prob": 0.1381
+      },
+      {
+       "score": "1-0",
+       "prob": 0.1002
+      },
+      {
+       "score": "2-1",
+       "prob": 0.0928
+      }
+     ],
+     "p_1x2_raw": [
+      0.464,
+      0.2889,
+      0.2471
+     ],
+     "total_goals": {
+      "0": 0.0955,
+      "1": 0.1638,
+      "2": 0.271,
+      "3": 0.2142,
+      "4": 0.1387,
+      "5+": 0.1167
+     },
+     "expected_goals": 2.56,
+     "expected_goals_raw": 2.57,
+     "main_goal_interval": {
+      "label": "2-3球",
+      "prob": 0.4852
+     },
+     "fair_handicap": {
+      "handicap": -0.75,
+      "win": 0.4279,
+      "push": 0,
+      "lose": 0.5721
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.3379,
+      "p_draw": 0.4564,
+      "p_away": 0.2057,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.3356
+       },
+       {
+        "score": "1-0",
+        "prob": 0.2025
+       },
+       {
+        "score": "0-1",
+        "prob": 0.1365
+       },
+       {
+        "score": "1-1",
+        "prob": 0.1128
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.2502,
+      "胜平": 0.0514,
+      "胜负": 0.0164,
+      "平胜": 0.1566,
+      "平平": 0.1972,
+      "平负": 0.1104,
+      "负胜": 0.0211,
+      "负平": 0.0503,
+      "负负": 0.1464
+     },
+     "total_goals_exact": {
+      "0": 0.0955,
+      "1": 0.1638,
+      "2": 0.271,
+      "3": 0.2142,
+      "4": 0.1387,
+      "5": 0.0704,
+      "6": 0.0303,
+      "7+": 0.0159
+     },
+     "upset_score": {
+      "score": "1-1",
+      "prob": 0.1429
+     }
+    },
+    "consistency_issues": [
+     "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+    ],
+    "confidence": "C",
+    "confidence_score": 23.9,
+    "divergence": null,
+    "upset_risk": 62.2,
+    "upset_risk_factors": [
+     "实力接近、无明显热门"
+    ],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "主胜",
+     "prob": 0.4279,
+     "value_outcomes": []
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+     "一致性检查发现冲突，信心已下调。"
+    ]
+   }
+  },
+  {
+   "no": "周五002",
+   "mid": "周五002",
+   "home": "柏太阳神",
+   "away": "神户胜利船",
+   "kickoff_beijing": "2026-10-09T18:00:00+08:00",
+   "league": "日职",
+   "handicap_line": -1,
+   "official_sp": {
+    "3": 2.23,
+    "1": 3.22,
+    "0": 2.7
+   },
+   "official_handicap_sp": {
+    "3": 5.1,
+    "1": 3.9,
+    "0": 1.48
+   },
+   "payload": {
+    "home": "柏太阳神",
+    "away": "神户胜利船",
+    "kickoff_at": "2026-10-09T18:00:00+08:00",
+    "snapshot_at": "2026-10-09T13:24:52.405412+08:00",
+    "competition": "日职",
+    "home_recent": [
+     {
+      "gf": 4,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-20",
+      "opp": "Machida"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-11",
+      "opp": "Kyoto"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-09-06",
+      "opp": "Yokohama F. Marinos"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-02",
+      "opp": "Cerezo Osaka"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-29",
+      "opp": "Shimizu S-Pulse"
+     },
+     {
+      "gf": 4,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-21",
+      "opp": "V-Varen Nagasaki"
+     },
+     {
+      "gf": 3,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-14",
+      "opp": "Verdy"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-08",
+      "opp": "Mito"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-20",
+      "opp": "Gamba Osaka"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-11",
+      "opp": "Kashima Antlers"
+     },
+     {
+      "gf": 3,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-06",
+      "opp": "V-Varen Nagasaki"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-02",
+      "opp": "Verdy"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-29",
+      "opp": "Cerezo Osaka"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-22",
+      "opp": "Yokohama F. Marinos"
+     },
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-15",
+      "opp": "FC Tokyo"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-08",
+      "opp": "Avispa Fukuoka"
+     }
+    ],
+    "h2h": [],
+    "odds": {
+     "home": 2.23,
+     "draw": 3.22,
+     "away": 2.7
+    },
+    "handicap_line": -1,
+    "handicap_sp": [
+     5.1,
+     3.9,
+     1.48
+    ],
+    "league_avg_goals": 2.7
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "柏太阳神",
+     "away": "神户胜利船",
+     "competition": "日职",
+     "kickoff_at": "2026-10-09T18:00:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 1.039,
+    "lambda_away": 1.341,
+    "lambda_notes": {
+     "attack_home": 1.119,
+     "defense_home": 1.113,
+     "attack_away": 0.893,
+     "defense_away": 0.614,
+     "home_sample": 3,
+     "away_sample": 4,
+     "home_effective_n": 1.88,
+     "away_effective_n": 2.8,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": true,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false
+    },
+    "p_home": 0.3396,
+    "p_draw": 0.2881,
+    "p_away": 0.3723,
+    "signals": {
+     "model": [
+      0.2729,
+      0.3076,
+      0.4195
+     ],
+     "market": [
+      0.4031,
+      0.2695,
+      0.3274
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      2.23,
+      3.22,
+      2.7
+     ],
+     "overround": 0.1294,
+     "implied": [
+      0.4031,
+      0.2695,
+      0.3274
+     ]
+    },
+    "value": [],
+    "derivatives": {
+     "btts": 0.491,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": -1,
+      "p_home": 0.1126,
+      "p_draw": 0.2269,
+      "p_away": 0.6604,
+      "p_home_raw": 0.1357,
+      "p_draw_raw": 0.2039,
+      "p_away_raw": 0.6604,
+      "letdraw_guard": {
+       "top": "让负",
+       "top_prob": 0.6604,
+       "gap": 0.4335,
+       "flags": [
+        "防让平"
+       ],
+       "downgrade": false
+      }
+     },
+     "top_scores": [
+      {
+       "score": "1-1",
+       "prob": 0.1365
+      },
+      {
+       "score": "0-0",
+       "prob": 0.1024
+      },
+      {
+       "score": "1-0",
+       "prob": 0.0988
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "1-1",
+       "prob": 0.1457
+      },
+      {
+       "score": "0-0",
+       "prob": 0.1094
+      },
+      {
+       "score": "0-1",
+       "prob": 0.1074
+      }
+     ],
+     "p_1x2_raw": [
+      0.2729,
+      0.3076,
+      0.4195
+     ],
+     "total_goals": {
+      "0": 0.1024,
+      "1": 0.1941,
+      "2": 0.2725,
+      "3": 0.2146,
+      "4": 0.1218,
+      "5+": 0.0945
+     },
+     "expected_goals": 2.39,
+     "expected_goals_raw": 2.38,
+     "main_goal_interval": {
+      "label": "2-3球",
+      "prob": 0.4871
+     },
+     "fair_handicap": {
+      "handicap": 0.0,
+      "win": 0.3396,
+      "push": 0.2881,
+      "lose": 0.3723
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.2175,
+      "p_draw": 0.4768,
+      "p_away": 0.3057,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.3633
+       },
+       {
+        "score": "0-1",
+        "prob": 0.1948
+       },
+       {
+        "score": "1-0",
+        "prob": 0.1481
+       },
+       {
+        "score": "1-1",
+        "prob": 0.1069
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.1826,
+      "胜平": 0.0457,
+      "胜负": 0.0176,
+      "平胜": 0.1386,
+      "平平": 0.1959,
+      "平负": 0.1424,
+      "负胜": 0.0183,
+      "负平": 0.0464,
+      "负负": 0.2124
+     },
+     "total_goals_exact": {
+      "0": 0.1024,
+      "1": 0.1941,
+      "2": 0.2725,
+      "3": 0.2146,
+      "4": 0.1218,
+      "5": 0.0603,
+      "6": 0.023,
+      "7+": 0.0112
+     },
+     "upset_score": {
+      "score": "1-0",
+      "prob": 0.0988
+     }
+    },
+    "consistency_issues": [
+     "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+    ],
+    "confidence": "C",
+    "confidence_score": 12.0,
+    "divergence": null,
+    "upset_risk": 67.8,
+    "upset_risk_factors": [
+     "实力接近、无明显热门"
+    ],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "客胜",
+     "prob": 0.3723,
+     "value_outcomes": []
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+     "一致性检查发现冲突，信心已下调。"
+    ]
+   }
+  },
+  {
+   "no": "周五003",
+   "mid": "周五003",
+   "home": "海登海姆",
+   "away": "凯泽",
+   "kickoff_beijing": "2026-10-10T00:30:00+08:00",
+   "league": "德乙",
+   "handicap_line": -1,
+   "official_sp": {
+    "3": 1.75,
+    "1": 3.55,
+    "0": 3.62
+   },
+   "official_handicap_sp": {
+    "3": 3.2,
+    "1": 3.66,
+    "0": 1.84
+   },
+   "payload": {
+    "home": "海登海姆",
+    "away": "凯泽",
+    "kickoff_at": "2026-10-10T00:30:00+08:00",
+    "snapshot_at": "2026-10-09T13:34:01.524614+08:00",
+    "competition": "德乙",
+    "home_recent": [
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-20",
+      "opp": "Arminia Bielefeld"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-13",
+      "opp": "Holstein Kiel"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-06",
+      "opp": "Greuther Furth"
+     },
+     {
+      "gf": 5,
+      "ga": 3,
+      "venue": "H",
+      "date": "2026-08-29",
+      "opp": "SG Dynamo Dresden"
+     },
+     {
+      "gf": 1,
+      "ga": 4,
+      "venue": "A",
+      "date": "2026-08-15",
+      "opp": "Hertha Berlin"
+     },
+     {
+      "gf": 4,
+      "ga": 3,
+      "venue": "H",
+      "date": "2026-08-08",
+      "opp": "VfL Osnabruck"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-19",
+      "opp": "Braunschweig"
+     },
+     {
+      "gf": 0,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-09-12",
+      "opp": "Magdeburg"
+     },
+     {
+      "gf": 3,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-05",
+      "opp": "Darmstadt"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-30",
+      "opp": "St. Pauli"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-15",
+      "opp": "Karlsruher SC"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-08",
+      "opp": "Wolfsburg"
+     }
+    ],
+    "h2h": [],
+    "handicap_line": -1,
+    "handicap_sp": [
+     3.2,
+     3.66,
+     1.84
+    ],
+    "league_avg_goals": 2.7,
+    "odds": {
+     "home": 1.75,
+     "draw": 3.55,
+     "away": 3.62
+    }
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "海登海姆",
+     "away": "凯泽",
+     "competition": "德乙",
+     "kickoff_at": "2026-10-10T00:30:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 2.496,
+    "lambda_away": 1.199,
+    "lambda_notes": {
+     "attack_home": 1.555,
+     "defense_home": 1.137,
+     "attack_away": 0.782,
+     "defense_away": 1.061,
+     "home_sample": 3,
+     "away_sample": 3,
+     "home_effective_n": 2.22,
+     "away_effective_n": 2.22,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": true,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false
+    },
+    "p_home": 0.583,
+    "p_draw": 0.2196,
+    "p_away": 0.1974,
+    "signals": {
+     "model": [
+      0.6468,
+      0.1967,
+      0.1566
+     ],
+     "market": [
+      0.5223,
+      0.2415,
+      0.2362
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      1.75,
+      3.55,
+      3.62
+     ],
+     "overround": 0.1294,
+     "implied": [
+      0.5223,
+      0.2415,
+      0.2362
+     ]
+    },
+    "value": [
+     {
+      "outcome": "home",
+      "edge": 0.0607,
+      "kelly": 0.0067
+     }
+    ],
+    "derivatives": {
+     "btts": 0.6605,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": -1,
+      "p_home": 0.3657,
+      "p_draw": 0.2174,
+      "p_away": 0.417,
+      "p_home_raw": 0.3983,
+      "p_draw_raw": 0.1847,
+      "p_away_raw": 0.417,
+      "letdraw_guard": {
+       "top": "让负",
+       "top_prob": 0.417,
+       "gap": 0.0513,
+       "flags": [
+        "防让平",
+        "概率接近建议降档"
+       ],
+       "downgrade": true
+      }
+     },
+     "top_scores": [
+      {
+       "score": "1-1",
+       "prob": 0.0939
+      },
+      {
+       "score": "2-1",
+       "prob": 0.0837
+      },
+      {
+       "score": "2-0",
+       "prob": 0.0698
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "2-1",
+       "prob": 0.0928
+      },
+      {
+       "score": "1-1",
+       "prob": 0.0841
+      },
+      {
+       "score": "2-0",
+       "prob": 0.0774
+      }
+     ],
+     "p_1x2_raw": [
+      0.6468,
+      0.1967,
+      0.1566
+     ],
+     "total_goals": {
+      "0": 0.0385,
+      "1": 0.0726,
+      "2": 0.1861,
+      "3": 0.2069,
+      "4": 0.1931,
+      "5+": 0.3027
+     },
+     "expected_goals": 3.65,
+     "expected_goals_raw": 3.69,
+     "main_goal_interval": {
+      "label": "4-5+球",
+      "prob": 0.4958
+     },
+     "fair_handicap": {
+      "handicap": -1.0,
+      "win": 0.3983,
+      "push": 0.1847,
+      "lose": 0.417
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.4804,
+      "p_draw": 0.358,
+      "p_away": 0.1616,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.2116
+       },
+       {
+        "score": "1-0",
+        "prob": 0.2012
+       },
+       {
+        "score": "1-1",
+        "prob": 0.1288
+       },
+       {
+        "score": "2-0",
+        "prob": 0.1186
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.3798,
+      "胜平": 0.0486,
+      "胜负": 0.0182,
+      "平胜": 0.1703,
+      "平平": 0.1249,
+      "平负": 0.0746,
+      "负胜": 0.033,
+      "负平": 0.0461,
+      "负负": 0.1046
+     },
+     "total_goals_exact": {
+      "0": 0.0385,
+      "1": 0.0726,
+      "2": 0.1861,
+      "3": 0.2069,
+      "4": 0.1931,
+      "5": 0.1387,
+      "6": 0.0861,
+      "7+": 0.078
+     },
+     "upset_score": {
+      "score": "1-1",
+      "prob": 0.0939
+     }
+    },
+    "consistency_issues": [
+     "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+    ],
+    "confidence": "C",
+    "confidence_score": 23.9,
+    "divergence": null,
+    "upset_risk": 41.7,
+    "upset_risk_factors": [],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "主胜",
+     "prob": 0.583,
+     "value_outcomes": [
+      "home"
+     ]
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+     "一致性检查发现冲突，信心已下调。"
+    ]
+   }
+  },
+  {
+   "no": "周五004",
+   "mid": "周五004",
+   "home": "哥德堡",
+   "away": "韦斯特罗斯",
+   "kickoff_beijing": "2026-10-10T01:00:00+08:00",
+   "league": "瑞超",
+   "handicap_line": -1,
+   "official_sp": {
+    "3": 1.51,
+    "1": 4.0,
+    "0": 4.6
+   },
+   "official_handicap_sp": {
+    "3": 2.58,
+    "1": 3.55,
+    "0": 2.18
+   },
+   "payload": {
+    "home": "哥德堡",
+    "away": "韦斯特罗斯",
+    "kickoff_at": "2026-10-10T01:00:00+08:00",
+    "snapshot_at": "2026-10-09T13:34:08.483495+08:00",
+    "competition": "瑞超",
+    "home_recent": [
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-19",
+      "opp": "Brommapojkarna"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-12",
+      "opp": "Halmstad"
+     },
+     {
+      "gf": 4,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-07",
+      "opp": "Mjallby"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-30",
+      "opp": "Orgryte"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-23",
+      "opp": "Elfsborg"
+     },
+     {
+      "gf": 0,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-08-16",
+      "opp": "Degerfors"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-09",
+      "opp": "Kalmar"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-02",
+      "opp": "Degerfors"
+     },
+     {
+      "gf": 1,
+      "ga": 4,
+      "venue": "A",
+      "date": "2026-07-26",
+      "opp": "Sirius"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-07-17",
+      "opp": "Brommapojkarna"
+     },
+     {
+      "gf": 0,
+      "ga": 4,
+      "venue": "A",
+      "date": "2026-07-12",
+      "opp": "Malmo FF"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-07-05",
+      "opp": "AIK"
+     },
+     {
+      "gf": 5,
+      "ga": 4,
+      "venue": "A",
+      "date": "2026-05-31",
+      "opp": "Vasteras SK"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-05-25",
+      "opp": "Mjallby"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-05-19",
+      "opp": "Orgryte"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-19",
+      "opp": "Malmo FF"
+     },
+     {
+      "gf": 4,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-12",
+      "opp": "AIK"
+     },
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-05",
+      "opp": "Sirius"
+     },
+     {
+      "gf": 3,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-08-29",
+      "opp": "Hacken"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-23",
+      "opp": "Kalmar"
+     },
+     {
+      "gf": 0,
+      "ga": 3,
+      "venue": "A",
+      "date": "2026-08-14",
+      "opp": "Elfsborg"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-10",
+      "opp": "Djurgarden"
+     },
+     {
+      "gf": 0,
+      "ga": 6,
+      "venue": "A",
+      "date": "2026-08-03",
+      "opp": "Djurgarden"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-07-24",
+      "opp": "Orgryte"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-07-17",
+      "opp": "Mjallby"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-07-12",
+      "opp": "Degerfors"
+     },
+     {
+      "gf": 3,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-07-04",
+      "opp": "Halmstad"
+     },
+     {
+      "gf": 4,
+      "ga": 5,
+      "venue": "H",
+      "date": "2026-05-31",
+      "opp": "Goteborg"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-05-24",
+      "opp": "Malmo FF"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-05-17",
+      "opp": "AIK"
+     }
+    ],
+    "h2h": [
+     {
+      "gf": 5,
+      "ga": 4
+     }
+    ],
+    "handicap_line": -1,
+    "handicap_sp": [
+     2.58,
+     3.55,
+     2.18
+    ],
+    "league_avg_goals": 2.7,
+    "odds": {
+     "home": 1.51,
+     "draw": 4.0,
+     "away": 4.6
+    }
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "哥德堡",
+     "away": "韦斯特罗斯",
+     "competition": "瑞超",
+     "kickoff_at": "2026-10-10T01:00:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 2.154,
+    "lambda_away": 1.393,
+    "lambda_notes": {
+     "attack_home": 1.137,
+     "defense_home": 0.811,
+     "attack_away": 1.285,
+     "defense_away": 1.241,
+     "home_sample": 8,
+     "away_sample": 7,
+     "home_effective_n": 4.25,
+     "away_effective_n": 3.65,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": false,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false,
+     "h2h_adjust": 0.01
+    },
+    "p_home": 0.5749,
+    "p_draw": 0.2194,
+    "p_away": 0.2057,
+    "signals": {
+     "model": [
+      0.5377,
+      0.2288,
+      0.2335
+     ],
+     "market": [
+      0.6103,
+      0.2105,
+      0.1792
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      1.51,
+      4.0,
+      4.6
+     ],
+     "overround": 0.1296,
+     "implied": [
+      0.6103,
+      0.2105,
+      0.1792
+     ]
+    },
+    "value": [],
+    "derivatives": {
+     "btts": 0.6719,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": -1,
+      "p_home": 0.3408,
+      "p_draw": 0.2341,
+      "p_away": 0.4251,
+      "p_home_raw": 0.3567,
+      "p_draw_raw": 0.2182,
+      "p_away_raw": 0.4251,
+      "letdraw_guard": {
+       "top": "让负",
+       "top_prob": 0.4251,
+       "gap": 0.0843,
+       "flags": [
+        "防让平",
+        "概率接近建议降档"
+       ],
+       "downgrade": true
+      }
+     },
+     "top_scores": [
+      {
+       "score": "2-1",
+       "prob": 0.0996
+      },
+      {
+       "score": "1-1",
+       "prob": 0.0937
+      },
+      {
+       "score": "3-1",
+       "prob": 0.0715
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "1-1",
+       "prob": 0.0977
+      },
+      {
+       "score": "2-1",
+       "prob": 0.0931
+      },
+      {
+       "score": "3-1",
+       "prob": 0.0669
+      }
+     ],
+     "p_1x2_raw": [
+      0.5377,
+      0.2288,
+      0.2335
+     ],
+     "total_goals": {
+      "0": 0.0384,
+      "1": 0.0798,
+      "2": 0.1898,
+      "3": 0.2153,
+      "4": 0.1899,
+      "5+": 0.2868
+     },
+     "expected_goals": 3.56,
+     "expected_goals_raw": 3.55,
+     "main_goal_interval": {
+      "label": "4-5+球",
+      "prob": 0.4767
+     },
+     "fair_handicap": {
+      "handicap": -1.0,
+      "win": 0.3567,
+      "push": 0.2182,
+      "lose": 0.4251
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.4049,
+      "p_draw": 0.3826,
+      "p_away": 0.2125,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.2259
+       },
+       {
+        "score": "1-0",
+        "prob": 0.1832
+       },
+       {
+        "score": "1-1",
+        "prob": 0.1378
+       },
+       {
+        "score": "0-1",
+        "prob": 0.1128
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.3565,
+      "胜平": 0.0482,
+      "胜负": 0.0176,
+      "平胜": 0.1812,
+      "平平": 0.1246,
+      "平负": 0.0752,
+      "负胜": 0.0372,
+      "负平": 0.0467,
+      "负负": 0.1129
+     },
+     "total_goals_exact": {
+      "0": 0.0384,
+      "1": 0.0798,
+      "2": 0.1898,
+      "3": 0.2153,
+      "4": 0.1899,
+      "5": 0.1364,
+      "6": 0.0803,
+      "7+": 0.0701
+     },
+     "upset_score": {
+      "score": "1-1",
+      "prob": 0.0937
+     }
+    },
+    "consistency_issues": [],
+    "confidence": "C",
+    "confidence_score": 26.6,
+    "divergence": null,
+    "upset_risk": 42.5,
+    "upset_risk_factors": [],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "主胜",
+     "prob": 0.5749,
+     "value_outcomes": []
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。"
+    ]
+   }
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "布兰",
+    "away": "维京",
+    "competition": "挪超",
+    "kickoff_at": "2026-10-10T01:00:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 1.32,
+   "lambda_away": 1.453,
+   "lambda_notes": {
+    "attack_home": 1.077,
+    "defense_home": 0.894,
+    "attack_away": 1.084,
+    "defense_away": 0.73,
+    "home_sample": 4,
+    "away_sample": 5,
+    "home_effective_n": 2.67,
+    "away_effective_n": 3.33,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": true,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.3117,
+   "p_draw": 0.2469,
+   "p_away": 0.4414,
+   "signals": {
+    "model": [
+     0.3273,
+     0.2847,
+     0.388
+    ],
+    "market": [
+     0.2968,
+     0.2109,
+     0.4923
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     2.95,
+     4.0,
+     1.85
+    ],
+    "overround": 0.1295,
+    "implied": [
+     0.2968,
+     0.2109,
+     0.4923
+    ]
+   },
+   "value": [],
+   "derivatives": {
+    "btts": 0.5688,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "1-1",
+      "prob": 0.1174
+     },
+     {
+      "score": "1-2",
+      "prob": 0.0991
+     },
+     {
+      "score": "0-1",
+      "prob": 0.0855
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "1-1",
+      "prob": 0.1354
+     },
+     {
+      "score": "1-2",
+      "prob": 0.0871
+     },
+     {
+      "score": "2-1",
+      "prob": 0.0791
+     }
+    ],
+    "p_1x2_raw": [
+     0.3273,
+     0.2847,
+     0.388
+    ],
+    "total_goals": {
+     "0": 0.0677,
+     "1": 0.1492,
+     "2": 0.2443,
+     "3": 0.2335,
+     "4": 0.1517,
+     "5+": 0.1537
+    },
+    "expected_goals": 2.81,
+    "expected_goals_raw": 2.77,
+    "main_goal_interval": {
+     "label": "2-3球",
+     "prob": 0.4778
+    },
+    "fair_handicap": {
+     "handicap": 0.25,
+     "win": 0.5586,
+     "push": 0,
+     "lose": 0.4414
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.2595,
+     "p_draw": 0.4439,
+     "p_away": 0.2966,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "0-0",
+       "prob": 0.3094
+      },
+      {
+       "score": "0-1",
+       "prob": 0.1745
+      },
+      {
+       "score": "1-0",
+       "prob": 0.1572
+      },
+      {
+       "score": "1-1",
+       "prob": 0.1239
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.174,
+     "胜平": 0.0452,
+     "胜负": 0.0261,
+     "平胜": 0.1182,
+     "平平": 0.1563,
+     "平负": 0.1629,
+     "负胜": 0.0194,
+     "负平": 0.0455,
+     "负负": 0.2525
+    },
+    "total_goals_exact": {
+     "0": 0.0677,
+     "1": 0.1492,
+     "2": 0.2443,
+     "3": 0.2335,
+     "4": 0.1517,
+     "5": 0.0899,
+     "6": 0.0394,
+     "7+": 0.0243
+    },
+    "upset_score": {
+     "score": "2-1",
+     "prob": 0.0753
+    }
+   },
+   "consistency_issues": [
+    "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+   ],
+   "confidence": "C",
+   "confidence_score": 23.9,
+   "divergence": null,
+   "upset_risk": 60.9,
+   "upset_risk_factors": [
+    "实力接近、无明显热门"
+   ],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "客胜",
+    "prob": 0.4414,
+    "value_outcomes": []
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+    "一致性检查发现冲突，信心已下调。"
+   ],
+   "no": "周五005",
+   "home": "布兰",
+   "away": "维京"
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "埃因霍温",
+    "away": "海伦芬",
+    "competition": "荷甲",
+    "kickoff_at": "2026-10-10T02:00:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 2.451,
+   "lambda_away": 1.956,
+   "lambda_notes": {
+    "attack_home": 1.597,
+    "defense_home": 0.922,
+    "attack_away": 1.369,
+    "defense_away": 0.884,
+    "home_sample": 3,
+    "away_sample": 3,
+    "home_effective_n": 2.09,
+    "away_effective_n": 2.32,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": true,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.5892,
+   "p_draw": 0.1913,
+   "p_away": 0.2195,
+   "signals": {
+    "model": [
+     0.4871,
+     0.2069,
+     0.3061
+    ],
+    "market": [
+     0.6864,
+     0.1765,
+     0.1371
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     1.35,
+     4.65,
+     5.75
+    ],
+    "overround": 0.1297,
+    "implied": [
+     0.6864,
+     0.1765,
+     0.1371
+    ]
+   },
+   "value": [
+    {
+     "outcome": "away",
+     "edge": 0.0824,
+     "kelly": 0.0138
+    }
+   ],
+   "derivatives": {
+    "btts": 0.787,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "2-1",
+      "prob": 0.0866
+     },
+     {
+      "score": "3-1",
+      "prob": 0.0708
+     },
+     {
+      "score": "3-2",
+      "prob": 0.0692
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "2-1",
+      "prob": 0.0716
+     },
+     {
+      "score": "2-2",
+      "prob": 0.0701
+     },
+     {
+      "score": "1-1",
+      "prob": 0.066
+     }
+    ],
+    "p_1x2_raw": [
+     0.4871,
+     0.2069,
+     0.3061
+    ],
+    "total_goals": {
+     "0": 0.0183,
+     "1": 0.0386,
+     "2": 0.1221,
+     "3": 0.1747,
+     "4": 0.1898,
+     "5+": 0.4564
+    },
+    "expected_goals": 4.44,
+    "expected_goals_raw": 4.41,
+    "main_goal_interval": {
+     "label": "4-5+球",
+     "prob": 0.6462
+    },
+    "fair_handicap": {
+     "handicap": -1.0,
+     "win": 0.3709,
+     "push": 0.2183,
+     "lose": 0.4108
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.3844,
+     "p_draw": 0.3464,
+     "p_away": 0.2692,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "0-0",
+       "prob": 0.1612
+      },
+      {
+       "score": "1-1",
+       "prob": 0.1509
+      },
+      {
+       "score": "1-0",
+       "prob": 0.1377
+      },
+      {
+       "score": "0-1",
+       "prob": 0.1064
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.3646,
+     "胜平": 0.0483,
+     "胜负": 0.0216,
+     "平胜": 0.1751,
+     "平平": 0.0955,
+     "平负": 0.0712,
+     "负胜": 0.0495,
+     "负平": 0.0475,
+     "负负": 0.1266
+    },
+    "total_goals_exact": {
+     "0": 0.0183,
+     "1": 0.0386,
+     "2": 0.1221,
+     "3": 0.1747,
+     "4": 0.1898,
+     "5": 0.1714,
+     "6": 0.1245,
+     "7+": 0.1606
+    },
+    "upset_score": {
+     "score": "1-2",
+     "prob": 0.041
+    }
+   },
+   "consistency_issues": [],
+   "confidence": "C",
+   "confidence_score": 26.6,
+   "divergence": null,
+   "upset_risk": 41.1,
+   "upset_risk_factors": [],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "主胜",
+    "prob": 0.5892,
+    "value_outcomes": [
+     "away"
+    ]
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。"
+   ],
+   "no": "周五006",
+   "home": "埃因霍温",
+   "away": "海伦芬"
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "赫拉克勒",
+    "away": "瓦尔韦克",
+    "competition": "荷乙",
+    "kickoff_at": "2026-10-10T02:00:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 2.257,
+   "lambda_away": 1.201,
+   "lambda_notes": {
+    "attack_home": 1.49,
+    "defense_home": 0.93,
+    "attack_away": 0.807,
+    "defense_away": 0.845,
+    "home_sample": 5,
+    "away_sample": 4,
+    "home_effective_n": 3.15,
+    "away_effective_n": 2.59,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": true,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.6941,
+   "p_draw": 0.1766,
+   "p_away": 0.1293,
+   "signals": {
+    "model": [
+     0.6007,
+     0.2176,
+     0.1817
+    ],
+    "market": [
+     0.7831,
+     0.1375,
+     0.0793
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     1.19,
+     5.7,
+     8.8
+    ],
+    "overround": 0.1294,
+    "implied": [
+     0.7831,
+     0.1375,
+     0.0793
+    ]
+   },
+   "value": [],
+   "derivatives": {
+    "btts": 0.6228,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "2-1",
+      "prob": 0.1113
+     },
+     {
+      "score": "2-0",
+      "prob": 0.0927
+     },
+     {
+      "score": "3-1",
+      "prob": 0.0838
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "1-1",
+      "prob": 0.0965
+     },
+     {
+      "score": "2-1",
+      "prob": 0.0963
+     },
+     {
+      "score": "2-0",
+      "prob": 0.0802
+     }
+    ],
+    "p_1x2_raw": [
+     0.6007,
+     0.2176,
+     0.1817
+    ],
+    "total_goals": {
+     "0": 0.0346,
+     "1": 0.0883,
+     "2": 0.1871,
+     "3": 0.224,
+     "4": 0.1866,
+     "5+": 0.2794
+    },
+    "expected_goals": 3.53,
+    "expected_goals_raw": 3.46,
+    "main_goal_interval": {
+     "label": "4-5+球",
+     "prob": 0.466
+    },
+    "fair_handicap": {
+     "handicap": -1.75,
+     "win": 0.4501,
+     "push": 0,
+     "lose": 0.5499
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.4446,
+     "p_draw": 0.3787,
+     "p_away": 0.1767,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "0-0",
+       "prob": 0.2333
+      },
+      {
+       "score": "1-0",
+       "prob": 0.202
+      },
+      {
+       "score": "1-1",
+       "prob": 0.1295
+      },
+      {
+       "score": "2-0",
+       "prob": 0.1077
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.4407,
+     "胜平": 0.0377,
+     "胜负": 0.0111,
+     "平胜": 0.2137,
+     "平平": 0.1029,
+     "平负": 0.0492,
+     "负胜": 0.0397,
+     "负平": 0.036,
+     "负负": 0.069
+    },
+    "total_goals_exact": {
+     "0": 0.0346,
+     "1": 0.0883,
+     "2": 0.1871,
+     "3": 0.224,
+     "4": 0.1866,
+     "5": 0.1367,
+     "6": 0.0766,
+     "7+": 0.0661
+    },
+    "upset_score": {
+     "score": "1-1",
+     "prob": 0.0783
+    }
+   },
+   "consistency_issues": [],
+   "confidence": "C",
+   "confidence_score": 26.6,
+   "divergence": null,
+   "upset_risk": 30.6,
+   "upset_risk_factors": [],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "主胜",
+    "prob": 0.6941,
+    "value_outcomes": []
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。"
+   ],
+   "no": "周五007",
+   "home": "赫拉克勒",
+   "away": "瓦尔韦克"
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "多特蒙德",
+    "away": "不来梅",
+    "competition": "德甲",
+    "kickoff_at": "2026-10-10T02:30:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 2.539,
+   "lambda_away": 0.844,
+   "lambda_notes": {
+    "attack_home": 1.104,
+    "defense_home": 0.579,
+    "attack_away": 0.972,
+    "defense_away": 1.368,
+    "home_sample": 5,
+    "away_sample": 5,
+    "home_effective_n": 3.33,
+    "away_effective_n": 3.09,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": false,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.5713,
+   "p_draw": 0.2092,
+   "p_away": 0.2195,
+   "signals": {
+    "model": [
+     0.7312,
+     0.1753,
+     0.0935
+    ],
+    "market": [
+     0.419,
+     0.2414,
+     0.3396
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     2.15,
+     3.55,
+     2.61
+    ],
+    "overround": 0.1299,
+    "implied": [
+     0.419,
+     0.2414,
+     0.3396
+    ]
+   },
+   "value": [
+    {
+     "outcome": "home",
+     "edge": 0.1523,
+     "kelly": 0.0496
+    }
+   ],
+   "derivatives": {
+    "btts": 0.5627,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "1-1",
+      "prob": 0.0981
+     },
+     {
+      "score": "2-0",
+      "prob": 0.0855
+     },
+     {
+      "score": "3-0",
+      "prob": 0.0723
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "2-0",
+      "prob": 0.1094
+     },
+     {
+      "score": "3-0",
+      "prob": 0.0926
+     },
+     {
+      "score": "2-1",
+      "prob": 0.0924
+     }
+    ],
+    "p_1x2_raw": [
+     0.7312,
+     0.1753,
+     0.0935
+    ],
+    "total_goals": {
+     "0": 0.0518,
+     "1": 0.1051,
+     "2": 0.212,
+     "3": 0.2246,
+     "4": 0.1755,
+     "5+": 0.231
+    },
+    "expected_goals": 3.25,
+    "expected_goals_raw": 3.38,
+    "main_goal_interval": {
+     "label": "2-3球",
+     "prob": 0.4367
+    },
+    "fair_handicap": {
+     "handicap": -1.0,
+     "win": 0.4083,
+     "push": 0.163,
+     "lose": 0.4287
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.5356,
+     "p_draw": 0.3539,
+     "p_away": 0.1105,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "1-0",
+       "prob": 0.2399
+      },
+      {
+       "score": "0-0",
+       "prob": 0.2379
+      },
+      {
+       "score": "2-0",
+       "prob": 0.1408
+      },
+      {
+       "score": "1-1",
+       "prob": 0.1058
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.3843,
+     "胜平": 0.0414,
+     "胜负": 0.0184,
+     "平胜": 0.1633,
+     "平平": 0.1294,
+     "平负": 0.0903,
+     "负胜": 0.0238,
+     "负平": 0.0383,
+     "负负": 0.1107
+    },
+    "total_goals_exact": {
+     "0": 0.0518,
+     "1": 0.1051,
+     "2": 0.212,
+     "3": 0.2246,
+     "4": 0.1755,
+     "5": 0.1182,
+     "6": 0.0632,
+     "7+": 0.0496
+    },
+    "upset_score": {
+     "score": "1-2",
+     "prob": 0.0721
+    }
+   },
+   "consistency_issues": [
+    "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+   ],
+   "confidence": "C",
+   "confidence_score": 23.9,
+   "divergence": null,
+   "upset_risk": 42.9,
+   "upset_risk_factors": [],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "主胜",
+    "prob": 0.5713,
+    "value_outcomes": [
+     "home"
+    ]
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+    "一致性检查发现冲突，信心已下调。"
+   ],
+   "no": "周五008",
+   "data_note": "德甲4场+上赛季末6场",
+   "home": "多特蒙德",
+   "away": "不来梅"
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "朗斯",
+    "away": "里昂",
+    "competition": "法甲",
+    "kickoff_at": "2026-10-10T02:45:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 1.537,
+   "lambda_away": 0.921,
+   "lambda_notes": {
+    "attack_home": 1.319,
+    "defense_home": 0.802,
+    "attack_away": 0.85,
+    "defense_away": 0.771,
+    "home_sample": 5,
+    "away_sample": 5,
+    "home_effective_n": 3.0,
+    "away_effective_n": 3.23,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": false,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.5989,
+   "p_draw": 0.2335,
+   "p_away": 0.1677,
+   "signals": {
+    "model": [
+     0.5012,
+     0.2886,
+     0.2102
+    ],
+    "market": [
+     0.6919,
+     0.181,
+     0.1271
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     1.34,
+     4.55,
+     6.12
+    ],
+    "overround": 0.1294,
+    "implied": [
+     0.6919,
+     0.181,
+     0.1271
+    ]
+   },
+   "value": [
+    {
+     "outcome": "draw",
+     "edge": 0.0525,
+     "kelly": 0.0044
+    }
+   ],
+   "derivatives": {
+    "btts": 0.4727,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "1-0",
+      "prob": 0.1384
+     },
+     {
+      "score": "2-0",
+      "prob": 0.1208
+     },
+     {
+      "score": "2-1",
+      "prob": 0.1113
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "1-1",
+      "prob": 0.1369
+     },
+     {
+      "score": "1-0",
+      "prob": 0.1158
+     },
+     {
+      "score": "0-0",
+      "prob": 0.1014
+     }
+    ],
+    "p_1x2_raw": [
+     0.5012,
+     0.2886,
+     0.2102
+    ],
+    "total_goals": {
+     "0": 0.082,
+     "1": 0.1887,
+     "2": 0.2606,
+     "3": 0.2266,
+     "4": 0.1312,
+     "5+": 0.1109
+    },
+    "expected_goals": 2.53,
+    "expected_goals_raw": 2.46,
+    "main_goal_interval": {
+     "label": "2-3球",
+     "prob": 0.4871
+    },
+    "fair_handicap": {
+     "handicap": -1.0,
+     "win": 0.3196,
+     "push": 0.2793,
+     "lose": 0.4011
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.3573,
+     "p_draw": 0.4627,
+     "p_away": 0.18,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "0-0",
+       "prob": 0.3512
+      },
+      {
+       "score": "1-0",
+       "prob": 0.2172
+      },
+      {
+       "score": "0-1",
+       "prob": 0.1253
+      },
+      {
+       "score": "1-1",
+       "prob": 0.105
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.3536,
+     "胜平": 0.0382,
+     "胜负": 0.0097,
+     "平胜": 0.2188,
+     "平平": 0.1583,
+     "平负": 0.0701,
+     "负胜": 0.0264,
+     "负平": 0.037,
+     "负负": 0.0879
+    },
+    "total_goals_exact": {
+     "0": 0.082,
+     "1": 0.1887,
+     "2": 0.2606,
+     "3": 0.2266,
+     "4": 0.1312,
+     "5": 0.0695,
+     "6": 0.0272,
+     "7+": 0.0142
+    },
+    "upset_score": {
+     "score": "1-1",
+     "prob": 0.1108
+    }
+   },
+   "consistency_issues": [],
+   "confidence": "C",
+   "confidence_score": 26.6,
+   "divergence": null,
+   "upset_risk": 40.1,
+   "upset_risk_factors": [],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "主胜",
+    "prob": 0.5989,
+    "value_outcomes": [
+     "draw"
+    ]
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。"
+   ],
+   "no": "周五009",
+   "data_note": "法甲5场+上赛季末6场",
+   "home": "朗斯",
+   "away": "里昂"
+  },
+  {
+   "status": "ok",
+   "model": "jingcai",
+   "model_version": "v2.9+273cb883",
+   "match": {
+    "home": "西汉姆联",
+    "away": "女王公园巡游者",
+    "competition": "英冠",
+    "kickoff_at": "2026-10-10T03:00:00+08:00"
+   },
+   "grade": "B",
+   "completeness": 55,
+   "lambda_home": 2.203,
+   "lambda_away": 1.065,
+   "lambda_notes": {
+    "attack_home": 1.936,
+    "defense_home": 0.83,
+    "attack_away": 0.987,
+    "defense_away": 0.781,
+    "home_sample": 4,
+    "away_sample": 4,
+    "home_effective_n": 2.82,
+    "away_effective_n": 2.78,
+    "opp_adjust_coverage": 0.0,
+    "decay": 0.9,
+    "shrink_prior": 3.0,
+    "degraded": true,
+    "home_adv_factor": 1.12,
+    "neutral_site": false,
+    "weak_competition": false
+   },
+   "p_home": 0.473,
+   "p_draw": 0.2498,
+   "p_away": 0.2772,
+   "signals": {
+    "model": [
+     0.6201,
+     0.219,
+     0.1609
+    ],
+    "market": [
+     0.3328,
+     0.2792,
+     0.388
+    ],
+    "elo": null
+   },
+   "weights": {
+    "model": 0.488,
+    "market": 0.512,
+    "elo": 0.0
+   },
+   "flow": null,
+   "flow_shadow": null,
+   "market": {
+    "odds": [
+     2.66,
+     3.12,
+     2.31
+    ],
+    "overround": 0.1294,
+    "implied": [
+     0.3328,
+     0.2792,
+     0.388
+    ]
+   },
+   "value": [
+    {
+     "outcome": "home",
+     "edge": 0.1402,
+     "kelly": 0.0389
+    }
+   ],
+   "derivatives": {
+    "btts": 0.6135,
+    "over_under": null,
+    "asian": null,
+    "handicap_1x2": null,
+    "top_scores": [
+     {
+      "score": "1-1",
+      "prob": 0.1152
+     },
+     {
+      "score": "1-2",
+      "prob": 0.082
+     },
+     {
+      "score": "2-1",
+      "prob": 0.0751
+     }
+    ],
+    "top_scores_raw": [
+     {
+      "score": "1-1",
+      "prob": 0.101
+     },
+     {
+      "score": "2-1",
+      "prob": 0.0984
+     },
+     {
+      "score": "2-0",
+      "prob": 0.0924
+     }
+    ],
+    "p_1x2_raw": [
+     0.6201,
+     0.219,
+     0.1609
+    ],
+    "total_goals": {
+     "0": 0.0567,
+     "1": 0.105,
+     "2": 0.2229,
+     "3": 0.222,
+     "4": 0.176,
+     "5+": 0.2173
+    },
+    "expected_goals": 3.18,
+    "expected_goals_raw": 3.27,
+    "main_goal_interval": {
+     "label": "2-3球",
+     "prob": 0.4449
+    },
+    "fair_handicap": {
+     "handicap": -0.75,
+     "win": 0.473,
+     "push": 0,
+     "lose": 0.527
+    },
+    "cards": {
+     "status": "insufficient_data",
+     "reason": "未指定联赛代码，无牌数历史"
+    },
+    "half_time": {
+     "p_home": 0.4539,
+     "p_draw": 0.3862,
+     "p_away": 0.1599,
+     "ht_factor": 0.44,
+     "top_scores": [
+      {
+       "score": "0-0",
+       "prob": 0.2515
+      },
+      {
+       "score": "1-0",
+       "prob": 0.2161
+      },
+      {
+       "score": "1-1",
+       "prob": 0.1219
+      },
+      {
+       "score": "2-0",
+       "prob": 0.1115
+      }
+     ]
+    },
+    "half_full_1x2": {
+     "胜胜": 0.3013,
+     "胜平": 0.0507,
+     "胜负": 0.0225,
+     "平胜": 0.1472,
+     "平平": 0.1509,
+     "平负": 0.1091,
+     "负胜": 0.0245,
+     "负平": 0.0482,
+     "负负": 0.1456
+    },
+    "total_goals_exact": {
+     "0": 0.0567,
+     "1": 0.105,
+     "2": 0.2229,
+     "3": 0.222,
+     "4": 0.176,
+     "5": 0.1128,
+     "6": 0.06,
+     "7+": 0.0444
+    },
+    "upset_score": {
+     "score": "1-2",
+     "prob": 0.082
+    }
+   },
+   "consistency_issues": [
+    "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+   ],
+   "confidence": "C",
+   "confidence_score": 0.0,
+   "divergence": {
+    "model_direction": "home",
+    "market_direction": "away",
+    "gap": 0.2873
+   },
+   "upset_risk": 67.7,
+   "upset_risk_factors": [
+    "模型与市场严重背离"
+   ],
+   "beidan": {},
+   "monte_carlo": {
+    "ran": false,
+    "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+   },
+   "calibrated": false,
+   "recommendation": {
+    "direction": "主胜",
+    "prob": 0.473,
+    "value_outcomes": [
+     "home"
+    ]
+   },
+   "notes": [
+    "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+    "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+    "一致性检查发现冲突，信心已下调。",
+    "⚠️模型与市场严重背离（模型看home、市场看away），信心已自动下调；背离时不硬扛。"
+   ],
+   "no": "周五010",
+   "data_note": "英联杯，联赛近况",
+   "home": "西汉姆联",
+   "away": "女王公园巡游者"
+  },
+  {
+   "no": "周五011",
+   "mid": "周五011",
+   "home": "马拉加",
+   "away": "西班牙人",
+   "kickoff_beijing": "2026-10-10T03:00:00+08:00",
+   "league": "西甲",
+   "handicap_line": 1,
+   "official_sp": {
+    "3": 2.66,
+    "1": 3.12,
+    "0": 2.31
+   },
+   "official_handicap_sp": {
+    "3": 1.47,
+    "1": 4.05,
+    "0": 4.95
+   },
+   "payload": {
+    "home": "马拉加",
+    "away": "西班牙人",
+    "kickoff_at": "2026-10-10T03:00:00+08:00",
+    "snapshot_at": "2026-10-09T13:34:34.136932+08:00",
+    "competition": "西甲",
+    "home_recent": [
+     {
+      "gf": 0,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-20",
+      "opp": "Getafe"
+     },
+     {
+      "gf": 1,
+      "ga": 3,
+      "venue": "H",
+      "date": "2026-09-17",
+      "opp": "Villarreal"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-13",
+      "opp": "Celta Vigo"
+     },
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-06",
+      "opp": "Levante"
+     },
+     {
+      "gf": 0,
+      "ga": 4,
+      "venue": "A",
+      "date": "2026-08-30",
+      "opp": "Real Madrid"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-24",
+      "opp": "Dep. A Coruna"
+     },
+     {
+      "gf": 0,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-08-19",
+      "opp": "Atl. Madrid"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 1,
+      "ga": 3,
+      "venue": "H",
+      "date": "2026-09-18",
+      "opp": "Elche"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-15",
+      "opp": "Rayo Vallecano"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-12",
+      "opp": "Osasuna"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-09-06",
+      "opp": "Sevilla"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-08-29",
+      "opp": "Real Sociedad"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-22",
+      "opp": "Real Madrid"
+     },
+     {
+      "gf": 3,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-16",
+      "opp": "Levante"
+     }
+    ],
+    "h2h": [],
+    "handicap_line": 1,
+    "handicap_sp": [
+     1.47,
+     4.05,
+     4.95
+    ],
+    "league_avg_goals": 2.7,
+    "odds": {
+     "home": 2.66,
+     "draw": 3.12,
+     "away": 2.31
+    }
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "马拉加",
+     "away": "西班牙人",
+     "competition": "西甲",
+     "kickoff_at": "2026-10-10T03:00:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 1.175,
+    "lambda_away": 1.403,
+    "lambda_notes": {
+     "attack_home": 0.786,
+     "defense_home": 1.042,
+     "attack_away": 0.997,
+     "defense_away": 0.989,
+     "home_sample": 3,
+     "away_sample": 3,
+     "home_effective_n": 2.22,
+     "away_effective_n": 2.37,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": true,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false
+    },
+    "p_home": 0.3162,
+    "p_draw": 0.2872,
+    "p_away": 0.3966,
+    "signals": {
+     "model": [
+      0.2988,
+      0.2957,
+      0.4055
+     ],
+     "market": [
+      0.3328,
+      0.2792,
+      0.388
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      2.66,
+      3.12,
+      2.31
+     ],
+     "overround": 0.1294,
+     "implied": [
+      0.3328,
+      0.2792,
+      0.388
+     ]
+    },
+    "value": [],
+    "derivatives": {
+     "btts": 0.536,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": 1,
+      "p_home": 0.6034,
+      "p_draw": 0.2256,
+      "p_away": 0.171,
+      "p_home_raw": 0.6034,
+      "p_draw_raw": 0.2012,
+      "p_away_raw": 0.1954,
+      "letdraw_guard": {
+       "top": "让胜",
+       "top_prob": 0.6034,
+       "gap": 0.3779,
+       "flags": [
+        "防让平"
+       ],
+       "downgrade": false
+      }
+     },
+     "top_scores": [
+      {
+       "score": "1-1",
+       "prob": 0.1374
+      },
+      {
+       "score": "0-0",
+       "prob": 0.0895
+      },
+      {
+       "score": "0-1",
+       "prob": 0.0882
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "1-1",
+       "prob": 0.1414
+      },
+      {
+       "score": "0-0",
+       "prob": 0.0922
+      },
+      {
+       "score": "0-1",
+       "prob": 0.0902
+      }
+     ],
+     "p_1x2_raw": [
+      0.2988,
+      0.2957,
+      0.4055
+     ],
+     "total_goals": {
+      "0": 0.0895,
+      "1": 0.1654,
+      "2": 0.2659,
+      "3": 0.2196,
+      "4": 0.1391,
+      "5+": 0.1204
+     },
+     "expected_goals": 2.59,
+     "expected_goals_raw": 2.58,
+     "main_goal_interval": {
+      "label": "2-3球",
+      "prob": 0.4855
+     },
+     "fair_handicap": {
+      "handicap": 0.0,
+      "win": 0.3162,
+      "push": 0.2872,
+      "lose": 0.3966
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.2379,
+      "p_draw": 0.4595,
+      "p_away": 0.3026,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.335
+       },
+       {
+        "score": "0-1",
+        "prob": 0.1852
+       },
+       {
+        "score": "1-0",
+        "prob": 0.153
+       },
+       {
+        "score": "1-1",
+        "prob": 0.116
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.1733,
+      "胜平": 0.0492,
+      "胜负": 0.0211,
+      "平胜": 0.1244,
+      "平平": 0.1882,
+      "平负": 0.1487,
+      "负胜": 0.0185,
+      "负平": 0.0498,
+      "负负": 0.2268
+     },
+     "total_goals_exact": {
+      "0": 0.0895,
+      "1": 0.1654,
+      "2": 0.2659,
+      "3": 0.2196,
+      "4": 0.1391,
+      "5": 0.0729,
+      "6": 0.0309,
+      "7+": 0.0166
+     },
+     "upset_score": {
+      "score": "2-1",
+      "prob": 0.0778
+     }
+    },
+    "consistency_issues": [
+     "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+    ],
+    "confidence": "C",
+    "confidence_score": 23.9,
+    "divergence": null,
+    "upset_risk": 65.3,
+    "upset_risk_factors": [
+     "实力接近、无明显热门"
+    ],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "客胜",
+     "prob": 0.3966,
+     "value_outcomes": []
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+     "一致性检查发现冲突，信心已下调。"
+    ]
+   }
+  },
+  {
+   "no": "周五012",
+   "mid": "周五012",
+   "home": "布拉加",
+   "away": "里斯本",
+   "kickoff_beijing": "2026-10-10T03:15:00+08:00",
+   "league": "葡超",
+   "handicap_line": 1,
+   "official_sp": {
+    "3": 3.26,
+    "1": 3.2,
+    "0": 1.96
+   },
+   "official_handicap_sp": {
+    "3": 1.63,
+    "1": 3.65,
+    "0": 4.15
+   },
+   "payload": {
+    "home": "布拉加",
+    "away": "里斯本",
+    "kickoff_at": "2026-10-10T03:15:00+08:00",
+    "snapshot_at": "2026-10-09T13:34:40.013297+08:00",
+    "competition": "葡超",
+    "home_recent": [
+     {
+      "gf": 0,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-09-20",
+      "opp": "Santa Clara"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-14",
+      "opp": "Estoril"
+     },
+     {
+      "gf": 1,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-09-10",
+      "opp": "Estrela"
+     },
+     {
+      "gf": 2,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-05",
+      "opp": "Alverca"
+     },
+     {
+      "gf": 1,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-08-31",
+      "opp": "Vitoria Guimaraes"
+     },
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-08-09",
+      "opp": "Moreirense"
+     }
+    ],
+    "away_recent": [
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-09-19",
+      "opp": "Arouca"
+     },
+     {
+      "gf": 1,
+      "ga": 1,
+      "venue": "A",
+      "date": "2026-09-13",
+      "opp": "Famalicao"
+     },
+     {
+      "gf": 2,
+      "ga": 0,
+      "venue": "H",
+      "date": "2026-09-05",
+      "opp": "Nacional"
+     },
+     {
+      "gf": 4,
+      "ga": 0,
+      "venue": "A",
+      "date": "2026-08-28",
+      "opp": "Rio Ave"
+     },
+     {
+      "gf": 3,
+      "ga": 1,
+      "venue": "H",
+      "date": "2026-08-22",
+      "opp": "Alverca"
+     },
+     {
+      "gf": 3,
+      "ga": 2,
+      "venue": "H",
+      "date": "2026-08-14",
+      "opp": "Vitoria Guimaraes"
+     },
+     {
+      "gf": 2,
+      "ga": 2,
+      "venue": "A",
+      "date": "2026-08-08",
+      "opp": "Estrela"
+     }
+    ],
+    "h2h": [],
+    "handicap_line": 1,
+    "handicap_sp": [
+     1.63,
+     3.65,
+     4.15
+    ],
+    "league_avg_goals": 2.7,
+    "odds": {
+     "home": 3.26,
+     "draw": 3.2,
+     "away": 1.96
+    }
+   },
+   "result": {
+    "status": "ok",
+    "model": "jingcai",
+    "model_version": "v2.9+273cb883",
+    "match": {
+     "home": "布拉加",
+     "away": "里斯本",
+     "competition": "葡超",
+     "kickoff_at": "2026-10-10T03:15:00+08:00"
+    },
+    "grade": "B",
+    "completeness": 55,
+    "lambda_home": 1.189,
+    "lambda_away": 1.257,
+    "lambda_notes": {
+     "attack_home": 0.911,
+     "defense_home": 0.727,
+     "attack_away": 1.282,
+     "defense_away": 0.863,
+     "home_sample": 2,
+     "away_sample": 3,
+     "home_effective_n": 1.56,
+     "away_effective_n": 2.16,
+     "opp_adjust_coverage": 0.0,
+     "decay": 0.9,
+     "shrink_prior": 3.0,
+     "degraded": true,
+     "home_adv_factor": 1.12,
+     "neutral_site": false,
+     "weak_competition": false
+    },
+    "p_home": 0.2972,
+    "p_draw": 0.2887,
+    "p_away": 0.4141,
+    "signals": {
+     "model": [
+      0.3302,
+      0.3069,
+      0.3629
+     ],
+     "market": [
+      0.2658,
+      0.2713,
+      0.4629
+     ],
+     "elo": null
+    },
+    "weights": {
+     "model": 0.488,
+     "market": 0.512,
+     "elo": 0.0
+    },
+    "flow": null,
+    "flow_shadow": null,
+    "market": {
+     "odds": [
+      3.26,
+      3.2,
+      1.96
+     ],
+     "overround": 0.1295,
+     "implied": [
+      0.2658,
+      0.2713,
+      0.4629
+     ]
+    },
+    "value": [],
+    "derivatives": {
+     "btts": 0.5105,
+     "over_under": null,
+     "asian": null,
+     "handicap_1x2": {
+      "line": 1,
+      "p_home": 0.5859,
+      "p_draw": 0.2371,
+      "p_away": 0.177,
+      "p_home_raw": 0.5859,
+      "p_draw_raw": 0.2242,
+      "p_away_raw": 0.19,
+      "letdraw_guard": {
+       "top": "让胜",
+       "top_prob": 0.5859,
+       "gap": 0.3488,
+       "flags": [
+        "防让平"
+       ],
+       "downgrade": false
+      }
+     },
+     "top_scores": [
+      {
+       "score": "1-1",
+       "prob": 0.1376
+      },
+      {
+       "score": "0-1",
+       "prob": 0.105
+      },
+      {
+       "score": "0-0",
+       "prob": 0.0972
+      }
+     ],
+     "top_scores_raw": [
+      {
+       "score": "1-1",
+       "prob": 0.1463
+      },
+      {
+       "score": "0-0",
+       "prob": 0.1034
+      },
+      {
+       "score": "0-1",
+       "prob": 0.092
+      }
+     ],
+     "p_1x2_raw": [
+      0.3302,
+      0.3069,
+      0.3629
+     ],
+     "total_goals": {
+      "0": 0.0972,
+      "1": 0.1825,
+      "2": 0.2708,
+      "3": 0.2168,
+      "4": 0.1287,
+      "5+": 0.1039
+     },
+     "expected_goals": 2.47,
+     "expected_goals_raw": 2.45,
+     "main_goal_interval": {
+      "label": "2-3球",
+      "prob": 0.4876
+     },
+     "fair_handicap": {
+      "handicap": 0.0,
+      "win": 0.2972,
+      "push": 0.2887,
+      "lose": 0.4141
+     },
+     "cards": {
+      "status": "insufficient_data",
+      "reason": "未指定联赛代码，无牌数历史"
+     },
+     "half_time": {
+      "p_home": 0.2539,
+      "p_draw": 0.4724,
+      "p_away": 0.2736,
+      "ht_factor": 0.44,
+      "top_scores": [
+       {
+        "score": "0-0",
+        "prob": 0.3536
+       },
+       {
+        "score": "0-1",
+        "prob": 0.1757
+       },
+       {
+        "score": "1-0",
+        "prob": 0.1655
+       },
+       {
+        "score": "1-1",
+        "prob": 0.1115
+       }
+      ]
+     },
+     "half_full_1x2": {
+      "胜胜": 0.1641,
+      "胜平": 0.0476,
+      "胜负": 0.0215,
+      "平胜": 0.1171,
+      "平平": 0.1933,
+      "平负": 0.1609,
+      "负胜": 0.0159,
+      "负平": 0.0478,
+      "负负": 0.2317
+     },
+     "total_goals_exact": {
+      "0": 0.0972,
+      "1": 0.1825,
+      "2": 0.2708,
+      "3": 0.2168,
+      "4": 0.1287,
+      "5": 0.065,
+      "6": 0.0259,
+      "7+": 0.0131
+     },
+     "upset_score": {
+      "score": "1-0",
+      "prob": 0.0775
+     }
+    },
+    "consistency_issues": [
+     "首选比分 1-1 的胜负方向与 1X2 首选不一致"
+    ],
+    "confidence": "C",
+    "confidence_score": 23.9,
+    "divergence": null,
+    "upset_risk": 63.6,
+    "upset_risk_factors": [
+     "实力接近、无明显热门"
+    ],
+    "beidan": {},
+    "monte_carlo": {
+     "ran": false,
+     "reason": "Monte Carlo：未运行（完整度 55 < 60）"
+    },
+    "calibrated": false,
+    "recommendation": {
+     "direction": "客胜",
+     "prob": 0.4141,
+     "value_outcomes": []
+    },
+    "notes": [
+     "概率为赛前估计，非结果承诺；单比分概率通常较低，仅供覆盖参考。",
+     "伤停修正仅在已确认名单时生效，未经确认不做调整。",
+     "一致性检查发现冲突，信心已下调。"
+    ]
+   }
+  }
+ ]
+}
