@@ -69,27 +69,47 @@ def _parse_scores_str(s):
 
 
 def parse_standings(data):
-    """纯解析：联赛 leagues 响应 -> 积分榜列表（零网络，可单测）。"""
+    """纯解析：联赛 leagues 响应 -> 积分榜列表（零网络，可单测）。
+
+    兼容两种结构：
+    - 单组：data.table[0].data.table.all（如 J2/挪甲）
+    - 多组：data.table[0].data.tables[i].table.all（如挪乙/瑞典乙，分 Avd.1/2）
+    多组时每行多带 group 字段（小组名）；单组时 group 为 ""。
+    """
     tables = data.get("table") or []
     if not tables:
         raise RuntimeError("FotMob: 积分榜为空")
-    rows = tables[0]["data"]["table"]["all"]
+    d = tables[0].get("data") or {}
+    groups = []  # [(group_name, rows)]
+    multi = d.get("tables")
+    if isinstance(multi, list) and multi:
+        for g in multi:
+            gt = (g or {}).get("table") or {}
+            rows = gt.get("all")
+            if isinstance(rows, list):
+                groups.append(((g or {}).get("leagueName", ""), rows))
+    elif isinstance(d.get("table"), dict) and isinstance(d["table"].get("all"), list):
+        groups = [("", d["table"]["all"])]
+    if not groups:
+        raise RuntimeError("FotMob: 积分榜结构未知")
     out = []
-    for r in rows:
-        gf, ga = _parse_scores_str(r.get("scoresStr", ""))
-        out.append({
-            "name": r.get("name", ""),
-            "shortName": r.get("shortName", ""),
-            "fotmob_id": str(r.get("id", "")),
-            "played": r.get("played", 0),
-            "wins": r.get("wins", 0),
-            "draws": r.get("draws", 0),
-            "losses": r.get("losses", 0),
-            "gf": gf, "ga": ga,
-            "gd": r.get("goalConDiff"),
-            "pts": r.get("pts", 0),
-            "rank": r.get("idx", 0),
-        })
+    for gname, rows in groups:
+        for r in rows:
+            gf, ga = _parse_scores_str(r.get("scoresStr", ""))
+            out.append({
+                "name": r.get("name", ""),
+                "shortName": r.get("shortName", ""),
+                "fotmob_id": str(r.get("id", "")),
+                "played": r.get("played", 0),
+                "wins": r.get("wins", 0),
+                "draws": r.get("draws", 0),
+                "losses": r.get("losses", 0),
+                "gf": gf, "ga": ga,
+                "gd": r.get("goalConDiff"),
+                "pts": r.get("pts", 0),
+                "rank": r.get("idx", 0),
+                "group": gname,
+            })
     return out
 
 

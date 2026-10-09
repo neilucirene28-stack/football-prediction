@@ -96,3 +96,24 @@ def test_team_names_normalize_fotmob():
     from team_names import normalize
     assert normalize("Vegalta Sendai") == "vegalta sendai"
     assert normalize("São Bernardo FC") == "são bernardo"
+
+
+def test_parse_standings_multigroup():
+    # 2026-10-09 实测：挪乙/瑞典乙返回多组结构 data.tables[i].table.all
+    # （单组 data.table.all 缺失，曾致 KeyError 'table' 连续 3 天抓取失败）
+    st = parse_standings(_load("fm_nor2_multigroup.json"))
+    groups = {t["group"] for t in st}
+    assert len(groups) == 2  # Avd. 1 / Avd. 2
+    assert len(st) == 28  # 每组 14 队
+    for t in st:
+        assert t["group"] in groups and t["group"] != ""
+        assert t["pts"] == 3 * t["wins"] + t["draws"]
+        assert t["played"] == t["wins"] + t["draws"] + t["losses"]
+        assert t["fotmob_id"]
+
+
+def test_parse_standings_single_group_still_works():
+    # 单组结构回归：group 为空字符串，不影响老字段
+    st = parse_standings(_load("fm_j2.json"))
+    assert len(st) == 20
+    assert all(t["group"] == "" for t in st)
