@@ -1,0 +1,242 @@
+[
+  {
+    "team_id": "2594",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/2594/schedule",
+    "start_utc": "2026-10-09T13:14:10.224833+00:00",
+    "end_utc": "2026-10-09T13:14:11.049470+00:00",
+    "http_status": 200,
+    "size_bytes": 62924,
+    "sha256": "88f06b4d228f6f1a55d953135c3572e7a073db8f6e26e1bc4847a19696c94a6e",
+    "file": "data/exports/raw/eng4_true/espn_team_2594.json"
+  },
+  {
+    "team_id": "2731",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/2731/schedule",
+    "start_utc": "2026-10-09T13:14:13.050051+00:00",
+    "end_utc": "2026-10-09T13:14:13.693612+00:00",
+    "http_status": 200,
+    "size_bytes": 79482,
+    "sha256": "c5d57fd6d44241f43b34d1d9ac853f27fcbd12eb59f1d25f76541efbd68bd939",
+    "file": "data/exports/raw/eng4_true/espn_team_2731.json"
+  },
+  {
+    "team_id": "280",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/280/schedule",
+    "start_utc": "2026-10-09T13:14:15.694101+00:00",
+    "end_utc": "2026-10-09T13:14:16.659622+00:00",
+    "http_status": 200,
+    "size_bytes": 61248,
+    "sha256": "f6460ecd72822ada440b6448dd6e97aae7b2e3e6db46f7fc5be8752b587c9711",
+    "file": "data/exports/raw/eng4_true/espn_team_280.json"
+  },
+  {
+    "team_id": "302",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/302/schedule",
+    "start_utc": "2026-10-09T13:14:18.660096+00:00",
+    "end_utc": "2026-10-09T13:14:19.300881+00:00",
+    "http_status": 200,
+    "size_bytes": 79710,
+    "sha256": "0e0cfe0a412d923d278846e7505c3f38a92cba0ce4cbc1911f0fad98516320f5",
+    "file": "data/exports/raw/eng4_true/espn_team_302.json"
+  },
+  {
+    "team_id": "303",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/303/schedule",
+    "start_utc": "2026-10-09T13:14:21.301433+00:00",
+    "end_utc": "2026-10-09T13:14:22.110976+00:00",
+    "http_status": 200,
+    "size_bytes": 80275,
+    "sha256": "a4484d6a489edb4b75e29f927ee6d8902a9532f16864888c509692c8ae4bb5f6",
+    "file": "data/exports/raw/eng4_true/espn_team_303.json"
+  },
+  {
+    "team_id": "308",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/308/schedule",
+    "start_utc": "2026-10-09T13:14:24.111540+00:00",
+    "end_utc": "2026-10-09T13:14:25.267020+00:00",
+    "http_status": 200,
+    "size_bytes": 79656,
+    "sha256": "a8e424704433f295f8db6888db49af6370dcc9d4ac47b071687e2178808c9efc",
+    "file": "data/exports/raw/eng4_true/espn_team_308.json"
+  },
+  {
+    "team_id": "315",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/315/schedule",
+    "start_utc": "2026-10-09T13:14:27.267920+00:00",
+    "end_utc": "2026-10-09T13:14:28.459552+00:00",
+    "http_status": 200,
+    "size_bytes": 71394,
+    "sha256": "ab4b85458c6337cad7c0e944e5a749c505d24096e7c69391e81f9371c1574da8",
+    "file": "data/exports/raw/eng4_true/espn_team_315.json"
+  },
+  {
+    "team_id": "320",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/320/schedule",
+    "start_utc": "2026-10-09T13:14:30.460056+00:00",
+    "end_utc": "2026-10-09T13:14:31.032939+00:00",
+    "http_status": 200,
+    "size_bytes": 79624,
+    "sha256": "837e2109a5be2d6e0ccff0baa8d99fc6d37a05bddbc7d030d4def25cceb129d4",
+    "file": "data/exports/raw/eng4_true/espn_team_320.json"
+  },
+  {
+    "team_id": "324",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/324/schedule",
+    "start_utc": "2026-10-09T13:14:33.033544+00:00",
+    "end_utc": "2026-10-09T13:14:33.625071+00:00",
+    "http_status": 200,
+    "size_bytes": 79030,
+    "sha256": "3e166173ad83da4a81ca18d4d37860c0acd0de6f0694864e2eded7ab50206a77",
+    "file": "data/exports/raw/eng4_true/espn_team_324.json"
+  },
+  {
+    "team_id": "332",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/332/schedule",
+    "start_utc": "2026-10-09T13:14:35.625760+00:00",
+    "end_utc": "2026-10-09T13:14:36.169732+00:00",
+    "http_status": 200,
+    "size_bytes": 72060,
+    "sha256": "7a116bb40c8352d2aa83674a216687e498fe77254b906e7dfeecddfda2d4421e",
+    "file": "data/exports/raw/eng4_true/espn_team_332.json"
+  },
+  {
+    "team_id": "339",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/339/schedule",
+    "start_utc": "2026-10-09T13:14:38.170372+00:00",
+    "end_utc": "2026-10-09T13:14:38.790630+00:00",
+    "http_status": 200,
+    "size_bytes": 70958,
+    "sha256": "eeb0a43aeca10c2fce9c65208eb37fa53c041e8f8ffb87ae72ff87f9856a4057",
+    "file": "data/exports/raw/eng4_true/espn_team_339.json"
+  },
+  {
+    "team_id": "341",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/341/schedule",
+    "start_utc": "2026-10-09T13:14:40.791188+00:00",
+    "end_utc": "2026-10-09T13:14:41.739409+00:00",
+    "http_status": 200,
+    "size_bytes": 79639,
+    "sha256": "f92c6133c714dc080505bea380278f7772c78b3201579a6e4e347240a9dbc99f",
+    "file": "data/exports/raw/eng4_true/espn_team_341.json"
+  },
+  {
+    "team_id": "343",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/343/schedule",
+    "start_utc": "2026-10-09T13:14:43.740002+00:00",
+    "end_utc": "2026-10-09T13:14:44.209096+00:00",
+    "http_status": 200,
+    "size_bytes": 79706,
+    "sha256": "bb4f81af1185b7ed9acaced3c268ee90d68e78cb3c65f0cfcec81eae58aab7fd",
+    "file": "data/exports/raw/eng4_true/espn_team_343.json"
+  },
+  {
+    "team_id": "345",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/345/schedule",
+    "start_utc": "2026-10-09T13:14:46.209643+00:00",
+    "end_utc": "2026-10-09T13:14:46.665460+00:00",
+    "http_status": 200,
+    "size_bytes": 80911,
+    "sha256": "7fa6b1687724aa560e6b16000c12ea1819ec920f9be3530d883b84b97b6525fa",
+    "file": "data/exports/raw/eng4_true/espn_team_345.json"
+  },
+  {
+    "team_id": "348",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/348/schedule",
+    "start_utc": "2026-10-09T13:14:48.666020+00:00",
+    "end_utc": "2026-10-09T13:14:49.251785+00:00",
+    "http_status": 200,
+    "size_bytes": 61643,
+    "sha256": "4592318c7bff3cd2a8614a82dd89a3fee6203fa973222c6ad868ce70c0e740ca",
+    "file": "data/exports/raw/eng4_true/espn_team_348.json"
+  },
+  {
+    "team_id": "353",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/353/schedule",
+    "start_utc": "2026-10-09T13:14:51.252478+00:00",
+    "end_utc": "2026-10-09T13:14:51.602466+00:00",
+    "http_status": 200,
+    "size_bytes": 63315,
+    "sha256": "a18b9453714f59b047236702db2667365ca6cdeb8ebc3cf2d2e9e7027e4ac2cf",
+    "file": "data/exports/raw/eng4_true/espn_team_353.json"
+  },
+  {
+    "team_id": "386",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/386/schedule",
+    "start_utc": "2026-10-09T13:14:53.602974+00:00",
+    "end_utc": "2026-10-09T13:14:54.358932+00:00",
+    "http_status": 200,
+    "size_bytes": 79149,
+    "sha256": "6ff26e63885315ecb11a4879096f66ac797d02bc4fc163b8ff5437f3fcf20b54",
+    "file": "data/exports/raw/eng4_true/espn_team_386.json"
+  },
+  {
+    "team_id": "389",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/389/schedule",
+    "start_utc": "2026-10-09T13:14:56.359591+00:00",
+    "end_utc": "2026-10-09T13:14:57.000048+00:00",
+    "http_status": 200,
+    "size_bytes": 79431,
+    "sha256": "79094b166ca695bfba650d995306febd98128fd82e0eeaaa9afce940ad574b4d",
+    "file": "data/exports/raw/eng4_true/espn_team_389.json"
+  },
+  {
+    "team_id": "3891",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/3891/schedule",
+    "start_utc": "2026-10-09T13:14:59.000585+00:00",
+    "end_utc": "2026-10-09T13:14:59.688403+00:00",
+    "http_status": 200,
+    "size_bytes": 79501,
+    "sha256": "ea4bdafec9d8476043810ed7a8b98d6fb41be0ca5cdcbaed3ab3bc1b55441d0d",
+    "file": "data/exports/raw/eng4_true/espn_team_3891.json"
+  },
+  {
+    "team_id": "396",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/396/schedule",
+    "start_utc": "2026-10-09T13:15:01.689016+00:00",
+    "end_utc": "2026-10-09T13:15:02.845613+00:00",
+    "http_status": 200,
+    "size_bytes": 79697,
+    "sha256": "f67a5ea140b3f217304781418d00d6c26cd78c3ecc038a6ed61f9006a3526539",
+    "file": "data/exports/raw/eng4_true/espn_team_396.json"
+  },
+  {
+    "team_id": "401",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/401/schedule",
+    "start_utc": "2026-10-09T13:15:04.846206+00:00",
+    "end_utc": "2026-10-09T13:15:05.801972+00:00",
+    "http_status": 200,
+    "size_bytes": 70015,
+    "sha256": "30f41d52251c82f54ec03218fb8e508f9e045821a81ec656bfa64da90dde8631",
+    "file": "data/exports/raw/eng4_true/espn_team_401.json"
+  },
+  {
+    "team_id": "402",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/402/schedule",
+    "start_utc": "2026-10-09T13:15:07.802402+00:00",
+    "end_utc": "2026-10-09T13:15:08.330871+00:00",
+    "http_status": 200,
+    "size_bytes": 81286,
+    "sha256": "dd2067eb2a0187ac2d6311526fc2beb54cd7d68f50a6e6b1606e7874aa08435e",
+    "file": "data/exports/raw/eng4_true/espn_team_402.json"
+  },
+  {
+    "team_id": "4703",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/4703/schedule",
+    "start_utc": "2026-10-09T13:15:10.331375+00:00",
+    "end_utc": "2026-10-09T13:15:10.877564+00:00",
+    "http_status": 200,
+    "size_bytes": 80680,
+    "sha256": "db494490d5424c91f255641f4e615351c004bf080e7653c866def4a1f7ce3c8c",
+    "file": "data/exports/raw/eng4_true/espn_team_4703.json"
+  },
+  {
+    "team_id": "635",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/teams/635/schedule",
+    "start_utc": "2026-10-09T13:15:12.878173+00:00",
+    "end_utc": "2026-10-09T13:15:13.706988+00:00",
+    "http_status": 200,
+    "size_bytes": 80894,
+    "sha256": "f1dd9f4795a8185e1bdbe94b81f559e35d6f3ece4c5ef5435d04dcf10226df44",
+    "file": "data/exports/raw/eng4_true/espn_team_635.json"
+  }
+]
