@@ -1,0 +1,82 @@
+[
+  {
+    "league": "ger.2",
+    "date_param": "20261009",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/scoreboard?dates=20261009",
+    "start_utc": "2026-10-09T10:04:14.418655+00:00",
+    "end_utc": "2026-10-09T10:04:15.418948+00:00",
+    "http_status": 200,
+    "sha256_16": "783e1034360e87d4",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_ger.2_20261009.json"
+  },
+  {
+    "league": "ger.2",
+    "date_param": "20261010",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/scoreboard?dates=20261010",
+    "start_utc": "2026-10-09T10:04:15.420279+00:00",
+    "end_utc": "2026-10-09T10:04:16.053663+00:00",
+    "http_status": 200,
+    "sha256_16": "de64f19ae89d6a1a",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_ger.2_20261010.json"
+  },
+  {
+    "league": "nor.1",
+    "date_param": "20261009",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/nor.1/scoreboard?dates=20261009",
+    "start_utc": "2026-10-09T10:04:16.055282+00:00",
+    "end_utc": "2026-10-09T10:04:16.649221+00:00",
+    "http_status": 200,
+    "sha256_16": "66020b3de3ecccd2",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_nor.1_20261009.json"
+  },
+  {
+    "league": "nor.1",
+    "date_param": "20261010",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/nor.1/scoreboard?dates=20261010",
+    "start_utc": "2026-10-09T10:04:16.649913+00:00",
+    "end_utc": "2026-10-09T10:04:17.399181+00:00",
+    "http_status": 200,
+    "sha256_16": "fbab1c1648683bec",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_nor.1_20261010.json"
+  },
+  {
+    "league": "den.1",
+    "date_param": "20261009",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/den.1/scoreboard?dates=20261009",
+    "start_utc": "2026-10-09T10:04:17.400197+00:00",
+    "end_utc": "2026-10-09T10:04:17.848431+00:00",
+    "http_status": 200,
+    "sha256_16": "78bcae0e8ac7832b",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_den.1_20261009.json"
+  },
+  {
+    "league": "den.1",
+    "date_param": "20261010",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/den.1/scoreboard?dates=20261010",
+    "start_utc": "2026-10-09T10:04:17.849294+00:00",
+    "end_utc": "2026-10-09T10:04:18.295841+00:00",
+    "http_status": 200,
+    "sha256_16": "ca4f9b718f6f585c",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_den.1_20261010.json"
+  },
+  {
+    "league": "swe.1",
+    "date_param": "20261009",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/swe.1/scoreboard?dates=20261009",
+    "start_utc": "2026-10-09T10:04:18.296197+00:00",
+    "end_utc": "2026-10-09T10:04:19.119298+00:00",
+    "http_status": 200,
+    "sha256_16": "397c63b30329454a",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_swe.1_20261009.json"
+  },
+  {
+    "league": "swe.1",
+    "date_param": "20261010",
+    "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/swe.1/scoreboard?dates=20261010",
+    "start_utc": "2026-10-09T10:04:19.120038+00:00",
+    "end_utc": "2026-10-09T10:04:19.671693+00:00",
+    "http_status": 200,
+    "sha256_16": "b35b25ebd65a334a",
+    "file": "data/exports/raw/eu_scoreboard/scoreboard_swe.1_20261010.json"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "url_no_key": "https://v3.football.api-sports.io/fixtures?league=79&season=2026&status=FT",
+  "params": {
+    "league": "79",
+    "season": "2026",
+    "status": "FT"
+  },
+  "start_utc": "2026-10-09T11:06:47.003890+00:00",
+  "end_utc": "2026-10-09T11:06:47.575288+00:00",
+  "http_status": 200,
+  "size_bytes": 225,
+  "sha256": "17526b63feb603b78b119f2552f4f06756cc6a3230060fed6b8e53c4193f3bdb",
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "results": 0
+}
