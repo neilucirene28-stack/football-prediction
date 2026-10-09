@@ -1,0 +1,62 @@
+# 抓取UTC: 2026-10-09T08:27:23.029198+00:00 -> 2026-10-09T08:27:27.280700+00:00
+# SHA256(html全文): db16f8f87b058fbabafe949cf25347cda427a9ee6b463686515fd77f546e8612
+# URL: https://www.okooo.com/BJBet/BJBetMatchPoolOddsList.php?LotteryType=WDL (已脱敏headers)
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>单场即时SP值 </title>
+<meta name="keywords" content="即时,SP值,统计" />
+<meta name="description" content="北京单场即时SP值" />
+<meta name="robots" content="all" />
+<meta name="mobile-agent" content="format=xhtml;url=https://m.okooo.com/">
+<meta name="copyright" content="澳客官网" />
+<link rel="Shortcut Icon" href="/favicon_a_1.ico" />
+<meta name="referrer" content="unsafe-url"/>
+<script type="text/javascript">
+
+//ie6下图片重复加载bug解决
+var isIE = !!window.ActiveXObject;
+var isIE6 = isIE && !window.XMLHttpRequest;
+if(isIE6){document.execCommand("BackgroundImageCache", false, true);}
+
+var googleLotteryType="WDL";
+    var GoogleTJKG=true;
+
+
+var googledataobjs=new Date();
+var googlestarttime=googledataobjs.getTime();
+
+var ejsversion = '202609231010';
+var js_version = '202609231010' ;
+var googleversion='202102051123';
+var googlegaurl='https://imgv1.okoooimg.cn';
+
+var AgentLoginType='';
+var PayMethod='okooo';
+var AgentType='';
+var AgentUserID = '';
+var IsClub='';
+var IsSeparateDomain='';
+var currentDomainName = 'www.okooo.com';
+
+var gateway = '//www.okooo.com/Remoting/json.php';
+var LoginDomain = '//www.okooo.com';
+var SecureUrl =  '//www.okooo.com';
+var StaticUrl =  'https://imgv1.okoooimg.cn';
+var MainUrl = 'http://www.okooo.com';
+var jsrequire = 202608031717;
+var BaseUrl = '//www.okooo.com';
+var isNeedCors = '';
+var default_wager;
+var LotteryTypeList = {"WDL":"","OverUnder":"","Score":"","HalfFull":"","TotalGoals":"","WL":""};
+
+if(!LotteryTypeList){LotteryTypeList = {};}
+
+var HaveSetupIndexInfo = 'N';
+var saleGlobalStatus = false;
+</script>
+        			<link href="https://imgv1.okoooimg.cn/min/?f=style%2fcss%2flogin.css,StyleDefault%2fCss%2fheader.css,StyleDefault%2fCss%2fglobal.css,StyleD
