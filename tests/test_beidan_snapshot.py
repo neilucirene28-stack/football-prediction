@@ -78,21 +78,21 @@ def test_score_to_beidan_class():
     assert bs.score_to_beidan_class(5, 3) == "胜其他"  # 5-3不在13类内
 
 
-def test_25class_covers_all():
-    """25类 = 13胜+5平+7负，含三类'其他'。"""
-    assert len(bs.BEIDAN_SCORE_25["win"]) == 13
-    assert len(bs.BEIDAN_SCORE_25["draw"]) == 5
-    assert len(bs.BEIDAN_SCORE_25["lose"]) == 7
-    assert "胜其他" in bs.BEIDAN_SCORE_25["win"]
-    assert "平其他" in bs.BEIDAN_SCORE_25["draw"]
-    assert "负其他" in bs.BEIDAN_SCORE_25["lose"]
+def test_31class_covers_all():
+    """31类 = 13胜+5平+13负，含三类'其他'（福建体彩2024-04-01规则）。"""
+    assert len(bs.BEIDAN_SCORE_31["win"]) == 13
+    assert len(bs.BEIDAN_SCORE_31["draw"]) == 5
+    assert len(bs.BEIDAN_SCORE_31["lose"]) == 13
+    assert "胜其他" in bs.BEIDAN_SCORE_31["win"]
+    assert "平其他" in bs.BEIDAN_SCORE_31["draw"]
+    assert "负其他" in bs.BEIDAN_SCORE_31["lose"]
 
 
-def test_aggregate_25class_sums_to_one():
+def test_aggregate_31class_sums_to_one_v2():
     m = score_matrix(1.8, 1.2, rho=-0.13)
     mc = ipf_to_marginals(m, list(match_probs(m)))
-    dist = bs.aggregate_25class(mc)
-    assert len(dist) == 25
+    dist = bs.aggregate_31class(mc)
+    assert len(dist) == 31
     assert abs(sum(dist.values()) - 1.0) < 1e-6
 
 
@@ -103,7 +103,7 @@ def test_six_play_vector_completeness():
     assert abs(sum(six["wdl"].values()) - 1.0) < 1e-3
     hw = six["handicap_wdl"]
     assert abs(hw["让胜"] + hw["让平"] + hw["让负"] - 1.0) < 1e-3
-    assert abs(sum(six["score_25"].values()) - 1.0) < 1e-6
+    assert abs(sum(six["score_31"].values()) - 1.0) < 1e-6
     assert abs(sum(six["total_goals"].values()) - 1.0) < 1e-6
     assert abs(sum(six["half_full"].values()) - 1.0) < 1e-3
     assert abs(sum(six["ou"].values()) - 1.0) < 1e-6
@@ -121,7 +121,8 @@ def test_write_snapshot_append_only(tmp_path, monkeypatch):
     r2 = bs.write_snapshot(md, pr)  # 重跑
 
     assert r1["rerun_of"] is None
-    assert r2["rerun_of"] == "26103:1#r1"
+    # 修正：第二条rerun_of必须指向实际存在的第一条"26103:1"，不是不存在的#r1
+    assert r2["rerun_of"] == "26103:1"
     assert r1["snapshot_id"] == "26103:1"
     assert r2["snapshot_id"] == "26103:1#r2"
 
@@ -175,3 +176,150 @@ def test_prob_sum_violation_rejected():
         assert False, "应抛出ValueError"
     except ValueError as e:
         assert "概率和" in str(e)
+
+
+# ============ P0审计缺陷针对性测试（先失败，后修复）============
+
+def test_31class_lose_has_13():
+    """31类：客胜13类（含0-4,1-4,2-4,0-5,1-5,2-5,负其他）。"""
+    assert len(bs.BEIDAN_SCORE_31["win"]) == 13
+    assert len(bs.BEIDAN_SCORE_31["draw"]) == 5
+    assert len(bs.BEIDAN_SCORE_31["lose"]) == 13
+    assert "负其他" in bs.BEIDAN_SCORE_31["lose"]
+    # 25类误作全场时缺失的比分
+    for s in ["0-4", "1-4", "2-4", "0-5", "1-5", "2-5"]:
+        assert s in bs.BEIDAN_SCORE_31["lose"], f"{s}应在31类客胜中"
+
+
+def test_31class_mapping():
+    """31类映射：0-4/2-5等应映射到具体类而非负其他。"""
+    assert bs.score_to_beidan_class(0, 4) == "0-4"
+    assert bs.score_to_beidan_class(2, 5) == "2-5"
+    assert bs.score_to_beidan_class(1, 5) == "1-5"
+    assert bs.score_to_beidan_class(0, 6) == "负其他"
+    assert bs.score_to_beidan_class(6, 0) == "胜其他"
+    assert bs.score_to_beidan_class(4, 4) == "平其他"
+
+def test_naive_timestamp_rejected():
+    """无时区时间戳必须被拒绝（不能强行按UTC）。"""
+    assert bs._has_real_time_evidence("2026-10-09T14:20:16") is False
+    assert bs._has_real_time_evidence("2026-10-09 14:20:16") is False
+    # 有时区的合法过去时间 → True
+    past = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    assert bs._has_real_time_evidence(past) is True
+
+
+def test_null_source_not_ignored(tmp_path, monkeypatch):
+    """available_at中null来源不能被all()忽略，必须标observation_only。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    now = datetime.now(timezone.utc).isoformat()
+    md = _mock_match_data(available_at={"espn": now, "7m": None})
+    r = bs.write_snapshot(md, pr)
+    assert r["observation_only"] is True, "null来源必须显式标记，不能忽略"
+
+
+def test_time_ordering_violations(tmp_path, monkeypatch):
+    """时间顺序 available_at <= asof <= generated_at < kickoff，违反则observation_only。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    now = datetime.now(timezone.utc)
+    past = (now - timedelta(hours=2)).isoformat()
+    future_kickoff = (now + timedelta(hours=2)).isoformat()
+
+    # available_at 晚于 generated_at → 违反
+    md = _mock_match_data(
+        seq="10",
+        generated_at=past,
+        available_at={"espn": now.isoformat()},
+        kickoff=future_kickoff,
+    )
+    r = bs.write_snapshot(md, pr)
+    assert r["observation_only"] is True, "available_at>generated_at应标observation_only"
+
+    # generated_at 晚于 kickoff → 违反（赛后生成的不能算赛前）
+    md2 = _mock_match_data(
+        seq="11",
+        generated_at=now.isoformat(),
+        available_at={"espn": past},
+        kickoff=past,  # 开球早于生成
+    )
+    r2 = bs.write_snapshot(md2, pr)
+    assert r2["observation_only"] is True, "generated_at>kickoff应标observation_only"
+
+
+def test_prob_sum_tolerance_1e6():
+    """容差必须1e-6（与文档一致），1e-3太松。"""
+    borderline = {"a": 0.50025, "b": 0.50025}  # 和=1.0005，在1e-3内但超1e-6
+    try:
+        bs._check_prob_sum(borderline, "test")
+        assert False, "和偏离0.0005应在1e-6容差下被拒绝"
+    except ValueError:
+        pass
+
+
+def test_prob_range_and_finite():
+    """各项必须0<=p<=1且有限（非NaN/Inf）。"""
+    import math
+    for bad_dist, name in [
+        ({"a": 1.5, "b": -0.5}, "超范围"),
+        ({"a": float("nan"), "b": 1.0}, "NaN"),
+        ({"a": float("inf"), "b": 0.0}, "Inf"),
+    ]:
+        try:
+            bs._check_prob_sum(bad_dist, name)
+            assert False, f"{name}应被拒绝"
+        except ValueError:
+            pass
+
+
+def test_rerun_of_points_to_existing(tmp_path, monkeypatch):
+    """第二次重跑的rerun_of必须指向实际存在的第一条（无#r1）。"""
+    monkeypatch.setattr(bs, "SNAPSHOT_DIR", str(tmp_path))
+    pr = _mock_predict_result()
+    md = _mock_match_data()
+
+    r1 = bs.write_snapshot(md, pr)
+    r2 = bs.write_snapshot(md, pr)
+    r3 = bs.write_snapshot(md, pr)
+
+    # 第一条无后缀
+    assert r1["snapshot_id"] == "26103:1"
+    assert r1["rerun_of"] is None
+    # 第二条必须指向实际存在的第一条
+    assert r2["rerun_of"] == "26103:1", f"第二条rerun_of应为26103:1，实际{r2['rerun_of']}"
+    # 第三条指向第二条
+    assert r3["rerun_of"] == r2["snapshot_id"]
+
+    # 文件中所有rerun_of都必须对应已存在的snapshot_id
+    path = tmp_path / "26103.jsonl"
+    ids = set()
+    for line in path.read_text(encoding="utf-8").strip().split("\n"):
+        rec = json.loads(line)
+        if rec["rerun_of"] is not None:
+            assert rec["rerun_of"] in ids, f"rerun_of {rec['rerun_of']} 不存在"
+        ids.add(rec["snapshot_id"])
+
+
+def test_atomic_write_uses_temp_and_fsync(tmp_path, monkeypatch):
+    """原子写入：必须用临时文件+rename+fsync。"""
+    import inspect
+    src = inspect.getsource(bs.write_snapshot)
+    assert "mkstemp" in src or "NamedTemporaryFile" in src, "应使用临时文件"
+    assert "os.replace" in src or "os.rename" in src, "应使用原子rename"
+    assert "fsync" in src, "应调用fsync"
+
+
+def test_handicap_missing_returns_none():
+    """让球线缺失时统一返回None，不返回零概率/None混合dict。"""
+    pr = _mock_predict_result()
+    pr["derivatives"]["handicap_1x2"] = None  # 无让球数据
+    six = bs.build_six_play_vector(pr)
+    hw = six["handicap_wdl"]
+    # 要么完整三元组，要么整体None，不允许{"让胜":0.0,...,"handicap_line":None}混合
+    if hw is None:
+        pass  # 整体None，可接受
+    else:
+        assert hw["handicap_line"] is not None, "有dict就必须有line"
+        for k in ("让胜", "让平", "让负"):
+            assert hw[k] is not None

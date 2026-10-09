@@ -17,7 +17,7 @@ from _http import fetch_with_retry
 from opencc import OpenCC
 
 BJ = timezone(timedelta(hours=8))
-SNAP = "2026-10-09T13:30:00+08:00"
+# SNAP预设已删除（P0审计：禁止预设时间戳）。快照时间用真实生成时刻。
 s2t = OpenCC("s2t").convert
 t2s = OpenCC("t2s").convert
 
@@ -324,7 +324,7 @@ def predict_one(m):
     payload = {
         "home": home, "away": away,
         "kickoff_at": kickoff_bj.strftime("%Y-%m-%dT%H:%M:00+08:00"),
-        "snapshot_at": SNAP,
+        "snapshot_at": t_data_ready,  # 真实生成时刻（P0审计：禁预设）
         "competition": league,
         "home_recent": [{"gf": r["gf"], "ga": r["ga"], "venue": r["venue"]} for r in hr],
         "away_recent": [{"gf": r["gf"], "ga": r["ga"], "venue": r["venue"]} for r in ar],
