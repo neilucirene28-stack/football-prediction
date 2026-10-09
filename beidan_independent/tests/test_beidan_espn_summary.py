@@ -53,6 +53,12 @@ class SummaryTests(unittest.TestCase):
         self.assertEqual((row["ht_home"], row["ht_away"]), (1, 0))
         self.assertFalse(report["complete_goal_events_crosscheck"])
 
+    def test_matching_slug_does_not_hide_a_conflicting_league_id(self):
+        p = copy.deepcopy(self.payload)
+        p["header"]["league"]["id"] = "999"
+        with self.assertRaises(ValueError):
+            self.run_audit(p)
+
 
 if __name__ == "__main__":
     unittest.main()

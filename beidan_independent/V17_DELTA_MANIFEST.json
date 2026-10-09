@@ -1,0 +1,421 @@
+{
+  "base_commit": "0e3f121c2aae946d3a5a380ce71e516f6a6f66df",
+  "files": [
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "local_file": "beidan_bd1/README.md",
+      "bytes": 15477,
+      "git_blob_sha": "2f61737002cd2c06ec3d76c51dc4ef72e2e0eeb2",
+      "sha256": "7671aad30b2166904bbc4db9f9d0078475f0086b5e2dc00a356c62d93d5e073a",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/archive_io.py",
+      "local_file": "beidan_bd1/archive_io.py",
+      "bytes": 815,
+      "git_blob_sha": "937292d0a3fd59d60022700ac078ba90f85f4c82",
+      "sha256": "e1349e70585fbdc6a644c03b46c5ffba12fb6ae7b2b557a7408f856896167396",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/espn_fixture.py",
+      "local_file": "beidan_bd1/espn_fixture.py",
+      "bytes": 3755,
+      "git_blob_sha": "b60858502c86016da85fb92fe7002c5a0d849393",
+      "sha256": "13e9f2afa64d7cb2f11e3b983dd887910f55c4c9180c692661a531be1a8cd35a",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/espn_summary.py",
+      "local_file": "beidan_bd1/espn_summary.py",
+      "bytes": 5200,
+      "git_blob_sha": "5a943aa37cdee2e9ea2b51996d69802dd27954e2",
+      "sha256": "7ac5f9f8dd20073b5633148295e2722ad40f50959744bc0f998e40e5e43ab2a5",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/native_pool.py",
+      "local_file": "beidan_bd1/native_pool.py",
+      "bytes": 2780,
+      "git_blob_sha": "f148d38c05879e0c3f195574e68366cddb2d9865",
+      "sha256": "48146c644c5fb779674764f0d9c5391d27bcdd178ecd55dc07386667d97ce5d3",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_den.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "local_file": "data_sample/espn_den.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "bytes": 20999,
+      "git_blob_sha": "d430014104ef3ac9defae79183f83b6bdfed71cc",
+      "sha256": "74e548ceeaf81ff4a15d3b92f2a40e74156045565deae842fbc8f1689d5de745",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_den.1_mined_20261009/original_responses.tar.gz",
+      "local_file": "data_sample/espn_den.1_mined_20261009/original_responses.tar.gz",
+      "bytes": 488579,
+      "git_blob_sha": "0e47196129e06e7f5e4d2063f1e34a850605d39d",
+      "sha256": "7e6a5cf0e3a588ddb1900208c220ac39a2c4badbaf7d821ee7db9c747b4df94f",
+      "encoding": "base64"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_den.1_mining_config.json",
+      "local_file": "data_sample/espn_den.1_mining_config.json",
+      "bytes": 464,
+      "git_blob_sha": "514a167d48b77973a0f055f9776c1734892c3980",
+      "sha256": "d56ef7c897d7047ee8f7762d53bcfe0d050ad50d76974e90e76fe5ecd25fb945",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_j1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "local_file": "data_sample/espn_j1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "bytes": 22219,
+      "git_blob_sha": "ae0817893e1d2a61cf6a700305ca813638999c49",
+      "sha256": "58a6ae4603a8a69982642830fc7ea82f137043d170a35ddfbc5645696267d859",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_j1_mined_20261009/original_responses.tar.gz",
+      "local_file": "data_sample/espn_j1_mined_20261009/original_responses.tar.gz",
+      "bytes": 1160403,
+      "git_blob_sha": "e24f6f2f48c0cb22f30113e73178cb5db7dee5aa",
+      "sha256": "a2c0ede855de03fd0b5062f5b0395e8fa724a953c55050afbffe14ffe59deaa9",
+      "encoding": "base64"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_j1_mining_config.json",
+      "local_file": "data_sample/espn_j1_mining_config.json",
+      "bytes": 717,
+      "git_blob_sha": "6b9aeaa84d680a8cf49b7220803cdbd4a120350a",
+      "sha256": "6c4a2cb761e3332c022c2d582856c298f5a8d240ed1fa86244eee041b9911c09",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_nor.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "local_file": "data_sample/espn_nor.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "bytes": 20638,
+      "git_blob_sha": "cfc3c745aa4f4738021e63a2b6b16eb58c100511",
+      "sha256": "f9e17d7a7c576f95a25f165586cb124e307c68b27605cfd44a82216a46f8c5cd",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_nor.1_mined_20261009/original_responses.tar.gz",
+      "local_file": "data_sample/espn_nor.1_mined_20261009/original_responses.tar.gz",
+      "bytes": 805134,
+      "git_blob_sha": "9f7d587e040d21fd8ab811b78f57b36ab50ec5d6",
+      "sha256": "2b5c01b66bf095e2c0f1324f66128e854a600723dbd0970759ef9708cdcd24d9",
+      "encoding": "base64"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_nor.1_mining_config.json",
+      "local_file": "data_sample/espn_nor.1_mining_config.json",
+      "bytes": 546,
+      "git_blob_sha": "669f001a9fed18a7d917085860768d00b99468f0",
+      "sha256": "1e541cca6057a9171d5ef63e0b6313b12344f1d81259d0d87d9dcbc07cc34b70",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_swe.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "local_file": "data_sample/espn_swe.1_mined_20261009/VERIFIED_FILE_INDEX.json",
+      "bytes": 21743,
+      "git_blob_sha": "e02ff7bd579c6a13dde2567f9dc465d29045b6cb",
+      "sha256": "571ee111f64bd24952dd1619098f168fa57fe0cde4527bb2df568117650330e0",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_swe.1_mined_20261009/original_responses.tar.gz",
+      "local_file": "data_sample/espn_swe.1_mined_20261009/original_responses.tar.gz",
+      "bytes": 886169,
+      "git_blob_sha": "8dfb2917e204610d56004ec0c7cb9e51331917d7",
+      "sha256": "71172cf2e0bd11825f658c01d99c4ab09e60618cd1a48d2cfff8c99157a533e7",
+      "encoding": "base64"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_swe.1_mining_config.json",
+      "local_file": "data_sample/espn_swe.1_mining_config.json",
+      "bytes": 755,
+      "git_blob_sha": "12ad1b6f834b9711e3a5fc75dc545d211ecf308c",
+      "sha256": "300aac56120af8562f43a05ba2ea14c160956df46d51404593f4d5800dac8232",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_den.1_audit_config.json",
+      "local_file": "data_sample/v17_den.1_audit_config.json",
+      "bytes": 462,
+      "git_blob_sha": "0fa9f76749fddfca1acdab538dcc8df7f0eb1211",
+      "sha256": "d486398a7207dd8827492b540f0a19fa0c85ecd49426892282105c2324dabef4",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_eng2_audit_config.json",
+      "local_file": "data_sample/v17_eng2_audit_config.json",
+      "bytes": 1184,
+      "git_blob_sha": "68be63db12168d472a0b67f35571ac7827f4fab8",
+      "sha256": "b3fcc38e93eb5b3099fa8de834433600550db6eebd29479ff9eed1ea487a300e",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_eng3_audit_config.json",
+      "local_file": "data_sample/v17_eng3_audit_config.json",
+      "bytes": 1267,
+      "git_blob_sha": "5af4f4163baa367f2537c38168410fd894936875",
+      "sha256": "f114dc0813acfc45f1da1135e18c62433532791921fb86c24248fc018ad97d3d",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_eng4_audit_config.json",
+      "local_file": "data_sample/v17_eng4_audit_config.json",
+      "bytes": 1278,
+      "git_blob_sha": "7ba12fc7fe9f1dbda8f9f3043aa62afd35be67c1",
+      "sha256": "c6142b1b6bc56efb29afdf520087401641385d76f7bf117c43e034f258b94189",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_ger2_audit_config.json",
+      "local_file": "data_sample/v17_ger2_audit_config.json",
+      "bytes": 675,
+      "git_blob_sha": "8c2fc9fa5da1b97a5632a921e706f5d24d0a3272",
+      "sha256": "86fb2ce47299c415a8b6142d4670b42bb752da5ea5416727b12067636d3897dd",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_j1_audit_config.json",
+      "local_file": "data_sample/v17_j1_audit_config.json",
+      "bytes": 715,
+      "git_blob_sha": "88610e9f2a740b86d4ffbcd0d240fcedb7025b90",
+      "sha256": "2c15cedfe247f145c097c518c4f987c8d8aac9c52c1cf00f7d25de031f6c5c12",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_nor.1_audit_config.json",
+      "local_file": "data_sample/v17_nor.1_audit_config.json",
+      "bytes": 544,
+      "git_blob_sha": "3540e162d579a0566250045ea62a1ed67290f80b",
+      "sha256": "5f560b9bcb76c8f46fd0f534493ac63a9f306f5eee9552bf923b7b7b61823acb",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/v17_swe.1_audit_config.json",
+      "local_file": "data_sample/v17_swe.1_audit_config.json",
+      "bytes": 753,
+      "git_blob_sha": "c938266ebec2bfef0bd58ff67cc2726530ab5138",
+      "sha256": "8eb8260365fa1d961f690b728eb2d60ae182ee373984cf9665e626e870aafc86",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v17-native-mining.md",
+      "local_file": "docs/beidan-v17-native-mining.md",
+      "bytes": 4177,
+      "git_blob_sha": "9a766a6825f60453a02d3c372b6660126dfcac3a",
+      "sha256": "13c1b54a0ee2aa11292a290c2825206397290caea05240589287a834bbb1c6b0",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T150800070498Z/folds.json",
+      "local_file": "outputs/l1_prospective/20261009T150800070498Z/folds.json",
+      "bytes": 161146,
+      "git_blob_sha": "c383cea1a9d545e6660331e26e173b95c14e9c37",
+      "sha256": "69da76c00203ce15459b83345ffa524e0b7c725db6c2d68fada3f0f61c5563c8",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T150800070498Z/freeze_manifest.json",
+      "local_file": "outputs/l1_prospective/20261009T150800070498Z/freeze_manifest.json",
+      "bytes": 847,
+      "git_blob_sha": "dac9a4d0dc34f22e1bf8152a0b09cf2512a099aa",
+      "sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T150800070498Z/history.jsonl",
+      "local_file": "outputs/l1_prospective/20261009T150800070498Z/history.jsonl",
+      "bytes": 339318,
+      "git_blob_sha": "057715a87824d23b4062476848a0517a1aafc59a",
+      "sha256": "72519ec6e4c51edd992d416eef8c4985b0c5ca2e4c6a7e14cd94fe1f804f197c",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T150800070498Z/report.json",
+      "local_file": "outputs/l1_prospective/20261009T150800070498Z/report.json",
+      "bytes": 5345522,
+      "git_blob_sha": "703ecfc418d2c4aade5cc04aba4017fc1a4ddddf",
+      "sha256": "4c4d7fadb6d4afac9a07603d15b21371fa0cd1f3ad08874ad0d9d961e25d8723",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T150800070498Z/results.jsonl",
+      "local_file": "outputs/l1_prospective/20261009T150800070498Z/results.jsonl",
+      "bytes": 0,
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/predictions_20261010_v17.md",
+      "local_file": "outputs/predictions_20261010_v17.md",
+      "bytes": 9684,
+      "git_blob_sha": "5f7b13d3fcbe94cdd707e0c5e870098f0612bd77",
+      "sha256": "752043aa9f0fd8bd5efff9c58c10a3bcf7ae645c8530e0066e6a2faf0fc562ea",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_full_pool_coverage.json",
+      "local_file": "outputs/v17_full_pool_coverage.json",
+      "bytes": 74943,
+      "git_blob_sha": "a46ccef2add0b0f362d376024defcb92e475bb07",
+      "sha256": "3b236b17f0ba903d0ea26baabaab7fd17311eb3a5b0eddfd87bcdf19ba7df608",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/den.1/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/den.1/audit_and_predictions.json",
+      "bytes": 21929,
+      "git_blob_sha": "ec8d0cc6a4cb9631aecbebba1fba8f2af663c7eb",
+      "sha256": "a398a27353ef176afe1fc878d5defa58e2e1e86d55c592d5b53d4c71027a13f4",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/eng2/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/eng2/audit_and_predictions.json",
+      "bytes": 233351,
+      "git_blob_sha": "fcb573a8691ad4d83cbd5397073eb91520df1f99",
+      "sha256": "099ad77d1f8daaf447dfb764751a9562bb7d838422ea7ff94b7536ba7bee16e3",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/eng3/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/eng3/audit_and_predictions.json",
+      "bytes": 241452,
+      "git_blob_sha": "3e0b06a56c9b19434af4b2f5a2a9f59ff97a4ea7",
+      "sha256": "21df24c6fbf04b74df79288f66558136197814358f3bef6527eef10ed4d05adf",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/eng4/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/eng4/audit_and_predictions.json",
+      "bytes": 246262,
+      "git_blob_sha": "47dad1f09985db040631fd9591136c12aa13f5e7",
+      "sha256": "dab0d973e9e2eb745a2025dc0d2eb8d72a5d02778b6d64ceb945362988ace09e",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/ger2/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/ger2/audit_and_predictions.json",
+      "bytes": 119359,
+      "git_blob_sha": "a96f7a16036be848e694ca6e27ff8dfe12766815",
+      "sha256": "bbaa83f0e21e89a093c4a5453fb731b3e7cb7a2a82cc1e59411517d5af24098e",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/j1/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/j1/audit_and_predictions.json",
+      "bytes": 85817,
+      "git_blob_sha": "9f93ae75586225e7ed6927f501e59cf9960f50cb",
+      "sha256": "c54f355b64666469a241d7dc38ffc7d0fe0d7d7a36fc103ab8e343162c6cddd5",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/nor.1/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/nor.1/audit_and_predictions.json",
+      "bytes": 71641,
+      "git_blob_sha": "66c3f3e8a5dfee38e860bca830343f41f900aff4",
+      "sha256": "59188822096a8619029ff8730db3c15036c13f2a6ab2e4186aad2e130fc4625c",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_native/swe.1/audit_and_predictions.json",
+      "local_file": "outputs/v17_native/swe.1/audit_and_predictions.json",
+      "bytes": 85495,
+      "git_blob_sha": "b6efadeb4efb8ef65807ee997d70341be29011a3",
+      "sha256": "25bd03c226e58e8d19b37e050c9f2de16e6010f27d95d746503cc908301d2378",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/v17_pending_settlement.json",
+      "local_file": "outputs/v17_pending_settlement.json",
+      "bytes": 17325,
+      "git_blob_sha": "ecd6d3886d89020491ec636e8ed6e7c2d3b5feb2",
+      "sha256": "7e77885bb05830f78d02dbcc12cb1024bc561fbe39a78b929045c1ccb12ec7e5",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/audit_native_batch.py",
+      "local_file": "scripts/audit_native_batch.py",
+      "bytes": 5706,
+      "git_blob_sha": "ac1c463f969f6d3fd74ebad7a079cab30c7387a6",
+      "sha256": "ba8874a6e6725db2c2217087e81c9ffaf10d6a90f1cc451ca80534cacb85e639",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/emit_frozen_prediction_table.py",
+      "local_file": "scripts/emit_frozen_prediction_table.py",
+      "bytes": 4058,
+      "git_blob_sha": "8764833e25aadbdf8506a5bca82df16fbcdef881",
+      "sha256": "d6fd2385273c7a99809e14edeb2d9bd59ceb42fac0564936e3b90e478ef9ef71",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/freeze_native_pool.py",
+      "local_file": "scripts/freeze_native_pool.py",
+      "bytes": 4383,
+      "git_blob_sha": "e4d40ce4efd1d2a3e97075ff9f8e495c5d8acfa6",
+      "sha256": "cb4bea0dd456c70ed6043c86651afdfcd3c3b26f25859d355be21354cfd18591",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/mine_espn_native.py",
+      "local_file": "scripts/mine_espn_native.py",
+      "bytes": 4575,
+      "git_blob_sha": "cbc68e6ecd93f35429f2acc5b4b731e1d532d1f0",
+      "sha256": "29cb30852102500460aab97cb43e0b44fd6285173313cc2891a4571b950a2d07",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_archive_io.py",
+      "local_file": "tests/test_archive_io.py",
+      "bytes": 1258,
+      "git_blob_sha": "2041c5394fb97cd5a1599b8a1fc677377f172f5f",
+      "sha256": "b2795094adb2e4c2ea6eb37adac111674b50031d3fceffd37e6fb0594a9085a6",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_espn_fixture.py",
+      "local_file": "tests/test_beidan_espn_fixture.py",
+      "bytes": 2544,
+      "git_blob_sha": "6ae53c3313219f7a37dcae585fa3ed4d96b177c9",
+      "sha256": "5b4e096203a3899537cee3e8f844e844edd5623942f952c1ae66a8bf303c792d",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_espn_summary.py",
+      "local_file": "tests/test_beidan_espn_summary.py",
+      "bytes": 2790,
+      "git_blob_sha": "b99ff7b8eea57cdb5597972041dc37fd61da7833",
+      "sha256": "74c596f31aa17d3df8e6e07472fd1400c72c3ac49357e0ef547d0deca1bf7489",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_native_pool.py",
+      "local_file": "tests/test_beidan_native_pool.py",
+      "bytes": 3204,
+      "git_blob_sha": "4da251d146a1eb947155c78cfe58784035d21af6",
+      "sha256": "574449cfc4fccedf06c636eef6a08b7257dd2dcb51e421fcbd2f7a63095b1c8a",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_native_audit_cli.py",
+      "local_file": "tests/test_native_audit_cli.py",
+      "bytes": 1420,
+      "git_blob_sha": "37f8527b96361d2f42f2dd493137da596fe0a42e",
+      "sha256": "adf3ffbca82a92f8e3f5a0ccdb42fc276615b450d9b0be521755bbb0f1d3f0e5",
+      "encoding": "utf-8"
+    }
+  ],
+  "verified_tests": 116,
+  "historical_events_n": 476,
+  "research_predictions_n": 50,
+  "blocked_n": 129,
+  "paired_n": 0,
+  "production_eligible": false,
+  "compressed_original_responses_n": 163,
+  "failed_requests_n": 23
+}

@@ -2,6 +2,10 @@
 
 状态：**已实现可执行的 L3 根/赛事族先验、受身份门控的 L1 球队攻防影子候选、开售池只读导入和赛前快照；未训练生产参数，未做真实北单赛前 walk-forward，禁止上线**。包仅用 Python 标准库，不导入竞彩 `engine.predict()`。设计全文见 `docs/beidan-independent-model-v1-design.md`。
 
+## v17 自主原件采集与阶段门控
+
+新采日职、挪超、瑞典超、丹超163份原始响应，135场唯一显式半场赛果；合并历史476场，179场全池中50场研究候选、129场阻断。修复摘要联赛ID、未来赛程阶段与Python优化模式下的收据校验；116项测试通过。新概率和完整缺口见 `outputs/predictions_20261010_v17.md`、`outputs/v17_full_pool_coverage.json`，审计说明见 `docs/beidan-v17-native-mining.md`。当前选择仍为L3冷启动，L1只作诊断；0成对赛果、无实战Brier、生产门槛未通过。
+
 ## v11 逐期重拟合研究执行器
 
 `python -m beidan_bd1.walk_forward` 实际按每期cutoff重拟合L3，并只用更早已结算折选择校准收缩参数；固定总进球均值，分别绑定赛程和整数线来源，记录全池跳过、待结算、成对Brier和31类比分log loss。少于5期/500场或分期bootstrap不支持不恶化时，数值门槛不通过；生产标志始终为false。它是L3校准研究路径，不是L1或市场路线已完成验证。完整协议见 `docs/beidan-v11-walk-forward.md`；当前66项独立测试通过。`scripts/check_current_walk_forward.py` 可复跑现有数据阻断检查，不能把缺时间的存档升级为历史赛前证据。

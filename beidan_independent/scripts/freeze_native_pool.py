@@ -42,8 +42,9 @@ for r in roster:
 folds=[{'period':'26103','cutoff_at':now,'expected_total':179,'fixtures':fixtures}]
 report=run_walk_forward(history=history,folds=folds,results=[],evaluated_at=now,
         model_family='l1_team_strength',identity_mode='provider_native_espn')
-assert report['offered_n']==179 and report['predicted_n']==len(research) and report['paired_n']==0
-assert report['brier_candidate'] is None and report['production_gate_passed'] is False
+if (report['offered_n']!=179 or report['predicted_n']!=len(research) or report['paired_n']!=0
+        or report['brier_candidate'] is not None or report['production_gate_passed'] is not False):
+    raise ValueError('prospective freeze coverage or pending-only gate differs')
 report['prospective_freeze']={'generated_at':now,'original_roster_sha256':hashlib.sha256(pool_path.read_bytes()).hexdigest(),
      'history_audits_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in audit_paths},
      'canonical_identity_approved_n':0,'official_handicap_imported_n':0,

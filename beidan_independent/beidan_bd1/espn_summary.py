@@ -31,6 +31,7 @@ def audit_summary(payload: dict, schedule: dict, *, verified_at: str,
     header = payload.get("header", {})
     if (header.get("id") != schedule["provider_match_id"]
             or header.get("league", {}).get("slug") != league_slug
+            or header.get("league", {}).get("id") != schedule["provider_league_id"]
             or header.get("season", {}).get("year") != schedule["season_year"]
             or header.get("season", {}).get("type") != schedule["season_type"]):
         raise ValueError("summary比赛ID或赛季阶段不一致")

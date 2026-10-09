@@ -11,6 +11,8 @@ def batch(seq=18, league='1', eid='100'):
             'research_predictions': [{'seq': seq,
                 'status': 'native_research_binding_unapproved',
                 'binding': {'proposed_provider_event_id': eid + '0',
+                            'provider_league_id': league, 'season_year': 2026,
+                            'season_type': 1,
                             'canonical_identity_approved': False}}]}
 
 
@@ -40,6 +42,13 @@ class NativePoolTest(unittest.TestCase):
         b = batch(); other = copy.deepcopy(b['results'][0])
         other['record']['season_type'] = 2; b['results'].append(other)
         with self.assertRaises(ValueError): self.collect(b)
+
+    def test_fixture_stage_is_not_inferred_from_history(self):
+        for key, value in [('provider_league_id', '2'), ('season_year', 2025),
+                           ('season_type', 2), ('season_type', None), ('season_type', True)]:
+            b = batch()
+            b['research_predictions'][0]['binding'][key] = value
+            with self.assertRaises(ValueError): self.collect(b)
 
     def test_conflicting_history_is_not_silently_overwritten(self):
         b = batch(98); b['results'][0]['record']['ft_home'] = 7

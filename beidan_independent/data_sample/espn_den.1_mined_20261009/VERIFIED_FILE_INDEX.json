@@ -1,0 +1,532 @@
+{
+  "source_commit": null,
+  "source": "direct_ESPN_HTTP_response",
+  "created_at": "2026-10-09T15:06:17.565490+00:00",
+  "capture_clock_independently_authenticated": false,
+  "history_scope": "up_to_10_recent_FT_events_per_target_team",
+  "selected_summary_ids": [
+    "401874459",
+    "401874474",
+    "401874478",
+    "401874512",
+    "401874514",
+    "401874476",
+    "401874461",
+    "401874510",
+    "401874508",
+    "401874520",
+    "401874460",
+    "401874473",
+    "401874518",
+    "401874479",
+    "401874483",
+    "401874490",
+    "401874502",
+    "401874482",
+    "401874515",
+    "401874480",
+    "401874507",
+    "401874522",
+    "401874526",
+    "401874484",
+    "401874489",
+    "401874533",
+    "401874496",
+    "401874513",
+    "401874501",
+    "401874523",
+    "401874504",
+    "401874506",
+    "401874532",
+    "401874509",
+    "401874540",
+    "401874528",
+    "401874527",
+    "401874487",
+    "401874539",
+    "401874536",
+    "401874554",
+    "401874529",
+    "401874495"
+  ],
+  "files": [
+    {
+      "kind": "schedule",
+      "local_file": "schedule_3101.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/3101/schedule",
+      "team_id": "3101",
+      "start_utc": "2026-10-09T15:04:00.396289+00:00",
+      "end_utc": "2026-10-09T15:04:06.407142+00:00",
+      "http_status": 200,
+      "bytes": 81745,
+      "sha256": "f300f10abf0aa55719bd954fa3aa267c6c1e5b4c88d259f83bcfd7e7ac55a14c"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "schedule_11550.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/11550/schedule",
+      "team_id": "11550",
+      "start_utc": "2026-10-09T15:04:00.398918+00:00",
+      "end_utc": "2026-10-09T15:04:06.369196+00:00",
+      "http_status": 200,
+      "bytes": 81724,
+      "sha256": "e2007a3c0dc3e61c5bce7582754d3f030563fa4993cdef43debf46d338d0c5e2"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "schedule_3153.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/3153/schedule",
+      "team_id": "3153",
+      "start_utc": "2026-10-09T15:06:03.466963+00:00",
+      "end_utc": "2026-10-09T15:06:08.700936+00:00",
+      "http_status": 200,
+      "bytes": 81227,
+      "sha256": "9c162cec63c9f1a1f51ccf8cb71721c66b45219c71b54a75ada01033e6c18eab"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "schedule_7853.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/7853/schedule",
+      "team_id": "7853",
+      "start_utc": "2026-10-09T15:06:03.480773+00:00",
+      "end_utc": "2026-10-09T15:06:08.523255+00:00",
+      "http_status": 200,
+      "bytes": 80663,
+      "sha256": "771a27b53f29726d94c5d0560d84b454d474b11eb011be96e1c2a2d8370e2e0d"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "schedule_572.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/572/schedule",
+      "team_id": "572",
+      "start_utc": "2026-10-09T15:06:03.485075+00:00",
+      "end_utc": "2026-10-09T15:06:08.671089+00:00",
+      "http_status": 200,
+      "bytes": 81519,
+      "sha256": "2aeea12afa50b6008bc74c1d4bf5bebd1a412ed8ab6ad0ec525edcf7df712714"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "schedule_909.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/909/schedule",
+      "team_id": "909",
+      "start_utc": "2026-10-09T15:06:03.515135+00:00",
+      "end_utc": "2026-10-09T15:06:08.628952+00:00",
+      "http_status": 200,
+      "bytes": 81526,
+      "sha256": "26eab9cea76693e2991a563de0098d7d1c712f9cfa2bc3182e319621dbade777"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874459.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874459",
+      "event_id": "401874459",
+      "start_utc": "2026-10-09T15:04:06.415300+00:00",
+      "end_utc": "2026-10-09T15:04:11.260762+00:00",
+      "http_status": 200,
+      "bytes": 282197,
+      "sha256": "6b4f38b45c100b9f900729806ee35f5ae54e63811bf8feb42178bc3abf4dac7a"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874474.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874474",
+      "event_id": "401874474",
+      "start_utc": "2026-10-09T15:06:08.722292+00:00",
+      "end_utc": "2026-10-09T15:06:12.703946+00:00",
+      "http_status": 200,
+      "bytes": 289389,
+      "sha256": "4778aa990712307a7f20e162d768b53404a516b9c7c4b08ad7e50c53726d49a1"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874478.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874478",
+      "event_id": "401874478",
+      "start_utc": "2026-10-09T15:06:08.726519+00:00",
+      "end_utc": "2026-10-09T15:06:12.768011+00:00",
+      "http_status": 200,
+      "bytes": 289968,
+      "sha256": "13b4824b33d60ee51f3ba3cd5376445b926c3d069819adf11fa52e94d5754a6e"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874512.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874512",
+      "event_id": "401874512",
+      "start_utc": "2026-10-09T15:06:08.737021+00:00",
+      "end_utc": "2026-10-09T15:06:12.827999+00:00",
+      "http_status": 200,
+      "bytes": 276353,
+      "sha256": "c61a31bed799cac0e0266f1be2528e93c55d634f15a8bf8d20b6ba8f8b5af87b"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874514.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874514",
+      "event_id": "401874514",
+      "start_utc": "2026-10-09T15:04:06.416106+00:00",
+      "end_utc": "2026-10-09T15:04:11.280058+00:00",
+      "http_status": 200,
+      "bytes": 283409,
+      "sha256": "12a23ec278052be00c41dc3aa6adf59f83efb2d470dc7781206e9f479da27db1"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874476.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874476",
+      "event_id": "401874476",
+      "start_utc": "2026-10-09T15:06:08.828166+00:00",
+      "end_utc": "2026-10-09T15:06:12.842661+00:00",
+      "http_status": 200,
+      "bytes": 291937,
+      "sha256": "b8da3a94bd90bf018b52e3278e9fa57448a62073f9967dcb228b7825c25a0ae9"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874461.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874461",
+      "event_id": "401874461",
+      "start_utc": "2026-10-09T15:04:06.418081+00:00",
+      "end_utc": "2026-10-09T15:04:11.106179+00:00",
+      "http_status": 200,
+      "bytes": 282255,
+      "sha256": "613b8d39af26b02bcfce72b4add49b052966f1b509e18d2f33d0c243d4fd771c"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874460.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874460",
+      "event_id": "401874460",
+      "start_utc": "2026-10-09T15:04:06.419157+00:00",
+      "end_utc": "2026-10-09T15:04:11.299754+00:00",
+      "http_status": 200,
+      "bytes": 284609,
+      "sha256": "0795d77a2cb7696d4d4ad186c6771e303bab3eb0b3770425e8f07b858bc3ba80"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874518.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874518",
+      "event_id": "401874518",
+      "start_utc": "2026-10-09T15:04:11.122007+00:00",
+      "end_utc": "2026-10-09T15:04:17.335141+00:00",
+      "http_status": 200,
+      "bytes": 262235,
+      "sha256": "d7939d6760e74c07a26f6753dc09c5b4c57a82afb9bef171d215efdfa62b3b9b"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874483.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874483",
+      "event_id": "401874483",
+      "start_utc": "2026-10-09T15:04:11.292027+00:00",
+      "end_utc": "2026-10-09T15:04:17.475396+00:00",
+      "http_status": 200,
+      "bytes": 260054,
+      "sha256": "9328c2f27198cbb889b7b12e161fa20ecbade11f51ee25a4d9953736c2dcc670"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874490.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874490",
+      "event_id": "401874490",
+      "start_utc": "2026-10-09T15:04:11.293909+00:00",
+      "end_utc": "2026-10-09T15:04:17.521444+00:00",
+      "http_status": 200,
+      "bytes": 284585,
+      "sha256": "ff8f17cf4816a285bda75023d26feb6f7b975d441998f02eb6efd2bfb1b0cc65"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874515.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874515",
+      "event_id": "401874515",
+      "start_utc": "2026-10-09T15:04:11.310087+00:00",
+      "end_utc": "2026-10-09T15:04:17.627362+00:00",
+      "http_status": 200,
+      "bytes": 290365,
+      "sha256": "52ee25f1c577d97673cf19afb70ca89533cd8b8340c81571db184c107e514035"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874480.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874480",
+      "event_id": "401874480",
+      "start_utc": "2026-10-09T15:04:17.341893+00:00",
+      "end_utc": "2026-10-09T15:04:21.642345+00:00",
+      "http_status": 200,
+      "bytes": 291511,
+      "sha256": "2f5cb6bcb3ce1afef5ec1a831888acc308e5e20dc3e3231b41469f06254b0ec1"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874484.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874484",
+      "event_id": "401874484",
+      "start_utc": "2026-10-09T15:04:17.482298+00:00",
+      "end_utc": "2026-10-09T15:04:21.686855+00:00",
+      "http_status": 200,
+      "bytes": 269913,
+      "sha256": "2399373436f148723fbe2d234b9786448e8b0c6852ea9db3ae87c3538e62327b"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874496.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874496",
+      "event_id": "401874496",
+      "start_utc": "2026-10-09T15:04:17.533950+00:00",
+      "end_utc": "2026-10-09T15:04:21.776428+00:00",
+      "http_status": 200,
+      "bytes": 291601,
+      "sha256": "efb549f36b5dc81ecdf97459a13933acd678a2ed2bec16e14d6f1746af91fdf0"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874523.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874523",
+      "event_id": "401874523",
+      "start_utc": "2026-10-09T15:04:17.647966+00:00",
+      "end_utc": "2026-10-09T15:04:21.730475+00:00",
+      "http_status": 200,
+      "bytes": 289376,
+      "sha256": "06148a80161dba274108b5aba97a588a27cdca833084a30ce663f84596396fc4"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874532.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874532",
+      "event_id": "401874532",
+      "start_utc": "2026-10-09T15:04:21.652983+00:00",
+      "end_utc": "2026-10-09T15:04:25.540605+00:00",
+      "http_status": 200,
+      "bytes": 271816,
+      "sha256": "35e674a89c9bcc58d09c4ae39321f7c311099e2e6fa852d5e39e928f75203960"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874509.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874509",
+      "event_id": "401874509",
+      "start_utc": "2026-10-09T15:04:21.696520+00:00",
+      "end_utc": "2026-10-09T15:04:25.576751+00:00",
+      "http_status": 200,
+      "bytes": 275070,
+      "sha256": "d7a756f3abf0ee06c0f8edcbbb0947e48d9a904341f5dbf126de652d6a3df99f"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874527.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874527",
+      "event_id": "401874527",
+      "start_utc": "2026-10-09T15:04:21.737157+00:00",
+      "end_utc": "2026-10-09T15:04:25.656240+00:00",
+      "http_status": 200,
+      "bytes": 272133,
+      "sha256": "75474444053b3a745f259d83b846431c204c999f84a7596b753bfc8f04efaf67"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874487.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874487",
+      "event_id": "401874487",
+      "start_utc": "2026-10-09T15:04:21.787291+00:00",
+      "end_utc": "2026-10-09T15:04:25.695189+00:00",
+      "http_status": 200,
+      "bytes": 284378,
+      "sha256": "a70c0fce7c1fda3d9da9c187923d77af3e88bc2fab24ea2286427dc59a152f1b"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874536.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874536",
+      "event_id": "401874536",
+      "start_utc": "2026-10-09T15:04:25.551345+00:00",
+      "end_utc": "2026-10-09T15:04:30.285539+00:00",
+      "http_status": 200,
+      "bytes": 275945,
+      "sha256": "5ce81cdd7bc3b0d83c64b690c30632dbd61b103fee759646cc18c69679558872"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summary_401874495.json",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874495",
+      "event_id": "401874495",
+      "start_utc": "2026-10-09T15:04:25.587323+00:00",
+      "end_utc": "2026-10-09T15:04:30.259408+00:00",
+      "http_status": 200,
+      "bytes": 285667,
+      "sha256": "a4cdc2066074e1a19113d26a6f1ea922f65f52c8d544d6821226b590ba36e70e"
+    }
+  ],
+  "failed_requests": [
+    {
+      "kind": "summary",
+      "identity": "401874510",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874510",
+      "start_utc": "2026-10-09T15:06:12.784236+00:00",
+      "end_utc": "2026-10-09T15:06:17.274856+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874508",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874508",
+      "start_utc": "2026-10-09T15:06:12.821640+00:00",
+      "end_utc": "2026-10-09T15:06:17.299341+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874520",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874520",
+      "start_utc": "2026-10-09T15:06:12.857065+00:00",
+      "end_utc": "2026-10-09T15:06:17.269140+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874473",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874473",
+      "start_utc": "2026-10-09T15:06:12.876376+00:00",
+      "end_utc": "2026-10-09T15:06:17.269683+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874479",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874479",
+      "start_utc": "2026-10-09T15:06:17.271776+00:00",
+      "end_utc": "2026-10-09T15:06:17.313629+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874502",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874502",
+      "start_utc": "2026-10-09T15:06:17.299903+00:00",
+      "end_utc": "2026-10-09T15:06:17.327012+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874482",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874482",
+      "start_utc": "2026-10-09T15:06:17.310802+00:00",
+      "end_utc": "2026-10-09T15:06:17.357192+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874507",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874507",
+      "start_utc": "2026-10-09T15:06:17.327888+00:00",
+      "end_utc": "2026-10-09T15:06:17.402878+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874522",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874522",
+      "start_utc": "2026-10-09T15:06:17.357657+00:00",
+      "end_utc": "2026-10-09T15:06:17.368790+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874526",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874526",
+      "start_utc": "2026-10-09T15:06:17.358180+00:00",
+      "end_utc": "2026-10-09T15:06:17.368133+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874489",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874489",
+      "start_utc": "2026-10-09T15:06:17.368171+00:00",
+      "end_utc": "2026-10-09T15:06:17.372177+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874533",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874533",
+      "start_utc": "2026-10-09T15:06:17.369002+00:00",
+      "end_utc": "2026-10-09T15:06:17.379673+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874513",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874513",
+      "start_utc": "2026-10-09T15:06:17.379240+00:00",
+      "end_utc": "2026-10-09T15:06:17.384215+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874501",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874501",
+      "start_utc": "2026-10-09T15:06:17.379709+00:00",
+      "end_utc": "2026-10-09T15:06:17.385100+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874504",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874504",
+      "start_utc": "2026-10-09T15:06:17.385131+00:00",
+      "end_utc": "2026-10-09T15:06:17.415422+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874506",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874506",
+      "start_utc": "2026-10-09T15:06:17.402937+00:00",
+      "end_utc": "2026-10-09T15:06:17.548742+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874540",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874540",
+      "start_utc": "2026-10-09T15:06:17.420479+00:00",
+      "end_utc": "2026-10-09T15:06:17.426256+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874528",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874528",
+      "start_utc": "2026-10-09T15:06:17.421509+00:00",
+      "end_utc": "2026-10-09T15:06:17.442275+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874539",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874539",
+      "start_utc": "2026-10-09T15:06:17.442320+00:00",
+      "end_utc": "2026-10-09T15:06:17.554766+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874554",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874554",
+      "start_utc": "2026-10-09T15:06:17.547090+00:00",
+      "end_utc": "2026-10-09T15:06:17.562927+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "kind": "summary",
+      "identity": "401874529",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/summary?event=401874529",
+      "start_utc": "2026-10-09T15:06:17.548806+00:00",
+      "end_utc": "2026-10-09T15:06:17.557659+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}

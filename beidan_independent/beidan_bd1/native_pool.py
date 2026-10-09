@@ -30,6 +30,12 @@ def collect_batches(batches, *, cutoff_at):
         for item in batch['research_predictions']:
             seq = item['seq']
             binding = item['binding']
+            fixture_stage = tuple(binding.get(k) for k in
+                                  ('provider_league_id', 'season_year', 'season_type'))
+            if (not isinstance(fixture_stage[0], str) or not fixture_stage[0].isdigit()
+                    or any(isinstance(v, bool) or not isinstance(v, int) or v < 1
+                           for v in fixture_stage[1:]) or fixture_stage != stage):
+                raise ValueError('fixture and history native league or season stages differ')
             eid = binding['proposed_provider_event_id']
             if seq in bindings or eid in seen:
                 raise ValueError('duplicate pool sequence or provider fixture binding')

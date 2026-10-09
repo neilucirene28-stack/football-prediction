@@ -16,6 +16,13 @@ def audit_fixture(raw: bytes, *, event_id: str, league_slug: str,
     if len(leagues) != 1 or len(events) != 1 or roster.get("sport") != "football":
         raise ValueError("来源足球联赛、唯一比赛ID或北单运动类型不明确")
     event = events[0]
+    league_id = leagues[0].get("id")
+    season = event.get("season", {})
+    if (not isinstance(league_id, str) or not league_id.isdigit()
+            or leagues[0]["uid"] != "s:600~l:" + league_id
+            or any(isinstance(season.get(k), bool) or not isinstance(season.get(k), int)
+                   or season[k] < 1 for k in ("year", "type"))):
+        raise ValueError("来源联赛ID或赛季阶段不明确")
     if event.get("uid") != leagues[0]["uid"] + "~e:" + event_id:
         raise ValueError("来源赛事与足球联赛事件空间矛盾")
     comps = event.get("competitions", [])
@@ -45,6 +52,8 @@ def audit_fixture(raw: bytes, *, event_id: str, league_slug: str,
     return {"period": roster["period"], "seq": roster["seq"], "match_id": roster["match_id"],
         "proposed_provider_event_id": event_id, "provider_home_id": expected_home_id,
         "provider_away_id": expected_away_id, "provider_league_slug": league_slug,
+        "provider_league_id": league_id, "season_year": season["year"],
+        "season_type": season["type"],
         "provider_home": sides["home"]["team"]["displayName"],
         "provider_away": sides["away"]["team"]["displayName"],
         "kickoff_at": kickoff.isoformat(), "verified_at": verified_at,

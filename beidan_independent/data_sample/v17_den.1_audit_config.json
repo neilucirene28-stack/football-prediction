@@ -1,0 +1,26 @@
+{
+  "league_slug": "den.1",
+  "season_type": 14239,
+  "season_year": 2026,
+  "team_ids": [
+    "3101",
+    "11550",
+    "3153",
+    "7853",
+    "572",
+    "909"
+  ],
+  "recent_per_team": 10,
+  "folder": "data_sample/espn_den.1_mined_20261009",
+  "scoreboard_folder": "data_sample/espn_scoreboard_bb0c436",
+  "output_folder": "outputs/v17_native/den.1",
+  "proposals": [
+    [
+      23,
+      "401874517",
+      "3101",
+      "11550",
+      "20261009"
+    ]
+  ]
+}

@@ -44,6 +44,16 @@ class FixtureTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.run_audit(raw=json.dumps(p).encode())
 
+    def test_league_uid_or_missing_stage_is_rejected(self):
+        for field in ('league_id', 'season'):
+            p = json.loads(self.raw)
+            if field == 'league_id':
+                p['leagues'][0]['id'] = '999'
+            else:
+                p['events'][0].pop('season')
+            with self.assertRaises(ValueError):
+                self.run_audit(raw=json.dumps(p).encode())
+
 
 if __name__ == "__main__":
     unittest.main()
