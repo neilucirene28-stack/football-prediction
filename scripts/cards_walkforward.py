@@ -56,15 +56,25 @@ def load_matches():
     return rows
 
 
-def predict_from_state(st, league_code, home, away, referee):
+def predict_from_state(st, league_code, home, away, referee, use_recent=False):
     """st: {(league, team, side): [mp, yf, ya, rf]}, baselines类似。
-    返回 exp_total（黄牌）。"""
+    返回 exp_total（黄牌）。use_recent=True 时加入近5场牌数特征。"""
     lg = st["lg"][league_code]
     n = lg["n"]
     if n == 0:
         return None
     base_hy, base_ay = lg["hy"] / n, lg["ay"] / n
     base_hr, base_ar = lg["hr"] / n, lg["ar"] / n
+
+    def recent_factor(team, side, base, n_last=5, k=3.0, w=0.3):
+        """近n_last场吃牌率（收缩后）/ 联赛均值 → 混合因子。无数据返回1.0。"""
+        hist = st["hist"].get((league_code, team, side), [])
+        if not hist:
+            return 1.0
+        last = hist[-n_last:]
+        tot_y = sum(y for _, y in last)
+        shrunk = (tot_y + base * k) / (len(last) + k)
+        return (1.0 - w) + w * (shrunk / base) if base else 1.0
 
     def strength(team, side):
         s = st["tm"].get((league_code, team, side))
@@ -83,6 +93,9 @@ def predict_from_state(st, league_code, home, away, referee):
         return None
     lam_h = base_hy * hs[0] * aws[1]
     lam_a = base_ay * aws[0] * hs[1]
+    if use_recent:
+        lam_h *= recent_factor(home, "home", base_hy)
+        lam_a *= recent_factor(away, "away", base_ay)
     # 裁判乘子（oracle 档用真实裁判；shipped 档 referee=None → 1.0）
     lg_view = {"home_yellow": base_hy, "away_yellow": base_ay,
                "home_red": base_hr, "away_red": base_ar,
@@ -97,7 +110,7 @@ def main() -> int:
     train = [r for r in rows if r["date"] < datetime(2024, 7, 1)]
     print(f"训练 {len(train)} 场，测试 {len(test)} 场")
 
-    st = {"lg": {}, "tm": {}, "ref": {}}
+    st = {"lg": {}, "tm": {}, "ref": {}, "hist": {}}
     for lg in LEAGUES:
         st["lg"][lg] = {"n": 0, "hy": 0, "ay": 0, "hr": 0, "ar": 0}
 
@@ -116,6 +129,8 @@ def main() -> int:
             s[1] += yf
             s[2] += ya
             s[3] += rf
+            st["hist"].setdefault((r["league"], team, side), []).append(
+                (r["date"], yf))
         if r["ref"]:
             rr = st["ref"].setdefault(r["ref"], {"mp": 0, "cards": 0,
                                                  "reds": 0})
@@ -128,7 +143,9 @@ def main() -> int:
 
     agg = {"n": 0, "brier35": 0.0, "brier45": 0.0, "ll35": 0.0, "ll45": 0.0,
            "mae": 0.0, "base_brier35": 0.0, "hit35": 0,
-           "n_oracle": 0, "brier35_oracle": 0.0}
+           "n_oracle": 0, "brier35_oracle": 0.0,
+           "brier35_recent": 0.0, "brier45_recent": 0.0, "mae_recent": 0.0,
+           "hit35_recent": 0}
     for r in test:
         lam = predict_from_state(st, r["league"], r["home"], r["away"], None)
         total = r["hy"] + r["ay"]
@@ -137,6 +154,10 @@ def main() -> int:
             continue
         o35, o45 = 1.0 if total > 3.5 else 0.0, 1.0 if total > 4.5 else 0.0
         p35, p45 = _pois_over(lam, 3.5), _pois_over(lam, 4.5)
+        # 近期特征档
+        lam_r = predict_from_state(st, r["league"], r["home"], r["away"], None,
+                                   use_recent=True)
+        pr35, pr45 = _pois_over(lam_r, 3.5), _pois_over(lam_r, 4.5)
         # 基线：恒预测联赛均值
         lg = st["lg"][r["league"]]
         base_lam = (lg["hy"] + lg["ay"]) / max(lg["n"], 1)
@@ -151,6 +172,10 @@ def main() -> int:
         agg["mae"] += abs(lam - total)
         agg["base_brier35"] += (bp35 - o35) ** 2
         agg["hit35"] += ((p35 > 0.5) == bool(o35))
+        agg["brier35_recent"] += (pr35 - o35) ** 2
+        agg["brier45_recent"] += (pr45 - o45) ** 2
+        agg["mae_recent"] += abs(lam_r - total)
+        agg["hit35_recent"] += ((pr35 > 0.5) == bool(o35))
         # oracle 裁判档（仅 E0 有裁判数据）
         if r["ref"]:
             lam_o = predict_from_state(st, r["league"], r["home"], r["away"],
@@ -169,6 +194,14 @@ def main() -> int:
     print(f"O/U 4.5  Brier: {agg['brier45']/n:.4f} "
           f"LogLoss: {agg['ll45']/n:.4f}")
     print(f"总黄牌期望 MAE: {agg['mae']/n:.2f}")
+    print(f"--- 近期特征档（近5场，收缩k=3，权重0.3）---")
+    print(f"O/U 3.5  Brier: {agg['brier35_recent']/n:.4f} "
+          f"(Δ{agg['brier35_recent']/n - agg['brier35']/n:+.4f}) "
+          f"方向命中: {agg['hit35_recent']/n:.1%}")
+    print(f"O/U 4.5  Brier: {agg['brier45_recent']/n:.4f} "
+          f"(Δ{agg['brier45_recent']/n - agg['brier45']/n:+.4f})")
+    print(f"总黄牌期望 MAE: {agg['mae_recent']/n:.2f} "
+          f"(Δ{agg['mae_recent']/n - agg['mae']/n:+.2f})")
     if agg["n_oracle"]:
         print(f"oracle裁判档（n={agg['n_oracle']}，价值上界）O/U 3.5 Brier: "
               f"{agg['brier35_oracle']/agg['n_oracle']:.4f}")

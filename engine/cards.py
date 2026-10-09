@@ -1,20 +1,28 @@
 """红黄牌预测（MVP）。
 
-黄牌：球队吃牌倾向 × 造牌能力 × 主客场 × 联赛基线，小样本向联赛均值收缩
+黄牌：球队吃牌倾向 × 造牌能力 × 主客场 × 联赛基线 × 近期牌数因子，小样本向联赛均值收缩
 （复用 v2.4 shrink_prior 思想）；总牌数用独立 Poisson（主客相关性小，MVP 忽略）。
+近期牌数：近5场场均黄牌（收缩k=3，权重0.15；walk-forward 1739场验证 Brier 0.2463→0.2456）。
 裁判：strictness = 裁判场均牌 / 联赛场均牌，生涯 <5 场不用，5→20 场 confidence 爬坡，
 multiplier = 1 + (strictness-1) × confidence × 0.25。无裁判数据时乘子=1.0 并标记。
 红牌：稀有事件（场均约 0.06–0.13），单独建模：P(≥1红) = 1 - exp(-λ_red_total × 裁判红牌乘子)。
+近期红牌因过于稀疏不做近期特征（5场内多为0，纯噪声），用赛季聚合+收缩。
 Booking points：黄=10、红=25（聚合数据近似，忽略单人 35 封顶）。
 
 无数据（未知联赛/球队）→ {"status": "insufficient_data"}，绝不编造。
+近期牌数无数据 → 因子=1.0（无影响），回退到现有逻辑。
 """
 import json
 import math
 import os
+import re
 
 _HISTORY = None
+_RECENT = None
 SHRINK_PRIOR = 3.0      # 收缩先验场数（同 v2.4）
+RECENT_N = 5            # 近期场次窗口
+RECENT_K = 3.0          # 近期收缩先验
+RECENT_W = 0.15         # 近期特征权重（walk-forward最优）
 REF_WEIGHT = 0.25       # 裁判乘子权重
 REF_MIN_MATCHES = 5     # 裁判最少场次
 LAMBDA_CAP = 9.0        # 总牌数期望上限
@@ -27,6 +35,68 @@ def _history():
         with open(p, encoding="utf-8") as fh:
             _HISTORY = json.load(fh)
     return _HISTORY
+
+
+def _recent_records():
+    """加载逐场牌数记录 data/cards_history.json（ESPN回填）。缺失时返回空列表。"""
+    global _RECENT
+    if _RECENT is None:
+        p = os.path.join(os.path.dirname(__file__), "..", "data",
+                          "cards_history.json")
+        try:
+            with open(p, encoding="utf-8") as fh:
+                _RECENT = json.load(fh)
+        except (FileNotFoundError, json.JSONDecodeError):
+            _RECENT = []
+    return _RECENT
+
+
+def _norm_name(name: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def _match_team(name: str, candidates) -> str | None:
+    """ESPN英文名模糊匹配到cards_history队名。"""
+    nn = _norm_name(name)
+    if not nn:
+        return None
+    for c in candidates:
+        if _norm_name(c) == nn:
+            return c
+    for c in candidates:
+        nc = _norm_name(c)
+        if nc and (nc in nn or nn in nc):
+            return c
+    # token级：有长度≥5的公共token则匹配（如 united）
+    name_tokens = set(re.findall(r"[a-z]{2,}", name.lower()))
+    for c in candidates:
+        c_tokens = set(re.findall(r"[a-z]{2,}", c.lower()))
+        common = {t for t in name_tokens & c_tokens if len(t) >= 5}
+        if common:
+            return c
+    return None
+
+
+def _recent_yellow_factor(team_en: str, league_code: str,
+                          league_avg: float) -> tuple[float, int]:
+    """近N场吃牌因子（收缩后/联赛均值）。无数据时返回 (1.0, 0)。"""
+    recs = _recent_records()
+    if not recs or league_avg <= 0:
+        return 1.0, 0
+    matched = []
+    for r in recs:
+        if r.get("league") != league_code:
+            continue
+        if _match_team(r.get("team", ""), [team_en]):
+            matched.append(r)
+    matched.sort(key=lambda r: r.get("date", ""), reverse=True)
+    matched = matched[:RECENT_N]
+    if not matched:
+        return 1.0, 0
+    tot_y = sum(r.get("yellow", 0) for r in matched)
+    shrunk = (tot_y + league_avg * RECENT_K) / (len(matched) + RECENT_K)
+    factor = (1.0 - RECENT_W) + RECENT_W * (shrunk / league_avg)
+    return round(factor, 4), len(matched)
 
 
 def _shrunk_rate(count: float, n: int, league_avg: float,
@@ -101,6 +171,13 @@ def predict_cards(home_team: str, away_team: str, league_code: str,
 
     lam_h = league["home_yellow"] * hs[0] * aws[1]
     lam_a = league["away_yellow"] * aws[0] * hs[1]
+
+    # 近期牌数特征（无数据时因子=1.0，不影响）
+    lg_avg_y = (league["home_yellow"] + league["away_yellow"]) / 2.0
+    rf_h, n_rh = _recent_yellow_factor(home_team, league_code, lg_avg_y)
+    rf_a, n_ra = _recent_yellow_factor(away_team, league_code, lg_avg_y)
+    lam_h *= rf_h
+    lam_a *= rf_a
     lam_rh = league["home_red"] * hs[2]
     lam_ra = league["away_red"] * aws[2]
 
@@ -124,6 +201,12 @@ def predict_cards(home_team: str, away_team: str, league_code: str,
         warnings.append("裁判数据缺失/不足：总牌数用联赛均值口径，为最大不确定来源")
     if n_h < 5 or n_a < 5:
         warnings.append("球队样本<5场：已向联赛均值收缩")
+    recent_info = {
+        "home_factor": rf_h, "home_matches": n_rh,
+        "away_factor": rf_a, "away_matches": n_ra,
+    }
+    if n_rh == 0 and n_ra == 0:
+        warnings.append("无近期牌数数据：近期因子=1.0，未生效")
 
     return {
         "status": "ok",
@@ -138,6 +221,7 @@ def predict_cards(home_team: str, away_team: str, league_code: str,
         "p_home_red": round(p_home_red, 4),
         "p_away_red": round(p_away_red, 4),
         "referee": ref_info,
+        "recent_form": recent_info,
         "confidence": confidence,
         "warnings": warnings,
     }

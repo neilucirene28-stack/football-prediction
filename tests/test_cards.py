@@ -114,3 +114,52 @@ def test_predict_cards_insufficient_for_jleague():
     r = predict(_payload(home="富山胜利", away="大阪樱花",
                          cards={"league_code": "E0"}))
     assert r["derivatives"]["cards"]["status"] == "insufficient_data"
+
+
+def test_recent_factor_no_data_fallback():
+    """无近期数据时因子=1.0，不影响结果。"""
+    import engine.cards as cm
+    cm._RECENT = []  # 模拟空数据
+    try:
+        r = predict_cards("Arsenal", "Chelsea", "E0")
+        assert r["status"] == "ok"
+        assert r["recent_form"]["home_factor"] == 1.0
+        assert r["recent_form"]["away_factor"] == 1.0
+        assert any("无近期牌数数据" in w for w in r["warnings"])
+    finally:
+        cm._RECENT = None
+
+
+def test_recent_factor_direction():
+    """近期黄牌多→因子>1；少→因子<1。"""
+    import json, tempfile
+    import engine.cards as cm
+    recs = [{"team": "Arsenal", "date": f"2026-09-{10+i}", "league": "E0",
+             "yellow": 6, "red": 0, "venue": "H"} for i in range(5)]
+    recs += [{"team": "Chelsea", "date": f"2026-09-{10+i}", "league": "E0",
+              "yellow": 0, "red": 0, "venue": "A"} for i in range(5)]
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(recs, fh)
+        tmp = fh.name
+    old = cm._RECENT
+    cm._RECENT = recs
+    try:
+        f_h, n_h = cm._recent_yellow_factor("Arsenal", "E0", 2.0)
+        f_a, n_a = cm._recent_yellow_factor("Chelsea", "E0", 2.0)
+        assert n_h == 5 and n_a == 5
+        assert f_h > 1.0, f"高牌队因子应>1，实际{f_h}"
+        assert f_a < 1.0, f"低牌队因子应<1，实际{f_a}"
+        # 收缩：因子不会极端
+        assert f_h < 1.5 and f_a > 0.7
+    finally:
+        cm._RECENT = old
+        os.unlink(tmp)
+
+
+def test_recent_factor_team_matching():
+    """ESPN全名能匹配到简称。"""
+    import engine.cards as cm
+    assert cm._match_team("AFC Bournemouth", ["Bournemouth", "Arsenal"]) == "Bournemouth"
+    assert cm._match_team("Leeds United", ["Leeds", "Arsenal"]) == "Leeds"
+    assert cm._match_team("Manchester United", ["Man United", "Arsenal"]) == "Man United"
+    assert cm._match_team("不存在的队", ["Arsenal"]) is None
