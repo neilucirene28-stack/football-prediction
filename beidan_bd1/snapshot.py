@@ -14,7 +14,7 @@ import re
 from typing import Any
 
 
-SCHEMA_VERSION = "bd1-snapshot-5"  # v5: bind canonical identity evidence
+SCHEMA_VERSION = "bd1-snapshot-6"  # v6: bind optional market event evidence
 _MATCH_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 _TRAIN_ID = re.compile(r"^[A-Za-z0-9_:-]{1,80}$")
 _THREE = ("胜", "平", "负")
@@ -74,7 +74,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
                    synthetic_sample: bool = False,
                    training_lineage: dict | None = None,
                    identity_ids: dict[str, str] | None = None,
-                   identity_provenance: dict[str, str] | None = None) -> dict:
+                   identity_provenance: dict[str, str] | None = None,
+                   market_provenance: dict[str, str] | None = None) -> dict:
     """建立逐场证据记录。asof_at 是预测请求的时点，不冒充来源采集时间。
 
     ``sources`` 每项仅允许 name、source_match_id、available_at、status。
@@ -123,6 +124,18 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
             raise ValueError("规范ID核验来源非法")
         if _datetime(identity_provenance["verified_at"], "identity_verified_at") > asof:
             raise ValueError("规范ID身份核验晚于预测时点")
+    if model_version.startswith("bd1-market-") and market_provenance is None:
+        raise ValueError("市场候选快照缺少赔率事件来源")
+    if market_provenance is not None:
+        if (not isinstance(market_provenance, dict) or set(market_provenance)
+                != {"source", "available_at", "event_space", "odds_type"}
+                or market_provenance["event_space"] != "unhandicapped_wdl"
+                or market_provenance["odds_type"] != "european_decimal"
+                or not isinstance(market_provenance["source"], str)
+                or not _MATCH_ID.fullmatch(market_provenance["source"])):
+            raise ValueError("市场事件来源或类型非法")
+        if _datetime(market_provenance["available_at"], "market_available_at") > asof:
+            raise ValueError("市场事件晚于预测时点")
     if not isinstance(sources, list) or not sources:
         raise ValueError("必须列出实际使用的数据源")
     clean_sources = []
@@ -164,6 +177,13 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
                 or _datetime(identity_source["available_at"], "available_at")
                 < _datetime(identity_provenance["verified_at"], "identity_verified_at")):
             raise ValueError("规范ID来源早于身份核验")
+    if market_provenance is not None:
+        market_source = next((s for s in clean_sources
+                              if s["name"] == market_provenance["source"]), None)
+        if (market_source is None or market_source["available_at"] is None
+                or _datetime(market_source["available_at"], "available_at")
+                != _datetime(market_provenance["available_at"], "market_available_at")):
+            raise ValueError("市场事件来源时间与赔率观测不一致")
     required = {"fixture", "history"}
     if competition_family is not None:
         required.add("family")
@@ -171,6 +191,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         required.add("handicap")
     if identity_ids is not None:
         required.update(identity_ids)
+    if market_provenance is not None:
+        required.add("market")
     if input_sources is None:
         verified = False
         clean_input_sources = None
@@ -190,6 +212,8 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
             input_sources[k] != identity_provenance["source"] for k in identity_ids
         ):
             raise ValueError("规范ID字段未绑定身份核验来源")
+        if market_provenance is not None and input_sources["market"] != market_provenance["source"]:
+            raise ValueError("市场事件未绑定实际赔率来源")
         clean_input_sources = dict(input_sources)
     if training_lineage is None:
         verified = False
@@ -286,6 +310,7 @@ def build_snapshot(*, match_id: str, period: str, kickoff_at: str, asof_at: str,
         "handicap": handicap, "competition_family": competition_family,
         "identity_ids": dict(identity_ids) if identity_ids is not None else None,
         "identity_provenance": dict(identity_provenance) if identity_provenance is not None else None,
+        "market_provenance": dict(market_provenance) if market_provenance is not None else None,
         "sources": clean_sources, "vectors": clean_vectors,
         "input_sources": clean_input_sources,
         "training_lineage": clean_lineage,

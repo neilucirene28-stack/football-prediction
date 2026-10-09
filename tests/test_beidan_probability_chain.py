@@ -34,8 +34,23 @@ class ProbabilityChainTests(unittest.TestCase):
             asof_at=ASOF, generated_at="2026-10-09T14:01:00+08:00",
             model_version="bd1-market-candidate-shadow", vectors=candidate["vectors"],
             sources=[{"name": "audited_decimal_odds", "available_at": MARKET["available_at"],
-                      "status": "ok"}], lambda_home=None, lambda_away=None, handicap=-1)
+                      "status": "ok"},
+                     {"name": "verified_results", "available_at": MARKET["available_at"],
+                      "status": "ok"}],
+            input_sources={"fixture": "audited_decimal_odds", "history": "verified_results",
+                           "market": "audited_decimal_odds", "handicap": "audited_decimal_odds"},
+            training_lineage={"match_ids": p["training_match_ids"],
+                              "latest_available_at": MARKET["available_at"]},
+            market_provenance=candidate["market_provenance"],
+            lambda_home=None, lambda_away=None, handicap=-1)
         self.assertAlmostEqual(sum(snap["vectors"]["wdl"].values()), 1)
+        self.assertTrue(snap["as_of_backtest_eligible"])
+        with self.assertRaisesRegex(ValueError, "市场候选快照"):
+            build_snapshot(
+                match_id="26103-2", period="26103", kickoff_at=p["kickoff_at"],
+                asof_at=ASOF, generated_at="2026-10-09T14:01:00+08:00",
+                model_version="bd1-market-candidate-shadow", vectors=candidate["vectors"],
+                sources=snap["sources"], lambda_home=None, lambda_away=None, handicap=-1)
 
     def test_wrong_market_event_or_late_observation_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "事件空间"):

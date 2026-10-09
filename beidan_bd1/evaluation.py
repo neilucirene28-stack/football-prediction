@@ -63,6 +63,7 @@ def _forecast(row: dict, cutoff: str, kickoff: str) -> dict:
         training_lineage=row.get("training_lineage"),
         identity_ids=row.get("identity_ids"),
         identity_provenance=row.get("identity_provenance"),
+        market_provenance=row.get("market_provenance"),
     )
     if rebuilt["as_of_backtest_eligible"] is not True:
         raise ValueError("来源未核验")

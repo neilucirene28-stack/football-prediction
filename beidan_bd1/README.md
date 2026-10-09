@@ -66,3 +66,5 @@ PYTHONPATH=. python -m unittest discover -s tests -p 'test_beidan_*.py' -v
 ## 从现在起的原始赛前输入归档
 
 采集器拿到单场真实源响应后，立即调用 `python -m beidan_bd1.capture --payload source-response.json --out source-archive --period 26103 --match-id 26103-1 --source roster --kind fixture`。它将 UTF-8 JSON 原字节独占保存，按**本系统读完输入后的真实 UTC 接收时刻**生成收据和 SHA-256；旧文件修改时间不会被当作赛前采集时间。`receipt_source(receipt, root)` 校验原字节后给快照 `sources` 的标准来源记录。这个接收时间可能晚于提供商原始发布，是保守时间；收据本身还需外部不可篡改采集日志或存储策略交叉核验，单个收据不证明源内容、官方开售池完整性或生产资格。密钥不应写入原始比赛响应。
+
+v6 快照对非身份市场候选强制保存 `market_provenance`（赔率来源、可用时间、无让球事件空间、欧洲十进制类型），并要求 `input_sources.market` 与真实来源一致；评估重建时复核同一证据。纯平局偏置候选若没有市场输入，不伪造赔率来源。没有赛前市场历史的条件下，这仍只是一条待验证影子路径。

@@ -98,7 +98,8 @@ def shadow_adjust(prediction: dict, *, asof_at: str,
         return {"vectors": base, "score_31": prediction["score_31"],
                 "wdl_before": p, "wdl_after": p,
                 "goals_before": before, "goals_after": before,
-                "market_wdl": m, "parameters_unvalidated": True}
+                "market_wdl": m, "parameters_unvalidated": True,
+                "market_provenance": None}
     matrix = reweight_score_matrix(base["score"], q=q)
     fractions = prediction.get("ht_fractions")
     if fractions is None:
@@ -108,4 +109,9 @@ def shadow_adjust(prediction: dict, *, asof_at: str,
     after = sum((i + j) * v for i, row in enumerate(matrix) for j, v in enumerate(row))
     return {"vectors": vectors, "score_31": score31, "wdl_before": p,
             "wdl_after": q, "goals_before": before, "goals_after": after,
-            "market_wdl": m, "parameters_unvalidated": True}
+            "market_wdl": m, "parameters_unvalidated": True,
+            "market_provenance": ({"source": market["source"],
+                                   "available_at": market["available_at"],
+                                   "event_space": market["event_space"],
+                                   "odds_type": market["odds_type"]}
+                                  if weight > 0 else None)}
