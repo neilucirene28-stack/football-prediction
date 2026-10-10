@@ -8,22 +8,20 @@
 """
 import sys, json, re
 from concurrent.futures import ThreadPoolExecutor
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from collector.collector.sources.titan007 import (
     Titan007Source, _DETAIL_URL, _http_get, ENTRY_URL)
-from engine.predictor import predict
-from engine.poisson import handicap_1x2, score_matrix
+from engine.jingcai_predictor import predict
+from engine.jingcai_batch import with_official_handicap, handicap_output
+from engine.jingcai_calibration import load_form_only_config
 
 FIXTURES = "/tmp/jingcai_today_fixtures.json"
 OUT = "/tmp/jingcai_today_1005_results.json"
 # 开球日期取自赛程（竞彩销售日跨自然日：10-05 开售的场次开球在 10-06 凌晨）
 
-try:
-    _cal = json.load(open("/home/hatch/workspace/football-prediction-v2/engine/calibration.json"))
-    _PLATT = {k: tuple(v) for k, v in _cal["form_only"].items()}
-except Exception:
-    _PLATT = None
+_CALIBRATION_CONFIG, _CALIBRATION_SELECTION = load_form_only_config()
 
 
 def norm(s):
@@ -92,21 +90,15 @@ def main():
             p = dict(m)
             p["home"] = m["home_team"]
             p["away"] = m["away_team"]
-            cfg = {"platt": _PLATT} if (_PLATT and not p.get("odds")) else None
+            p = with_official_handicap(p, fx)
+            cfg = _CALIBRATION_CONFIG if not p.get("odds") else None
             res = predict(p, cfg)
             if res.get("status") == "insufficient_data":
                 results.append({"shop": fx, "status": "insufficient",
                                 "reason": res.get("reason")})
                 continue
             d = res["derivatives"]
-            # 竞彩让球口径：用官方 rq（adj = margin + rq，rq<0 主让）
-            h1x2 = None
-            rq = fx.get("rq")
-            if rq is not None:
-                mx = score_matrix(res["lambda_home"], res["lambda_away"])
-                h, dr, a = handicap_1x2(mx, int(rq))
-                h1x2 = {"rq": int(rq), "p_home": round(h, 4),
-                        "p_draw": round(dr, 4), "p_away": round(a, 4)}
+            h1x2 = handicap_output(res, include_rq_alias=True)
             cards = d.get("cards") or {}
             results.append({
                 "shop": fx, "titan_matchid": mid,
@@ -122,6 +114,7 @@ def main():
                 "top_scores": d["top_scores"][:5],
                 "half_time": d.get("half_time"),
                 "handicap_1x2": h1x2,
+                "calibration_selection": _CALIBRATION_SELECTION,
                 "total_goals": d.get("total_goals"),
                 "cards": cards if cards else None,
                 "confidence": res["confidence"],

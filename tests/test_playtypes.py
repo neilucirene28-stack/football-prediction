@@ -110,7 +110,7 @@ def _sample_payload(**kw):
     p = {
         "home": "法国", "away": "比利时", "competition": "欧国联",
         "kickoff_at": (now + timedelta(days=2)).isoformat(),
-        "snapshot_at": (now + timedelta(days=1)).isoformat(),
+        "snapshot_at": now.isoformat(),
         "league_avg_goals": 2.70,
         "home_recent": mk(2, 1, "H"),
         "away_recent": mk(1, 1, "A"),

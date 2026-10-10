@@ -14,7 +14,7 @@ import sys, json, time
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
 from datetime import datetime, timedelta, timezone
 from collector.collector.sources.titan007 import Titan007Source, _X12JS_URL, _ANALYSIS_URL
-from engine.predictor import predict, PredictError
+from engine.jingcai_predictor import predict, PredictError
 
 TZ8 = timezone(timedelta(hours=8))
 
