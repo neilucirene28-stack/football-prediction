@@ -198,7 +198,8 @@ def summarize_pairs(pairs: list[dict], *, football_offered_n: int,
 def run_walk_forward(*, history: list[dict], folds: list[dict],
                      results: list[dict], evaluated_at: str,
                      min_history: int = 30, min_selection_matches: int = 30,
-                     model_family: str = "l3_calibration", identity_mode: str = "canonical") -> dict:
+                     model_family: str = "l3_calibration", identity_mode: str = "canonical",
+                     allow_expired_blocked: bool = False) -> dict:
     """Refit at each supplied cutoff; choose kappa from earlier settled folds.
 
     Only unhandicapped calibration is implemented here. Missing handicap stays
@@ -215,6 +216,13 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
         if isinstance(value, bool) or not isinstance(value, int) or value < 1:
             raise ValueError("最低样本量必须为正整数")
     now = _datetime(evaluated_at, "evaluated_at")
+    if not isinstance(allow_expired_blocked, bool):
+        raise ValueError("过期开球阻断模式必须为布尔值")
+    # This opt-in is only for a current, result-free prospective complete pool.
+    # Historical replay retains its original strict pre-kickoff validation.
+    if allow_expired_blocked and (len(folds) != 1 or results or
+                                 _datetime(folds[0].get('cutoff_at'), 'cutoff_at') != now):
+        raise ValueError("过期阻断模式只接受本次时点、单期、无赛果前瞻池")
     hi = {r["match_id"]: r for r in history}
     ri = {r["match_id"]: r for r in results}
     if len(hi) != len(history) or len(ri) != len(results):
@@ -254,7 +262,7 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
                 raise ValueError("测试比赛ID重复或期号不一致")
             seen.add(identity)
             ko = _datetime(row.get("kickoff_at"), "kickoff_at")
-            if cutoff >= ko:
+            if cutoff >= ko and not allow_expired_blocked:
                 raise ValueError("测试池含决策时已经开球的比赛")
             if identity in ri and (ri[identity].get("period") != fold["period"]
                                   or _datetime(ri[identity]["kickoff_at"], "result.kickoff_at") != ko):
@@ -297,6 +305,8 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
                       "selected_parameter":selected, "training_n": len(train),
                       "training_ids": [r["match_id"] for r in train]}
             try:
+                if cutoff >= _datetime(row['kickoff_at'], 'kickoff_at'):
+                    raise ValueError("决策时已经开球；仅保留完整池阻断行")
                 if row.get("sport") != "football":
                     raise ValueError("非足球或运动类型未核验")
                 _fixture_source(row, cutoff)
@@ -356,6 +366,7 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
     return {"label": "walk_forward_refit_research_not_release_approval",
             "executed_at": datetime.now(timezone.utc).isoformat(), "evaluated_at": evaluated_at,
             "model_family":model_family,"identity_mode":identity_mode,
+            "allow_expired_blocked": allow_expired_blocked,
             "declared_candidates": list(grid), "selections": selections, "folds": reports,
             "offered_n": sum(r["offered_n"] for r in reports), "football_offered_n": football_n,
             "predicted_n": len(previous_predictions), "paired_n": len(pairs), "pending_ids": pending,

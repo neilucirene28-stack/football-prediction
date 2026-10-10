@@ -8,6 +8,7 @@ import urllib.request
 
 from .frozen_results import import_espn_result
 from .frozen_settlement import load_bundle, settle_bundle
+from .http_archive import capture_response
 from .snapshot import _datetime
 
 
@@ -20,13 +21,26 @@ def due_for_collection(fixture, now):
     return _datetime(now, 'now') >= _datetime(fixture['kickoff_at'], 'kickoff') + timedelta(minutes=105)
 
 
-def collect(bundle, manifest_sha256, folder, *, opener=urllib.request.urlopen):
+def collect(bundle, manifest_sha256, folder, *, opener=urllib.request.urlopen, only_match_ids=None):
     now = clock()
     report, pool, predictions = load_bundle(bundle, manifest_sha256=manifest_sha256, evaluated_at=now)
     if report['identity_mode'] != 'provider_native_espn':
         raise ValueError('collector requires an ESPN native research freeze')
+    scope = None
+    if only_match_ids is not None:
+        if isinstance(only_match_ids, (str, bytes)):
+            raise ValueError('collection scope must be a sequence of match IDs')
+        ids = list(only_match_ids)
+        if not ids or any(not isinstance(mid, str) for mid in ids) or len(set(ids)) != len(ids):
+            raise ValueError('collection scope must contain unique nonempty predicted match IDs')
+        scope = set(ids)
+        if not scope <= set(predictions):
+            raise ValueError('collection scope includes an unknown or originally blocked match')
     # Resolve slugs only from the exact audits retained by the freeze.
     root = Path(__file__).resolve().parents[1]
+    execution_code_sha256 = {name: hashlib.sha256((root / 'beidan_bd1' / name).read_bytes()).hexdigest()
+                            for name in ('result_collection.py', 'http_archive.py',
+                                         'frozen_results.py', 'espn_summary.py')}
     slugs = {}
     for name, expected in report['prospective_freeze']['history_audits_sha256'].items():
         path = Path(name)
@@ -53,6 +67,9 @@ def collect(bundle, manifest_sha256, folder, *, opener=urllib.request.urlopen):
         if identity not in predictions:
             ledger.append({'match_id': identity, 'status': 'originally_blocked'})
             continue
+        if scope is not None and identity not in scope:
+            ledger.append({'match_id': identity, 'status': 'outside_collection_scope'})
+            continue
         if not due_for_collection(fixture, now):
             ledger.append({'match_id': identity, 'status': 'not_due'})
             continue
@@ -61,17 +78,16 @@ def collect(bundle, manifest_sha256, folder, *, opener=urllib.request.urlopen):
             raise ValueError('frozen provider league has no audited slug')
         eid = fixture['provider_match_id']
         url = f'https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/summary?event={eid}'
-        receipt = {'match_id': identity, 'url': url, 'start_utc': clock()}
+        receipt, raw = capture_response(url, folder, f'summary_{eid}.json', opener=opener)
+        receipt['match_id'] = identity
         try:
-            with opener(url, timeout=45) as response:
-                raw, status = response.read(), response.status
-            receipt.update(end_utc=clock(), http_status=status, bytes=len(raw),
-                           sha256=hashlib.sha256(raw).hexdigest(), local_file=f'summary_{eid}.json')
-            (folder / receipt['local_file']).write_bytes(raw)
-            if status != 200:
+            if raw is None:
+                raise ValueError(receipt['error'])
+            if receipt['http_status'] != 200:
                 raise ValueError('unsuccessful HTTP status')
             # The fresh verification clock is never copied from kickoff or publication.
-            record = import_espn_result(raw, pool=pool, verified_at=clock())
+            record = import_espn_result(raw, pool={identity: fixture}, verified_at=clock(),
+                                        expected_league_slug=slug)
             results.append(record)
             ledger.append({'match_id': identity, 'status': 'verified_regular_time_ft'})
         except Exception as error:
@@ -86,6 +102,8 @@ def collect(bundle, manifest_sha256, folder, *, opener=urllib.request.urlopen):
     index = {'bundle': str(bundle), 'manifest_sha256': manifest_sha256, 'started_at': now,
              'completed_at': clock(), 'receipts': receipts, 'complete_pool_ledger': ledger,
              'original_probabilities_only': True, 'refitted': False, 'reselected': False}
+    index['execution_code_sha256'] = execution_code_sha256
+    index['collection_scope_match_ids'] = sorted(scope) if scope is not None else None
     for name, value in [('COLLECTION_INDEX.json', index), ('settlement.json', settlement)]:
         with (folder / name).open('x') as fh:
             json.dump(value, fh, ensure_ascii=False, allow_nan=False, indent=2)
@@ -97,8 +115,9 @@ def main():
     ap.add_argument('--bundle', required=True)
     ap.add_argument('--manifest-sha256', required=True)
     ap.add_argument('--out', required=True)
+    ap.add_argument('--match-id', action='append', help='collect only these frozen predictions; repeat for multiple IDs')
     args = ap.parse_args()
-    result = collect(args.bundle, args.manifest_sha256, args.out)
+    result = collect(args.bundle, args.manifest_sha256, args.out, only_match_ids=args.match_id)
     print(json.dumps({k: result[k] for k in ('offered_n', 'predicted_n', 'blocked_n', 'paired_n', 'brier_candidate', 'refitted', 'reselected_after_results')}))
 
 

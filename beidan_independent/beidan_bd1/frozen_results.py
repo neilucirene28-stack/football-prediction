@@ -9,7 +9,7 @@ from .espn_summary import _goals, audit_summary
 from .frozen_settlement import load_bundle, _utc_now
 
 
-def import_espn_result(raw_bytes, *, pool, verified_at):
+def import_espn_result(raw_bytes, *, pool, verified_at, expected_league_slug=None):
     """Use explicit 90-minute FT/HT; never infer missing halftime scores."""
     payload = json.loads(raw_bytes)
     header = payload.get("header", {})
@@ -29,6 +29,8 @@ def import_espn_result(raw_bytes, *, pool, verified_at):
     slug = header.get("league", {}).get("slug")
     if not isinstance(slug, str) or not slug:
         raise ValueError("赛果联赛slug缺失")
+    if expected_league_slug is not None and slug != expected_league_slug:
+        raise ValueError("赛果联赛slug与原封存审核不一致")
     schedule = {**fixture, "ft_home": _goals(sides["home"].get("score")),
                 "ft_away": _goals(sides["away"].get("score")), "regular_time": True}
     record, audit = audit_summary(payload, schedule, verified_at=verified_at, raw_bytes=raw_bytes, league_slug=slug)

@@ -30,6 +30,42 @@ def run(history, folds, results):
 
 
 class WalkForwardTests(unittest.TestCase):
+    def test_prospective_expired_rows_stay_blocked_without_probability_generation(self):
+        from unittest.mock import patch
+        h, f, _ = case()
+        fold = f[0]
+        now = fold['cutoff_at']
+        current = copy.deepcopy(fold['fixtures'][0])
+        expired = {**current, 'match_id': 'expired', 'kickoff_at': now}
+        fold.update(expected_total=2, fixtures=[expired, current])
+        from beidan_bd1.walk_forward import predict_l3
+        with patch('beidan_bd1.walk_forward.predict_l3', wraps=predict_l3) as predictor:
+            out = run_walk_forward(history=h, folds=[fold], results=[], evaluated_at=now,
+                                   allow_expired_blocked=True)
+        self.assertEqual(predictor.call_count, 1)
+        self.assertEqual((out['offered_n'], out['predicted_n'], out['paired_n']), (2, 1, 0))
+        blocked = out['folds'][0]['matches'][0]
+        self.assertEqual(blocked['status'], 'blocked')
+        self.assertIn('已经开球', blocked['reason'])
+        for field in ('alternatives', 'baseline', 'candidate', 'vectors', 'score_31'):
+            self.assertNotIn(field, blocked)
+        self.assertEqual(out['pending_ids'], [current['match_id']])
+
+    def test_default_replay_still_rejects_expired_complete_pool(self):
+        h, f, _ = case()
+        f[0]['fixtures'][0]['kickoff_at'] = f[0]['cutoff_at']
+        with self.assertRaisesRegex(ValueError, '已经开球'):
+            run_walk_forward(history=h, folds=f[:1], results=[], evaluated_at=f[0]['cutoff_at'])
+
+    def test_expired_mode_rejects_results_multiple_periods_or_backdated_cutoff(self):
+        h, f, r = case()
+        for folds, results, now in ((f[:1], r, f[0]['cutoff_at']),
+                                    (f, [], f[-1]['cutoff_at']),
+                                    (f[:1], [], '2026-10-09T23:00:00+08:00')):
+            with self.assertRaisesRegex(ValueError, '单期'):
+                run_walk_forward(history=h, folds=folds, results=results, evaluated_at=now,
+                                 allow_expired_blocked=True)
+
     def test_actual_refit_past_only_selection_and_mean_constraint(self):
         h, f, r = case()
         report = run(h, f, r)

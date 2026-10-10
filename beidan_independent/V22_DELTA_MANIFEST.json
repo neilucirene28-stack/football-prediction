@@ -1,0 +1,525 @@
+{
+  "base_commit": "b6029a7346213a0e94a3867f1ba13223823345ae",
+  "created_at": "2026-10-09T17:13:16.453152+00:00",
+  "version": "v22",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2601,
+      "sha256": "217004f6801541c2b8d2bf43994b8cfb83c9509e4c2bada34cc969b1dd3c16c3"
+    },
+    {
+      "path": "beidan_independent/V22_INITIAL_DELTA_MANIFEST.json",
+      "bytes": 7320,
+      "sha256": "993c41aa7b233447bb60711a2a669060585748eddd42a1d7c7e9f60d86220be0"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/archive_io.py",
+      "bytes": 924,
+      "sha256": "7654bed1d790cd35eca61fd8be5dd5e3606382113073d61741e9ccdf79c16348"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/artifact_io.py",
+      "bytes": 2907,
+      "sha256": "04dd6e09dd109495cef39a12ad8c56a09cc0d375773c1b2c9f4b2ddad2604c2c"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/frozen_results.py",
+      "bytes": 3819,
+      "sha256": "6634b78a104fc87cd0a119a1ac8958711568930a13669e2085f9786fa438ce01"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/frozen_settlement.py",
+      "bytes": 19856,
+      "sha256": "22c35c61387992642f5e46a954f7a2791cb43939b7a3a12d7d52a759e473d1ae"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/http_archive.py",
+      "bytes": 1349,
+      "sha256": "7db6a363c36abf46cab41b93f507f0917d6d154e28ad073f2f37e28e8aa1b79d"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/result_collection.py",
+      "bytes": 5282,
+      "sha256": "d1a4b0e951648ea9ecd5f0b90376835e514f2fd9f9d1bc7a3272bd9c17af01ea"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/walk_forward.py",
+      "bytes": 26311,
+      "sha256": "9e5c49e4dce232c2e3c8c389cec01f92aa5f0c4d2b2568236dfca81c9e0d5374"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/EXECUTED_MINING_SCRIPT.txt",
+      "bytes": 5313,
+      "sha256": "daf049fe4cb609881dfc8448b650c1d1dcd613f3534ad7e4d7e1a4ce0803569d"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/INITIAL_EMITTED_FILE_INDEX.json",
+      "bytes": 36954,
+      "sha256": "53e96c34433de834b76bc9651e77d38bf52d4942327e48a2ff03f9fe28d5ef85"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/VERIFIED_FILE_INDEX.json",
+      "bytes": 37639,
+      "sha256": "60702ab6f88daeda6db1140b9074013edae10134f9f17d9e81a7d98edc01c388"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts.json",
+      "bytes": 5081,
+      "sha256": "73aedbe82e8ac3f6c0d23fc15d780d70c8432fb853e3d27cb1594627a39bf306"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0000.bin",
+      "bytes": 48000,
+      "sha256": "ed14bd3fde865cab6793c23fcca88a36077810e9ffe49f17b25b37731f68b6a3"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0001.bin",
+      "bytes": 48000,
+      "sha256": "1cf60a0b11920d6aed40724cc41ed0f8b4a2db812b15bdf5e5e6943f6ca86f11"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0002.bin",
+      "bytes": 48000,
+      "sha256": "d239ee9d89e75b65097ada088e16efab2889a8b30af6fa1a6026e6fa6000fa60"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0003.bin",
+      "bytes": 48000,
+      "sha256": "79c0b8161f80169bca90fe15bc6cd8941752e675c6c4a74932ea1398c8b20f2e"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0004.bin",
+      "bytes": 48000,
+      "sha256": "5c99502e9686f8ebbf9811c67fdec248483af3d5312dcd1994e49c717b805650"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0005.bin",
+      "bytes": 48000,
+      "sha256": "a85249720a73bfa6080b45c4ce3f62f44a2c103f7a404d62c5ae3051fb8698b9"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0006.bin",
+      "bytes": 48000,
+      "sha256": "0ebebae3bbaba1c60bab448f2039d7302a1ef87de3c69ced88a549c41a3f129d"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0007.bin",
+      "bytes": 48000,
+      "sha256": "3ca630d50f1f01a5cb6ee542fc3f5b1f4f59756faac0b447bccfae5872eca0b2"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0008.bin",
+      "bytes": 48000,
+      "sha256": "4bc17e6daf4186461ae24163bf90385de33ca52af21b0ceb232bb02ecb8cfe4c"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0009.bin",
+      "bytes": 48000,
+      "sha256": "2ac78d3f2df8bd4dacb2dbe97d0b27b34a31ffc2b31ab4a6472e1e394ad559a2"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0010.bin",
+      "bytes": 48000,
+      "sha256": "3f421b94d15971f3f0c3187635a2622e89fbd9032a099f17606673b761473c87"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0011.bin",
+      "bytes": 48000,
+      "sha256": "3888a67c1ab95ab87a2b810fab35f3b07fecbbc17816dbcf4319f6b8bab6d9de"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0012.bin",
+      "bytes": 48000,
+      "sha256": "847b8c4724c952b55057aaaa9e1f58c838d32aff7eae5e72cd52d33535155fc7"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0013.bin",
+      "bytes": 48000,
+      "sha256": "d51f6dd176dec2ddec3400a750e6e5fbd584ff6fcb62698d48843f12ef51ebfd"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0014.bin",
+      "bytes": 48000,
+      "sha256": "b10ef09bdddb9529ed5f5c094f41705560211c7acb550aed6c04e48eb17791c0"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0015.bin",
+      "bytes": 48000,
+      "sha256": "b72de2056ef8f0b067032fc742803c5ff1bbd89f15ca4278bb6e0edc70616e82"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0016.bin",
+      "bytes": 48000,
+      "sha256": "623146d4b8c5f3e9293b3642ba94229fc54426706c2258b43afc0b0c2a1b6c99"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0017.bin",
+      "bytes": 48000,
+      "sha256": "58880d75f61208846c8009b29df15fa0b809434867b10eb526b1d0ace6e82e00"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0018.bin",
+      "bytes": 48000,
+      "sha256": "ec2b830ea035809f80584a08f238393b378cd150ce62d5b2a09c894c0744133b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0019.bin",
+      "bytes": 48000,
+      "sha256": "0ac1a908b6efa72f54a28ea4af4b9050352385cf9a4140e223ac2008ac0ab246"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0020.bin",
+      "bytes": 48000,
+      "sha256": "96e2a5a1c3b6d1cb6429d8e0f6d1c74de63eb20d91114bc3862b7dfcb0046662"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0021.bin",
+      "bytes": 48000,
+      "sha256": "cac2a1fbe1a18aef331177b690a3734dfac23e53d6c4668e58f4b50b207bc04b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0022.bin",
+      "bytes": 48000,
+      "sha256": "2e6a84e748a1a33e9abc62e58ffb7fcd3c5e5ff6e162ec51df022c013268c53d"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0023.bin",
+      "bytes": 48000,
+      "sha256": "79e0152232287430a66596e6ae869cf71b8f55147fb72a1983a1d002a0d14c5b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0024.bin",
+      "bytes": 48000,
+      "sha256": "7d24d38d2de03e7d120c2bf829a10f1459c64c8d35bad11832d5dde19b8c190a"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0025.bin",
+      "bytes": 48000,
+      "sha256": "0dddfe7714b44baf7c867778ee2c623bb6dced93aad3767ec945f784e8d8e33f"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0026.bin",
+      "bytes": 48000,
+      "sha256": "87e7553c2821741898c78ddd4447cb7d1dd526e784174eb2bae3d63c748bdbc2"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0027.bin",
+      "bytes": 48000,
+      "sha256": "6761a6d88023d70dc07e72a5025bbf3310240c28353ddaf01875cf780677ce22"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0028.bin",
+      "bytes": 48000,
+      "sha256": "1fbf228ec31dbcaffbbfb50588041f75914a665da66cf6b977d1648f5dca012b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0029.bin",
+      "bytes": 48000,
+      "sha256": "555d22557915a420a36ad86595fa403c9431ba38bb67f5b61dd85e89d05ff581"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0030.bin",
+      "bytes": 48000,
+      "sha256": "58e10e8061c789d38f6a2ad6a39d0a12def3ef15628e0f47505b7ec19ac2fbdf"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_mined_20261010_v22/original_responses.tar.gz.parts/part_0031.bin",
+      "bytes": 45692,
+      "sha256": "3b91becbb6513b1181fcdb930f085d4e02e1c30cb1d54e226f43c2f2cd4f096b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_ned.2_v22_mining_config.json",
+      "bytes": 1493,
+      "sha256": "13b98ae522d2c318879419f2c09e3db1026248a98c87e4ec5a58eb98916d473f"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v22-http-binding-and-prospective-pool.md",
+      "bytes": 6022,
+      "sha256": "881589d43c1b6f3713e676f73b9ada8f830ede7ccd2a3d6c1ee4125d975907e2"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/folds.json",
+      "bytes": 177257,
+      "sha256": "853cd27d14ee984df205ec3718d9fec1a79d1636d4664d16bf205c43bf9d6f4a"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/freeze_manifest.json",
+      "bytes": 874,
+      "sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/history.jsonl",
+      "bytes": 445122,
+      "sha256": "c5f54ce3230cbba7655aa485cc9608fa973e8986a39cb48bd955b3373595310c"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts.json",
+      "bytes": 4778,
+      "sha256": "9fd18c11fe5478a18ecaf4700aac6b0903b67b9b08862ad7b2ae21000292d28c"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0000.bin",
+      "bytes": 48000,
+      "sha256": "f38352c5af36e3f6233ab09043457210518984580b421ff92e5165fb86d76f89"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0001.bin",
+      "bytes": 48000,
+      "sha256": "7721ff5d88e35688ce931e73dcdd7b488375688cd74011221135a34b01c55eb3"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0002.bin",
+      "bytes": 48000,
+      "sha256": "5de9a007361674cbbeab6d2594efa7cc20393e36e87102db8e0bf06a7c971bb1"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0003.bin",
+      "bytes": 48000,
+      "sha256": "18632cded59e2863a773221fe426509b3f16329661a44115ac9a3d1ed0b3edcb"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0004.bin",
+      "bytes": 48000,
+      "sha256": "2884ddc55f4c1da119879db25bb307c738ff758f4328f8daec30ef8ba4bfce8d"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0005.bin",
+      "bytes": 48000,
+      "sha256": "c06889b79807c54721549f1cedb4f1cb80f6ad7172c7392769275bf672ca74e0"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0006.bin",
+      "bytes": 48000,
+      "sha256": "6575fdc3cf9b3c32ca2a9304c497023ee06802439285304a9d451a0300923f53"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0007.bin",
+      "bytes": 48000,
+      "sha256": "03055e65d3425f12c2ee6fb69fa70e476f2feacdb0382c97c095f2c2a66965fd"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0008.bin",
+      "bytes": 48000,
+      "sha256": "7d1a7882d6625d5df324b746a9a7a330aa9d56c1ebf07a4a1d7257fc1547ddef"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0009.bin",
+      "bytes": 48000,
+      "sha256": "e1e455487780bf82cd5b690960ea48f7b45009765ec1d32932858caa2c00370c"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0010.bin",
+      "bytes": 48000,
+      "sha256": "1ccef10ba048e2c1e783f29f19073604450b3cdb8bf336ffd8eb1cb4e5f964f9"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0011.bin",
+      "bytes": 48000,
+      "sha256": "824f75716c67a0d5fdab54fd3ff343f7dcb391fa7be3cb27f71061e476e8ee32"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0012.bin",
+      "bytes": 48000,
+      "sha256": "fe7a4c1bdd08614ecdfbbfb1681510b96ede5ca207299aea0ebece3cc95f1dfe"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0013.bin",
+      "bytes": 48000,
+      "sha256": "1a23284e1fe6f928757d547bbbf057381a02a9d362cb90976a378c3e2b3b7c8c"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0014.bin",
+      "bytes": 48000,
+      "sha256": "9f735f7c7dd23e2f0999d0417150016e1cca202607e855e1aaea6db84735d486"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0015.bin",
+      "bytes": 48000,
+      "sha256": "e163179e0d13665f82a69c1e370defb91218eb6823c8c8db1bd1d51c7edd390f"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0016.bin",
+      "bytes": 48000,
+      "sha256": "53ad583c693c2da81c7559e5994aa9381c38f668bfc2cabaeebe2773f6f21ea4"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0017.bin",
+      "bytes": 48000,
+      "sha256": "bd92b4ad749ce57df3c680c45f41527d769999a02c6da87a6f5b5922925c7e81"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0018.bin",
+      "bytes": 48000,
+      "sha256": "fa0f286f2734101536dc86ec436eb745f6e84ad407a6f1dbc8f6bf71445638a0"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0019.bin",
+      "bytes": 48000,
+      "sha256": "7513abdafffd35ae92fc3566460534e2ded4ec59651ea2b1eca44e4da91af6ba"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0020.bin",
+      "bytes": 48000,
+      "sha256": "975efc71f85dbdea23d3f0c17855e9e6744513730a8140d3a1dd75fafa871e12"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0021.bin",
+      "bytes": 48000,
+      "sha256": "e48c76df21788fe6ccd1f56a4b8a415bfa7bd59494cca8954ffd9fbe0a331bd3"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0022.bin",
+      "bytes": 48000,
+      "sha256": "a7629a8016365345421897b279b52ffc904efed0864d3329e99b2d801e811e14"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0023.bin",
+      "bytes": 48000,
+      "sha256": "d1611c9e3bc1cdac4fe77331ee1e16f315d963c9bde60c1e447960811b50780c"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0024.bin",
+      "bytes": 48000,
+      "sha256": "f19f0f5bc8a3044c853aebf52eee6fa75cf874c671c20324d26cdcbf152e18c0"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0025.bin",
+      "bytes": 48000,
+      "sha256": "464669c1c8fcd47b09fbda286bf89fb820d88737246e75a395ae4d87253519ab"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0026.bin",
+      "bytes": 48000,
+      "sha256": "03d25ae61b2e7729de44f92a2417a3f3c442f2f7f39f4f3094f461f79b0a2892"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0027.bin",
+      "bytes": 48000,
+      "sha256": "ca5bd6a043824050789358c99e9df58383396720ab18dddefbfa1d948a07c11f"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0028.bin",
+      "bytes": 48000,
+      "sha256": "404b65b3d9dd5a2dfd8736344c9aed7c5b792632a4af6e8254399ffbcc30c467"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/report.json.parts/part_0029.bin",
+      "bytes": 7291,
+      "sha256": "2c5f1a527697cfbecccf85e5bbbdfcf0ee714dc1474d8dfa2170a363f9d9fa59"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T164056789363Z/results.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "beidan_independent/outputs/predictions_20261010_v22.md",
+      "bytes": 10908,
+      "sha256": "530caaa5408f0b64816037aeba417d85517484fb15fcf68e122f0c1ef8ac9baa"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_full_pool_coverage.json",
+      "bytes": 74543,
+      "sha256": "b415d227229ee5f6e4628ab5009312de62da943a235d67ee8c9c8330126a6b49"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_native/ned.2/audit_and_predictions.json",
+      "bytes": 187839,
+      "sha256": "9840dceb12f22ec9dc46c0ec02a536182176d1f5905670d8c85e9d743742bb8f"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_prospective_registry.json",
+      "bytes": 31391,
+      "sha256": "3b45be0123dfa0156dc48ae24907b6aaa594e2030dac60f3591f3c64b14176b3"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_initial/COLLECTION_INDEX.json",
+      "bytes": 14578,
+      "sha256": "4c3a248784277a94e53be0ad5ee3e3b81b34cec0200b16e84bd1a2372ad7c771"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_initial/results.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_initial/settlement.json",
+      "bytes": 22784,
+      "sha256": "28a3f46c04da0ada664d01f45772a600380bd13eb518c4097ab23504e3f05380"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_new_freeze/COLLECTION_INDEX.json",
+      "bytes": 14501,
+      "sha256": "3cf7f9ffcd9298aefc53a485e0a863e5d36c16dc6ec8e590999569cec3c8be05"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_new_freeze/results.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_result_collection_new_freeze/settlement.json",
+      "bytes": 22874,
+      "sha256": "129c79e5559085a79f210592f84cbe5aaee0384b8d346014a576b950c247e8ef"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_unique_pending_settlement.json",
+      "bytes": 33854,
+      "sha256": "92140e1ebda35faac477fa042bc5cd60da27be348efbb2bc6ee15682033c492c"
+    },
+    {
+      "path": "beidan_independent/outputs/v22_unique_pending_settlement_new_registry.json",
+      "bytes": 35491,
+      "sha256": "b2b3eb4b8cdf464393851ad12aadad1bdcf28911f2a75f9381b37190cd242f93"
+    },
+    {
+      "path": "beidan_independent/scripts/freeze_native_pool.py",
+      "bytes": 4582,
+      "sha256": "ca3561cc063bd8c26d94cd70872e9f9dc67dd1c62d95e2923b1d843786d2c8b2"
+    },
+    {
+      "path": "beidan_independent/scripts/mine_espn_native.py",
+      "bytes": 5374,
+      "sha256": "a9ae8258042bbd15554c0619e221830aa01c2cbc42bf8a3c344b1291d62c6593"
+    },
+    {
+      "path": "beidan_independent/tests/test_artifact_io.py",
+      "bytes": 2578,
+      "sha256": "578380fdaf5399f51d1b68414f4089ad6168be15cf7e5a09ad0cdfd66e77da3f"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_frozen_results.py",
+      "bytes": 3383,
+      "sha256": "b3f2d2e9ad32ed45106bbfb598420db1a74a567a15c48aa3e553ab1fc1225ebb"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_walk_forward.py",
+      "bytes": 8736,
+      "sha256": "d02fbc264dc77df57b0c19d57db498b409f26ac347b9d285bd711ad6c181574d"
+    },
+    {
+      "path": "beidan_independent/tests/test_http_archive.py",
+      "bytes": 2210,
+      "sha256": "084a042de25a2000ced90ba221eef9e39fc159b7365b367de516763da5c1d195"
+    },
+    {
+      "path": "beidan_independent/tests/test_native_mining_capture.py",
+      "bytes": 3333,
+      "sha256": "1b9fc0c826393c2029ed81d231098b5ff5bb4cc414b94163dd7c32aaf0959110"
+    },
+    {
+      "path": "beidan_independent/tests/test_result_collection.py",
+      "bytes": 5786,
+      "sha256": "55ab06dcb9f6898b17ee963cd1bfdeb89551fee202396a31389785e9c3e0e722"
+    }
+  ],
+  "tests": {
+    "standard_unittest": 156,
+    "optimized_walk_forward_tests": 11
+  },
+  "old_freezes_modified": false,
+  "old_registry_modified": false,
+  "new_freeze_original_bytes_changed": false,
+  "production_gate_passed": false
+}

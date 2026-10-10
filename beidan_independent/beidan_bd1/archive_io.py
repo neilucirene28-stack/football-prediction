@@ -1,6 +1,8 @@
 """Read exact response bytes from a file or a losslessly packed raw archive."""
 from pathlib import Path
+import io
 import tarfile
+from .artifact_io import read_artifact
 
 
 def read_response(folder, filename):
@@ -10,7 +12,8 @@ def read_response(folder, filename):
     path = folder / filename
     if path.exists():
         return path.read_bytes()
-    with tarfile.open(folder / 'original_responses.tar.gz', 'r:gz') as archive:
+    packed = read_artifact(folder / 'original_responses.tar.gz')
+    with tarfile.open(fileobj=io.BytesIO(packed), mode='r:gz') as archive:
         members = [m for m in archive.getmembers() if m.name == filename]
         if len(members) != 1 or not members[0].isfile():
             raise ValueError('raw archive member is absent, duplicated or not a file')

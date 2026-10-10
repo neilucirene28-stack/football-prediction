@@ -57,6 +57,14 @@ class FrozenResultsTests(unittest.TestCase):
         self.assertIsNone(r["explicit_halftime_fields"][side["homeAway"]])
         self.assertFalse(r["result_audit"]["explicit_halftime_available"])
 
+    def test_expected_frozen_slug_is_checked(self):
+        r = import_espn_result(self.raw, pool=self.pool, verified_at="2026-10-09T10:00:00Z",
+                               expected_league_slug="jpn.1")
+        self.assertEqual(r['match_id'], 'synthetic-1')
+        with self.assertRaises(ValueError):
+            import_espn_result(self.raw, pool=self.pool, verified_at="2026-10-09T10:00:00Z",
+                               expected_league_slug="other.1")
+
 
 if __name__ == "__main__":
     unittest.main()

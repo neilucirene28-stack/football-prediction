@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 
 from .baseline import _history
+from .artifact_io import read_artifact
 from .evaluation import _brier
 from .snapshot import _datetime, build_snapshot
 from .walk_forward import _fixture_source, _fixture_identity, _observed_result, summarize_pairs, summarize_goal_means
@@ -40,7 +41,7 @@ def _sha(value):
 
 
 def _archive(bundle):
-    raw = {name: (Path(bundle) / name).read_bytes() for name in FILES}
+    raw = {name: read_artifact(Path(bundle) / name) for name in FILES}
     history = [json.loads(line) for line in raw["history.jsonl"].splitlines() if line.strip()]
     folds = json.loads(raw["folds.json"])
     report = json.loads(raw["report.json"])

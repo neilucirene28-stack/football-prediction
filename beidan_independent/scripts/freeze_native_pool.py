@@ -42,7 +42,7 @@ for r in roster:
     fixtures.append(f)
 folds=[{'period':'26103','cutoff_at':now,'expected_total':179,'fixtures':fixtures}]
 report=run_walk_forward(history=history,folds=folds,results=[],evaluated_at=now,
-        model_family='l1_team_strength',identity_mode='provider_native_espn')
+        model_family='l1_team_strength',identity_mode='provider_native_espn',allow_expired_blocked=True)
 future_research_n=sum(_datetime(bindings[seq]['binding']['kickoff_at'],'kickoff') > _datetime(now,'now') for seq in research)
 if (report['offered_n']!=179 or report['predicted_n']!=future_research_n or report['paired_n']!=0
         or report['brier_candidate'] is not None or report['production_gate_passed'] is not False):
