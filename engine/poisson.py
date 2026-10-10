@@ -131,6 +131,28 @@ def top_scores(matrix, n: int = 3) -> list[tuple[str, float]]:
     return scored[:n]
 
 
+def top_scores_diverse(matrix, n: int = 3, lam_h: float = 1.35,
+                        lam_a: float = 1.35, pool: int = 12) -> list[tuple[str, float]]:
+    """比分输出层多样化（2026-10-10用户指令）：
+
+    Poisson众数+Dixon-Coles会让1-1霸榜。先取概率Top pool，
+    再按总进球与期望的接近度重排，避免满屏1-1。
+    排序分 = prob / (1 + |total_goals - expected| * 0.5)。
+    内部概率矩阵不动，只影响展示排序。
+    """
+    expected = lam_h + lam_a
+    scored = []
+    for i, row in enumerate(matrix):
+        for j, p in enumerate(row):
+            scored.append((f"{i}-{j}", p, i + j))
+    scored.sort(key=lambda x: x[1], reverse=True)
+    candidates = scored[:pool]
+    # 按接近期望进球重排
+    candidates.sort(key=lambda x: x[1] / (1 + abs(x[2] - expected) * 0.5),
+                    reverse=True)
+    return [(s, p) for s, p, _ in candidates[:n]]
+
+
 def total_goals_distribution(matrix) -> dict:
     """总进球数分布：{0:p, 1:p, 2:p, 3:p, 4:p, '5+':p}。"""
     dist = {k: 0.0 for k in range(5)}

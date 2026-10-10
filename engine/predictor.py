@@ -17,6 +17,7 @@ from .elo import win_probability_from_elo
 from .strengths import estimate_lambdas, team_tier
 from .poisson import (score_matrix, match_probs, btts_prob, over_under_prob,
                       asian_handicap_probs, handicap_1x2, top_scores,
+                      top_scores_diverse,
                       total_goals_distribution, expected_total_goals,
                       main_goal_interval, half_time_probs,
                       half_full_1x2, total_goals_exact, ipf_to_marginals)
@@ -391,7 +392,8 @@ def predict(payload: dict, config: dict | None = None,
         "asian": None,
         "handicap_1x2": None,
         "top_scores": [{"score": s, "prob": round(p, 4)}
-                       for s, p in top_scores(matrix_cal, n=5)],
+                       for s, p in top_scores_diverse(matrix_cal, n=5,
+                                                     lam_h=lam_h, lam_a=lam_a)],
         "top_scores_raw": [{"score": s, "prob": round(p, 4)}
                            for s, p in top_scores(matrix, n=5)],
         "p_1x2_raw": [round(p, 4) for p in p_model],
