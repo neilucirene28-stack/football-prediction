@@ -457,6 +457,14 @@ def predict(payload: dict, config: dict | None = None,
             matrix_cal, int(handicap), league=competition,
             strength=cfg.get("letdraw_strength", 0.5))
         h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
+        # 让平选择规则（2026-10-10用户指令）：P(让平)>=0.28时选让平，
+        # 否则按argmax。依据：历史回填P(让平)>=0.28时实际让平率42.9%，
+        # 模型低估14pp；不选则系统性漏掉该档。
+        if d2 >= 0.28:
+            _hcp_pick = "draw"
+        else:
+            _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
+                            key=lambda x: x[1])[0]
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),
@@ -465,6 +473,8 @@ def predict(payload: dict, config: dict | None = None,
                                  # 未舍入全精度（供北单快照使用，展示层再round）
                                  "p_home_full": h2, "p_draw_full": d2,
                                  "p_away_full": a2,
+                                 "pick": _hcp_pick,
+                                 "pick_rule": "draw>=0.28",
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
 
