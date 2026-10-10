@@ -1,0 +1,110 @@
+{
+  "schema": "bd1-lossless-parts-1",
+  "encoding": "identity",
+  "original_bytes": 958974,
+  "original_sha256": "50ebc681c42214ea82183a2e56d261d09b574b4eac6142da40cf9b142715f9f5",
+  "packed_bytes": 958974,
+  "packed_sha256": "50ebc681c42214ea82183a2e56d261d09b574b4eac6142da40cf9b142715f9f5",
+  "parts": [
+    {
+      "name": "part_0000.bin",
+      "bytes": 48000,
+      "sha256": "9b4d2d3b0c956d55472ace2175f14f0fa7e5e9993517042d061f463c122f6b61"
+    },
+    {
+      "name": "part_0001.bin",
+      "bytes": 48000,
+      "sha256": "d2884e0903d49dadbae0a3a217707de511d0c189d5eb860efd3280925c6e8c38"
+    },
+    {
+      "name": "part_0002.bin",
+      "bytes": 48000,
+      "sha256": "689f62a763e9c2b39643b9510e66af539c852d34e0e024ce747da2628794770d"
+    },
+    {
+      "name": "part_0003.bin",
+      "bytes": 48000,
+      "sha256": "a7bb5d048450a27906cc2776b5b69a64bf048d0a068ca02ef0df53dee1580a42"
+    },
+    {
+      "name": "part_0004.bin",
+      "bytes": 48000,
+      "sha256": "6926d55c67caa1000efabe2592cc8ec674c00aca966c7c66486f95d0d968995e"
+    },
+    {
+      "name": "part_0005.bin",
+      "bytes": 48000,
+      "sha256": "1c7e1442a91522d9ae0f87e920cea47f76a9f8dec0eb5e27c0fc22359f8ad194"
+    },
+    {
+      "name": "part_0006.bin",
+      "bytes": 48000,
+      "sha256": "751d2b58a5012b41f1c7d550e9edbbee506db4bc5bb091390d94d7b35dbdd8db"
+    },
+    {
+      "name": "part_0007.bin",
+      "bytes": 48000,
+      "sha256": "afe467571541251a97372b8902ecf361afe14a1af39a870bdd97f59516c23127"
+    },
+    {
+      "name": "part_0008.bin",
+      "bytes": 48000,
+      "sha256": "5057827d2517e1890a2b3a3af249e3858e8d6bcf5131d09a4cacb21cb3b6a7d9"
+    },
+    {
+      "name": "part_0009.bin",
+      "bytes": 48000,
+      "sha256": "cf7641e16f281b6f1d83567bf3deae1c0dc44942a4bce9908807a895dc5658bf"
+    },
+    {
+      "name": "part_0010.bin",
+      "bytes": 48000,
+      "sha256": "b5c9bd759c68d94740c4481d0205fdffbafd0698e7acbf302a132add34da3113"
+    },
+    {
+      "name": "part_0011.bin",
+      "bytes": 48000,
+      "sha256": "ab984bad5db12283b59b9b492d19c04d335a3ff5dca273176279bb6bb5a9b782"
+    },
+    {
+      "name": "part_0012.bin",
+      "bytes": 48000,
+      "sha256": "117fb540688a87984d1fb8a4665e0a84b1de3cf1458d8be537e9179b27323f7a"
+    },
+    {
+      "name": "part_0013.bin",
+      "bytes": 48000,
+      "sha256": "5a8d1aeeb3f52bdd6a35c9c55876f401c3fbc448bca4fc6b15a7daa7e4422d3e"
+    },
+    {
+      "name": "part_0014.bin",
+      "bytes": 48000,
+      "sha256": "9b476b97292c3e201e509da61a12c355857cba2719d7ec1f659214769de384ca"
+    },
+    {
+      "name": "part_0015.bin",
+      "bytes": 48000,
+      "sha256": "2d27d3c8657e4bfc12f5bd67c726b4abccf995375c71b3f9e82ddb88ca3d67e4"
+    },
+    {
+      "name": "part_0016.bin",
+      "bytes": 48000,
+      "sha256": "bebb0740bbef3d0057bdcda3bc7f5cdc3d0d609e58e979f6c0b150efa24cc631"
+    },
+    {
+      "name": "part_0017.bin",
+      "bytes": 48000,
+      "sha256": "3ea9e5a758da8de2e549514e0173152d125eb7cca535ea5a47b36f5e6b7699c4"
+    },
+    {
+      "name": "part_0018.bin",
+      "bytes": 48000,
+      "sha256": "2c7a40799310dcfef820e5af252f42cd2c575ae2af6c0d166f6e25e8cae6e395"
+    },
+    {
+      "name": "part_0019.bin",
+      "bytes": 46974,
+      "sha256": "fa70f42abd2150b1533954998ccc577d4f03aed8cc596e3da2668c177ec09a3e"
+    }
+  ]
+}

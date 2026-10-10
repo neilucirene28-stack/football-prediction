@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-10-10T01:10:14.280201+00:00",
+  "receipt": {
+    "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams/359/schedule",
+    "start_utc": "2026-10-10T01:10:10.474526+00:00",
+    "http_status": 200,
+    "end_utc": "2026-10-10T01:10:14.279900+00:00",
+    "bytes": 47378,
+    "sha256": "bc590e2cda64d999af70265f23a3e0ac180299b49f156212bce600a9fe201443",
+    "local_file": "schedule_359.json"
+  },
+  "independent_clock_authenticated": false
+}

@@ -1,0 +1,1588 @@
+{
+  "policy": "earliest_qualified_sealed_forecast_per_unique_fixture",
+  "created_at": "2026-10-10T02:25:59.652756+00:00",
+  "bundles": [
+    {
+      "path": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "predicted_n": 17
+    },
+    {
+      "path": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "predicted_n": 40
+    },
+    {
+      "path": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "predicted_n": 50
+    },
+    {
+      "path": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "predicted_n": 57
+    },
+    {
+      "path": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "predicted_n": 64
+    },
+    {
+      "path": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "predicted_n": 54
+    },
+    {
+      "path": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "predicted_n": 75
+    },
+    {
+      "path": "outputs/l1_prospective/20261010T014631001193Z",
+      "manifest_sha256": "3f6c05791fd39d1c01913cea651eb6e7837dd274a7f376a136877798044f1502",
+      "sealed_at": "2026-10-10T01:46:31.407844+00:00",
+      "predicted_n": 76
+    },
+    {
+      "path": "outputs/l1_prospective/20261010T022340230825Z",
+      "manifest_sha256": "1306df98c0df1d57dab3ef51adb3f28b3d754242e40f12521b2ecf757e965427",
+      "sealed_at": "2026-10-10T02:23:45.239494+00:00",
+      "predicted_n": 76
+    }
+  ],
+  "unique_predictions_n": 95,
+  "later_duplicate_predictions_excluded_n": 414,
+  "rows": [
+    {
+      "period": "26103",
+      "match_id": "26103-18",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401885100",
+        "6418",
+        "130",
+        "3927",
+        2026,
+        14359,
+        "2026-10-10T00:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-19",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401885094",
+        "3067",
+        "7884",
+        "3927",
+        2026,
+        14359,
+        "2026-10-10T00:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-89",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401885099",
+        "3812",
+        "123",
+        "3927",
+        2026,
+        14359,
+        "2026-10-10T19:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-90",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401885095",
+        "10382",
+        "2428",
+        "3927",
+        2026,
+        14359,
+        "2026-10-10T19:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-91",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401885093",
+        "7013",
+        "7017",
+        "3927",
+        2026,
+        14359,
+        "2026-10-10T19:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-98",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880807",
+        "340",
+        "311",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-99",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880806",
+        "307",
+        "3802",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-138",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880814",
+        "387",
+        "309",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-139",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880813",
+        "351",
+        "346",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-140",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880812",
+        "279",
+        "2567",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-141",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880811",
+        "335",
+        "399",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-142",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880810",
+        "375",
+        "342",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-143",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880809",
+        "304",
+        "3129",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-144",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880808",
+        "390",
+        "338",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-145",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880805",
+        "285",
+        "350",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-146",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880804",
+        "400",
+        "397",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-147",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "sealed_at": "2026-10-09T13:50:28.876075+00:00",
+      "physical_identity": [
+        "401880803",
+        "344",
+        "301",
+        "3915",
+        2026,
+        14336,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-65",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880233",
+        "371",
+        "334",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T03:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-95",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880242",
+        "372",
+        "333",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-96",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880236",
+        "318",
+        "381",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-97",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880234",
+        "383",
+        "392",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-100",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881331",
+        "332",
+        "2731",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-101",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881327",
+        "341",
+        "396",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-131",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880244",
+        "365",
+        "347",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-132",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880243",
+        "358",
+        "336",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-133",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880241",
+        "374",
+        "352",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-134",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880240",
+        "369",
+        "380",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-135",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880239",
+        "394",
+        "391",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-136",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880238",
+        "398",
+        "314",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-137",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401880235",
+        "395",
+        "379",
+        "3914",
+        2026,
+        14327,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-148",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881336",
+        "308",
+        "280",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-149",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881335",
+        "320",
+        "4703",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-150",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881334",
+        "2594",
+        "343",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-151",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881333",
+        "3891",
+        "401",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-152",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881332",
+        "635",
+        "339",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-153",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881330",
+        "348",
+        "386",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-154",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881329",
+        "402",
+        "389",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-155",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881328",
+        "302",
+        "324",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-156",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881326",
+        "345",
+        "303",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-157",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+      "physical_identity": [
+        "401881325",
+        "315",
+        "353",
+        "3916",
+        2026,
+        14339,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-22",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401843455",
+        "620",
+        "510",
+        "3960",
+        2026,
+        13943,
+        "2026-10-10T01:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-24",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401874089",
+        "2556",
+        "22163",
+        "3945",
+        2026,
+        13929,
+        "2026-10-10T01:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-72",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401877606",
+        "7109",
+        "7116",
+        "750",
+        2026,
+        14287,
+        "2026-10-10T13:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-80",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401877575",
+        "3384",
+        "3385",
+        "750",
+        2026,
+        14287,
+        "2026-10-10T14:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-81",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401877605",
+        "7107",
+        "22522",
+        "750",
+        2026,
+        14287,
+        "2026-10-10T14:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-87",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401877607",
+        "21361",
+        "22167",
+        "750",
+        2026,
+        14287,
+        "2026-10-10T18:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-115",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401874022",
+        "994",
+        "8221",
+        "3945",
+        2026,
+        13929,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-116",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401874016",
+        "8222",
+        "8547",
+        "3945",
+        2026,
+        13929,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-163",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401843456",
+        "2980",
+        "6672",
+        "3960",
+        2026,
+        13943,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-188",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "sealed_at": "2026-10-09T15:08:02.207387+00:00",
+      "physical_identity": [
+        "401874087",
+        "20301",
+        "20856",
+        "3945",
+        2026,
+        13929,
+        "2026-10-10T23:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-32",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876734",
+        "7732",
+        "18066",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-33",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876733",
+        "274",
+        "6994",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-34",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876732",
+        "3267",
+        "171",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-35",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876730",
+        "10678",
+        "3266",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-36",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876728",
+        "272",
+        "7869",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-104",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876736",
+        "3171",
+        "11884",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T20:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-105",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "sealed_at": "2026-10-09T15:47:36.598389+00:00",
+      "physical_identity": [
+        "401876731",
+        "165",
+        "3243",
+        "3926",
+        2026,
+        14253,
+        "2026-10-10T20:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-39",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875896",
+        "3728",
+        "3775",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-40",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875897",
+        "149",
+        "9983",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-41",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875898",
+        "141",
+        "3730",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-42",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875899",
+        "18748",
+        "271",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-43",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875900",
+        "10597",
+        "3731",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-44",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875901",
+        "3708",
+        "155",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-45",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875902",
+        "144",
+        "18278",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-46",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875903",
+        "4426",
+        "3707",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-47",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "sealed_at": "2026-10-09T16:40:57.915361+00:00",
+      "physical_identity": [
+        "401875904",
+        "5291",
+        "3732",
+        "3933",
+        2026,
+        14251,
+        "2026-10-10T02:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-94",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401879268",
+        "359",
+        "357",
+        "700",
+        2026,
+        14308,
+        "2026-10-10T19:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-103",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401882849",
+        "101",
+        "93",
+        "740",
+        2026,
+        14357,
+        "2026-10-10T20:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-128",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401878776",
+        "362",
+        "337",
+        "700",
+        2026,
+        14308,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-129",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401878775",
+        "363",
+        "349",
+        "700",
+        2026,
+        14308,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-130",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401879265",
+        "373",
+        "370",
+        "700",
+        2026,
+        14308,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-176",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401882856",
+        "96",
+        "1068",
+        "740",
+        2026,
+        14357,
+        "2026-10-10T22:15:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-186",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "sealed_at": "2026-10-10T01:15:17.129498+00:00",
+      "physical_identity": [
+        "401876446",
+        "166",
+        "3236",
+        "710",
+        2026,
+        14252,
+        "2026-10-10T23:15:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-107",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401874947",
+        "3263",
+        "109",
+        "730",
+        2026,
+        14240,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-108",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401899607",
+        "4059",
+        "3337",
+        "3931",
+        2026,
+        14422,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-109",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401899605",
+        "2574",
+        "2923",
+        "3931",
+        2026,
+        14422,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-110",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401899601",
+        "11139",
+        "3346",
+        "3931",
+        2026,
+        14422,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-111",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401899600",
+        "11137",
+        "3975",
+        "3931",
+        2026,
+        14422,
+        "2026-10-10T21:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-158",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878373",
+        "264",
+        "258",
+        "735",
+        2026,
+        14300,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-159",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878372",
+        "254",
+        "261",
+        "735",
+        2026,
+        14300,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-160",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878371",
+        "262",
+        "250",
+        "735",
+        2026,
+        14300,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-161",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878369",
+        "257",
+        "260",
+        "735",
+        2026,
+        14300,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-162",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878977",
+        "3610",
+        "441",
+        "3901",
+        2026,
+        14307,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-169",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878551",
+        "252",
+        "411",
+        "3940",
+        2026,
+        14301,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-170",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878550",
+        "248",
+        "265",
+        "3940",
+        2026,
+        14301,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-171",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878549",
+        "253",
+        "405",
+        "3940",
+        2026,
+        14301,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-172",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878548",
+        "259",
+        "247",
+        "3940",
+        2026,
+        14301,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-173",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401878547",
+        "249",
+        "422",
+        "3940",
+        2026,
+        14301,
+        "2026-10-10T22:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-177",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401883185",
+        "5404",
+        "11487",
+        "3921",
+        2026,
+        14356,
+        "2026-10-10T22:15:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-179",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401885426",
+        "21581",
+        "12215",
+        "715",
+        2026,
+        14361,
+        "2026-10-10T22:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-180",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401875590",
+        "3706",
+        "151",
+        "725",
+        2026,
+        14250,
+        "2026-10-10T22:30:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-182",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401881776",
+        "21846",
+        "2790",
+        "3907",
+        2026,
+        14351,
+        "2026-10-10T23:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-183",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401881774",
+        "18794",
+        "3759",
+        "3907",
+        2026,
+        14351,
+        "2026-10-10T23:00:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-187",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "sealed_at": "2026-10-10T01:32:14.183108+00:00",
+      "physical_identity": [
+        "401899604",
+        "120",
+        "3956",
+        "3931",
+        2026,
+        14422,
+        "2026-10-10T23:15:00+08:00"
+      ]
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-71",
+      "bundle": "outputs/l1_prospective/20261010T014631001193Z",
+      "manifest_sha256": "3f6c05791fd39d1c01913cea651eb6e7837dd274a7f376a136877798044f1502",
+      "sealed_at": "2026-10-10T01:46:31.407844+00:00",
+      "physical_identity": [
+        "401876953",
+        "232",
+        "223",
+        "760",
+        2026,
+        14277,
+        "2026-10-10T11:00:00+08:00"
+      ]
+    }
+  ],
+  "paired_n": 0,
+  "brier": null,
+  "production_gate_passed": false,
+  "parameter_selection_after_results": false
+}

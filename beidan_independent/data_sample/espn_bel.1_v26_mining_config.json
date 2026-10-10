@@ -1,0 +1,62 @@
+{
+  "league_slug": "bel.1",
+  "season_year": 2026,
+  "season_type": 14307,
+  "team_ids": [
+    "441",
+    "559",
+    "570",
+    "606",
+    "936",
+    "938",
+    "3610",
+    "3611",
+    "3616",
+    "4691",
+    "5579",
+    "5786",
+    "5807",
+    "7879",
+    "13450",
+    "17544",
+    "22269",
+    "131235"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_bel.1_mined_20261010_v26",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v26_native/bel.1",
+  "proposals": [
+    [
+      162,
+      "401878977",
+      "3610",
+      "441",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_bel.1_20261009.json",
+      "sha256": "4eab63899604326efa9b0db50b677f8a3ee399b4ec695249b36ec01f3d88d7f4"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_bel.1_20261010.json",
+      "sha256": "d82fcdf66b07e91b4bd7247715f5f9fc3753df66e13956c601d2ffcd84289d33"
+    }
+  ],
+  "additional_team_seed_receipt": {
+    "index": "data_sample/v26_additional_seed_scoreboards/HTTP_RECEIPTS.json",
+    "receipt": {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.920598+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:30.941736+00:00",
+      "bytes": 50556,
+      "sha256": "576334b0d182a3b9daf7381f4f15bcb30ba6a6d7b10270636dbfe7399f1aa46d",
+      "local_file": "scoreboard_bel.1_20261011.json",
+      "league_slug": "bel.1"
+    }
+  }
+}

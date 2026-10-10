@@ -199,7 +199,8 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
                      results: list[dict], evaluated_at: str,
                      min_history: int = 30, min_selection_matches: int = 30,
                      model_family: str = "l3_calibration", identity_mode: str = "canonical",
-                     allow_expired_blocked: bool = False) -> dict:
+                     allow_expired_blocked: bool = False,
+                     prospective_feedback: dict | None = None, feedback_root=None) -> dict:
     """Refit at each supplied cutoff; choose kappa from earlier settled folds.
 
     Only unhandicapped calibration is implemented here. Missing handicap stays
@@ -223,6 +224,13 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
     if allow_expired_blocked and (len(folds) != 1 or results or
                                  _datetime(folds[0].get('cutoff_at'), 'cutoff_at') != now):
         raise ValueError("过期阻断模式只接受本次时点、单期、无赛果前瞻池")
+    if prospective_feedback is not None:
+        if (not allow_expired_blocked or model_family != 'l1_team_strength' or
+                identity_mode != 'provider_native_espn' or min_selection_matches != 30):
+            raise ValueError('frozen feedback requires the current native L1 prospective pool and declared threshold')
+        from .prospective_feedback import verify_feedback
+        verify_feedback(prospective_feedback, cutoff_at=folds[0]['cutoff_at'],
+                        current_fixtures=folds[0]['fixtures'], root=feedback_root)
     hi = {r["match_id"]: r for r in history}
     ri = {r["match_id"]: r for r in results}
     if len(hi) != len(history) or len(ri) != len(results):
@@ -291,11 +299,17 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
                                         for r in eligible) / len(eligible) for k in grid}
             # Tie order favours exact identity; the grid is declared above.
             selected = min(grid, key=lambda k: losses[str(k)])
+        if prospective_feedback is not None:
+            selected = prospective_feedback['selected_parameter']
+            losses = prospective_feedback['past_only_brier']
         selections.append({"period": fold["period"], "cutoff_at": fold["cutoff_at"],
                            "selected_kappa": selected if model_family == "l3_calibration" else None,
                            "selected_ridge": selected if model_family == "l1_team_strength" else None,
-                           "selected_parameter": selected, "selection_n": len(eligible),
-                           "selection_ids": [r["match_id"] for r in eligible], "past_only_brier": losses})
+                           "selected_parameter": selected,
+                           "selection_n": prospective_feedback['selection_n'] if prospective_feedback is not None else len(eligible),
+                           "selection_ids": ([r['match_id'] for r in prospective_feedback['eligible_rows']]
+                                if prospective_feedback is not None else [r["match_id"] for r in eligible]),
+                           "past_only_brier": losses})
         ledger = []
         for row in fold["fixtures"]:
             record = {"period": fold["period"], "match_id": row["match_id"],
@@ -367,6 +381,7 @@ def run_walk_forward(*, history: list[dict], folds: list[dict],
             "executed_at": datetime.now(timezone.utc).isoformat(), "evaluated_at": evaluated_at,
             "model_family":model_family,"identity_mode":identity_mode,
             "allow_expired_blocked": allow_expired_blocked,
+            **({'selection_feedback': prospective_feedback} if prospective_feedback is not None else {}),
             "declared_candidates": list(grid), "selections": selections, "folds": reports,
             "offered_n": sum(r["offered_n"] for r in reports), "football_offered_n": football_n,
             "predicted_n": len(previous_predictions), "paired_n": len(pairs), "pending_ids": pending,

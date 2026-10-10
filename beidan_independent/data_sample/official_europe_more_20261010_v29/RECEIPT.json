@@ -1,0 +1,65 @@
+{
+  "receipts": [
+    {
+      "source": "finland_league",
+      "url": "https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/",
+      "start_utc": "2026-10-10T02:46:08.431789+00:00",
+      "http_status": 502,
+      "end_utc": "2026-10-10T02:46:13.559947+00:00",
+      "bytes": 185,
+      "sha256": "8c8725a026ebf6ffcefc29aa6727250f9e3c69d5264bbd1d9277497c93db4929",
+      "local_file": "finland_league.html"
+    },
+    {
+      "source": "denmark_league",
+      "url": "https://www.1-division.dk/",
+      "start_utc": "2026-10-10T02:46:08.432487+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:46:14.926294+00:00",
+      "bytes": 144586,
+      "sha256": "4fc7e11901bec097a461088ec0ae42bed8d95549fbe0570c997fafb6e3b3a7cd",
+      "local_file": "denmark_league.html"
+    },
+    {
+      "source": "poland_league",
+      "url": "https://ekstraklasa.org/terminarz/2026-2027/kolejka-1/",
+      "start_utc": "2026-10-10T02:46:08.433319+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:46:13.563032+00:00",
+      "bytes": 339043,
+      "sha256": "85dc85a4fe347a30a8e46e0dbc11259b4882cb8ad3fd68823c94341e8334fe7a",
+      "local_file": "poland_league.html"
+    },
+    {
+      "source": "belgium_league",
+      "url": "https://www.proleague.be/cpl-kalender",
+      "start_utc": "2026-10-10T02:46:08.436145+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:46:13.988840+00:00",
+      "bytes": 230679,
+      "sha256": "f5804c195a24e7274154abcda5a230afc36a904f665ec19f9b631f68aa5bf4a3",
+      "local_file": "belgium_league.html"
+    },
+    {
+      "source": "romania_league",
+      "url": "https://lpf.ro/etape-liga-1/12",
+      "start_utc": "2026-10-10T02:46:13.560236+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:46:17.428787+00:00",
+      "bytes": 42049,
+      "sha256": "2fd8ff3a29c8b27340d6b24b114bcb44a20ad7f4f9239a7cfc3179363afe97ef",
+      "local_file": "romania_league.html"
+    },
+    {
+      "source": "ireland_cup",
+      "url": "https://www.fai.ie/latest/fixtures-confirmed-club-orange-mens-fai-cup-semi-finals/",
+      "start_utc": "2026-10-10T02:46:13.563801+00:00",
+      "http_status": 403,
+      "end_utc": "2026-10-10T02:46:18.257853+00:00",
+      "bytes": 17,
+      "sha256": "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+      "local_file": "ireland_cup.html"
+    }
+  ],
+  "retries": 0
+}

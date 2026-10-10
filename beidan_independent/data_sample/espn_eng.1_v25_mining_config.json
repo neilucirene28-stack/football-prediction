@@ -1,0 +1,64 @@
+{
+  "league_slug": "eng.1",
+  "season_year": 2026,
+  "season_type": 14308,
+  "team_ids": [
+    "331",
+    "337",
+    "349",
+    "357",
+    "359",
+    "360",
+    "362",
+    "363",
+    "366",
+    "367",
+    "370",
+    "373"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_eng.1_mined_20261010_v25",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v25_native/eng.1",
+  "proposals": [
+    [
+      94,
+      "401879268",
+      "359",
+      "357",
+      "20261010"
+    ],
+    [
+      128,
+      "401878776",
+      "362",
+      "337",
+      "20261010"
+    ],
+    [
+      129,
+      "401878775",
+      "363",
+      "349",
+      "20261010"
+    ],
+    [
+      130,
+      "401879265",
+      "373",
+      "370",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_eng.1_20261009.json",
+      "sha256": "57e18c687bf21abd795e68e9cdcd961cbeba98d5c583cc5a81e60abbeb8f544a"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_eng.1_20261010.json",
+      "sha256": "af4c872ce7ae8913b8d2a9637125d4ab1c5599fc1233b36fde8472074007baec"
+    }
+  ]
+}

@@ -15,12 +15,14 @@ def resolve_bundle(name, root):
     path = Path(name)
     if not path.is_absolute():
         return Path(root) / path
+    marker = '/beidan_independent/'
+    if marker in name:
+        # An explicit checkout root must win even when the old checkout still
+        # exists, otherwise transfer verification can silently read outside it.
+        return Path(root) / name.split(marker, 1)[1]
     if path.exists():
         return path
-    marker = '/beidan_independent/'
-    if marker not in name:
-        raise ValueError('cannot relocate frozen bundle path')
-    return Path(root) / name.split(marker, 1)[1]
+    raise ValueError('cannot relocate frozen bundle path')
 
 
 def settle_unique(registry_path, *, registry_sha256, results, evaluated_at, root=None):

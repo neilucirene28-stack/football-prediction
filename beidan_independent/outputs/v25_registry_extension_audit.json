@@ -1,0 +1,18 @@
+{
+  "registry_sha256": "61fa65eec8271943847e63da3988184c2c9b17389c4940912b446449cba6a7c9",
+  "previous_registry_sha256": "3b45be0123dfa0156dc48ae24907b6aaa594e2030dac60f3591f3c64b14176b3",
+  "old_earliest_owners_preserved_n": 66,
+  "new_unique_predictions_n": 7,
+  "new_match_ids": [
+    "26103-94",
+    "26103-103",
+    "26103-128",
+    "26103-129",
+    "26103-130",
+    "26103-176",
+    "26103-186"
+  ],
+  "unique_predictions_n": 73,
+  "later_duplicate_predictions_excluded_n": 209,
+  "original_sealed_probabilities_changed": false
+}

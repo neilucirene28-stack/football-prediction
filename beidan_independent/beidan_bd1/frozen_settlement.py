@@ -69,7 +69,15 @@ def _check_forecast(value, fixture, cutoff, generated):
     return value
 
 
-def _validate_archive(history, folds, report, *, allow_expired_blocked=False):
+def _bundle_root(bundle):
+    text = str(Path(bundle).resolve())
+    marker = '/beidan_independent/'
+    if marker in text:
+        return Path(text.split(marker, 1)[0]) / 'beidan_independent'
+    return Path(__file__).resolve().parents[1]
+
+
+def _validate_archive(history, folds, report, *, allow_expired_blocked=False, feedback_root=None):
     freeze = report.get("prospective_freeze")
     if (not isinstance(freeze, dict) or report.get("paired_n") != 0
             or report.get("brier_baseline") is not None or report.get("brier_candidate") is not None
@@ -90,6 +98,23 @@ def _validate_archive(history, folds, report, *, allow_expired_blocked=False):
     grid = report.get("declared_candidates")
     if not isinstance(grid, list) or not grid or grid[0] is not None:
         raise ValueError("冻结候选列表必须包含None基线")
+    feedback = report.get('selection_feedback')
+    if feedback is not None:
+        if (len(folds) != 1 or report.get('allow_expired_blocked') is not True or
+                report.get('model_family') != 'l1_team_strength' or
+                report.get('identity_mode') != 'provider_native_espn'):
+            raise ValueError('frozen feedback is only valid for a current native prospective pool')
+        from .prospective_feedback import verify_feedback
+        verify_feedback(feedback, cutoff_at=folds[0]['cutoff_at'],
+                        current_fixtures=folds[0]['fixtures'], root=feedback_root)
+        expected = {'period': folds[0]['period'], 'cutoff_at': folds[0]['cutoff_at'],
+                    'selected_kappa': None, 'selected_ridge': feedback['selected_parameter'],
+                    'selected_parameter': feedback['selected_parameter'],
+                    'selection_n': feedback['selection_n'],
+                    'selection_ids': [r['match_id'] for r in feedback['eligible_rows']],
+                    'past_only_brier': feedback['past_only_brier']}
+        if report.get('selections') != [expected] or grid != feedback['declared_candidates']:
+            raise ValueError('frozen selection differs from authenticated feedback')
     for fold, ledger in zip(folds, report["folds"]):
         cutoff = _datetime(fold.get("cutoff_at"), "cutoff_at")
         if cutoff > generated or (previous is not None and cutoff <= previous):
@@ -103,6 +128,9 @@ def _validate_archive(history, folds, report, *, allow_expired_blocked=False):
             raise ValueError("冻结完整池与账本不一致")
         available = {row["match_id"] for row in _history(history, cutoff)}
         for fixture, saved in zip(fixtures, matches):
+            if feedback is not None and any(saved.get(k) != expected[k] for k in
+                    ('selected_kappa', 'selected_ridge', 'selected_parameter')):
+                raise ValueError('frozen row selection differs from feedback decision')
             identity = fixture["match_id"]
             ko = _datetime(fixture["kickoff_at"], "kickoff_at")
             if (identity in pool or not isinstance(identity, str) or not identity
@@ -157,7 +185,8 @@ def _validate_archive(history, folds, report, *, allow_expired_blocked=False):
 def seal_bundle(bundle):
     """Add an exclusive digest manifest using the actual current clock."""
     raw, history, folds, report = _archive(bundle)
-    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=True)
+    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=True,
+                                                    feedback_root=_bundle_root(bundle))
     sealed = _utc_now()
     if sealed < generated or any(sealed >= _datetime(pool[mid]["kickoff_at"], "kickoff_at") for mid in predictions):
         raise ValueError("每条实际预测必须在开球前封存；不能补造旧赛前封存时间")
@@ -188,7 +217,8 @@ def load_bundle(bundle, *, manifest_sha256, evaluated_at):
         if manifest["files"][name] != {"sha256": _digest(content), "size_bytes": len(content)}:
             raise ValueError("冻结文件字节改变: " + name)
     modern = manifest["schema"] == SCHEMA
-    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=modern)
+    pool, predictions, generated = _validate_archive(history, folds, report, allow_expired_blocked=modern,
+                                                    feedback_root=_bundle_root(bundle))
     sealed = _datetime(manifest.get("sealed_at"), "sealed_at")
     now = _datetime(evaluated_at, "evaluated_at")
     if (not generated <= sealed <= now

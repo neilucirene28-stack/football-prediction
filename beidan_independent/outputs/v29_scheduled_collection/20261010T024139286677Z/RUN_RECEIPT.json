@@ -1,0 +1,16 @@
+{
+  "completed_at": "2026-10-10T02:42:47.846323+00:00",
+  "config_sha256": "32397bec1cfc49b988ff682be23ce7941a860918f80bc9146e4707369eb48e81",
+  "requested_groups_n": 0,
+  "access_denied_match_ids": [],
+  "offered_n": 179,
+  "predicted_n": 95,
+  "paired_n": 19,
+  "duplicate_n": 0,
+  "pending_n": 76,
+  "due_for_poll_n": 0,
+  "next_poll_not_before": "2026-10-10T04:45:00+00:00",
+  "brier": 0.20622960801176707,
+  "production_gate_passed": false,
+  "refitted": false
+}

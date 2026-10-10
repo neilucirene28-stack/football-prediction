@@ -7,9 +7,12 @@ from pathlib import Path
 
 def read_artifact(path):
     path = Path(path)
-    if path.exists():
+    index_path = Path(str(path) + '.parts.json')
+    # A verified parts index defines the retained original. Temporary direct
+    # copies must not shadow it, nor hide missing or corrupt archive parts.
+    if path.exists() and not index_path.exists():
         return path.read_bytes()
-    index = json.loads(Path(str(path) + '.parts.json').read_bytes())
+    index = json.loads(index_path.read_bytes())
     if index.get('schema') != 'bd1-lossless-parts-1' or index.get('encoding') not in ('identity', 'gzip'):
         raise ValueError('unsupported lossless artifact format')
     parts = index.get('parts')

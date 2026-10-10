@@ -10,9 +10,10 @@ def read_response(folder, filename):
     if not isinstance(filename, str) or Path(filename).name != filename:
         raise ValueError('response filename must be a plain archive member name')
     path = folder / filename
-    if path.exists():
+    archive_path = folder / 'original_responses.tar.gz'
+    if path.exists() and not Path(str(archive_path) + '.parts.json').exists():
         return path.read_bytes()
-    packed = read_artifact(folder / 'original_responses.tar.gz')
+    packed = read_artifact(archive_path)
     with tarfile.open(fileobj=io.BytesIO(packed), mode='r:gz') as archive:
         members = [m for m in archive.getmembers() if m.name == filename]
         if len(members) != 1 or not members[0].isfile():

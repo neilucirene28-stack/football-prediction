@@ -32,6 +32,19 @@ class ArtifactIOTests(unittest.TestCase):
             next(Path(str(path) + '.parts').glob('*.bin')).unlink()
             with self.assertRaises(FileNotFoundError): read_artifact(path)
 
+    def test_stale_direct_copy_cannot_shadow_verified_original(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path, raw = self.packed(tmp, True)
+            path.write_bytes(b'incomplete restored intermediate')
+            self.assertEqual(read_artifact(path), raw)
+
+    def test_direct_copy_cannot_hide_corrupted_archive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path, raw = self.packed(tmp)
+            path.write_bytes(raw)
+            next(Path(str(path) + '.parts').glob('*.bin')).write_bytes(b'tampered')
+            with self.assertRaises(ValueError): read_artifact(path)
+
     def test_changed_part_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             path, _ = self.packed(tmp)
