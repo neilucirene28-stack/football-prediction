@@ -2,6 +2,14 @@
 
 一套完整重写的足球比赛量化预测项目。Python 单语言，引擎完整实现，开箱即跑。
 
+## 竞彩 v2.12 独立迭代
+
+API 与批处理统一入口和校准策略，完整预测支持不可变本地留档；复盘与看板保留同场同版本最早合格记录，不替换等待赛果的最早预测，不合并不同版本的评分。
+详见 [`docs/jingcai-v212-prospective-workflow.md`](docs/jingcai-v212-prospective-workflow.md)。
+
+此前十二场复盘与224场历史校准研究见 [`docs/jingcai-v211-review-and-flow-audit.md`](docs/jingcai-v211-review-and-flow-audit.md)。研究候选未启用；新流程不代表准确率提升。
+相关测试374项通过、1项跳过；真实数据库与来源时间留证仍需环境验收。独立分支 `codex/jingcai-v211-model-review`，基于 `v2`。
+
 ## 架构一览
 
 ```

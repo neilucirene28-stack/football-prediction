@@ -37,8 +37,16 @@ def _top_n(prob_dict: dict, n: int = 3) -> list[tuple[str, float]]:
 
 def format_1x2(pred: dict) -> str:
     """①胜平负。"""
-    return (f"胜平负：胜({pred['p_home']:.3f})/平({pred['p_draw']:.3f})"
+    text = (f"胜平负：胜({pred['p_home']:.3f})/平({pred['p_draw']:.3f})"
             f"/负({pred['p_away']:.3f})")
+    summary = pred.get('derivatives', {}).get('wdl_summary')
+    if summary:
+        labels = {'home': '主胜', 'draw': '平局', 'away': '客胜'}
+        text += (f"；平局排序{summary['draw_rank']}/3，"
+                 f"次选{labels[summary['runner_up']]}({summary['runner_up_probability']:.3f})")
+        draw_score = pred['derivatives']['score_summary']['best_draw_score']
+        text += f"；平局比分参考{draw_score['score']}({draw_score['prob']:.3f})"
+    return text
 
 
 def format_handicap_1x2(pred: dict) -> str:
@@ -59,7 +67,12 @@ def format_top_scores(pred: dict, n: int = 5) -> str:
     for idx, s in enumerate(scores):
         label = f"**{s['score']}**" if idx == 0 else s["score"]
         parts.append(f"{label}({s['prob']:.3f})")
-    return "比分：" + "、".join(parts)
+    text = "比分：" + "、".join(parts)
+    summary = pred["derivatives"].get("score_summary")
+    if summary and n == 5 and len(scores) == 5:
+        text += (f"；合计覆盖{summary['top5_probability']:.1%}，"
+                 f"其他比分{summary['outside_top5_probability']:.1%}")
+    return text
 
 
 def format_goal_intervals(pred: dict) -> str:

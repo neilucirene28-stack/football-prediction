@@ -23,7 +23,7 @@ def sample_payload(**kw):
     p = {
         "home": "土耳其", "away": "意大利", "competition": "欧国联",
         "kickoff_at": _future_ts(days=2),
-        "snapshot_at": _future_ts(days=1),
+        "snapshot_at": _future_ts(hours=-1),
         "league_avg_goals": 2.70,
         "home_recent": _mk(2, 1, "H"),
         "away_recent": _mk(1, 1, "A"),
@@ -38,7 +38,7 @@ def sample_payload(**kw):
 def test_model_version_deterministic():
     cfg = {"rho": -0.13, "decay": 0.9}
     assert model_version(cfg) == model_version(cfg)
-    assert model_version(cfg).startswith("v2.10+")
+    assert model_version(cfg).startswith("v2.12+")
 
 
 def test_model_version_changes_with_params():
@@ -50,18 +50,19 @@ def test_model_version_changes_with_params():
 def test_predict_result_carries_model_version():
     r = predict(sample_payload())
     assert r["status"] == "ok"
-    assert r["model_version"].startswith("v2.10+")
+    assert r["model_version"].startswith("v2.12+")
     # 同一 payload 同一版本
     assert predict(sample_payload())["model_version"] == r["model_version"]
 
 
 def test_build_prediction_row_fields():
-    p, r = sample_payload(), predict(sample_payload())
+    p = sample_payload()
+    r = predict(p)
     row = build_prediction_row(42, p, r, deterministic_day=date(2026, 9, 30))
     assert row["match_id"] == 42
     assert row["model_version"] == r["model_version"]
     assert row["league"] == "欧国联"
-    assert row["p_home"] == r["p_home"]
+    assert row["p_home"] == r["p_final_full"][0]
     assert abs(r["p_home"] + r["p_draw"] + r["p_away"] - 1.0) < 5e-4
     import json
     assert json.loads(row["signals"])["model"] == r["signals"]["model"]
@@ -76,7 +77,8 @@ def test_build_prediction_row_fields():
 
 
 def test_build_prediction_row_random_without_day():
-    p, r = sample_payload(), predict(sample_payload())
+    p = sample_payload()
+    r = predict(p)
     a = build_prediction_row(1, p, r)["prediction_id"]
     b = build_prediction_row(1, p, r)["prediction_id"]
     assert a != b
@@ -92,7 +94,8 @@ def _mock_conn(fetchone_result=None):
 
 
 def test_save_prediction_idempotent_sql():
-    p, r = sample_payload(), predict(sample_payload())
+    p = sample_payload()
+    r = predict(p)
     conn, cur = _mock_conn()
     pid = save_prediction(conn, 7, p, r, deterministic_day=date(2026, 9, 30))
     sql = cur.execute.call_args[0][0]

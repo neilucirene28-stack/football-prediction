@@ -22,7 +22,7 @@ def sample_payload(**kw):
     p = {
         "home": "土耳其", "away": "意大利", "competition": "欧国联",
         "kickoff_at": _future_ts(days=2),
-        "snapshot_at": _future_ts(days=1),
+        "snapshot_at": _future_ts(hours=-1),
         "league_avg_goals": 2.70,
         "home_recent": _mk(2, 1, "H"),
         "away_recent": _mk(1, 1, "A"),

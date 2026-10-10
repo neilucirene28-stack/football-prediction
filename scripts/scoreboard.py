@@ -10,8 +10,11 @@ import math
 import os
 import sys
 from datetime import datetime, timezone
+from pathlib import Path
 
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from engine.backtest import calibration_by_class
+from engine.jingcai_evaluation import select_earliest
 from engine.adaptive_weights import shadow_weights  # noqa: E402
 
 try:
@@ -36,14 +39,18 @@ def score_one(pred: dict, st: dict) -> dict:
     """单场评分。pred: predictions 行（含 JSON 字段已解析），st: settlements 行。"""
     hg, ag = st["home_goals"], st["away_goals"]
     outcome = _outcome(hg, ag)
-    probs = [pred["p_home"], pred["p_draw"], pred["p_away"]]
+    probs = pred.get("p_final_full") or [pred["p_home"], pred["p_draw"], pred["p_away"]]
     brier, logloss = _brier_logloss(probs, outcome)
     m = {
         "outcome": outcome,
-        "brier": round(brier, 4),
-        "logloss": round(logloss, 4),
+        "brier": brier,
+        "logloss": logloss,
         "direction_hit": int(max(range(3), key=lambda i: probs[i]) == outcome),
     }
+    m["draw_brier"] = (probs[1] - int(outcome == 1)) ** 2
+    m["draw_probability"] = probs[1]
+    m["draw_actual"] = int(outcome == 1)
+    m["wdl_probs"] = list(probs)
     # 每个信号各自的损失（Hedge 学习输入）
     for name, sp in (pred.get("signals") or {}).items():
         if isinstance(sp, (list, tuple)) and len(sp) == 3:
@@ -53,19 +60,26 @@ def score_one(pred: dict, st: dict) -> dict:
     # 让球胜平负
     h = (pred.get("derivatives") or {}).get("handicap_1x2") or {}
     if h.get("line") is not None:
-        hp = [h["p_home"], h["p_draw"], h["p_away"]]
-        diff = (hg - ag) - int(h["line"])
+        hp = [h.get(k+"_full", h[k]) for k in ("p_home", "p_draw", "p_away")]
+        diff = (hg - ag) + int(h["line"])
         h_out = 0 if diff > 0 else (1 if diff == 0 else 2)
         hb, hll = _brier_logloss(hp, h_out)
         m["handicap_hit"] = int(max(range(3), key=lambda i: hp[i]) == h_out)
         m["handicap_brier"] = round(hb, 4)
         m["handicap_logloss"] = round(hll, 4)
-    # 比分 Top3
-    top3 = ((pred.get("derivatives") or {}).get("top_scores") or [])[:3]
-    m["top3_hit"] = int(f"{hg}-{ag}" in [t.get("score") for t in top3])
+    # Missing archived scores are unknown, not misses; each metric has its own denominator.
+    scores = (pred.get("derivatives") or {}).get("top_scores") or []
+    for n in (1, 3, 5):
+        if len(scores) >= n:
+            m[f"top{n}_hit"] = int(f"{hg}-{ag}" in [t.get("score") for t in scores[:n]])
+    summary = (pred.get("derivatives") or {}).get("score_summary") or {}
+    if "top5_probability" in summary and len(scores) >= 5:
+        m["top5_probability"] = summary["top5_probability"]
+        m["top5_coverage_error"] = summary["top5_probability"] - m["top5_hit"]
     # 进球误差
     exp_g = (pred.get("derivatives") or {}).get("expected_goals")
     if exp_g is not None:
+        m["goals_bias"] = float(exp_g) - (hg + ag)
         m["goals_err"] = round(abs(float(exp_g) - (hg + ag)), 2)
     return m
 
@@ -75,7 +89,9 @@ def aggregate(scored: list[dict]) -> dict:
     if not n:
         return {"n": 0}
     out = {"n": n}
-    for key in ["brier", "logloss", "direction_hit", "top3_hit",
+    for key in ["brier", "logloss", "direction_hit", "top1_hit", "top3_hit", "top5_hit",
+                "top5_probability", "top5_coverage_error",
+                "draw_brier", "draw_probability", "draw_actual", "goals_bias",
                 "handicap_hit", "handicap_brier", "handicap_logloss",
                 "goals_err",
                 "brier_model", "logloss_model",
@@ -91,31 +107,35 @@ def aggregate(scored: list[dict]) -> dict:
 def _load_rows(conn, days: int) -> list[dict]:
     with conn.cursor(row_factory=dict_row) as cur:
         cur.execute(
-            """SELECT p.prediction_id, p.model_version, p.league,
-                      p.kickoff_at, p.p_home, p.p_draw, p.p_away,
-                      p.signals, p.derivatives,
-                      s.home_goals, s.away_goals
+            """SELECT p.prediction_id,p.match_id,p.model_version,p.league,
+                      p.kickoff_at,p.predicted_at,p.p_home,p.p_draw,p.p_away,
+                      p.signals,p.derivatives,p.payload,
+                      s.home_goals,s.away_goals,s.settled_at
                FROM predictions p
-               JOIN settlements s ON s.prediction_id = p.prediction_id
-               WHERE p.kickoff_at > now() - (%s || ' days')::interval
-               ORDER BY p.kickoff_at""",
-            (str(days),))
-        rows = []
-        for r in cur.fetchall():
-            rows.append({
-                "pred": {
-                    "p_home": r["p_home"], "p_draw": r["p_draw"],
-                    "p_away": r["p_away"],
-                    "signals": r["signals"] or {},
-                    "derivatives": r["derivatives"] or {},
-                },
-                "st": {"home_goals": r["home_goals"],
-                       "away_goals": r["away_goals"]},
-                "league": r["league"] or "未知",
-                "model_version": r["model_version"],
-                "kickoff_at": r["kickoff_at"],
-            })
-        return rows
+               LEFT JOIN settlements s ON s.prediction_id=p.prediction_id
+               WHERE p.kickoff_at > now()-(%s || ' days')::interval
+               ORDER BY p.kickoff_at,p.predicted_at,p.prediction_id""",(str(days),))
+        return cur.fetchall()
+
+
+def build_scoreboard(rows, days=30):
+    selected,audit=select_earliest(rows)
+    scored=[]
+    for r in selected:
+        if r.get("home_goals") is None:continue
+        pred={"p_home":r["p_home"],"p_draw":r["p_draw"],"p_away":r["p_away"],
+              "p_final_full":r["payload"]["result"]["p_final_full"],
+              "signals":r.get("signals") or {},"derivatives":r.get("derivatives") or {}}
+        s=score_one(pred,r);s.update(league=r.get("league") or "未知",model_version=r["model_version"],kickoff_at=r["kickoff_at"])
+        scored.append(s)
+    by_version={}
+    for version in sorted({r['model_version'] for r in selected}):
+        group=[s for s in scored if s['model_version']==version]
+        by_version[version]={"overall":aggregate(group),"shadow_weights":shadow_weights(group),
+            "calibration":calibration_by_class([(tuple(s['wdl_probs']),s['outcome']) for s in group]),
+            "by_league":{lg:aggregate([s for s in group if s['league']==lg]) for lg in sorted({s['league'] for s in group})}}
+    return {"generated_at":datetime.now(timezone.utc).isoformat(),"days":days,"audit":audit,"by_version":by_version,
+            "note":"同场同版本保留最早合格预测；不同版本的评分和影子权重分别统计；来源可用时间未经独立核验。"}
 
 
 def main() -> int:
@@ -135,23 +155,7 @@ def main() -> int:
         rows = _load_rows(conn, days)
     finally:
         conn.close()
-    scored = []
-    for r in rows:
-        s = score_one(r["pred"], r["st"])
-        s["league"], s["model_version"] = r["league"], r["model_version"]
-        s["kickoff_at"] = r["kickoff_at"]
-        scored.append(s)
-    shadow = shadow_weights(scored)
-    report = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "days": days,
-        "overall": aggregate(scored),
-        "shadow_weights": shadow,  # 影子模式：只看不切换
-        "by_league": {lg: aggregate([s for s in scored if s["league"] == lg])
-                      for lg in sorted({s["league"] for s in scored})},
-        "by_version": {v: aggregate([s for s in scored if s["model_version"] == v])
-                      for v in sorted({s["model_version"] for s in scored})},
-    }
+    report = build_scoreboard(rows, days)
     print(json.dumps(report, ensure_ascii=False, indent=1))
     if want_md:
         path = os.path.expanduser(
@@ -164,52 +168,18 @@ def main() -> int:
 
 
 def _render_md(rep: dict) -> str:
-    o = rep["overall"]
-    lines = [f"# 模型评分看板（近 {rep['days']} 天）",
-             f"生成时间：{rep['generated_at']}", "",
-             f"已结算场次：{o.get('n', 0)}", ""]
-    if o.get("n"):
-        lines += [
-            f"- 方向命中：{o.get('direction_hit', 0):.1%}（n={o.get('direction_hit_n', 0)}）",
-            f"- Brier：{o.get('brier')} / LogLoss：{o.get('logloss')}",
-            f"- 比分 Top3 命中：{o.get('top3_hit', 0):.1%}",
-            f"- 让球胜平负命中：{o.get('handicap_hit', 0):.1%}（n={o.get('handicap_hit_n', 0)}）",
-            f"- 进球期望平均误差：{o.get('goals_err', '-')} 球", "",
-            "## 分信号 Brier（Hedge 学习输入）", ""]
-        for sig in ["model", "market", "elo"]:
-            b, n = o.get(f"brier_{sig}"), o.get(f"brier_{sig}_n", 0)
-            if b is not None:
-                lines.append(f"- {sig}：Brier {b}（n={n}）")
-        sh = rep.get("shadow_weights") or {}
-        lines += ["", "## Hedge 影子权重（只看不切换）", ""]
-        if sh.get("weights"):
-            w = sh["weights"]
-            lines.append(
-                f"- 自适应权重：model {w.get('model', 0):.3f} / "
-                f"market {w.get('market', 0):.3f} / elo {w.get('elo', 0):.3f} "
-                f"（n_eff={sh.get('n_eff')}）")
-            lines.append("- 影子模式运行 2–4 周、持续优于静态权重后才考虑切换。")
-        else:
-            lines.append(
-                f"- 样本不足（n_eff={sh.get('n_eff', 0)}<15），权重未激活，"
-                "继续用静态权重。")
-        lines += ["", "## 分联赛", ""]
-        for lg, a in rep["by_league"].items():
-            if a.get("n"):
-                lines.append(
-                    f"- {lg}：n={a['n']}，方向 {a.get('direction_hit', 0):.1%}，"
-                    f"Brier {a.get('brier')}")
-        lines += ["", "## 分模型版本", ""]
-        for v, a in rep["by_version"].items():
-            if a.get("n"):
-                lines.append(
-                    f"- {v}：n={a['n']}，方向 {a.get('direction_hit', 0):.1%}，"
-                    f"Brier {a.get('brier')}")
-        lines += ["", "> 只看不调：样本 <100 场不碰任何参数。",
-                  "> 结构参数（rho/decay/级别修正）永不在线漂移。"]
-    else:
-        lines.append("暂无已结算样本。")
-    return "\n".join(lines) + "\n"
+    audit=rep['audit']
+    lines=[f"# 竞彩模型评分看板（近 {rep['days']} 天）",f"生成时间：{rep['generated_at']}","",
+           f"排除记录：{audit['excluded_rows']}；排除后续重复预测：{audit['later_duplicate_predictions']}；等待最早记录赛果：{audit['pending_selected_predictions']}","",
+           "|模型版本|已结算|方向命中|Brier|LogLoss|平局预测/实际|Top5有效场次|",
+           "|---|---:|---:|---:|---:|---|---:|"]
+    for v,entry in rep['by_version'].items():
+        o=entry['overall']
+        if not o['n']:
+            lines.append(f"|{v}|0|—|—|—|—|0|");continue
+        lines.append(f"|{v}|{o['n']}|{o['direction_hit']:.1%}|{o['brier']}|{o['logloss']}|{o['draw_probability']:.1%}/{o['draw_actual']:.1%}|{o.get('top5_hit_n',0)}|")
+    lines += ["",rep['note'],"","来源时间未经独立核验，这份看板不等同于正式前瞻验收。影子权重保留在JSON中，未用于生产参数。"]
+    return "\n".join(lines)+"\n"
 
 
 if __name__ == "__main__":

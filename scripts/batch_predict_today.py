@@ -5,25 +5,21 @@
 不使用任何主观伤停系数。已开赛的比赛引擎会自动拒绝。
 """
 import sys, json, time, os
-from datetime import date
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from collector.collector.sources.titan007 import Titan007Source
-from engine.predictor import predict
-from engine.poisson import handicap_1x2, score_matrix
+from engine.jingcai_runtime import predict_jingcai
+from engine.jingcai_archive import archive_prediction
 from api.api.persist import save_prediction
 
 try:
     import psycopg
 except ImportError:
     psycopg = None
-
-# form-only 校准参数（无市场信号时启用；有市场时不用，避免过度收缩）
-try:
-    _cal = json.load(open("/home/hatch/workspace/football-prediction-v2/engine/calibration.json"))
-    _PLATT_FORM_ONLY = {k: tuple(v) for k, v in _cal["form_only"].items()}
-except Exception:
-    _PLATT_FORM_ONLY = None
 
 def _db_conn():
     """best-effort：无 DB 时返回 None，预测照常输出到 /tmp。"""
@@ -57,7 +53,7 @@ def main():
         matches = json.load(f)
     print(f"matches to predict: {len(matches)}", flush=True)
     conn = _db_conn()
-    today = date.today()
+    today = datetime.now(ZoneInfo("Asia/Shanghai")).date()
     if conn:
         print("DB persistence enabled (self-learning loop)", flush=True)
     src = Titan007Source(request_delay=0.5)
@@ -70,12 +66,14 @@ def main():
             if not m:
                 print(f"[{i}] {mid} build failed", flush=True); continue
             p = dict(m); p["home"] = m["home_team"]; p["away"] = m["away_team"]
-            # 无市场信号时启用 form-only Platt 校准
-            cfg = {"platt": _PLATT_FORM_ONLY} if (
-                _PLATT_FORM_ONLY and not p.get("odds")) else None
-            res = predict(p, cfg)
+            res = predict_jingcai(p)
             if res.get("status") == "insufficient_data":
                 print(f"[{i}] {m['home_team']} vs {m['away_team']} 数据不足", flush=True); continue
+            try:
+                res["archive"] = archive_prediction(p, res)
+            except Exception as exc:
+                res["archive"] = {"status": "failed", "note": "本地预测留档失败"}
+                print(f"[{i}] archive ERROR {type(exc).__name__}", flush=True)
             # 自学习回路：持久化完整预测记录（含 input 快照 + model_version），幂等
             if conn:
                 try:
@@ -84,17 +82,11 @@ def main():
                     save_prediction(conn, mid, payload=p, result=res,
                                     deterministic_day=today)
                 except Exception as e:
+                    conn.rollback()
                     print(f"[{i}] persist ERROR {type(e).__name__}: {e}", flush=True)
             d = res["derivatives"]
-            # 让球胜平负：按整数让球线算（取市场亚盘就近整数）
-            h1x2 = None
-            ah = (res.get("derivatives", {}).get("asian") or {}).get("handicap")
-            if ah is not None:
-                line = int(round(ah))
-                mx = score_matrix(res["lambda_home"], res["lambda_away"])
-                h, dr, a = handicap_1x2(mx, line)
-                h1x2 = {"line": line, "p_home": round(h, 4),
-                        "p_draw": round(dr, 4), "p_away": round(a, 4)}
+            # Only the supplied official integer line may produce a Jingcai handicap.
+            h1x2 = d.get("handicap_1x2")
             out = {
                 "kickoff": m["kickoff_at"], "competition": m["competition"],
                 "home": m["home_team"], "away": m["away_team"],
@@ -113,7 +105,10 @@ def main():
                 "main_goal_interval": d["main_goal_interval"],
                 "total_goals": d["total_goals"],
                 "btts": d["btts"],
-                "issues": res.get("issues"),
+                "issues": res.get("consistency_issues"),
+                "payload": p, "result": res,
+                "model_version": res["model_version"],
+                "prediction_timing": res["prediction_timing"],
             }
             results.append(out)
             print(f"[{i}] {m['kickoff_at'][11:16]} {m['home_team']} vs {m['away_team']} "
@@ -128,4 +123,5 @@ def main():
         conn.close()
     print(f"DONE: {len(results)} predictions -> /tmp/today_predictions.json", flush=True)
 
-main()
+if __name__ == "__main__":
+    main()

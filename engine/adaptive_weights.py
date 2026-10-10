@@ -45,7 +45,6 @@ def accumulate(records: list[dict], now: datetime | None = None,
     now = now or datetime.now(timezone.utc)
     losses: dict[str, float] = {}
     n_eff = 0.0
-    seen_times = set()
     for rec in records:
         at = rec.get("at")
         if at is None:
@@ -54,10 +53,8 @@ def accumulate(records: list[dict], now: datetime | None = None,
             at = at.replace(tzinfo=timezone.utc)
         age_days = max((now - at).total_seconds() / 86400.0, 0.0)
         d = _decay(age_days, half_life)
-        key = at.isoformat()
-        if key not in seen_times:
-            seen_times.add(key)
-            n_eff += d
+        # Each row is a match: fixtures sharing kickoff still count separately.
+        n_eff += d
         for sig, ll in rec.items():
             if sig == "at" or not isinstance(ll, (int, float)):
                 continue
@@ -79,7 +76,11 @@ def shadow_weights(scored: list[dict], now: datetime | None = None):
                 rec[sig] = ll
         if len(rec) > 1:
             records.append(rec)
-    losses, n_eff = accumulate(records, now)
-    return {"weights": hedge_weights(losses, n_eff),
+    common = set.intersection(*(set(r) - {"at"} for r in records)) if records else set()
+    paired_records = [{"at": r["at"], **{s: r[s] for s in common}} for r in records]
+    losses, n_eff = accumulate(paired_records, now)
+    return {"weights": hedge_weights(losses, n_eff) if len(common) >= 2 else None,
             "n_eff": round(n_eff, 2),
+            "comparison_signals": sorted(common),
+            "excluded_signals": sorted(set.union(*(set(r)-{"at"} for r in records))-common) if records else [],
             "losses": {k: round(v, 4) for k, v in losses.items()}}

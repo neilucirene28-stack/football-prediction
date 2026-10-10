@@ -1,4 +1,6 @@
 """B深修单测：IPF 校准层与比分矩阵统一为自洽分布。"""
+from datetime import datetime, timedelta, timezone
+
 import pytest
 
 from engine.poisson import (score_matrix, match_probs, ipf_to_marginals,
@@ -71,8 +73,8 @@ class TestIPF:
 def _payload(**kw):
     base = {
         "home": "主队A", "away": "客队B",
-        "kickoff_at": "2030-06-01T20:00:00+08:00",
-        "snapshot_at": "2030-06-01T10:00:00+08:00",
+        "kickoff_at": (datetime.now(timezone.utc) + timedelta(days=2)).isoformat(),
+        "snapshot_at": (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat(),
         "competition": "测试联赛",
         "home_recent": [{"gf": 2, "ga": 1, "venue": "H"}] * 8,
         "away_recent": [{"gf": 1, "ga": 1, "venue": "A"}] * 8,

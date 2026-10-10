@@ -8,7 +8,8 @@
 """
 import json
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
+import math
 
 PRED_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "football-prediction-v2")
 
@@ -26,6 +27,29 @@ _PREDICTION_COLS = (
 def build_prediction_row(match_id: int, payload: dict, result: dict,
                          deterministic_day: date | None = None) -> dict:
     """拼装 predictions 行。result 必须是 predict() 的 ok 结果。"""
+    if result.get("status") != "ok":
+        raise ValueError("only successful predictions can be persisted")
+    timing = result.get("prediction_timing") or {}
+    if timing.get("mode") == "historical_replay":
+        raise ValueError("historical replay cannot be stored as a prospective prediction")
+    if timing.get("mode") != "prospective" or not timing.get("generated_at"):
+        raise ValueError("prospective generation timestamp is required")
+    written_at = datetime.now(timezone.utc)
+    generated_at = datetime.fromisoformat(timing["generated_at"])
+    kickoff = datetime.fromisoformat(payload["kickoff_at"])
+    snapshot = datetime.fromisoformat(payload["snapshot_at"])
+    if any(t.tzinfo is None for t in (generated_at, kickoff, snapshot)):
+        raise ValueError("prediction times must carry timezones")
+    if not snapshot <= generated_at <= written_at < kickoff:
+        raise ValueError("prediction must be generated and stored before kickoff, after its snapshot")
+    probs = result.get("p_final_full")
+    if probs is None:
+        probs = [result["p_home"], result["p_draw"], result["p_away"]]
+    if len(probs) != 3 or any(not math.isfinite(p) or not 0 <= p <= 1 for p in probs) or abs(sum(probs)-1) > 5e-4:
+        raise ValueError("invalid WDL probabilities")
+    match = result.get("match") or {}
+    if any(match.get(k) != payload.get(k) for k in ("home", "away", "kickoff_at")):
+        raise ValueError("prediction result does not match its input fixture")
     version = result.get("model_version", "unknown")
     if deterministic_day is not None:
         prediction_id = uuid.uuid5(
@@ -39,10 +63,10 @@ def build_prediction_row(match_id: int, payload: dict, result: dict,
         "model_version": version,
         "league": payload.get("competition", "") or "",
         "kickoff_at": payload.get("kickoff_at"),
-        "predicted_at": payload.get("snapshot_at"),
-        "p_home": result["p_home"],
-        "p_draw": result["p_draw"],
-        "p_away": result["p_away"],
+        "predicted_at": generated_at.isoformat(),
+        "p_home": probs[0],
+        "p_draw": probs[1],
+        "p_away": probs[2],
         "lambda_home": result.get("lambda_home"),
         "lambda_away": result.get("lambda_away"),
         "completeness": result.get("completeness", 0),
@@ -74,9 +98,15 @@ def save_prediction(conn, match_id: int, payload: dict, result: dict,
     placeholders = ", ".join(["%s"] * len(_PREDICTION_COLS))
     with conn.cursor() as cur:
         cur.execute(
-            f"INSERT INTO predictions ({cols}) VALUES ({placeholders}) "
+            f"INSERT INTO predictions ({cols}) SELECT {placeholders} "
+            "WHERE clock_timestamp() < %s::timestamptz "
             "ON CONFLICT (prediction_id) DO NOTHING",
-            [row[c] for c in _PREDICTION_COLS])
+            [row[c] for c in _PREDICTION_COLS] + [row["kickoff_at"]])
+        if cur.rowcount == 0:
+            cur.execute("SELECT prediction_id FROM predictions WHERE prediction_id=%s",
+                        [row["prediction_id"]])
+            if cur.fetchone() is None:
+                raise ValueError("prediction reached database after kickoff")
     conn.commit()
     return row["prediction_id"]
 

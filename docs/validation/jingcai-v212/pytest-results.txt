@@ -1,0 +1,5 @@
+Command: python -m pytest tests collector/tests -q --ignore-glob='tests/test_beidan*'
+374 passed, 1 skipped in 3.92s
+Skipped: penaltyblog shadow module not installed.
+Observed terminal session 32940 completed with exit_code=0.
+No real PostgreSQL validation performed; DATABASE_URL and local PostgreSQL unavailable.

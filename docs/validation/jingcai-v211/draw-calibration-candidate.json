@@ -1,0 +1,58 @@
+{
+  "name": "jingcai_v211_draw_gamma_research_candidate",
+  "gamma": 0.8,
+  "transform": "normalize([p_home, gamma*p_draw, p_away])",
+  "production_enabled": false,
+  "selected_using": "training dates only; multiclass logloss",
+  "validation": {
+    "baseline": {
+      "n": 30,
+      "brier": 0.192980413805948,
+      "logloss": 0.9828338948826035,
+      "draw_brier": 0.16035049426167325,
+      "direction_accuracy": 0.5666666666666667,
+      "mean_draw_probability": 0.25847598968931745,
+      "actual_draw_rate": 0.2
+    },
+    "candidate": {
+      "n": 30,
+      "brier": 0.1911204105564343,
+      "logloss": 0.974347997973651,
+      "draw_brier": 0.15747274244864604,
+      "direction_accuracy": 0.5666666666666667,
+      "mean_draw_probability": 0.21835043389407266,
+      "actual_draw_rate": 0.2
+    }
+  },
+  "holdout": {
+    "baseline": {
+      "n": 75,
+      "brier": 0.16743313168971113,
+      "logloss": 0.8649057059972329,
+      "draw_brier": 0.1420374203573664,
+      "direction_accuracy": 0.64,
+      "mean_draw_probability": 0.24025205069711147,
+      "actual_draw_rate": 0.17333333333333334
+    },
+    "candidate": {
+      "n": 75,
+      "brier": 0.16501103540184606,
+      "logloss": 0.8543039574979858,
+      "draw_brier": 0.1388730984178383,
+      "direction_accuracy": 0.64,
+      "mean_draw_probability": 0.20221213330874696,
+      "actual_draw_rate": 0.17333333333333334
+    }
+  },
+  "paired_holdout_brier": {
+    "method": "2000 paired resamples by match-number date, seed 211",
+    "date_groups": 6,
+    "delta_brier_candidate_minus_baseline": -0.002422096287865064,
+    "ci95": [
+      -0.005015171951692429,
+      -6.726378496631098e-05
+    ]
+  },
+  "reason_not_promoted": "research-only history and schedule odds lack authenticated pre-match source availability; one dataset is insufficient for prospective promotion",
+  "provenance": "historical research only; not prospective or independently authenticated"
+}

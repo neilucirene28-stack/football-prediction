@@ -18,31 +18,31 @@ def ranked_probability_score(p: tuple[float, float, float], outcome: int) -> flo
     cum_p, cum_o, total = 0.0, 0.0, 0.0
     for i in range(3):
         cum_p += p[i]
-        cum_o += 1.0 if i >= outcome else 0.0
+        cum_o = 1.0 if i >= outcome else 0.0
         total += (cum_p - cum_o) ** 2
     return total / 2.0
 
 
 def calibration_table(rows: list[tuple[tuple[float, float, float], int]],
-                      bins: int = 10) -> list[dict]:
-    """rows: [((pH,pD,pA), outcome)]。按主胜概率分桶，看预测 vs 实际胜率。"""
-    buckets: list[list[int]] = [[] for _ in range(bins)]
-    for (p, outcome) in rows:
-        b = min(int(p[0] * bins), bins - 1)
-        buckets[b].append(1 if outcome == 0 else 0)
-    out = []
-    for i, b in enumerate(buckets):
-        if not b:
-            continue
-        preds = [rows[j][0][0] for j in range(len(rows))
-                 if min(int(rows[j][0][0] * bins), bins - 1) == i]
-        out.append({
-            "bin": f"{i / bins:.1f}-{(i + 1) / bins:.1f}",
-            "n": len(b),
-            "predicted": round(sum(preds) / len(preds), 4),
-            "actual": round(sum(b) / len(b), 4),
-        })
-    return out
+                      bins: int = 10, outcome_index: int = 0) -> list[dict]:
+    """One-vs-rest calibration; default remains home win for compatibility."""
+    if bins < 1 or outcome_index not in (0, 1, 2):
+        raise ValueError("bins must be positive and outcome_index must be 0, 1 or 2")
+    buckets = [[] for _ in range(bins)]
+    for p, outcome in rows:
+        probability = p[outcome_index]
+        if not math.isfinite(probability) or not 0 <= probability <= 1:
+            raise ValueError("invalid calibration probability")
+        buckets[min(int(probability * bins), bins - 1)].append((probability, int(outcome == outcome_index)))
+    return [{"bin": f"{i / bins:.1f}-{(i + 1) / bins:.1f}", "n": len(bucket),
+             "predicted": round(sum(p for p, _ in bucket) / len(bucket), 4),
+             "actual": round(sum(y for _, y in bucket) / len(bucket), 4)}
+            for i, bucket in enumerate(buckets) if bucket]
+
+
+def calibration_by_class(rows, bins: int = 10) -> dict:
+    return {name: calibration_table(rows, bins, i)
+            for i, name in enumerate(("home", "draw", "away"))}
 
 
 def _sigmoid(x: float) -> float:

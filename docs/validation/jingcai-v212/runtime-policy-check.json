@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-10-10T00:45:06.052732+00:00",
+  "synthetic_payload_checks_not_real_match_forecasts": true,
+  "comparison": "unified production entry versus uncalibrated underlying engine",
+  "checks": [
+    {
+      "has_market": false,
+      "max_probability_difference": 0.0,
+      "production_calibration_enabled": false
+    },
+    {
+      "has_market": true,
+      "max_probability_difference": 0.0,
+      "production_calibration_enabled": false
+    }
+  ]
+}

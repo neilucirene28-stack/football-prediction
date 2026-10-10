@@ -16,8 +16,6 @@ DIXON_COLES_RHO = _f("DIXON_COLES_RHO", -0.13)
 LEAGUE_AVG_GOALS = _f("LEAGUE_AVG_GOALS", 2.70)
 KELLY_FRACTION = _f("KELLY_FRACTION", 0.25)
 
-ENGINE_CONFIG = {
-    "rho": DIXON_COLES_RHO,
-    "kelly_fraction": KELLY_FRACTION,
-    "model_edge": 0.0,
-}
+from engine.jingcai_runtime import runtime_config
+
+ENGINE_CONFIG = runtime_config()

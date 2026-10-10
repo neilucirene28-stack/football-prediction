@@ -9,6 +9,7 @@
 - Monte Carlo（完整度门控，十五节）
 """
 from datetime import datetime
+import math
 import hashlib
 import json
 import os
@@ -26,6 +27,7 @@ from .market import (implied_proportional, shin_probs, overround,
 from .fusion import (completeness_score, ensemble, ensemble_weights,
                      agreement, fuse_probs)
 from .backtest import platt_apply
+from .forecast_reporting import distribution_summary
 from .montecarlo import maybe_simulate
 from .cards import predict_cards
 from .market_flow import (flow_features, apply_volume_weight,
@@ -78,7 +80,7 @@ class PredictError(ValueError):
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
 # v2.7: B深修——比分矩阵 IPF 校准，所有全场衍生项从校准后矩阵计算。
-ENGINE_VERSION = "2.10"
+ENGINE_VERSION = "2.12"
 
 
 # 弱赛事集合（v2.5）：国家队/友谊赛性质赛事，弱队进攻 λ 系统性高估。
@@ -87,18 +89,22 @@ ENGINE_VERSION = "2.10"
 WEAK_COMPETITIONS = {"欧国联", "友谊赛", "球会友谊", "亚运男足", "亚运女足"}
 
 
-def model_version(cfg: dict) -> str:
+def model_version(cfg: dict, *, model: str = "jingcai") -> str:
     """模型版本号：由全部被跟踪参数计算得出，参数一变版本即变。
 
     杜绝"3 月和 8 月的预测被混成一个系统"——回测/学习时必须按版本分组。
     """
     canon = json.dumps(cfg, sort_keys=True, default=str)
     digest = hashlib.sha1(canon.encode("utf-8")).hexdigest()[:8]
-    return f"v{ENGINE_VERSION}+{digest}"
+    version = ENGINE_VERSION if model == "jingcai" else "2.10"
+    return f"v{version}+{digest}"
 
 
 def _parse_dt(s: str) -> datetime:
-    dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+    try:
+        dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+    except (ValueError, TypeError, AttributeError) as exc:
+        raise PredictError("无效时间格式") from exc
     if dt.tzinfo is None:
         raise PredictError("时间必须带时区")
     return dt
@@ -211,7 +217,7 @@ def predict(payload: dict, config: dict | None = None,
            # 自动触发背离警告并下调信心一档。0 = 关闭门控
            "divergence_gate": 0.15}
     cfg.update(config or {})
-    version = model_version(cfg)
+    version = model_version(cfg, model=model)
 
     # ---- 1. 输入校验与防泄漏 ----
     try:
@@ -219,15 +225,58 @@ def predict(payload: dict, config: dict | None = None,
         snapshot = _parse_dt(payload["snapshot_at"])
     except KeyError as e:
         raise PredictError(f"缺少必填时间字段: {e}")
-    now = asof or datetime.now().astimezone()
+    started_at = datetime.now().astimezone()
+    now = asof or started_at
+    if now.tzinfo is None:
+        raise PredictError("预测截止时间必须带时区")
     if kickoff <= now:
         raise PredictError("比赛已开赛或为历史比赛：拒绝赛后预测")
-    if snapshot > kickoff:
-        raise PredictError("快照晚于开球：存在未来泄漏")
+    if snapshot > kickoff or (model == "jingcai" and snapshot == kickoff):
+        raise PredictError("快照必须早于开球：存在未来泄漏")
+    if model == "jingcai" and snapshot > now:
+        raise PredictError("快照晚于预测截止时间：存在未来泄漏")
     home, away = payload.get("home"), payload.get("away")
     if not home or not away or home == away:
         raise PredictError("主客队无效")
 
+    if model == "jingcai":
+        # Reject malformed numeric inputs and explicitly future-dated features.
+        for field in ("home_recent", "away_recent", "h2h"):
+            for row in payload.get(field) or []:
+                if not isinstance(row, dict) or any(type(row.get(k)) is not int or row[k] < 0 for k in ("gf", "ga")):
+                    raise PredictError(f"{field} 含无效进球记录")
+                if row.get("date"):
+                    try:
+                        observed_date = datetime.fromisoformat(str(row["date"])[:10]).date()
+                    except ValueError as exc:
+                        raise PredictError(f"{field} 含无效日期") from exc
+                    if observed_date >= snapshot.date():
+                        raise PredictError(f"{field} 日期必须早于快照日；同日只有日期无法证明已完赛")
+        for field in ("odds", "opening_odds"):
+            if payload.get(field):
+                try:
+                    values = [float(payload[field][k]) for k in ("home", "draw", "away")]
+                    valid = all(math.isfinite(v) and v > 1 for v in values)
+                except (ValueError, TypeError, KeyError):
+                    valid = False
+                if not valid:
+                    raise PredictError(f"{field} 必须是大于1的有限十进制赔率")
+        if payload.get("league_avg_goals") is not None:
+            try:
+                average = float(payload["league_avg_goals"])
+                valid = math.isfinite(average) and average > 0
+            except (ValueError, TypeError):
+                valid = False
+            if not valid:
+                raise PredictError("联赛平均进球必须是有限正数")
+        if payload.get("handicap_line") is not None:
+            try:
+                line = float(payload["handicap_line"])
+                valid = math.isfinite(line) and line.is_integer() and not isinstance(payload["handicap_line"], bool)
+            except (ValueError, TypeError):
+                valid = False
+            if not valid:
+                raise PredictError("竞彩让球线必须是整数；不得用亚盘取整代替")
     home_recent = payload.get("home_recent") or []
     away_recent = payload.get("away_recent") or []
     league_avg = float(payload.get("league_avg_goals", 2.70))
@@ -422,6 +471,8 @@ def predict(payload: dict, config: dict | None = None,
         "total_goals_exact": {str(k): round(v, 4) for k, v in
                               total_goals_exact(matrix_cal).items()},
     }
+    if model == "jingcai":
+        deriv.update(distribution_summary(matrix_cal, p_final))
     interval, interval_p = main_goal_interval(matrix_cal)
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
     if ou_line is not None:
@@ -663,16 +714,22 @@ def predict(payload: dict, config: dict | None = None,
         + (["一致性检查发现冲突，信心已下调。"] if issues else [])
         + ([_divergence_note(divergence)] if divergence else []),
     }
-    # 北单快照链路：仅 model='beidan' 时输出全精度字段，
-    # 供 engine/beidan_snapshot.py 聚合31类比分分布。竞彩流程不受影响。
-    # P0数值一致性：p_home/p_draw/p_away 是 round(4) 展示值，
-    # score_matrix_full 用未舍入 p_final 校准；快照必须用 p_final_full
-    # 统一 wdl/p_1x2/半全场目标，避免舍入导致的不一致。
-    if model == "beidan":
-        out["score_matrix_full"] = [list(row) for row in matrix_cal]
-        out["p_final_full"] = [float(p) for p in p_final]
-        out["lambda_home_full"] = float(lam_h)
-        out["lambda_away_full"] = float(lam_a)
+    # Both workflows retain exact vectors for replay/scoring; display remains rounded.
+    out["score_matrix_full"] = [list(row) for row in matrix_cal]
+    out["p_final_full"] = [float(p) for p in p_final]
+    out["lambda_home_full"] = float(lam_h)
+    out["lambda_away_full"] = float(lam_a)
+    if model == "jingcai":
+        completed_at = datetime.now().astimezone()
+        if asof is None and completed_at >= kickoff:
+            raise PredictError("预测生成完成时已开球：拒绝追加赛前预测")
+        out["prediction_timing"] = {
+            "mode": "historical_replay" if asof is not None else "prospective",
+            "started_at": started_at.isoformat(),
+            "generated_at": completed_at.isoformat(),
+            "decision_at": now.isoformat(),
+            "snapshot_at": snapshot.isoformat(),
+        }
     return out
 
 

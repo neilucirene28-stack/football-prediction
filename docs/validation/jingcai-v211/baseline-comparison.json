@@ -1,0 +1,28 @@
+{
+  "old_model_version": "v2.10+273cb883",
+  "new_model_version": "v2.11+273cb883",
+  "shared_matches": 224,
+  "max_probability_difference_vs_normalized_legacy_display": 5.031822754530957e-05,
+  "direction_changes": 0,
+  "top1_hit_changes": 0,
+  "top3_hit_changes": 0,
+  "old_metrics": {
+    "n": 224,
+    "brier": 0.17744201842435864,
+    "logloss": 0.9095427695169197,
+    "draw_brier": 0.15443462948440542,
+    "direction_accuracy": 0.5982142857142857,
+    "mean_draw_probability": 0.2427241093817143,
+    "actual_draw_rate": 0.19642857142857142
+  },
+  "new_metrics": {
+    "n": 224,
+    "brier": 0.17744105238849622,
+    "logloss": 0.9095371697626272,
+    "draw_brier": 0.15443265242514256,
+    "direction_accuracy": 0.5982142857142857,
+    "mean_draw_probability": 0.2427249904495559,
+    "actual_draw_rate": 0.19642857142857142
+  },
+  "note": "No production probability parameters tuned; tiny difference is legacy 4-decimal display versus full precision. Both runs use the same dated filtered historical input."
+}

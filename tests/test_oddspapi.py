@@ -85,9 +85,17 @@ def test_quota_counter_monthly(tmp_path, monkeypatch):
 
 
 def test_no_key_raises_helpful_error(monkeypatch):
-    # 无 env key 时优先走 Secure Vault（本机有 vault 时返回 __VAULT__ 标记）
     monkeypatch.delenv("ODDSPAPI_KEY", raising=False)
-    key = oddspapi._get_key()
-    assert key == "__VAULT__"  # vault 可用时不抛错
+    monkeypatch.setitem(sys.modules, "dynamic_credentials", None)
+    with pytest.raises(RuntimeError, match="ODDSPAPI_KEY"):
+        oddspapi._get_key()
     monkeypatch.setenv("ODDSPAPI_KEY", "  demo-key  ")
-    assert oddspapi._get_key() == "demo-key"  # strip，env 优先
+    assert oddspapi._get_key() == "demo-key"
+
+
+def test_no_env_key_can_use_mocked_vault(monkeypatch):
+    from types import SimpleNamespace
+    monkeypatch.delenv("ODDSPAPI_KEY", raising=False)
+    monkeypatch.setitem(sys.modules, "dynamic_credentials",
+                        SimpleNamespace(url_with_surrogate_query_param=lambda *a, **k: None))
+    assert oddspapi._get_key() == "__VAULT__"

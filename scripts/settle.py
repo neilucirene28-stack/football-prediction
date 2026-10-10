@@ -12,8 +12,9 @@ import sys
 import time
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from api.api.persist import save_settlement  # noqa: E402
 
 try:
@@ -53,6 +54,7 @@ def pending_predictions(cur):
            JOIN matches m ON m.id = p.match_id
            LEFT JOIN settlements s ON s.prediction_id = p.prediction_id
            WHERE s.prediction_id IS NULL
+             AND p.predicted_at < p.kickoff_at
              AND p.kickoff_at < now() - interval '2 hours'
              AND m.external_id LIKE 'titan-%%'
            ORDER BY p.kickoff_at""")
@@ -84,6 +86,7 @@ def main() -> int:
             else:
                 skipped += 1
         except Exception as e:
+            conn.rollback()
             failed += 1
             print(f"{external_id} ERROR {type(e).__name__}: {e}", flush=True)
         time.sleep(_DELAY)

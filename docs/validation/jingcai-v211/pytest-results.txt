@@ -1,0 +1,5 @@
+Command: python -m pytest tests collector/tests -q --ignore-glob='tests/test_beidan*'
+Final observed run: 351 passed, 1 skipped in 3.37s
+Scope: Jingcai and common engine/API/collector tests; separate project's adapters excluded.
+Skipped: tests/test_pi.py module; penaltyblog shadow dependency not installed.
+Source: completed terminal session 45029, exit_code=0.

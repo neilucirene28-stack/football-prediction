@@ -587,6 +587,7 @@ class Titan007Source(Source):
             "snapshot_at": datetime.now(timezone.utc).isoformat(),
             "raw": {"matchid": mid},
         }
+        match["raw"]["collection_started_at"] = match["snapshot_at"]
         # -- 1x2 数据 JS：球队 / 中立场 / 欧指 --
         try:
             x = self.parse_x12js(self._get(_X12JS_URL.format(mid=mid)))
@@ -630,7 +631,7 @@ class Titan007Source(Source):
                      if c.get("open") and len(c["open"]) == 3
                      and all(v and v > 1 for v in c["open"])}
             match["raw"]["x12_open_snapshot"] = {
-                "captured_at": match["snapshot_at"],
+                "captured_at": datetime.now(timezone.utc).isoformat(),
                 "n_companies": len(opens),
                 "companies": opens,
             }
@@ -652,7 +653,7 @@ class Titan007Source(Source):
                     "median_n_points": sorted(
                         len(v["points"]) for v in mv.values()
                     )[len(mv) // 2] if mv else 0,
-                    "captured_at": match["snapshot_at"],
+                    "captured_at": datetime.now(timezone.utc).isoformat(),
                 }
         if x.get("temperature"):
             match["raw"]["temperature"] = x["temperature"]
@@ -698,7 +699,7 @@ class Titan007Source(Source):
                     match["raw"]["asian_movement_meta"] = {
                         "granularity": "key_change_points",
                         "n_companies": len(trends),
-                        "captured_at": match["snapshot_at"],
+                        "captured_at": datetime.now(timezone.utc).isoformat(),
                     }
         except Exception:
             pass
@@ -726,7 +727,7 @@ class Titan007Source(Source):
                     match["raw"]["ou_movement_meta"] = {
                         "granularity": "key_change_points",
                         "n_companies": len(trends),
-                        "captured_at": match["snapshot_at"],
+                        "captured_at": datetime.now(timezone.utc).isoformat(),
                     }
         except Exception:
             pass
@@ -740,6 +741,8 @@ class Titan007Source(Source):
         except Exception:
             pass
 
+        match["snapshot_at"] = datetime.now(timezone.utc).isoformat()
+        match["raw"]["collection_completed_at"] = match["snapshot_at"]
         return match
 
     def fetch_matches(self, with_trends: bool = False) -> list[dict]:
