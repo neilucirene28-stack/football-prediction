@@ -1,0 +1,12 @@
+{
+  "url": "https://www.kleague.com/getScheduleList.do",
+  "start_utc": "2026-10-10T02:40:04.869965+00:00",
+  "http_status": 200,
+  "end_utc": "2026-10-10T02:40:11.114370+00:00",
+  "bytes": 56187,
+  "sha256": "7b4b752c24343bc916e7d26604165c6a46f7ac706d509f0bc2ce1f5d1cec2e6c",
+  "local_file": "schedule.json",
+  "method": "POST",
+  "request_body": "{\"leagueId\": 1, \"teamId\": \"\", \"year\": \"2026\", \"month\": \"10\", \"ticketYn\": \"\"}",
+  "parameter_evidence": "official_resource_links_20261010_v29/kleague_schedule.html:1698"
+}

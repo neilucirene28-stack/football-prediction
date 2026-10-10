@@ -1,0 +1,43 @@
+{
+  "executed_at": "2026-10-10T02:41:39.286734+00:00",
+  "registry_sha256": "5c2bc0c0825d61596cce72761c2c71178e794aaa94dbb98741bee103f9796607",
+  "sources": [
+    {
+      "collection": "outputs/v23_result_collection_v19_20261010_morning",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "index_sha256": "821c9868d48a1cd2c8a88a0ca681b228cfd6b344225ce61174cbe556c4ab92e0",
+      "results_sha256": "1c39971e39c4327edbcd0015415c8f06ff9751d34d7416f8a262c8f599212edd",
+      "results_n": 10,
+      "receipts_n": 10,
+      "pool_ledger_n": 179
+    },
+    {
+      "collection": "outputs/v23_result_collection_v22_ned2_20261010_morning",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "index_sha256": "f655c90a61f72bddbe183ab5161598d33e7eff8467037b0b622eb53bf1bcc9aa",
+      "results_sha256": "11b639407aa0207109f45b023e1349c4cfc764f502fc55c8efe670be17092f6a",
+      "results_n": 9,
+      "receipts_n": 9,
+      "pool_ledger_n": 179
+    }
+  ],
+  "observations_n": 19,
+  "results_n": 19,
+  "duplicate_n": 0,
+  "excluded_duplicates": [],
+  "output_sha256": "6d0adc63ece8c116acaa34536ee3039f134c37427911c73bde81e4ba418cbe56",
+  "raw_bytes_and_original_verification_times_preserved": true,
+  "result_records_reimported_from_http_originals": true,
+  "execution_code_sha256": {
+    "collection_workflow.py": "3d80d7e391efec36a19bef0e82de4944482bb41029413b89c0ca41aaabf5fe2e",
+    "result_collection.py": "69fc694b2f41ea2c1155bc6ed988803f5bd0f9bd6d1661a3d280fc1df1b74b86",
+    "frozen_results.py": "6634b78a104fc87cd0a119a1ac8958711568930a13669e2085f9786fa438ce01",
+    "espn_summary.py": "7ac5f9f8dd20073b5633148295e2722ad40f50959744bc0f998e40e5e43ab2a5",
+    "unique_settlement.py": "e20f634bf1f9baa71780a82c4f2e37c064c8f4e8da3d211f2357b812a4c96fbf",
+    "frozen_settlement.py": "ae6ebda7d66bd49dae13104c92473a13395271f103bc3d4aea49a3e7f7cf5664"
+  },
+  "refitted": false,
+  "reselected_after_results": false,
+  "production_gate_passed": false,
+  "independent_source_and_clock_authentication": false
+}

@@ -1,0 +1,73 @@
+{
+  "executed_at": "2026-10-10T01:39:28.811529+00:00",
+  "batches": [
+    {
+      "league_slug": "ned.1",
+      "verified_original_history_n": 55,
+      "verified_seed_team_n": 18,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "por.1",
+      "verified_original_history_n": 55,
+      "verified_seed_team_n": 16,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "ita.1",
+      "verified_original_history_n": 50,
+      "verified_seed_team_n": 16,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "ita.2",
+      "verified_original_history_n": 51,
+      "verified_seed_team_n": 20,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "sco.1",
+      "verified_original_history_n": 36,
+      "verified_seed_team_n": 12,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "sco.2",
+      "verified_original_history_n": 31,
+      "verified_seed_team_n": 10,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "bel.1",
+      "verified_original_history_n": 55,
+      "verified_seed_team_n": 18,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "esp.2",
+      "verified_original_history_n": 59,
+      "verified_seed_team_n": 14,
+      "original_availability_preserved": true
+    },
+    {
+      "league_slug": "aut.1",
+      "verified_original_history_n": 36,
+      "verified_seed_team_n": 12,
+      "original_availability_preserved": true
+    }
+  ],
+  "archive_parts_authoritative": true,
+  "freeze_manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+  "full_pool_n": 179,
+  "latest_freeze_prediction_n": 75,
+  "history_n": 1182,
+  "unique_prediction_n": 94,
+  "paired_n": 19,
+  "brier": 0.20622960801176707,
+  "results_sha256": "6d0adc63ece8c116acaa34536ee3039f134c37427911c73bde81e4ba418cbe56",
+  "reader_code_sha256": {
+    "artifact_io.py": "d436547479c7d73f911a92a29a60c43af20a56edbe2e77d1dc94a612213c1519",
+    "archive_io.py": "62d4f771592e177dbbfa4da7e4d95c48e24ba2fce9be979a7cc8332c7571b8da"
+  },
+  "production_gate_passed": false
+}

@@ -1,0 +1,15 @@
+{
+  "archived_at": "2026-10-10T01:33:55.297515+00:00",
+  "receipt_index_sha256": "4ce48775632b18f4ed3c7ccf3e78beb9e305e5533cc7fd8de54820a2043d8e4f",
+  "archived_body_n": 73,
+  "receipts_n": 73,
+  "failed_http_n": 0,
+  "archive_sha256": "ccb49de05d77654855d5d6f19fce584282ff242d68b14c5992faac134685ece5",
+  "archive_bytes": 1604794,
+  "capture_clock_independently_authenticated": false,
+  "execution_code_sha256": {
+    "http_batch_archive.py": "a9a294d70475509583a2bbff0a6d9eedd3cc8e804b222fc86ab1561f0cc634d4",
+    "artifact_io.py": "04dd6e09dd109495cef39a12ad8c56a09cc0d375773c1b2c9f4b2ddad2604c2c",
+    "archive_io.py": "7654bed1d790cd35eca61fd8be5dd5e3606382113073d61741e9ccdf79c16348"
+  }
+}

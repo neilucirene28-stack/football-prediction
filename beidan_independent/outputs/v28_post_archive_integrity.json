@@ -1,0 +1,10 @@
+{
+  "verified_at": "2026-10-10T02:26:29.253663+00:00",
+  "freeze_manifest_sha256": "1306df98c0df1d57dab3ef51adb3f28b3d754242e40f12521b2ecf757e965427",
+  "lossless_original_bytes_verified": true,
+  "history_n": 1231,
+  "offered_n": 179,
+  "predicted_n": 76,
+  "feedback_selection_n": 19,
+  "production_gate_passed": false
+}

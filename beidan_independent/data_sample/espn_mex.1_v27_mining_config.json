@@ -1,0 +1,43 @@
+{
+  "league_slug": "mex.1",
+  "season_year": 2026,
+  "season_type": 14277,
+  "team_ids": [
+    "216",
+    "219",
+    "220",
+    "222",
+    "223",
+    "226",
+    "227",
+    "228",
+    "231",
+    "232",
+    "10125",
+    "17851"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_mex.1_mined_20261010_v27",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v27_native/mex.1",
+  "proposals": [
+    [
+      71,
+      "401876953",
+      "232",
+      "223",
+      "20261009"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_mex.1_20261009.json",
+      "sha256": "7cc4f8b3bb657dbcb797bcd8d958a9e81ebd5086375c3c2b0dd7771576d3a65d"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_mex.1_20261010.json",
+      "sha256": "442140e51e2de900aca145f7ccf4e6f5cfa782a7db236d5102b93f40001610c9"
+    }
+  ]
+}

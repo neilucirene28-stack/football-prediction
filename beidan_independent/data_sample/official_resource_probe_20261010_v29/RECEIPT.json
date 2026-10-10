@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-10-10T02:36:21.629443+00:00",
+  "receipts": [
+    {
+      "source": "beijing_lottery_home",
+      "url": "https://www.bjlot.com.cn/",
+      "start_utc": "2026-10-10T02:36:11.882836+00:00",
+      "http_status": 502,
+      "end_utc": "2026-10-10T02:36:21.194610+00:00",
+      "bytes": 144,
+      "sha256": "cbcb5f2cda8ce5d830af6694c3a58c4189f2eb991294f7ea4afbfe5b3f774681",
+      "local_file": "beijing_lottery_home.html"
+    },
+    {
+      "source": "beijing_government_official_reference",
+      "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/1793946/index.html",
+      "start_utc": "2026-10-10T02:36:11.883678+00:00",
+      "http_status": 403,
+      "end_utc": "2026-10-10T02:36:17.002778+00:00",
+      "bytes": 2497,
+      "sha256": "72d38ce192faa30203f41969dbb2290ca9e90225fe8f8203be1875ad8b6f3d16",
+      "local_file": "beijing_government_official_reference.html"
+    },
+    {
+      "source": "jleague_match_home",
+      "url": "https://www.jleague.jp/match/",
+      "start_utc": "2026-10-10T02:36:11.884403+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:36:21.626000+00:00",
+      "bytes": 1193550,
+      "sha256": "1ed9a7ab869d1cb9353c634b1928ec290083463539a0a3918a3e1711394b0e1a",
+      "local_file": "jleague_match_home.html"
+    },
+    {
+      "source": "kleague_home",
+      "url": "https://www.kleague.com/index.do",
+      "start_utc": "2026-10-10T02:36:11.884879+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:36:20.821678+00:00",
+      "bytes": 80733,
+      "sha256": "0d0a52fc176b64538772efb8d25d425c2099a4c9581cd31acf1aac4e7dce422c",
+      "local_file": "kleague_home.html"
+    }
+  ],
+  "retries": 0,
+  "identity_approvals_n": 0,
+  "official_lines_imported_n": 0
+}

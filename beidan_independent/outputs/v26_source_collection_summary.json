@@ -1,0 +1,90 @@
+{
+  "rows": [
+    {
+      "league_slug": "ned.1",
+      "successful_http_n": 73,
+      "failed_http_n": 0,
+      "history_n": 55,
+      "explicit_ht_n": 55,
+      "new_forecast_candidates_n": 1,
+      "rejected": []
+    },
+    {
+      "league_slug": "por.1",
+      "successful_http_n": 71,
+      "failed_http_n": 0,
+      "history_n": 55,
+      "explicit_ht_n": 55,
+      "new_forecast_candidates_n": 1,
+      "rejected": []
+    },
+    {
+      "league_slug": "ita.1",
+      "successful_http_n": 66,
+      "failed_http_n": 0,
+      "history_n": 50,
+      "explicit_ht_n": 50,
+      "new_forecast_candidates_n": 1,
+      "rejected": []
+    },
+    {
+      "league_slug": "ita.2",
+      "successful_http_n": 71,
+      "failed_http_n": 0,
+      "history_n": 51,
+      "explicit_ht_n": 51,
+      "new_forecast_candidates_n": 5,
+      "rejected": []
+    },
+    {
+      "league_slug": "sco.1",
+      "successful_http_n": 48,
+      "failed_http_n": 0,
+      "history_n": 36,
+      "explicit_ht_n": 36,
+      "new_forecast_candidates_n": 4,
+      "rejected": []
+    },
+    {
+      "league_slug": "sco.2",
+      "successful_http_n": 41,
+      "failed_http_n": 0,
+      "history_n": 31,
+      "explicit_ht_n": 31,
+      "new_forecast_candidates_n": 5,
+      "rejected": []
+    },
+    {
+      "league_slug": "bel.1",
+      "successful_http_n": 73,
+      "failed_http_n": 0,
+      "history_n": 55,
+      "explicit_ht_n": 55,
+      "new_forecast_candidates_n": 1,
+      "rejected": []
+    },
+    {
+      "league_slug": "esp.2",
+      "successful_http_n": 73,
+      "failed_http_n": 0,
+      "history_n": 59,
+      "explicit_ht_n": 59,
+      "new_forecast_candidates_n": 1,
+      "rejected": []
+    },
+    {
+      "league_slug": "aut.1",
+      "successful_http_n": 48,
+      "failed_http_n": 0,
+      "history_n": 36,
+      "explicit_ht_n": 36,
+      "new_forecast_candidates_n": 2,
+      "rejected": []
+    }
+  ],
+  "http_n": 564,
+  "failed_http_n": 0,
+  "new_history_n": 428,
+  "new_candidates_n": 21,
+  "additional_seed_http_n": 9
+}

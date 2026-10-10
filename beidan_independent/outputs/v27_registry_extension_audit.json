@@ -1,0 +1,12 @@
+{
+  "registry_sha256": "e314e39f5239be7a00e6ad9a68851e65f4fc60d618716dea1b88a84bf9dffd23",
+  "previous_registry_sha256": "cd9192a5f0280dc843168b0cdffc10ec2693a86174af5cc55739e3710cb04a04",
+  "old_earliest_owners_preserved_n": 94,
+  "new_unique_predictions_n": 1,
+  "new_match_ids": [
+    "26103-71"
+  ],
+  "unique_predictions_n": 95,
+  "later_duplicate_predictions_excluded_n": 338,
+  "original_sealed_probabilities_changed": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "bd1-lossless-parts-1",
+  "encoding": "gzip",
+  "original_bytes": 111898,
+  "original_sha256": "96dc268d9b375272796ecd83de8d775dee7d30ff6d0b6ea08ea3b65194ec030f",
+  "packed_bytes": 26646,
+  "packed_sha256": "8cba740919cab292718d55133479b2dee911357db9b8843f8e5821e1c82adb9d",
+  "parts": [
+    {
+      "name": "part_0000.bin",
+      "bytes": 26646,
+      "sha256": "8cba740919cab292718d55133479b2dee911357db9b8843f8e5821e1c82adb9d"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "bd1-lossless-parts-1",
+  "encoding": "gzip",
+  "original_bytes": 1004956,
+  "original_sha256": "15c0dcb274712ecf9f4169b063470986dbde640688e94de122d6aa9d02d9e0af",
+  "packed_bytes": 117985,
+  "packed_sha256": "cdb45699c2b5f600fdf1ba2bb4351bdf9b94bebd1ecc1b091ac26ccefcb50a06",
+  "parts": [
+    {
+      "name": "part_0000.bin",
+      "bytes": 48000,
+      "sha256": "001ac20a719985f97083f369f6b320de3cec25632cfb0c7ee28e53cdb85ae340"
+    },
+    {
+      "name": "part_0001.bin",
+      "bytes": 48000,
+      "sha256": "aa3871060aa370e63c029c1161ede8494d5879f8b966492dae5a003d24151f49"
+    },
+    {
+      "name": "part_0002.bin",
+      "bytes": 21985,
+      "sha256": "018ca36261ea590c7d029c2dd0f9bb26da9d18afbce82ebdd255a145b1be8ef7"
+    }
+  ]
+}

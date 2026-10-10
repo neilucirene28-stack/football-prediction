@@ -1,0 +1,728 @@
+{
+  "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+  "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+  "started_at": "2026-10-09T15:48:47.170675+00:00",
+  "completed_at": "2026-10-09T15:48:52.332271+00:00",
+  "receipts": [],
+  "complete_pool_ledger": [
+    {
+      "match_id": "26103-11",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-12",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-13",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-14",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-15",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-16",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-17",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-18",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-19",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-20",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-21",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-22",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-23",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-24",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-25",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-26",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-27",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-28",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-29",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-30",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-31",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-32",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-33",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-34",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-35",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-36",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-37",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-38",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-39",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-40",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-41",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-42",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-43",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-44",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-45",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-46",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-47",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-48",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-49",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-50",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-51",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-52",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-53",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-54",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-55",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-56",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-57",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-58",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-59",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-60",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-61",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-62",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-63",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-64",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-65",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-66",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-67",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-68",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-69",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-70",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-71",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-72",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-73",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-74",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-75",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-76",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-77",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-78",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-79",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-80",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-81",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-82",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-83",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-84",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-85",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-86",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-87",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-88",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-89",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-90",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-91",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-92",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-93",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-94",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-95",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-96",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-97",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-98",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-99",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-100",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-101",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-102",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-103",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-104",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-105",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-106",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-107",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-108",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-109",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-110",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-111",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-112",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-113",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-114",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-115",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-116",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-117",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-118",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-119",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-120",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-121",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-122",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-123",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-124",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-125",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-126",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-127",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-128",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-129",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-130",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-131",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-132",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-133",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-134",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-135",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-136",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-137",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-138",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-139",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-140",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-141",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-142",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-143",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-144",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-145",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-146",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-147",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-148",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-149",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-150",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-151",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-152",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-153",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-154",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-155",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-156",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-157",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-158",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-159",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-160",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-161",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-162",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-163",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-164",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-165",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-166",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-167",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-168",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-169",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-170",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-171",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-172",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-173",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-174",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-175",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-176",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-177",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-178",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-179",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-180",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-181",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-182",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-183",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-184",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-185",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-186",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-187",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-188",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-189",
+      "status": "originally_blocked"
+    }
+  ],
+  "original_probabilities_only": true,
+  "refitted": false,
+  "reselected": false
+}

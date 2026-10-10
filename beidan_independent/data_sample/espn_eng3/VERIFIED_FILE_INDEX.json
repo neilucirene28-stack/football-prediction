@@ -1,0 +1,1147 @@
+{
+  "source_commit": "aa9fff60a3918c12388876ffc5e9a3862cbed5f2",
+  "index_author": "Codex; derived receipt index, not provider payload",
+  "provider_capture_clock_independently_verified": false,
+  "files": [
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_2567.json",
+      "bytes": 81502,
+      "sha256": "a34f8a1c97b22be786cc05036fba8cae6fc157f9daa7cdd9279300b5b6c4c970",
+      "start_utc": "2026-10-09T12:18:33.885581+00:00",
+      "end_utc": "2026-10-09T12:18:35.003030+00:00",
+      "http_status": 200,
+      "team_id": "2567"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_279.json",
+      "bytes": 62400,
+      "sha256": "2a6f473411dce88585b9e6a71475010c8f554d53d3588dcf9677da7ee1354ba1",
+      "start_utc": "2026-10-09T12:18:37.003747+00:00",
+      "end_utc": "2026-10-09T12:18:37.654645+00:00",
+      "http_status": 200,
+      "team_id": "279"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_285.json",
+      "bytes": 63262,
+      "sha256": "85447def3116ed27cd31c48a170caa1114267e676fcd6c7369bb68000e9c5170",
+      "start_utc": "2026-10-09T12:18:39.655181+00:00",
+      "end_utc": "2026-10-09T12:18:40.288943+00:00",
+      "http_status": 200,
+      "team_id": "285"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_301.json",
+      "bytes": 62991,
+      "sha256": "7db92a5d7660fd6d8a36ef137aeca0aee0bc1b03054529b3d50feb03aa111436",
+      "start_utc": "2026-10-09T12:18:42.289413+00:00",
+      "end_utc": "2026-10-09T12:18:42.817693+00:00",
+      "http_status": 200,
+      "team_id": "301"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_304.json",
+      "bytes": 63612,
+      "sha256": "221988b9e14e8a871e804e03197ed9664972c5877f56038ffe0c41d5485ee905",
+      "start_utc": "2026-10-09T12:18:44.818146+00:00",
+      "end_utc": "2026-10-09T12:18:45.487725+00:00",
+      "http_status": 200,
+      "team_id": "304"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_307.json",
+      "bytes": 79880,
+      "sha256": "d023ddc5c174eafe4f3ba5a8ac32702b43e9093127a5b131a0b946f491bb719a",
+      "start_utc": "2026-10-09T12:18:47.488248+00:00",
+      "end_utc": "2026-10-09T12:18:48.036182+00:00",
+      "http_status": 200,
+      "team_id": "307"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_309.json",
+      "bytes": 71017,
+      "sha256": "6cd8378feeaa0c9409b428d9c8cfa1bd7e2223d8dc434813318577bc4abe590a",
+      "start_utc": "2026-10-09T12:18:50.037107+00:00",
+      "end_utc": "2026-10-09T12:18:50.546787+00:00",
+      "http_status": 200,
+      "team_id": "309"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_311.json",
+      "bytes": 54631,
+      "sha256": "c8bfcf224002d99dc63962b2f4df652354d964df5a6fbb5379d36ffae0345d3b",
+      "start_utc": "2026-10-09T12:18:52.547283+00:00",
+      "end_utc": "2026-10-09T12:18:53.265091+00:00",
+      "http_status": 200,
+      "team_id": "311"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_3129.json",
+      "bytes": 61749,
+      "sha256": "85a10633fa6e8ad2a9f5f375553f085c5b5502668ec8d9d56e054bdc2b41553f",
+      "start_utc": "2026-10-09T12:18:55.265637+00:00",
+      "end_utc": "2026-10-09T12:18:55.796990+00:00",
+      "http_status": 200,
+      "team_id": "3129"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_335.json",
+      "bytes": 72570,
+      "sha256": "c4a4fcaa58763b3e19dc3a3ff17b75c08abea19d80db573baea2fe813e4c3ec2",
+      "start_utc": "2026-10-09T12:18:57.797615+00:00",
+      "end_utc": "2026-10-09T12:18:58.323057+00:00",
+      "http_status": 200,
+      "team_id": "335"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_338.json",
+      "bytes": 71536,
+      "sha256": "652a44b3e5e70f434d5e45a79318208a1125d7b0907f0bbb5d7bcb676fc88cd5",
+      "start_utc": "2026-10-09T12:19:00.324399+00:00",
+      "end_utc": "2026-10-09T12:19:01.395392+00:00",
+      "http_status": 200,
+      "team_id": "338"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_340.json",
+      "bytes": 62245,
+      "sha256": "6d7d955c90a7fc88cabce7237e0ef8c5ede1a09ebdad9ae53f29087a7b0b4016",
+      "start_utc": "2026-10-09T12:19:03.395915+00:00",
+      "end_utc": "2026-10-09T12:19:03.877301+00:00",
+      "http_status": 200,
+      "team_id": "340"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_342.json",
+      "bytes": 73082,
+      "sha256": "d48e54a73aa1fc4daf2f9652cd4d1558e974e34335a08e535a6ecacf1bc4a021",
+      "start_utc": "2026-10-09T12:19:05.877823+00:00",
+      "end_utc": "2026-10-09T12:19:06.589564+00:00",
+      "http_status": 200,
+      "team_id": "342"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_344.json",
+      "bytes": 71523,
+      "sha256": "b9627c0a60a7a7a93f5f9b32afeca09ae3420e48255a61f490b31c41ac22bfc7",
+      "start_utc": "2026-10-09T12:19:08.590071+00:00",
+      "end_utc": "2026-10-09T12:19:09.114478+00:00",
+      "http_status": 200,
+      "team_id": "344"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_346.json",
+      "bytes": 63076,
+      "sha256": "da3d74874708709752c6f107b484d36408473fcf8254ddc1887f9acb40c5b216",
+      "start_utc": "2026-10-09T12:19:11.115078+00:00",
+      "end_utc": "2026-10-09T12:19:11.525504+00:00",
+      "http_status": 200,
+      "team_id": "346"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_350.json",
+      "bytes": 63310,
+      "sha256": "dba69b7e3a29a14917c4e76b4bfaffab1ec4eaaaf6df6508203776cb5aa510ca",
+      "start_utc": "2026-10-09T12:19:13.525987+00:00",
+      "end_utc": "2026-10-09T12:19:14.025896+00:00",
+      "http_status": 200,
+      "team_id": "350"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_351.json",
+      "bytes": 71239,
+      "sha256": "69803367896bb695b02d441c210280414fe6b4ad2f3f98ce410c4a53dc35d87d",
+      "start_utc": "2026-10-09T12:19:16.026377+00:00",
+      "end_utc": "2026-10-09T12:19:16.533011+00:00",
+      "http_status": 200,
+      "team_id": "351"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_375.json",
+      "bytes": 63480,
+      "sha256": "0343f34c5db0f264193381de0891caeaadc026d28ea0b34417c32b18221a7493",
+      "start_utc": "2026-10-09T12:19:18.533539+00:00",
+      "end_utc": "2026-10-09T12:19:19.056895+00:00",
+      "http_status": 200,
+      "team_id": "375"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_3802.json",
+      "bytes": 71125,
+      "sha256": "703bbe2b3b9ec1e1625bf2dd523c18e7473f50b2f5f54fa97e1894e947dad00b",
+      "start_utc": "2026-10-09T12:19:21.057396+00:00",
+      "end_utc": "2026-10-09T12:19:21.518750+00:00",
+      "http_status": 200,
+      "team_id": "3802"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_387.json",
+      "bytes": 71080,
+      "sha256": "7edb9a2e206808ab4dcb96283d9e5b283b802c2dec2f51609b664a5da361a8b0",
+      "start_utc": "2026-10-09T12:19:23.520521+00:00",
+      "end_utc": "2026-10-09T12:19:24.647036+00:00",
+      "http_status": 200,
+      "team_id": "387"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_390.json",
+      "bytes": 63837,
+      "sha256": "96c195f2dae05767458a05ad863a753bfa96471867d7086156d57ee6621a7b8d",
+      "start_utc": "2026-10-09T12:19:26.652093+00:00",
+      "end_utc": "2026-10-09T12:19:28.199218+00:00",
+      "http_status": 200,
+      "team_id": "390"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_397.json",
+      "bytes": 62705,
+      "sha256": "6630c370d5b22e56ca038386ee60e4a99062d8fb24379329a9b97963492b529d",
+      "start_utc": "2026-10-09T12:19:30.199759+00:00",
+      "end_utc": "2026-10-09T12:19:31.052301+00:00",
+      "http_status": 200,
+      "team_id": "397"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_399.json",
+      "bytes": 63536,
+      "sha256": "66d430a165546a24266ea51559139d4c75a1c102f4e4e2d4dba26eedece24b1c",
+      "start_utc": "2026-10-09T12:19:33.052925+00:00",
+      "end_utc": "2026-10-09T12:19:33.842198+00:00",
+      "http_status": 200,
+      "team_id": "399"
+    },
+    {
+      "kind": "schedule",
+      "local_file": "espn_team_400.json",
+      "bytes": 72629,
+      "sha256": "465068cc2329d7f8c5aa8f94136bf21ad8fa5b85b3241fdcac5237d562d51c9e",
+      "start_utc": "2026-10-09T12:19:35.842702+00:00",
+      "end_utc": "2026-10-09T12:19:36.614781+00:00",
+      "http_status": 200,
+      "team_id": "400"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880817.json",
+      "bytes": 323393,
+      "sha256": "dab3dbad658965fc70f3a2fd66d26a4193353a7e055c64f080b18d017a65551d",
+      "start_utc": "2026-10-09T12:19:46.230157+00:00",
+      "end_utc": "2026-10-09T12:19:47.073066+00:00",
+      "http_status": 200,
+      "event_id": "401880817"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880821.json",
+      "bytes": 321319,
+      "sha256": "88f20a7abaeaff315c5fc4d697759487d74e0af92f174c04a9ec6c43eb927ece",
+      "start_utc": "2026-10-09T12:19:48.578296+00:00",
+      "end_utc": "2026-10-09T12:19:49.192415+00:00",
+      "http_status": 200,
+      "event_id": "401880821"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880822.json",
+      "bytes": 321593,
+      "sha256": "be9531af3aba45e69e7e0ae53904a789ef3889530963c05bd4e91405a972af0c",
+      "start_utc": "2026-10-09T12:19:50.698069+00:00",
+      "end_utc": "2026-10-09T12:19:51.332075+00:00",
+      "http_status": 200,
+      "event_id": "401880822"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880827.json",
+      "bytes": 327577,
+      "sha256": "fd35ae4820af410649d837bd39d61ece89f72b18be0b09ef754e1adf489d19b5",
+      "start_utc": "2026-10-09T12:19:52.838104+00:00",
+      "end_utc": "2026-10-09T12:19:53.836283+00:00",
+      "http_status": 200,
+      "event_id": "401880827"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880828.json",
+      "bytes": 322805,
+      "sha256": "4d8f825b356702ec181c5dfb98e1cf5d0fe74c94faa37816bcdbaef209e58593",
+      "start_utc": "2026-10-09T12:19:55.341903+00:00",
+      "end_utc": "2026-10-09T12:19:56.434191+00:00",
+      "http_status": 200,
+      "event_id": "401880828"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880830.json",
+      "bytes": 321392,
+      "sha256": "da45ba496a74ea6ed5e651be475c6324422c093d57f4680c8b558058aae6e517",
+      "start_utc": "2026-10-09T12:19:57.939375+00:00",
+      "end_utc": "2026-10-09T12:19:59.015831+00:00",
+      "http_status": 200,
+      "event_id": "401880830"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880837.json",
+      "bytes": 306010,
+      "sha256": "71aa220caea892b2cd9d9cd9e46469612b6329027d988a7398fecb47bee99aac",
+      "start_utc": "2026-10-09T12:20:00.520479+00:00",
+      "end_utc": "2026-10-09T12:20:01.176295+00:00",
+      "http_status": 200,
+      "event_id": "401880837"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880839.json",
+      "bytes": 325393,
+      "sha256": "dda4ea6f0c3870ba068d56d353a640499f7ba5ddd2efdc3449e3a0be7fdd77bd",
+      "start_utc": "2026-10-09T12:20:02.681019+00:00",
+      "end_utc": "2026-10-09T12:20:03.324028+00:00",
+      "http_status": 200,
+      "event_id": "401880839"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880840.json",
+      "bytes": 324899,
+      "sha256": "cc3e2e8cabaa270d772ea33d5bb09d2099c7b4272403d347f8f29f416bef18fe",
+      "start_utc": "2026-10-09T12:20:04.829357+00:00",
+      "end_utc": "2026-10-09T12:20:05.368832+00:00",
+      "http_status": 200,
+      "event_id": "401880840"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880841.json",
+      "bytes": 318725,
+      "sha256": "7abc1b7a1e5eb7ddfc15e000f494fba11587e6bd6b29900699257543c75596be",
+      "start_utc": "2026-10-09T12:20:06.874206+00:00",
+      "end_utc": "2026-10-09T12:20:07.558298+00:00",
+      "http_status": 200,
+      "event_id": "401880841"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880842.json",
+      "bytes": 318724,
+      "sha256": "79422b341b0172ba47b3c4727bfc7c4e0e59d5f7052e4db082b21f32caf8b1fb",
+      "start_utc": "2026-10-09T12:20:09.063476+00:00",
+      "end_utc": "2026-10-09T12:20:10.019149+00:00",
+      "http_status": 200,
+      "event_id": "401880842"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880843.json",
+      "bytes": 325683,
+      "sha256": "175e630317ef19c83d29f507a84a2a8f07952e9713624c01925c3d365aa3858f",
+      "start_utc": "2026-10-09T12:20:11.526273+00:00",
+      "end_utc": "2026-10-09T12:20:12.192419+00:00",
+      "http_status": 200,
+      "event_id": "401880843"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880844.json",
+      "bytes": 328814,
+      "sha256": "494c8559d4ad0f441ccffc70c5b06799dbd87b6c6f0f1d19d80971ff5d0a34dd",
+      "start_utc": "2026-10-09T12:20:13.697760+00:00",
+      "end_utc": "2026-10-09T12:20:14.324848+00:00",
+      "http_status": 200,
+      "event_id": "401880844"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880845.json",
+      "bytes": 315896,
+      "sha256": "5e945c45648dc225744b7d3b9136d2f60ccf4b8a8c89b11fac8fc70079370637",
+      "start_utc": "2026-10-09T12:20:15.829924+00:00",
+      "end_utc": "2026-10-09T12:20:16.323733+00:00",
+      "http_status": 200,
+      "event_id": "401880845"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880846.json",
+      "bytes": 331364,
+      "sha256": "78961fa290a5244de829f19f1008ec6a0b27869a819f7ea1b267b5dc52c6ac1a",
+      "start_utc": "2026-10-09T12:20:17.828795+00:00",
+      "end_utc": "2026-10-09T12:20:18.505888+00:00",
+      "http_status": 200,
+      "event_id": "401880846"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880847.json",
+      "bytes": 313933,
+      "sha256": "231632936c7d793d54a459cf1369243f782a951a32045f9518fff5520bbbfb0f",
+      "start_utc": "2026-10-09T12:20:20.010869+00:00",
+      "end_utc": "2026-10-09T12:20:20.667267+00:00",
+      "http_status": 200,
+      "event_id": "401880847"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880848.json",
+      "bytes": 324796,
+      "sha256": "a5e592bb66c4a9b09b9fc6ce17484a8d2db8bfc84ffb72eceb43041dc05c2c02",
+      "start_utc": "2026-10-09T12:20:22.172861+00:00",
+      "end_utc": "2026-10-09T12:20:23.064717+00:00",
+      "http_status": 200,
+      "event_id": "401880848"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880849.json",
+      "bytes": 333998,
+      "sha256": "b64806d1cfa62462c166c9ba33043e5cb3b0a17dbf11dc22b609c105c83efc44",
+      "start_utc": "2026-10-09T12:20:24.571383+00:00",
+      "end_utc": "2026-10-09T12:20:25.680931+00:00",
+      "http_status": 200,
+      "event_id": "401880849"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880850.json",
+      "bytes": 304514,
+      "sha256": "335e63b24772844d111b867336e36258214cc6a0a66a79e6d37c9fb372bab806",
+      "start_utc": "2026-10-09T12:20:27.186902+00:00",
+      "end_utc": "2026-10-09T12:20:27.853255+00:00",
+      "http_status": 200,
+      "event_id": "401880850"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880851.json",
+      "bytes": 321430,
+      "sha256": "0d2d34825ea589bb9a198214d9245b5b6fc3945721729ebd6f75a302ef0659a7",
+      "start_utc": "2026-10-09T12:20:29.358166+00:00",
+      "end_utc": "2026-10-09T12:20:29.870586+00:00",
+      "http_status": 200,
+      "event_id": "401880851"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880852.json",
+      "bytes": 325138,
+      "sha256": "acdc33cb075257f3dd54358de6303823fe38fa1064bfd2f4a3f76038a52f6419",
+      "start_utc": "2026-10-09T12:20:31.375490+00:00",
+      "end_utc": "2026-10-09T12:20:32.097421+00:00",
+      "http_status": 200,
+      "event_id": "401880852"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880853.json",
+      "bytes": 309750,
+      "sha256": "e2aa8d85fb70280b8f19ce395443beff14088e125d2e9ca66897c724b27e0095",
+      "start_utc": "2026-10-09T12:20:33.602505+00:00",
+      "end_utc": "2026-10-09T12:20:34.300275+00:00",
+      "http_status": 200,
+      "event_id": "401880853"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880854.json",
+      "bytes": 316212,
+      "sha256": "4fa32766a0a29650f3233698fce347ea0453ba860c28fb2ebbd4455a7ed0929e",
+      "start_utc": "2026-10-09T12:20:35.806640+00:00",
+      "end_utc": "2026-10-09T12:20:36.607943+00:00",
+      "http_status": 200,
+      "event_id": "401880854"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880855.json",
+      "bytes": 333960,
+      "sha256": "5c32350a8f5e1d8b8404aa773dbe628cbd41f9177e243135e0d1e69198829496",
+      "start_utc": "2026-10-09T12:20:38.113846+00:00",
+      "end_utc": "2026-10-09T12:20:38.788039+00:00",
+      "http_status": 200,
+      "event_id": "401880855"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880856.json",
+      "bytes": 331331,
+      "sha256": "a3de23cea91104410859d7d4c180050d1b1946111e1b4cea536d558a0b9efa7c",
+      "start_utc": "2026-10-09T12:20:40.295805+00:00",
+      "end_utc": "2026-10-09T12:20:40.961536+00:00",
+      "http_status": 200,
+      "event_id": "401880856"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880857.json",
+      "bytes": 325934,
+      "sha256": "d64ec3be54960a01ae7b37eae92106afe044385dad1b2f31fc53930391b6a8f4",
+      "start_utc": "2026-10-09T12:20:42.466948+00:00",
+      "end_utc": "2026-10-09T12:20:43.183405+00:00",
+      "http_status": 200,
+      "event_id": "401880857"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880858.json",
+      "bytes": 326754,
+      "sha256": "161a544b5a212c1b25d0e0853c83298c249810dac02c6c52d2bdd619726db845",
+      "start_utc": "2026-10-09T12:20:44.688812+00:00",
+      "end_utc": "2026-10-09T12:20:45.337251+00:00",
+      "http_status": 200,
+      "event_id": "401880858"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880859.json",
+      "bytes": 324756,
+      "sha256": "ec0b2a9b14a6df60fe0857ef235f93cce9ce8c4dd9e6ebc394ffc06e87d71936",
+      "start_utc": "2026-10-09T12:20:46.843604+00:00",
+      "end_utc": "2026-10-09T12:20:47.690620+00:00",
+      "http_status": 200,
+      "event_id": "401880859"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880860.json",
+      "bytes": 323597,
+      "sha256": "66caaa2898155c2d6cd06b64175e6614dbcf7da29a91e6d48e4f9264aec63a4e",
+      "start_utc": "2026-10-09T12:20:49.200261+00:00",
+      "end_utc": "2026-10-09T12:20:49.839032+00:00",
+      "http_status": 200,
+      "event_id": "401880860"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880861.json",
+      "bytes": 319493,
+      "sha256": "f0785509280d6b1075474a4eddd2077295c9a2c99b417812d37630da65adfef7",
+      "start_utc": "2026-10-09T12:20:51.345248+00:00",
+      "end_utc": "2026-10-09T12:20:52.107172+00:00",
+      "http_status": 200,
+      "event_id": "401880861"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880862.json",
+      "bytes": 320793,
+      "sha256": "f869eaa535377c7bd1110c83b0802c062c31b31d47883171c0310bcf3b043ab6",
+      "start_utc": "2026-10-09T12:20:53.612508+00:00",
+      "end_utc": "2026-10-09T12:20:54.111251+00:00",
+      "http_status": 200,
+      "event_id": "401880862"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880863.json",
+      "bytes": 324490,
+      "sha256": "b8be37f55c2ba0659be9c91319f68b0706de4aa2692f5e97b323c9212cd7c73a",
+      "start_utc": "2026-10-09T12:20:55.617351+00:00",
+      "end_utc": "2026-10-09T12:20:56.255642+00:00",
+      "http_status": 200,
+      "event_id": "401880863"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880864.json",
+      "bytes": 330878,
+      "sha256": "4d61a0d805f7c5b3f3eb8cea30c5d5baf844905501d1bbdc9bf049a5c01a5e30",
+      "start_utc": "2026-10-09T12:20:57.761310+00:00",
+      "end_utc": "2026-10-09T12:20:58.380967+00:00",
+      "http_status": 200,
+      "event_id": "401880864"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880865.json",
+      "bytes": 322159,
+      "sha256": "b00fc2fac9a10b9907b70952efa7b178bc2052f4d54dde20b8c3e725d7d50167",
+      "start_utc": "2026-10-09T12:20:59.887793+00:00",
+      "end_utc": "2026-10-09T12:21:00.492566+00:00",
+      "http_status": 200,
+      "event_id": "401880865"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880866.json",
+      "bytes": 332056,
+      "sha256": "2955ef999742c86cfdfe86629139dd8ee7c15453fee02ecb6ab10a4bbae4722f",
+      "start_utc": "2026-10-09T12:21:01.997938+00:00",
+      "end_utc": "2026-10-09T12:21:02.581823+00:00",
+      "http_status": 200,
+      "event_id": "401880866"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880867.json",
+      "bytes": 331655,
+      "sha256": "8c78f7335398993744e7dd8f962e293d1e34ded889d7a5bf74b75eb16d5ae018",
+      "start_utc": "2026-10-09T12:21:04.087446+00:00",
+      "end_utc": "2026-10-09T12:21:04.689409+00:00",
+      "http_status": 200,
+      "event_id": "401880867"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880868.json",
+      "bytes": 282323,
+      "sha256": "1a4ccd1d7d09679a83e43b0e1247eb8ebec6fd04701fb4deef2480c9e953aad9",
+      "start_utc": "2026-10-09T12:21:06.195687+00:00",
+      "end_utc": "2026-10-09T12:21:06.914125+00:00",
+      "http_status": 200,
+      "event_id": "401880868"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880869.json",
+      "bytes": 326460,
+      "sha256": "b5fa37373acadea05f85f9f7225f2a50ed8a78b8d99452f1dac0117a6c58d6c5",
+      "start_utc": "2026-10-09T12:21:08.419972+00:00",
+      "end_utc": "2026-10-09T12:21:09.115387+00:00",
+      "http_status": 200,
+      "event_id": "401880869"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880870.json",
+      "bytes": 326729,
+      "sha256": "2c42d2f1ecbad63ad92aab563f10ee5ee8a9a3a461e1f48bf85890ad60781997",
+      "start_utc": "2026-10-09T12:21:10.621809+00:00",
+      "end_utc": "2026-10-09T12:21:11.232517+00:00",
+      "http_status": 200,
+      "event_id": "401880870"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880871.json",
+      "bytes": 323797,
+      "sha256": "339631bac345fbbe6398dd01a3c5dbff0238542818261677b87610c9412412da",
+      "start_utc": "2026-10-09T12:21:12.742346+00:00",
+      "end_utc": "2026-10-09T12:21:13.298042+00:00",
+      "http_status": 200,
+      "event_id": "401880871"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880872.json",
+      "bytes": 316487,
+      "sha256": "02394191193391d06f2267172d1327e0a5d1d758d148ba4a7694c72e0b9df0a8",
+      "start_utc": "2026-10-09T12:21:14.804226+00:00",
+      "end_utc": "2026-10-09T12:21:15.492940+00:00",
+      "http_status": 200,
+      "event_id": "401880872"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880873.json",
+      "bytes": 316810,
+      "sha256": "c3f7ca12475a401e9d5a3035a4e64b92ea530c0fbe928467d3df73d7a2c935e2",
+      "start_utc": "2026-10-09T12:21:16.999016+00:00",
+      "end_utc": "2026-10-09T12:21:17.513245+00:00",
+      "http_status": 200,
+      "event_id": "401880873"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880874.json",
+      "bytes": 332673,
+      "sha256": "2c333c5762e90311b8e727914f5ed1b6ca5051c5902ffabfa97b6ffb03ae98ef",
+      "start_utc": "2026-10-09T12:21:19.020549+00:00",
+      "end_utc": "2026-10-09T12:21:19.747692+00:00",
+      "http_status": 200,
+      "event_id": "401880874"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880875.json",
+      "bytes": 327468,
+      "sha256": "ffdafc94b0824bd30f24b4588b2ae87687b520a9d0570655355edb0c4b0107e3",
+      "start_utc": "2026-10-09T12:21:21.253852+00:00",
+      "end_utc": "2026-10-09T12:21:21.917481+00:00",
+      "http_status": 200,
+      "event_id": "401880875"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880876.json",
+      "bytes": 325637,
+      "sha256": "ee23eb44ad56bf70ff7ded3a0b274e9be9afcb075237952a76346eb941642077",
+      "start_utc": "2026-10-09T12:21:23.425074+00:00",
+      "end_utc": "2026-10-09T12:21:23.983704+00:00",
+      "http_status": 200,
+      "event_id": "401880876"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880877.json",
+      "bytes": 326245,
+      "sha256": "b7c4616c81c5ed7ab4380ce76b2eb799d4e9f9cdb8e48e553d117a4b9dff4b82",
+      "start_utc": "2026-10-09T12:21:25.489377+00:00",
+      "end_utc": "2026-10-09T12:21:26.196623+00:00",
+      "http_status": 200,
+      "event_id": "401880877"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880878.json",
+      "bytes": 317636,
+      "sha256": "ca83f8e09e1121c074590d4411e1a5e80c9f873988507a5afa96df50da373b5b",
+      "start_utc": "2026-10-09T12:21:27.701943+00:00",
+      "end_utc": "2026-10-09T12:21:28.690455+00:00",
+      "http_status": 200,
+      "event_id": "401880878"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880879.json",
+      "bytes": 325575,
+      "sha256": "60f5d3ecd47b9a7c6e27c3e8309f8e1a47885bf94b3aa97b57476d93aa2fcba6",
+      "start_utc": "2026-10-09T12:21:30.196230+00:00",
+      "end_utc": "2026-10-09T12:21:30.815451+00:00",
+      "http_status": 200,
+      "event_id": "401880879"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880880.json",
+      "bytes": 322869,
+      "sha256": "b988ca7e389db553bc5238ef522276489ab2e08589e4ce60e1dc7b66764b6d60",
+      "start_utc": "2026-10-09T12:21:32.323296+00:00",
+      "end_utc": "2026-10-09T12:21:32.931624+00:00",
+      "http_status": 200,
+      "event_id": "401880880"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880881.json",
+      "bytes": 319600,
+      "sha256": "9ca8e539d8426e6b206ff7db40fbb1f3a8e93b74ad1b9debacd532b3448f79a3",
+      "start_utc": "2026-10-09T12:21:34.437776+00:00",
+      "end_utc": "2026-10-09T12:21:35.422804+00:00",
+      "http_status": 200,
+      "event_id": "401880881"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880882.json",
+      "bytes": 324584,
+      "sha256": "34057c28232efd21486faac01e4d5cfb7f18f130eaa1994dbaabd07d1fae5bbb",
+      "start_utc": "2026-10-09T12:21:36.928894+00:00",
+      "end_utc": "2026-10-09T12:21:37.619294+00:00",
+      "http_status": 200,
+      "event_id": "401880882"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880883.json",
+      "bytes": 323921,
+      "sha256": "a2684b21fa3a551de0d810fe517660b86942b30ea116b1c33b287f98acab4a8c",
+      "start_utc": "2026-10-09T12:21:39.125355+00:00",
+      "end_utc": "2026-10-09T12:21:39.700066+00:00",
+      "http_status": 200,
+      "event_id": "401880883"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880884.json",
+      "bytes": 330760,
+      "sha256": "f26daa86bffb660d5212f6d7c1ee025f82829e8fbe08f756dcaf241a635df060",
+      "start_utc": "2026-10-09T12:21:41.205499+00:00",
+      "end_utc": "2026-10-09T12:21:41.928758+00:00",
+      "http_status": 200,
+      "event_id": "401880884"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880885.json",
+      "bytes": 312785,
+      "sha256": "2229ed8a97fbd195a602dbcbf418c0356a928dd06570782e94a6badd165b3e47",
+      "start_utc": "2026-10-09T12:21:43.439251+00:00",
+      "end_utc": "2026-10-09T12:21:44.332878+00:00",
+      "http_status": 200,
+      "event_id": "401880885"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880886.json",
+      "bytes": 327660,
+      "sha256": "8053af354a93cdf5746ae770a1900ac501200a723d44d16e4d8056c65fcee9be",
+      "start_utc": "2026-10-09T12:21:45.838682+00:00",
+      "end_utc": "2026-10-09T12:21:46.939046+00:00",
+      "http_status": 200,
+      "event_id": "401880886"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880887.json",
+      "bytes": 327813,
+      "sha256": "8a0c711056f7d14b9bc0108801f6ea6affb3d13563097c72007735bfff6090b7",
+      "start_utc": "2026-10-09T12:21:48.446971+00:00",
+      "end_utc": "2026-10-09T12:21:49.105736+00:00",
+      "http_status": 200,
+      "event_id": "401880887"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880888.json",
+      "bytes": 325133,
+      "sha256": "43329d6009379962f326fbcb7ef1bac9c205a149b7e0ba2038bc654e960a1e2d",
+      "start_utc": "2026-10-09T12:21:50.612140+00:00",
+      "end_utc": "2026-10-09T12:21:51.363400+00:00",
+      "http_status": 200,
+      "event_id": "401880888"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880889.json",
+      "bytes": 285306,
+      "sha256": "2684a648e47117787677d3a8fdf41a29e3e1bd272bb2529828cb63888ed0cdee",
+      "start_utc": "2026-10-09T12:21:52.869034+00:00",
+      "end_utc": "2026-10-09T12:21:53.517121+00:00",
+      "http_status": 200,
+      "event_id": "401880889"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880890.json",
+      "bytes": 313378,
+      "sha256": "167fc52410a6425bc7bc91c2898c967c5db21c084c4dddbb92ebf97d9faa8242",
+      "start_utc": "2026-10-09T12:21:55.022239+00:00",
+      "end_utc": "2026-10-09T12:21:55.695445+00:00",
+      "http_status": 200,
+      "event_id": "401880890"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880892.json",
+      "bytes": 319072,
+      "sha256": "6ad2cb64afac38044731406d311bfaff19eca3a20757dd500dd1577658918354",
+      "start_utc": "2026-10-09T12:21:57.200834+00:00",
+      "end_utc": "2026-10-09T12:21:57.764480+00:00",
+      "http_status": 200,
+      "event_id": "401880892"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880893.json",
+      "bytes": 277969,
+      "sha256": "c25fda1161ef10b1346316d68da921950ea7936508f1dced88b967348d59dde9",
+      "start_utc": "2026-10-09T12:21:59.270717+00:00",
+      "end_utc": "2026-10-09T12:21:59.926438+00:00",
+      "http_status": 200,
+      "event_id": "401880893"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880894.json",
+      "bytes": 338048,
+      "sha256": "07dc55aca4faf62751771492d658aef7bd87f0b1586c4764d600e9fa1f2e6305",
+      "start_utc": "2026-10-09T12:22:01.431732+00:00",
+      "end_utc": "2026-10-09T12:22:02.093587+00:00",
+      "http_status": 200,
+      "event_id": "401880894"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880895.json",
+      "bytes": 332914,
+      "sha256": "6381d42d75420367ffe1d05207552da468dbb616064afec071c21f750a43c430",
+      "start_utc": "2026-10-09T12:22:03.599173+00:00",
+      "end_utc": "2026-10-09T12:22:04.240537+00:00",
+      "http_status": 200,
+      "event_id": "401880895"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880896.json",
+      "bytes": 321245,
+      "sha256": "7649f0ad439ef6b04ba7780c67026cfb80c65e3ee393ac9e8fcc32f3e1807254",
+      "start_utc": "2026-10-09T12:22:05.746067+00:00",
+      "end_utc": "2026-10-09T12:22:06.342429+00:00",
+      "http_status": 200,
+      "event_id": "401880896"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880897.json",
+      "bytes": 322385,
+      "sha256": "49b6ea7dfef2e7532aba7d98b691a3278c29df833f694ac5f6a28c4f324b7335",
+      "start_utc": "2026-10-09T12:22:07.850654+00:00",
+      "end_utc": "2026-10-09T12:22:08.666973+00:00",
+      "http_status": 200,
+      "event_id": "401880897"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880898.json",
+      "bytes": 324010,
+      "sha256": "15137c10dce49dd16715efe347d756363cea2030eb79b7a10b46e1c444f8ed02",
+      "start_utc": "2026-10-09T12:22:10.173373+00:00",
+      "end_utc": "2026-10-09T12:22:10.793566+00:00",
+      "http_status": 200,
+      "event_id": "401880898"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880899.json",
+      "bytes": 319122,
+      "sha256": "f3b1e7df42068bae946413297882b3bf17e1319a117141996783fca89c9357be",
+      "start_utc": "2026-10-09T12:22:12.299335+00:00",
+      "end_utc": "2026-10-09T12:22:12.981239+00:00",
+      "http_status": 200,
+      "event_id": "401880899"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880900.json",
+      "bytes": 326213,
+      "sha256": "a1b8fe50d2831152a38503452b54edfa0f4c3d3a0ecc6dcdf87d62e67fa77bd6",
+      "start_utc": "2026-10-09T12:22:14.486972+00:00",
+      "end_utc": "2026-10-09T12:22:15.107233+00:00",
+      "http_status": 200,
+      "event_id": "401880900"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880901.json",
+      "bytes": 325260,
+      "sha256": "9e529b07a1fa4d6f8d0a7abb8f10a5a0f056a7ade3a28619692335d945c54fce",
+      "start_utc": "2026-10-09T12:22:16.612774+00:00",
+      "end_utc": "2026-10-09T12:22:17.278532+00:00",
+      "http_status": 200,
+      "event_id": "401880901"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880902.json",
+      "bytes": 326629,
+      "sha256": "764599822541629645651bf47f5df5deda02e9b41a8c2aa86e45f2accd11a75e",
+      "start_utc": "2026-10-09T12:22:18.784639+00:00",
+      "end_utc": "2026-10-09T12:22:19.402080+00:00",
+      "http_status": 200,
+      "event_id": "401880902"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880903.json",
+      "bytes": 315631,
+      "sha256": "278afe59b7ce266f754a85c0b37bbd4fe1ca9ada6f1df4ad8418c7a791a16953",
+      "start_utc": "2026-10-09T12:22:20.908056+00:00",
+      "end_utc": "2026-10-09T12:22:22.240165+00:00",
+      "http_status": 200,
+      "event_id": "401880903"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880904.json",
+      "bytes": 324200,
+      "sha256": "d6669b991414c9458e7a49f1d7dda4cb0e51f94c924e472a3ea9f0bd9309f63e",
+      "start_utc": "2026-10-09T12:22:23.745620+00:00",
+      "end_utc": "2026-10-09T12:22:24.461147+00:00",
+      "http_status": 200,
+      "event_id": "401880904"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880905.json",
+      "bytes": 315010,
+      "sha256": "a4b744edda5e66506a8f4a6c1ad90fa0c177ea49017eda2a933137f8292e3a11",
+      "start_utc": "2026-10-09T12:22:25.966839+00:00",
+      "end_utc": "2026-10-09T12:22:26.542147+00:00",
+      "http_status": 200,
+      "event_id": "401880905"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880906.json",
+      "bytes": 335457,
+      "sha256": "0330a31d528a5ced842442c8c3e5450c7e1a622308e43a78649a2bd853965d7c",
+      "start_utc": "2026-10-09T12:22:28.048378+00:00",
+      "end_utc": "2026-10-09T12:22:28.580526+00:00",
+      "http_status": 200,
+      "event_id": "401880906"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880907.json",
+      "bytes": 321777,
+      "sha256": "4688377c0429bef57bbbf1f8aa7ef7e0c9e7aa2393e81c11ef7093638b59dba4",
+      "start_utc": "2026-10-09T12:22:30.088466+00:00",
+      "end_utc": "2026-10-09T12:22:31.105521+00:00",
+      "http_status": 200,
+      "event_id": "401880907"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880908.json",
+      "bytes": 311192,
+      "sha256": "371bc1c7a392406cdf57654d181c22c0285ea3f2b8b63de74c806c752ed68328",
+      "start_utc": "2026-10-09T12:22:32.611956+00:00",
+      "end_utc": "2026-10-09T12:22:33.190125+00:00",
+      "http_status": 200,
+      "event_id": "401880908"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880909.json",
+      "bytes": 313789,
+      "sha256": "97ed84ca0554e190dd598cd02b779e8893378f6c5f6f49e7b2a7546ea7d767a7",
+      "start_utc": "2026-10-09T12:22:34.695981+00:00",
+      "end_utc": "2026-10-09T12:22:35.303167+00:00",
+      "http_status": 200,
+      "event_id": "401880909"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880910.json",
+      "bytes": 314170,
+      "sha256": "5a5f4c34c322d4fa4074082a385b4b3d9b6514c5d3b1f97f054f3c2383bebd28",
+      "start_utc": "2026-10-09T12:22:36.809270+00:00",
+      "end_utc": "2026-10-09T12:22:37.436908+00:00",
+      "http_status": 200,
+      "event_id": "401880910"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880911.json",
+      "bytes": 323848,
+      "sha256": "ecdb0aa9e278bca7565e0de1c45c8dab23aadd8d9cff4897c1b3e131913104f6",
+      "start_utc": "2026-10-09T12:22:38.942394+00:00",
+      "end_utc": "2026-10-09T12:22:39.482350+00:00",
+      "http_status": 200,
+      "event_id": "401880911"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880912.json",
+      "bytes": 319571,
+      "sha256": "b442856ac52b7aef654f947bf8cc3447a3df20fd0e39d05ce590c481b10c781b",
+      "start_utc": "2026-10-09T12:22:40.988435+00:00",
+      "end_utc": "2026-10-09T12:22:41.863711+00:00",
+      "http_status": 200,
+      "event_id": "401880912"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880913.json",
+      "bytes": 326770,
+      "sha256": "fdb8ce89ab826c0f7df482a44ce8dd42a9a75b05aac70ce6c83fbbbeca524cb9",
+      "start_utc": "2026-10-09T12:22:43.369256+00:00",
+      "end_utc": "2026-10-09T12:22:44.209695+00:00",
+      "http_status": 200,
+      "event_id": "401880913"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880914.json",
+      "bytes": 318001,
+      "sha256": "1381cbcb06f8744342c39193531ad789320f197bbc737cb3750b42d6c55c5f55",
+      "start_utc": "2026-10-09T12:22:45.715207+00:00",
+      "end_utc": "2026-10-09T12:22:46.246036+00:00",
+      "http_status": 200,
+      "event_id": "401880914"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880915.json",
+      "bytes": 317828,
+      "sha256": "f403d5041bfc67d5ea22f72774d5fb95ddbb8678dbe7ddd91c6470cef6aa784f",
+      "start_utc": "2026-10-09T12:22:47.753011+00:00",
+      "end_utc": "2026-10-09T12:22:48.364650+00:00",
+      "http_status": 200,
+      "event_id": "401880915"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880916.json",
+      "bytes": 308073,
+      "sha256": "35eb7716d5fda255723ca6d7183a5ecb47ca249c2f15d3baa8854595c31da181",
+      "start_utc": "2026-10-09T12:22:49.870628+00:00",
+      "end_utc": "2026-10-09T12:22:50.555838+00:00",
+      "http_status": 200,
+      "event_id": "401880916"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880917.json",
+      "bytes": 320902,
+      "sha256": "5a03413ac6328b8b7acf24d71c653ee69ce6030b2b0b3d697f867a34f042b9a3",
+      "start_utc": "2026-10-09T12:22:52.062011+00:00",
+      "end_utc": "2026-10-09T12:22:52.566527+00:00",
+      "http_status": 200,
+      "event_id": "401880917"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880918.json",
+      "bytes": 321992,
+      "sha256": "fb98ab6f3a767fe477de824440cad845485d717e3b6d9c052953899675b1e9eb",
+      "start_utc": "2026-10-09T12:22:54.073732+00:00",
+      "end_utc": "2026-10-09T12:22:55.276527+00:00",
+      "http_status": 200,
+      "event_id": "401880918"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880919.json",
+      "bytes": 304305,
+      "sha256": "5e0b79f7eef8db68d60b683822643a9a01904a3ff6821c98ef97aa87d0253988",
+      "start_utc": "2026-10-09T12:22:56.782572+00:00",
+      "end_utc": "2026-10-09T12:22:57.655676+00:00",
+      "http_status": 200,
+      "event_id": "401880919"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880920.json",
+      "bytes": 331710,
+      "sha256": "1f9e20cbde7bd246d22aced975632c1db06b5dd59429225964374af29fb23c6f",
+      "start_utc": "2026-10-09T12:22:59.160957+00:00",
+      "end_utc": "2026-10-09T12:23:00.046927+00:00",
+      "http_status": 200,
+      "event_id": "401880920"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880921.json",
+      "bytes": 281240,
+      "sha256": "18174eb6dc3549dd1ec619aabd40fa014c8c9acd81c38835a55ff429732032da",
+      "start_utc": "2026-10-09T12:23:01.552546+00:00",
+      "end_utc": "2026-10-09T12:23:02.455535+00:00",
+      "http_status": 200,
+      "event_id": "401880921"
+    },
+    {
+      "kind": "summary",
+      "local_file": "summaries/espn_summary_401880922.json",
+      "bytes": 272048,
+      "sha256": "9e6853502cfb0263a173a902e43279bedbe42fa954e4501963a08a512d9dc042",
+      "start_utc": "2026-10-09T12:23:03.960803+00:00",
+      "end_utc": "2026-10-09T12:23:04.547741+00:00",
+      "http_status": 200,
+      "event_id": "401880922"
+    }
+  ]
+}

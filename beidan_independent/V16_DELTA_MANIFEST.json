@@ -1,0 +1,2384 @@
+{
+  "version": "v16",
+  "created_at": "2026-10-09T14:54:41.530738+00:00",
+  "base_commit": "4a4eadb3354d29e9257b77f04544e4fc1b59af14",
+  "source_commit": "373be6b66f916fa5940dd5a5de50cf21e56bb901",
+  "changed_local_files": [
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "bytes": 14895,
+      "chars": 7603,
+      "git_blob_sha": "e4941deb321045ab6f9d058d2ca649b42f6ee7ce",
+      "sha256": "cc72875eeb6bfe19cd8b249a17627554f228dc2aa978a67404b6ead6df7fa0d5"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/football_data_csv.py",
+      "bytes": 5768,
+      "chars": 5768,
+      "git_blob_sha": "aa1ab93bc86f4bace679cb1709c32610b11dc470",
+      "sha256": "59c3083d6acbe120f424155365859199255b88394a0fe1bb391df9c94fd03f8d"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_eng2/AUDIT_CONFIG.json",
+      "bytes": 1180,
+      "chars": 1180,
+      "git_blob_sha": "dd64dbc130aaf44ace8af9a02d000b03a361414b",
+      "sha256": "6f4078ef598bdb6007f47604e69d8703ad05688079a65db3978d2d07038f430b"
+    },
+    {
+      "path": "beidan_independent/data_sample/espn_eng4/AUDIT_CONFIG.json",
+      "bytes": 1274,
+      "chars": 1274,
+      "git_blob_sha": "0b0286a6571a7b7c135592a4afdd16270edc4184",
+      "sha256": "50e82415907222b76bd427ead787f21e425d2cc7ebcdf3be4a20c56d90aed624"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/AUDIT.json",
+      "bytes": 34427,
+      "chars": 34427,
+      "git_blob_sha": "c21954372975eb7cfd4ccb2a9027d24232d2a4c1",
+      "sha256": "20b46b4e4f699c3a5366a8d42675174a30e7e9357889b78432812f5416b1445b"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/B1.csv",
+      "bytes": 158572,
+      "chars": 158572,
+      "git_blob_sha": "e074a025cd2c9a8fc0537644278946ac7e3334a6",
+      "sha256": "af974fabbfff429b5e85ed9973dde4c312658c8a4e327a630bd4af6a2f81eb44"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/D1.csv",
+      "bytes": 159633,
+      "chars": 159633,
+      "git_blob_sha": "b5a3cc2710bc646dcc19cf89ade68c13c7b9738d",
+      "sha256": "8ceb88a4d9ab909ce4e48fdba3a2af2cc722178c9619ae9cf64613cd20245aef"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/E3.csv",
+      "bytes": 289520,
+      "chars": 289520,
+      "git_blob_sha": "39db4e39b555923d9af7bc4056434f4d1eb6366b",
+      "sha256": "255578a245a4bf76e0e8572cb13995e4e5917c1ed09d5bd24c1535ea05cc7307"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/F2.csv",
+      "bytes": 155927,
+      "chars": 155927,
+      "git_blob_sha": "cb96fea6841ac291c9f91964b3c2e266f3c3f351",
+      "sha256": "f3a61a786e9470d2bf3711db8597ac29bdbd380dd48f09a95a3b966b98e9101d"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/I2.csv",
+      "bytes": 190581,
+      "chars": 190581,
+      "git_blob_sha": "b94de4b7f267250c39b20439413c959928588004",
+      "sha256": "2da0bd4b267a1829756242d3131c0065cbff1d9fd70b8125a395bd111e168239"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/N1.csv",
+      "bytes": 158053,
+      "chars": 158053,
+      "git_blob_sha": "9f4092b9c10366ce3e7428b9ecf2cee184491517",
+      "sha256": "ceb2b48a20d180f9f0f3621d7211c4d71e1d6284743c797c1b65705ef03b37be"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/P1.csv",
+      "bytes": 157404,
+      "chars": 157404,
+      "git_blob_sha": "42d75eed35e69f1b95ea19d3ffea52fd70420b85",
+      "sha256": "6c5fcfddf936e6f8606fe6ad1fbdfac5942cfdec2195851001d3e6a1218361d2"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/RETRIEVAL.json",
+      "bytes": 1679,
+      "chars": 1679,
+      "git_blob_sha": "50f9c84ef485d0e071edbcf3a6e03175344499a0",
+      "sha256": "09da7d184c38ef991e5bbc554c2b05e1ac3288c2671cd5277d7a265efa0188d1"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/SC0.csv",
+      "bytes": 118361,
+      "chars": 118361,
+      "git_blob_sha": "8684b2c72368f8f41fc982a604d171b3761740b9",
+      "sha256": "b5e3337c032ffe294b174b0b2906e762c739e0662b3119a3e6e6a704b64f65b9"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/SC1.csv",
+      "bytes": 94652,
+      "chars": 94652,
+      "git_blob_sha": "5b1f2e997bd10e21f3c33eb108b6500b5114321a",
+      "sha256": "a6be263f9a0c5c6e3c512ce7c2f10d82b0743302077a8e48b4fdd200a2a91989"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/SP2.csv",
+      "bytes": 237234,
+      "chars": 237234,
+      "git_blob_sha": "fe14f3b73b1384191fc54a31afa0271425a44dde",
+      "sha256": "f83eb0ad9ca4ff670a06ba3b46f4d7e0117e68451a6b6f16610261df250b0493"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/B1.csv",
+      "bytes": 158573,
+      "chars": 158573,
+      "git_blob_sha": "8ac764a63c5ae242f973cacdbbd318fa9e95f80b",
+      "sha256": "35959b786e016d36b4227e65e3f155e30ba4b1d38bd28c53f6fd8413d0b3d92f"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/D1.csv",
+      "bytes": 159634,
+      "chars": 159634,
+      "git_blob_sha": "e0f1ff8ac5417ba9c9ed6f60a054b54c9ad3750d",
+      "sha256": "b0f77ea632b2ee1bf5e3f0d6167ddcb24a91cfb1c684742e7876f904dd6ccb52"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/E3.csv",
+      "bytes": 289520,
+      "chars": 289520,
+      "git_blob_sha": "39db4e39b555923d9af7bc4056434f4d1eb6366b",
+      "sha256": "255578a245a4bf76e0e8572cb13995e4e5917c1ed09d5bd24c1535ea05cc7307"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/F2.csv",
+      "bytes": 155927,
+      "chars": 155927,
+      "git_blob_sha": "cb96fea6841ac291c9f91964b3c2e266f3c3f351",
+      "sha256": "f3a61a786e9470d2bf3711db8597ac29bdbd380dd48f09a95a3b966b98e9101d"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/I2.csv",
+      "bytes": 190582,
+      "chars": 190582,
+      "git_blob_sha": "80e1af0fc27355eb3422acb32680cd756b2bd84e",
+      "sha256": "5fe326b94985df27ed76cafc889ff49be194eb7220464c207b19312099480b7e"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/N1.csv",
+      "bytes": 158054,
+      "chars": 158054,
+      "git_blob_sha": "a106b4d2b8fc1addd31b55164015cee2a871933f",
+      "sha256": "feff4d7996557383e52e09e0c83c6d751edc936b5709974f52164ccb2886274d"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/P1.csv",
+      "bytes": 157404,
+      "chars": 157404,
+      "git_blob_sha": "42d75eed35e69f1b95ea19d3ffea52fd70420b85",
+      "sha256": "6c5fcfddf936e6f8606fe6ad1fbdfac5942cfdec2195851001d3e6a1218361d2"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/SC0.csv",
+      "bytes": 118362,
+      "chars": 118362,
+      "git_blob_sha": "80240918f6bbc389121d8d3085508270e3fbf2fb",
+      "sha256": "036fa8bcfca583abf28e1f7aab00505e5d89dbbf2a2d6c3c94486542b8d89ec3"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/SC1.csv",
+      "bytes": 94653,
+      "chars": 94653,
+      "git_blob_sha": "b891e25fee3afca90b5597b89031140309e6c57d",
+      "sha256": "966115992221fb0d44b7f4aa023169fb2cee1d883808af3bb4f6fc5e08a3977a"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/normalized/SP2.csv",
+      "bytes": 237235,
+      "chars": 237235,
+      "git_blob_sha": "bfa5aa85c7a6c83f4f7fd209ac148e685a40f43d",
+      "sha256": "f79906eccc532331f781908a8e6e737755245353880e25ba6b3f8e3507aeaacb"
+    },
+    {
+      "path": "beidan_independent/data_sample/football_data_csv/extracted_20261009/score_observations.jsonl",
+      "bytes": 2198168,
+      "chars": 2198168,
+      "git_blob_sha": "6e8627e5efad20b54498c25b65aa210fc6bda598",
+      "sha256": "45d0ebac9ca14712242113c9fe45b7838fde13a90602c18857e5c9dbede90c4e"
+    },
+    {
+      "path": "beidan_independent/data_sample/native_archive_download_plan.json",
+      "bytes": 73057,
+      "chars": 73057,
+      "git_blob_sha": "d1c7df87bbcfeb394e14a6b32f38ce2f38ce188e",
+      "sha256": "5ede97aa65ae3335d6465a4fe261d62f6e450eac60ee9a199efa0ea482641688"
+    },
+    {
+      "path": "beidan_independent/data_sample/native_archive_download_receipts.json",
+      "bytes": 109441,
+      "chars": 109441,
+      "git_blob_sha": "3241258361731268975e6ebf617b7e44164ea689",
+      "sha256": "b624db1e9180de8fb1e98a484587bbd0e6a7e22bad3d4c0ab7c52d3e8dace4bf"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v16-data-mining.md",
+      "bytes": 7140,
+      "chars": 3854,
+      "git_blob_sha": "725be9d8d30417e3958371b60bc66c0d029e2b5c",
+      "sha256": "2f30958cce0bcd3071bdd648a273cd23fd8cc2bb41c02c67d4c343d04e04e295"
+    },
+    {
+      "path": "beidan_independent/outputs/eng2_native/audit_and_predictions.json",
+      "bytes": 232129,
+      "chars": 231057,
+      "git_blob_sha": "448384e31c022e23adc76c055cadc292ec539d99",
+      "sha256": "6f51a791bf43ae8e50dabe52fec05526cfe336acfc1a1df4e8086288f526b16b"
+    },
+    {
+      "path": "beidan_independent/outputs/eng4_native/audit_and_predictions.json",
+      "bytes": 244967,
+      "chars": 243763,
+      "git_blob_sha": "1b3a081b06970575f83a295bc708e2d2a1a670ec",
+      "sha256": "d990225aad713e030a05f69bd62a054a93b454b6690f82e02229f1cd0fb2c585"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T143301921759Z/folds.json",
+      "bytes": 153083,
+      "chars": 149681,
+      "git_blob_sha": "4202084c5a5b18d99ccbc3712aa9d214c480ccbe",
+      "sha256": "2de4372b802feb6c3c23916b66ff28413a32722067ebbf0ca34f882e276bbe93"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T143301921759Z/freeze_manifest.json",
+      "bytes": 847,
+      "chars": 847,
+      "git_blob_sha": "300782f061f1264698917798a7d3658e2134daa5",
+      "sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T143301921759Z/history.jsonl",
+      "bytes": 243579,
+      "chars": 243567,
+      "git_blob_sha": "b83f3a59fb03c4be1fa5c641dfcf66a041ca1229",
+      "sha256": "f1cdc6593876e7fe6fd32cec872d4eba93c9ab22c990911bf90bf5ace8af4bbd"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T143301921759Z/report.json",
+      "bytes": 4159823,
+      "chars": 4134373,
+      "git_blob_sha": "8bfbd7563c8ea431a4bd28843aa426c4892218dd",
+      "sha256": "5887a4949963493a1661a7a33dd5cdb9f54145ff24594b044b84a1eb06926fc9"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T143301921759Z/results.jsonl",
+      "bytes": 0,
+      "chars": 0,
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "beidan_independent/outputs/predictions_20261009_20261010.md",
+      "bytes": 8514,
+      "chars": 6588,
+      "git_blob_sha": "ef565fbdd9ab2bc497aa8ea006d10e29b15edc1f",
+      "sha256": "18cf87f086278b989fd5fb66cbd748a3ab8b963ccf500815d246b79329cc8dbe"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145238015057Z/manifests/26103/20261009T145238015057Z.json",
+      "bytes": 1962,
+      "chars": 1746,
+      "git_blob_sha": "e8608b8b03612329f28a11637dc66ece6efe5a82",
+      "sha256": "bb599f1ec0ad93da17b966aed7e55c556071a453ca1e0357a63c641e4a15d999"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145238015057Z/manifests/26103/20261009T145238015057Z.reserved",
+      "bytes": 33,
+      "chars": 33,
+      "git_blob_sha": "114704912335cd0ee4a0c67dcfc82223b5cbd55f",
+      "sha256": "8252cb726672f1e007c6476888c451237f4c64e45081e753e80cc3cfb56bbd62"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145335665035Z/manifests/26103/20261009T145335665035Z.json",
+      "bytes": 2241,
+      "chars": 2021,
+      "git_blob_sha": "b738c1f888d12d81323c5a7a342165dc0592ab5b",
+      "sha256": "d732fdf99ab0f739cbae21c2f16ce7cd39ea6c5c127be6f1fd226c1225d51c34"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145335665035Z/manifests/26103/20261009T145335665035Z.reserved",
+      "bytes": 33,
+      "chars": 33,
+      "git_blob_sha": "c8fbf7f6fd885c0781820b7cdde2415aa34679e8",
+      "sha256": "e098f202b5fb9d4b7bb57a13fa87c3c9282ba10a4aa46cf8fe69bae27813eda5"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145335665035Z/snapshots/26103/26103-10__20261009T145335908735Z.json",
+      "bytes": 16767,
+      "chars": 16691,
+      "git_blob_sha": "fba4a4c701e2b59ec911bccdf4a0c35b1ff0afc1",
+      "sha256": "4db83e0b5957d6110649d0f297f5d172c39efdcc49f734008e08fd38998a701a"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_shadow/20261009T145335665035Z/snapshots/26103/26103-9__20261009T145335893791Z.json",
+      "bytes": 16766,
+      "chars": 16690,
+      "git_blob_sha": "00ab423d148dc49905ddbdb33aa2bd373d1d8be5",
+      "sha256": "ffbe7eb795981d91f7de2af881ba9dbb202a33c8affc84147bfd92190744bb97"
+    },
+    {
+      "path": "beidan_independent/outputs/today_calendar_status.json",
+      "bytes": 9613,
+      "chars": 9217,
+      "git_blob_sha": "726b317cf2d5967d9a82d5e4ef734773447dc50c",
+      "sha256": "f07d256c8927547fe4ca7195e0bcb97b2735e91dac476e157cb10c0f78d93bdc"
+    },
+    {
+      "path": "beidan_independent/outputs/v16_pending_settlement.json",
+      "bytes": 17231,
+      "chars": 17231,
+      "git_blob_sha": "1fcc83a718104e1ccce4552b920eaa8b711cc07d",
+      "sha256": "986c9f1fe141500884d3c3134553e472325b5779a3eb832efd1f64ea0abb357a"
+    },
+    {
+      "path": "beidan_independent/scripts/audit_extracted_csv.py",
+      "bytes": 4462,
+      "chars": 4462,
+      "git_blob_sha": "e1987beb95f18fcc9eb0c017ea3665455ac02b01",
+      "sha256": "5cbb69ef2d46d5e30eca92404cca1545e5e24d4dced9f69460a111de395a15ef"
+    },
+    {
+      "path": "beidan_independent/scripts/download_native_archives.py",
+      "bytes": 2849,
+      "chars": 2849,
+      "git_blob_sha": "75d76ed0690145657b2102dc386b6ac1eb96c992",
+      "sha256": "de72ed4ace0e1edd0eab68c13ec7f0849a928109556a1edb52334fe6cb0a768c"
+    },
+    {
+      "path": "beidan_independent/scripts/emit_current_prediction_tables.py",
+      "bytes": 7080,
+      "chars": 6354,
+      "git_blob_sha": "1c3c9ea012a17e726a22e3ae53973237bad25908",
+      "sha256": "4d1cf3fc3de26ecb5df3284170639091692bf437300f97263b854abb72fd511f"
+    },
+    {
+      "path": "beidan_independent/scripts/mine_football_data.py",
+      "bytes": 5760,
+      "chars": 5760,
+      "git_blob_sha": "a21507c7891caf1447aa3b317c73c7a7eb79e139",
+      "sha256": "4eee5695e0254064efa1a07f0a5cfd1c54148e26f027a9646e973c82dc901922"
+    },
+    {
+      "path": "beidan_independent/tests/test_football_data_csv.py",
+      "bytes": 3135,
+      "chars": 3135,
+      "git_blob_sha": "7247980ee036ab98f33bfccba620ebafb7b5eae4",
+      "sha256": "25d444d9084b69566ac52468e5c42e1a9a08cdfc3a72d71c0f0813b4827b4bae"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/VERIFIED_FILE_INDEX.json",
+      "bytes": 42937,
+      "chars": 42937,
+      "git_blob_sha": "0c94821591711ebd9faf00bcb9ade3bf3ceec4d5",
+      "sha256": "0bb1d4cc29536bc152d21e8801e930fa34a7875a5d2b5ba7b17d67c8b6bb4659"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/VERIFIED_FILE_INDEX.json",
+      "bytes": 46223,
+      "chars": 46223,
+      "git_blob_sha": "0ce8f238f3fb23e897d40dee15bf74c30b308935",
+      "sha256": "1f4c3f6184c1ff3bdab65f059ca2333f1de86006e1ae5e593efc71aa21363747"
+    }
+  ],
+  "reused_repository_blobs": [
+    {
+      "path": "data/exports/raw/eng2_true/MANIFEST_schedule.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6767dc8d3bde5397ca6a5d55484034f66d69e659",
+      "size": 9176,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6767dc8d3bde5397ca6a5d55484034f66d69e659"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/MANIFEST_summaries.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "518d7c4d101ee104a8c314bfed7e6b1949500168",
+      "size": 42657,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/518d7c4d101ee104a8c314bfed7e6b1949500168"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_314.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "690d078677a7633543cfb5890260e054675bda88",
+      "size": 73303,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/690d078677a7633543cfb5890260e054675bda88"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_318.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8deb79b4692d17cfbadb6e9db1ed317b2aeedbc5",
+      "size": 73269,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8deb79b4692d17cfbadb6e9db1ed317b2aeedbc5"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_333.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8ef4cf64cef51ac1a33e9a498268e0011d359fa",
+      "size": 73247,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a8ef4cf64cef51ac1a33e9a498268e0011d359fa"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_334.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b49918cfbfd6f665ddcee56c394a9afc9b94a70d",
+      "size": 74141,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b49918cfbfd6f665ddcee56c394a9afc9b94a70d"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_336.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ee2791c10a951a6a191c6709d2099d63b8afe5f9",
+      "size": 73452,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ee2791c10a951a6a191c6709d2099d63b8afe5f9"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_347.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "127ec5081e9d913fec821371adbf5ea04eb6ece8",
+      "size": 73594,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/127ec5081e9d913fec821371adbf5ea04eb6ece8"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_352.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e99f79cc3409e010f6e5ce8c0136e88c70f7d81",
+      "size": 74769,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1e99f79cc3409e010f6e5ce8c0136e88c70f7d81"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_358.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "531c3f910bf6f8d94869a3e3add8613d48701a51",
+      "size": 73539,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/531c3f910bf6f8d94869a3e3add8613d48701a51"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_365.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f34e4e861a8baf5a515cf88d169e4326b9d7e146",
+      "size": 73829,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f34e4e861a8baf5a515cf88d169e4326b9d7e146"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_369.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f0d6d3b9f1f6c64f12b6cd89d31c2d1dd7eb3121",
+      "size": 74043,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f0d6d3b9f1f6c64f12b6cd89d31c2d1dd7eb3121"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_371.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "342d468717965359c068fc7219058ef4415eaad2",
+      "size": 74229,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/342d468717965359c068fc7219058ef4415eaad2"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_372.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d01d81145fa9e2056ad2f4e2488acd564e5d914",
+      "size": 73749,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8d01d81145fa9e2056ad2f4e2488acd564e5d914"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_374.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "539ae42d335bec255d8a2f51b03fd3b92761adc0",
+      "size": 73348,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/539ae42d335bec255d8a2f51b03fd3b92761adc0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_379.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "11deb9ea8b8a1b5f59983749780c336a4079e4a0",
+      "size": 73890,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/11deb9ea8b8a1b5f59983749780c336a4079e4a0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_380.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7675117f85bdaa54a605793db04b80eefd1f30b4",
+      "size": 66034,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7675117f85bdaa54a605793db04b80eefd1f30b4"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_381.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0963e1aa6196747e782c156b8fdbc8493fe5295a",
+      "size": 73756,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0963e1aa6196747e782c156b8fdbc8493fe5295a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_383.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1dcbcf629028952687a4b9d6f680c2ae2a9f25a8",
+      "size": 74414,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1dcbcf629028952687a4b9d6f680c2ae2a9f25a8"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_391.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63525afa8a40427cf249301c5fbe3dfc2f483066",
+      "size": 73322,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/63525afa8a40427cf249301c5fbe3dfc2f483066"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_392.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7a29687ba07ffaa5436bef2f343b2fa1bd79515",
+      "size": 74272,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a7a29687ba07ffaa5436bef2f343b2fa1bd79515"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_394.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63f42119e7c62f170bc8aca1279d3fe2b60988d3",
+      "size": 73955,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/63f42119e7c62f170bc8aca1279d3fe2b60988d3"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_395.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3c4e67c01098a8e4e73a14f9a0bcde2403ba312",
+      "size": 73400,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/c3c4e67c01098a8e4e73a14f9a0bcde2403ba312"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/espn_team_398.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "968a6ae644aa49811ef4aa4d600c82581489e7e7",
+      "size": 73928,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/968a6ae644aa49811ef4aa4d600c82581489e7e7"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/ft_event_ids.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "25206288b762ad25e346d8787e2cf4baecaafc09",
+      "size": 1427,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/25206288b762ad25e346d8787e2cf4baecaafc09"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880245.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4d145151f028f027da539ff343294c9dff973b7",
+      "size": 385598,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a4d145151f028f027da539ff343294c9dff973b7"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880246.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed7d6a9fc77606c22b7b5d2262319b25a93e2167",
+      "size": 419278,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ed7d6a9fc77606c22b7b5d2262319b25a93e2167"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880247.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf6c6681d8c83aa3ee6cce5d109c27952ce60519",
+      "size": 413011,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cf6c6681d8c83aa3ee6cce5d109c27952ce60519"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880248.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca0c0322bf2484a0184a76f5fe5c262f896595e1",
+      "size": 418648,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ca0c0322bf2484a0184a76f5fe5c262f896595e1"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880249.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1c349b4bd3c21adddb4abf5996195d07af4ccd5c",
+      "size": 418291,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1c349b4bd3c21adddb4abf5996195d07af4ccd5c"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880250.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d3fcae9a433d37efa9aca9e83b000f46b6c7c8cd",
+      "size": 403142,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d3fcae9a433d37efa9aca9e83b000f46b6c7c8cd"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880251.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a4ac3f84d28cfc8afd37f0fa6fbefb9d26792a0",
+      "size": 432673,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5a4ac3f84d28cfc8afd37f0fa6fbefb9d26792a0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880252.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ba18aaf909d8eb521e849e3369eaa8fc86c9ca4",
+      "size": 394643,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4ba18aaf909d8eb521e849e3369eaa8fc86c9ca4"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880253.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17e75310af73d1f75db800b68eeba79e770be605",
+      "size": 423901,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/17e75310af73d1f75db800b68eeba79e770be605"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880254.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a9acfeaac2080af0b7eaae1a5c96e2df5cf1df8",
+      "size": 401828,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2a9acfeaac2080af0b7eaae1a5c96e2df5cf1df8"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880255.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1290c131f02163a72c3bc5d6440cadad96a60ebb",
+      "size": 402290,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1290c131f02163a72c3bc5d6440cadad96a60ebb"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880256.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cef79b617999c5c014ea71f7f1c18e520b9ebb2d",
+      "size": 397587,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cef79b617999c5c014ea71f7f1c18e520b9ebb2d"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880257.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd8b39f368f37aa1eb65e5ea0fc61fd5df406272",
+      "size": 390693,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cd8b39f368f37aa1eb65e5ea0fc61fd5df406272"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880258.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2d4fe521130b55f1551e12cb879f1905e5ea71be",
+      "size": 403010,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2d4fe521130b55f1551e12cb879f1905e5ea71be"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880259.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8109e22d97d08089d020b6703015b59d8e1bf9a",
+      "size": 401398,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a8109e22d97d08089d020b6703015b59d8e1bf9a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880260.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b6a2e0cb5408740b387a2c944abbe6699fec771",
+      "size": 406056,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4b6a2e0cb5408740b387a2c944abbe6699fec771"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880261.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "efa2a309f2ee605c14761a8c740f9b40e4271d26",
+      "size": 402484,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/efa2a309f2ee605c14761a8c740f9b40e4271d26"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880262.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29b73f7a9cdee70899decb68f709394698cf8d03",
+      "size": 411797,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/29b73f7a9cdee70899decb68f709394698cf8d03"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880263.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ed9fe93b7577bea2062facc350eb8d8e7c1bfca",
+      "size": 378969,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9ed9fe93b7577bea2062facc350eb8d8e7c1bfca"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880264.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8536a3613acd9e5e7f2702b45fa5ac347f6caf91",
+      "size": 412319,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8536a3613acd9e5e7f2702b45fa5ac347f6caf91"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880265.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e29b58fcc6a67a7e4512d0818051f18c008a87f",
+      "size": 419498,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9e29b58fcc6a67a7e4512d0818051f18c008a87f"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880266.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a6c4bdccc26036217a616de930d4b6267a6c810",
+      "size": 380044,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8a6c4bdccc26036217a616de930d4b6267a6c810"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880267.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d3fb4e101dfe561c7c7ec2d0e8c107620e6df93",
+      "size": 373897,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8d3fb4e101dfe561c7c7ec2d0e8c107620e6df93"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880268.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93ad4d81be5941c1507262badbb9c09cab302a54",
+      "size": 427884,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/93ad4d81be5941c1507262badbb9c09cab302a54"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880269.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "726acc41ae149207aa7184c4f60fe0bc18cc50b9",
+      "size": 410459,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/726acc41ae149207aa7184c4f60fe0bc18cc50b9"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880270.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b7581c0029689fad13086bbbd158aa4954ff7bc",
+      "size": 410107,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8b7581c0029689fad13086bbbd158aa4954ff7bc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880271.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72f9b9967c5272b624133f07eea16f7f8992e52b",
+      "size": 394109,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/72f9b9967c5272b624133f07eea16f7f8992e52b"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880272.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eeff6a91d21090209f65d1a75442829af54a3ba3",
+      "size": 392914,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/eeff6a91d21090209f65d1a75442829af54a3ba3"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880273.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "108f02b832445a035f5b523c80bb629bd1bdf4be",
+      "size": 408047,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/108f02b832445a035f5b523c80bb629bd1bdf4be"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880274.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3562aa098be8b452482e1a50915f55a53cfabdbb",
+      "size": 406132,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3562aa098be8b452482e1a50915f55a53cfabdbb"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880275.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6d93c9b621f41fb5077c5f3ff0262b4ec3ea987",
+      "size": 355209,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e6d93c9b621f41fb5077c5f3ff0262b4ec3ea987"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880276.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a07e99c4b3b4510b4fa354744f68ab9bbae3bf58",
+      "size": 401671,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a07e99c4b3b4510b4fa354744f68ab9bbae3bf58"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880278.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "952d93bcd398ba071d2e02b78b0ae4d1216c513f",
+      "size": 395322,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/952d93bcd398ba071d2e02b78b0ae4d1216c513f"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880279.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be078b45cc7c059422ec53c0930b4127e13f4595",
+      "size": 399693,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/be078b45cc7c059422ec53c0930b4127e13f4595"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880280.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "39c19a48ddc23b24041e43c5c96f006bd8d97385",
+      "size": 405194,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/39c19a48ddc23b24041e43c5c96f006bd8d97385"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880281.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0dc3d00709807d9d8a881922f7963be4bde578e",
+      "size": 401692,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b0dc3d00709807d9d8a881922f7963be4bde578e"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880282.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c8167c6415ac7a176a7c23a19e84e7f75d755bc",
+      "size": 408382,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9c8167c6415ac7a176a7c23a19e84e7f75d755bc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880283.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e64a06f2e4214708441c38fddb8e7f2e6541cfb0",
+      "size": 398593,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e64a06f2e4214708441c38fddb8e7f2e6541cfb0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880284.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a084ad3cd1f826f916a01f63714f03a2f07b8010",
+      "size": 432479,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a084ad3cd1f826f916a01f63714f03a2f07b8010"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880285.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f1daee6626492a22d2e5d811d4b0d2ebfc2d2120",
+      "size": 425739,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f1daee6626492a22d2e5d811d4b0d2ebfc2d2120"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880286.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4ccbdf46fa9611f5e0d0674be480494a289833a",
+      "size": 409077,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a4ccbdf46fa9611f5e0d0674be480494a289833a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880287.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "106b5f9b733454e31c7e17e4368b487c61002bb1",
+      "size": 403374,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/106b5f9b733454e31c7e17e4368b487c61002bb1"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880288.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f9f0443f68620f96322ca679baf82e221dfc1499",
+      "size": 416812,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f9f0443f68620f96322ca679baf82e221dfc1499"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880289.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5913f377ac4ed34344ed0abf94e23b2e9b20151a",
+      "size": 412884,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5913f377ac4ed34344ed0abf94e23b2e9b20151a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880290.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0c382ab888cd2696786d4b075711cc624b5b880",
+      "size": 400004,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b0c382ab888cd2696786d4b075711cc624b5b880"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880291.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8fc2c88085641ed76b72887e4d465ff3784229e8",
+      "size": 397656,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8fc2c88085641ed76b72887e4d465ff3784229e8"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880292.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b49148f8e396e78497342a203af3b4cd7adaa07e",
+      "size": 423379,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b49148f8e396e78497342a203af3b4cd7adaa07e"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880293.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26fd0d124a7569e6261f9567fa4e515a277b748d",
+      "size": 384356,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/26fd0d124a7569e6261f9567fa4e515a277b748d"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880294.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4c2c91a9e344439756e2b7c3e81023f1879b3a80",
+      "size": 402346,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4c2c91a9e344439756e2b7c3e81023f1879b3a80"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880295.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e299f6d1f80b760c41095d59cfe4640d801d04e3",
+      "size": 394385,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e299f6d1f80b760c41095d59cfe4640d801d04e3"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880296.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "48e4c65f9033dd90c5079d1da47a1ea49b0b35dc",
+      "size": 396664,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/48e4c65f9033dd90c5079d1da47a1ea49b0b35dc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880297.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4de6eb6c3253900b762746c1be6b65e04450cda0",
+      "size": 368763,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4de6eb6c3253900b762746c1be6b65e04450cda0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880298.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "541b7e53a649f4904ba3ea512bdbcef732a24250",
+      "size": 398362,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/541b7e53a649f4904ba3ea512bdbcef732a24250"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880299.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef754f0847bd18d9d3c492a27ecdf29a0a9459ee",
+      "size": 403228,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ef754f0847bd18d9d3c492a27ecdf29a0a9459ee"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880300.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc2e0cc9e8f78d9fd9b951ed58456a17725f170b",
+      "size": 410988,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cc2e0cc9e8f78d9fd9b951ed58456a17725f170b"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880301.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2fbe4833b517d06643f468115acc57c873b3041",
+      "size": 406598,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f2fbe4833b517d06643f468115acc57c873b3041"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880302.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5590a706bd2db3582dc7912854800e1c41f028e",
+      "size": 414610,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a5590a706bd2db3582dc7912854800e1c41f028e"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880303.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2153928e8eb92ff27861c1a5664c79e370531a08",
+      "size": 386626,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2153928e8eb92ff27861c1a5664c79e370531a08"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880304.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4503b8cda85367d089d60c2fcd71b0cc74c80e7a",
+      "size": 397848,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4503b8cda85367d089d60c2fcd71b0cc74c80e7a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880305.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e170e462c8b3a030dea8d1f723ec93295b9afd1",
+      "size": 412635,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6e170e462c8b3a030dea8d1f723ec93295b9afd1"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880306.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "baa246f3f826bfba0068d3fda7406ef873ca3c98",
+      "size": 418404,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/baa246f3f826bfba0068d3fda7406ef873ca3c98"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880307.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "513a3620ecdaecfc6505c43363d4115ec8463372",
+      "size": 390961,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/513a3620ecdaecfc6505c43363d4115ec8463372"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880308.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "efe6417ca2bdd0fb28a2145c6c6257ba505ef577",
+      "size": 414000,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/efe6417ca2bdd0fb28a2145c6c6257ba505ef577"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880309.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bb37711dcbfe46c7ab283aa910224ad53ff54843",
+      "size": 429446,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/bb37711dcbfe46c7ab283aa910224ad53ff54843"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880310.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a64007327eb3c887730501742b47771b361bb0d9",
+      "size": 400108,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a64007327eb3c887730501742b47771b361bb0d9"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880311.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1054c64974ae790a7ab23774dd44b816f959e692",
+      "size": 410925,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1054c64974ae790a7ab23774dd44b816f959e692"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880312.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1547f2a87ed6f9b3dfa6fa2b4140639cac67ea8",
+      "size": 411441,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d1547f2a87ed6f9b3dfa6fa2b4140639cac67ea8"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880313.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d17eb39659c72fac41dba9dd75cc77833b65c21",
+      "size": 417148,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3d17eb39659c72fac41dba9dd75cc77833b65c21"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880314.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d80efec6830b4afc775b3776d0aab0c12ad20e8a",
+      "size": 398731,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d80efec6830b4afc775b3776d0aab0c12ad20e8a"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880315.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e15651aec1a6d5d47d10d6d6f1c974dd023c2acc",
+      "size": 360817,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e15651aec1a6d5d47d10d6d6f1c974dd023c2acc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880316.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78a60c7129be36cad60702178d6bff7fc4567172",
+      "size": 403325,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/78a60c7129be36cad60702178d6bff7fc4567172"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880317.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1ee4ffc065cbcabbd0360cdd85859cbf0b6f3bcc",
+      "size": 398901,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1ee4ffc065cbcabbd0360cdd85859cbf0b6f3bcc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880318.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5fbc5f1521b4d7f2cdf01387d5d446bf3b718245",
+      "size": 404259,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5fbc5f1521b4d7f2cdf01387d5d446bf3b718245"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880319.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5745c35629ecbc27b4e7a56c125b8c3fd44f7810",
+      "size": 400439,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5745c35629ecbc27b4e7a56c125b8c3fd44f7810"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880320.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c62cd231212fd6c5170702269a51e2eb6d425e46",
+      "size": 389688,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/c62cd231212fd6c5170702269a51e2eb6d425e46"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880321.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebb08f88363bf28ae98b98bb4a4c8dc66662f3df",
+      "size": 421243,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ebb08f88363bf28ae98b98bb4a4c8dc66662f3df"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880322.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1cc73a5654835dee7726fb9e48fbcd1c62e2ae82",
+      "size": 377399,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1cc73a5654835dee7726fb9e48fbcd1c62e2ae82"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880323.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58d3f75005162895401beebe844a0dd9e7303493",
+      "size": 413568,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/58d3f75005162895401beebe844a0dd9e7303493"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880324.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6557e7970c6df89af6e3657eab7ab571578368f0",
+      "size": 407944,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6557e7970c6df89af6e3657eab7ab571578368f0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880325.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aad815d7d34dda557b861e425a82bcb8ea742ece",
+      "size": 430840,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/aad815d7d34dda557b861e425a82bcb8ea742ece"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880326.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7772a0c7b48ed7c0cfb8aaf762c8efb8e9e5af2c",
+      "size": 411619,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7772a0c7b48ed7c0cfb8aaf762c8efb8e9e5af2c"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880327.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "112a595db462cfa6bb1c98eec08ceb12885c7a87",
+      "size": 408263,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/112a595db462cfa6bb1c98eec08ceb12885c7a87"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880328.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "226c3bff4d4c65f7b51ef57dcb50182d412c8e0e",
+      "size": 398288,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/226c3bff4d4c65f7b51ef57dcb50182d412c8e0e"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880329.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "12b0c47b2125467e97805896cdac928c4ffeb6f0",
+      "size": 417084,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/12b0c47b2125467e97805896cdac928c4ffeb6f0"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880330.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1b01111eff91e2601431013f84a2e1138e8ea087",
+      "size": 401474,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1b01111eff91e2601431013f84a2e1138e8ea087"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880331.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a72635847ef85042b9f8308d26568fd4a8f49d76",
+      "size": 413366,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a72635847ef85042b9f8308d26568fd4a8f49d76"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880332.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3926109c8dd2645c2fa699c5a376a7e587707e65",
+      "size": 382875,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3926109c8dd2645c2fa699c5a376a7e587707e65"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880333.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7053238be4016974d1ee0c13d20bbc871a87f975",
+      "size": 389015,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7053238be4016974d1ee0c13d20bbc871a87f975"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880334.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe42ef69c941d4b8b8f3cd974a1b8d075d6d3fc9",
+      "size": 420065,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/fe42ef69c941d4b8b8f3cd974a1b8d075d6d3fc9"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880335.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f33d090c08aa86dd2773c3e561dc0007c04daa9b",
+      "size": 412323,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f33d090c08aa86dd2773c3e561dc0007c04daa9b"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880336.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "49025ad2c8cebf150edf9f071baaac7590cd2ebc",
+      "size": 394340,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/49025ad2c8cebf150edf9f071baaac7590cd2ebc"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880337.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6345dafc19d5542e637f998f7b98b3cefd9640f",
+      "size": 403238,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f6345dafc19d5542e637f998f7b98b3cefd9640f"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880338.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4956cbb29cc3be7e7bb66849a51e390593cd5e60",
+      "size": 405930,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4956cbb29cc3be7e7bb66849a51e390593cd5e60"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880339.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "161227e2fd23d9b3cf09682e5c71abe56078fd9c",
+      "size": 409396,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/161227e2fd23d9b3cf09682e5c71abe56078fd9c"
+    },
+    {
+      "path": "data/exports/raw/eng2_true/summaries/espn_summary_401880340.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09f639deb92e0aacf5649873471e6fc38d9bbe1b",
+      "size": 412594,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/09f639deb92e0aacf5649873471e6fc38d9bbe1b"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/MANIFEST_schedule.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d590f804b05d7abca7c6a91c8d474ffdd6cedac8",
+      "size": 10022,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d590f804b05d7abca7c6a91c8d474ffdd6cedac8"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/MANIFEST_summaries.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a28f777378675d7b2a2fee0512268a0e1e868e3e",
+      "size": 45800,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a28f777378675d7b2a2fee0512268a0e1e868e3e"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_2594.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d299c621d87b1d73c50b204562e6c8cda98d1f65",
+      "size": 62924,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d299c621d87b1d73c50b204562e6c8cda98d1f65"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_2731.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9caa5db4f420bce3cc3cc27e94bff9ee5e4e6509",
+      "size": 79482,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9caa5db4f420bce3cc3cc27e94bff9ee5e4e6509"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_280.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "de8e57e1d2e4d4851d3b92366672b6fb87d856c9",
+      "size": 61248,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/de8e57e1d2e4d4851d3b92366672b6fb87d856c9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_302.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6f47344725cadadca07145c323f2143dfbf13a7",
+      "size": 79710,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b6f47344725cadadca07145c323f2143dfbf13a7"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_303.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "153d8d2ed820a69aefa9568e18e2848d43edf6ee",
+      "size": 80275,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/153d8d2ed820a69aefa9568e18e2848d43edf6ee"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_308.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "50565a48f6ca274d64ec8220fe7987c047b1f886",
+      "size": 79656,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/50565a48f6ca274d64ec8220fe7987c047b1f886"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_315.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6cfa472966b72bc92733a9e33ef28a2ed04323d5",
+      "size": 71394,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6cfa472966b72bc92733a9e33ef28a2ed04323d5"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_320.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e3cd4f78c0375ab69883dd9a13be16a1b9e6a95",
+      "size": 79624,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0e3cd4f78c0375ab69883dd9a13be16a1b9e6a95"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_324.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dbd1ec817491d6bab1a388075ab9daa56112082a",
+      "size": 79030,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/dbd1ec817491d6bab1a388075ab9daa56112082a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_332.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33268887a4962118f4ead382addcab86af17f379",
+      "size": 72060,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/33268887a4962118f4ead382addcab86af17f379"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_339.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "952ad3e71f4d9874ad3ec771189894d853ee3689",
+      "size": 70958,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/952ad3e71f4d9874ad3ec771189894d853ee3689"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_341.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "674e7bf77a3fcedc2c59860b5195428c1210d0ff",
+      "size": 79639,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/674e7bf77a3fcedc2c59860b5195428c1210d0ff"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_343.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bdc0d8da81a92d7684c1927c2d98be6b7f892988",
+      "size": 79706,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/bdc0d8da81a92d7684c1927c2d98be6b7f892988"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_345.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "61e3222948222c5c33951c0ba1a705d5c395fd26",
+      "size": 80911,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/61e3222948222c5c33951c0ba1a705d5c395fd26"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_348.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bac22b76f53a52fcd7ef593c4c6a4ef6da5c4fa3",
+      "size": 61643,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/bac22b76f53a52fcd7ef593c4c6a4ef6da5c4fa3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_353.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "599b4a9dc3d513751d1ae57bf984350d112018a5",
+      "size": 63315,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/599b4a9dc3d513751d1ae57bf984350d112018a5"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_386.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b513faafec8dfeec2d504fd4f580c1f493a9494",
+      "size": 79149,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5b513faafec8dfeec2d504fd4f580c1f493a9494"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_389.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "016a95451bb89c18906869fd47d65462eedbce83",
+      "size": 79431,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/016a95451bb89c18906869fd47d65462eedbce83"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_3891.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60368f8d27da26d8274fd2a1e1a4d36adcb6b9a1",
+      "size": 79501,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/60368f8d27da26d8274fd2a1e1a4d36adcb6b9a1"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_396.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a129a9675a5cdf673f372e97d4dd31c2e99dda8d",
+      "size": 79697,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a129a9675a5cdf673f372e97d4dd31c2e99dda8d"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_401.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "769bc223eaa971592ea44b20b72fd9de1f3e33b8",
+      "size": 70015,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/769bc223eaa971592ea44b20b72fd9de1f3e33b8"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_402.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "79c5e7528997551e1c2d0905d27776fef3731d45",
+      "size": 81286,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/79c5e7528997551e1c2d0905d27776fef3731d45"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_4703.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2d79c017c3ce415bc2f24b9879b72b6dc18ec55",
+      "size": 80680,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f2d79c017c3ce415bc2f24b9879b72b6dc18ec55"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/espn_team_635.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b43c5cad09870ba78f9b762c731d66b0b2f23d7",
+      "size": 80894,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9b43c5cad09870ba78f9b762c731d66b0b2f23d7"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/ft_event_ids.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c2d5e1bf71396b6c1bb2c10f9b135891bae6219",
+      "size": 1532,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9c2d5e1bf71396b6c1bb2c10f9b135891bae6219"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881338.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d70411cdf07f8ec53e33a5dbaf48e7df1f806973",
+      "size": 315980,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d70411cdf07f8ec53e33a5dbaf48e7df1f806973"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881339.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13d841d09ca4d9a3a5e3476f81a773bcec340e8b",
+      "size": 320413,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/13d841d09ca4d9a3a5e3476f81a773bcec340e8b"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881341.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8fef1c8f377ed5759c4bc9d450de0a33ad309646",
+      "size": 318809,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8fef1c8f377ed5759c4bc9d450de0a33ad309646"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881342.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "61933891d200592ada77c518f56e1f904a84e53e",
+      "size": 320749,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/61933891d200592ada77c518f56e1f904a84e53e"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881343.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5569dff6f49e9ea33c85df4ed69c83725f87a9fc",
+      "size": 270995,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/5569dff6f49e9ea33c85df4ed69c83725f87a9fc"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881344.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d89ca1823ffda8eaefbd38cea613afc7a2580531",
+      "size": 320150,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d89ca1823ffda8eaefbd38cea613afc7a2580531"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881346.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "accc965278c4e6df49e2489297065db039ddabdd",
+      "size": 330505,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/accc965278c4e6df49e2489297065db039ddabdd"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881348.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "918a3a1fec0ffe22f10719fc67cd8ca39d10d87b",
+      "size": 315597,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/918a3a1fec0ffe22f10719fc67cd8ca39d10d87b"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881349.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a58c09612694a773e6e483847fc8fe8c4622477",
+      "size": 321005,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7a58c09612694a773e6e483847fc8fe8c4622477"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881350.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aa1025fe9422ee5d0a2f4481b56b9a0d8dfdaa44",
+      "size": 320349,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/aa1025fe9422ee5d0a2f4481b56b9a0d8dfdaa44"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881351.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d8f20b8cd4590742c369233e1326e6727e74649",
+      "size": 323668,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4d8f20b8cd4590742c369233e1326e6727e74649"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881352.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2d2caa7605bc15ac552e847fe1248eb127092ab",
+      "size": 309988,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a2d2caa7605bc15ac552e847fe1248eb127092ab"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881353.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a28d2b92ee2155d026f23e9ea92b0938a1523fdc",
+      "size": 314984,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a28d2b92ee2155d026f23e9ea92b0938a1523fdc"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881355.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "adb8ef6648be91a1a60ef06ba779acab2510cf71",
+      "size": 321614,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/adb8ef6648be91a1a60ef06ba779acab2510cf71"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881356.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4bbd0e024e158668aa079ee31a0b0d12b842ca0",
+      "size": 325167,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d4bbd0e024e158668aa079ee31a0b0d12b842ca0"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881357.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cad3802cca5f7bef122d906633d4c890c921e3f3",
+      "size": 319672,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cad3802cca5f7bef122d906633d4c890c921e3f3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881359.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "309761794024b657c56ed69006af681993dcd3f1",
+      "size": 323165,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/309761794024b657c56ed69006af681993dcd3f1"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881360.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6ca61ceeacddd161a37a5bce9983ff6978897295",
+      "size": 310431,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6ca61ceeacddd161a37a5bce9983ff6978897295"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881361.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91dfbfc1cc9e149e22ea195acfbd6b93ce0f74f4",
+      "size": 321539,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/91dfbfc1cc9e149e22ea195acfbd6b93ce0f74f4"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881362.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "454a96f92bb9850a076fc8750dfd8031c9d578fd",
+      "size": 321655,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/454a96f92bb9850a076fc8750dfd8031c9d578fd"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881363.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ff9a5224a8b419030177a94c1f4e496ba44d337",
+      "size": 313538,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4ff9a5224a8b419030177a94c1f4e496ba44d337"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881364.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "41d2273c17669cd0366292e31f6c848bd54322f0",
+      "size": 287021,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/41d2273c17669cd0366292e31f6c848bd54322f0"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881365.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "06c1c5a0dd6db8425a2388beae71e12265d0b86a",
+      "size": 329516,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/06c1c5a0dd6db8425a2388beae71e12265d0b86a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881366.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e370bd8afcd77c797ee58cb5927f5c006d3a64c",
+      "size": 316141,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6e370bd8afcd77c797ee58cb5927f5c006d3a64c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881367.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54ebae7d7241d89f812d6eccac1fa48950d9af26",
+      "size": 316635,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/54ebae7d7241d89f812d6eccac1fa48950d9af26"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881368.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d6451f793581915d1a0ab9e0e9a12bef3af7396",
+      "size": 315350,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3d6451f793581915d1a0ab9e0e9a12bef3af7396"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881369.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "827a4ab9379ae55d66e1214ff75073d715cd310a",
+      "size": 315119,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/827a4ab9379ae55d66e1214ff75073d715cd310a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881370.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f5baa9977ad883464fa1c12365cef43e4175246",
+      "size": 322268,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6f5baa9977ad883464fa1c12365cef43e4175246"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881371.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "190dbd9028da75239d4d98d86f74223c9ed8f4dc",
+      "size": 322139,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/190dbd9028da75239d4d98d86f74223c9ed8f4dc"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881372.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d16dd0a15f6f7a7ae02ef4c252cd625a8825877a",
+      "size": 312877,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d16dd0a15f6f7a7ae02ef4c252cd625a8825877a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881373.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37d219e701f5276461f2ef959cbae473887be927",
+      "size": 318609,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/37d219e701f5276461f2ef959cbae473887be927"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881374.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c5a0d628aeb1aeab117d3a0427addf2477fe47e3",
+      "size": 317005,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/c5a0d628aeb1aeab117d3a0427addf2477fe47e3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881375.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf1139df3cb4f11f8ae5a71c275e92f38d5d07e9",
+      "size": 316492,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cf1139df3cb4f11f8ae5a71c275e92f38d5d07e9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881376.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe438428c6a770b90832a75899d40c004306ab81",
+      "size": 332180,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/fe438428c6a770b90832a75899d40c004306ab81"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881377.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "12f8be2f7bc0fa794f2ab5e1a7e8a9a00e7d0842",
+      "size": 279290,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/12f8be2f7bc0fa794f2ab5e1a7e8a9a00e7d0842"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881378.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0bffca29e383f7e6b2384d50a81341841c6890f",
+      "size": 329160,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b0bffca29e383f7e6b2384d50a81341841c6890f"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881379.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4dd891a5d8a19dea4670827b4e89fd759de554b5",
+      "size": 325059,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/4dd891a5d8a19dea4670827b4e89fd759de554b5"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881380.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74034510e156b9639609695125eaea104228be2c",
+      "size": 326688,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/74034510e156b9639609695125eaea104228be2c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881381.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cf9f0f856fefb9dbab145c104020fc914e3ae3c",
+      "size": 326593,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/8cf9f0f856fefb9dbab145c104020fc914e3ae3c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881382.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33e6c81fe359cf8ae1e2a3e548d104977dead948",
+      "size": 324331,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/33e6c81fe359cf8ae1e2a3e548d104977dead948"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881383.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea2451d804eb8f25ddd141941025174cf45dcba9",
+      "size": 313156,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ea2451d804eb8f25ddd141941025174cf45dcba9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881384.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0d7341e57af523f06ce71cd034e861548e8a5e48",
+      "size": 326502,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0d7341e57af523f06ce71cd034e861548e8a5e48"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881385.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3770daf49884246078583e8614ae5560397f0c8b",
+      "size": 333138,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3770daf49884246078583e8614ae5560397f0c8b"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881386.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ed8b70e5a1073bcf05c8df309ad2b339bfe3c9f",
+      "size": 320409,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9ed8b70e5a1073bcf05c8df309ad2b339bfe3c9f"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881387.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0d7e1ce3eacc766fb1417f8ece09a8a40436b001",
+      "size": 326453,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0d7e1ce3eacc766fb1417f8ece09a8a40436b001"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881388.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df3461b8fb2610af3b286296baedae2c330037c8",
+      "size": 321947,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/df3461b8fb2610af3b286296baedae2c330037c8"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881389.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2941c63b0e7db16e79efcd33ea662f6ded22b4ab",
+      "size": 324627,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2941c63b0e7db16e79efcd33ea662f6ded22b4ab"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881390.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "41fe066af599ac1662b6fed52b0683f5ce8610c2",
+      "size": 313485,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/41fe066af599ac1662b6fed52b0683f5ce8610c2"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881391.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3582498bde02421160ab16e366d81f1c8a6a68b6",
+      "size": 315381,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3582498bde02421160ab16e366d81f1c8a6a68b6"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881392.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98f50f1f3ea6bf5b3487dfe7d453d1c280c5cf9c",
+      "size": 325732,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/98f50f1f3ea6bf5b3487dfe7d453d1c280c5cf9c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881393.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c736d4732232f375fb53c52dd4ecc0e74ff5896",
+      "size": 319441,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7c736d4732232f375fb53c52dd4ecc0e74ff5896"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881394.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3004afc3c56b95d0fc2a8ab47eccbd63ed784a61",
+      "size": 320972,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3004afc3c56b95d0fc2a8ab47eccbd63ed784a61"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881395.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b08b88790bd12f40868540ff630e9747c76d979",
+      "size": 329495,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3b08b88790bd12f40868540ff630e9747c76d979"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881396.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10c4a508682dce008d6c1f479a94a2b1f3456517",
+      "size": 316749,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/10c4a508682dce008d6c1f479a94a2b1f3456517"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881397.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a1c738003f70ca07df766959fc3e6de9baad6d1c",
+      "size": 331564,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a1c738003f70ca07df766959fc3e6de9baad6d1c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881398.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1838d4b2d30cc48e7334055e1740398369c6cd48",
+      "size": 322356,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/1838d4b2d30cc48e7334055e1740398369c6cd48"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881399.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0aedac1d40d27c52d097015de21714cf9fbda607",
+      "size": 318586,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0aedac1d40d27c52d097015de21714cf9fbda607"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881400.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ad00b99efe13ea16ae5f38da0dab184ca558f8eb",
+      "size": 318980,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ad00b99efe13ea16ae5f38da0dab184ca558f8eb"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881401.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2f11affe09836fbd354d97d5931edd59f20e9163",
+      "size": 319679,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2f11affe09836fbd354d97d5931edd59f20e9163"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881402.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef01b5190fc3984ea5f67e54f02e62c1fa2a7350",
+      "size": 311498,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ef01b5190fc3984ea5f67e54f02e62c1fa2a7350"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881403.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dbd2c369dbdd2c18d8220fc769896b769c2f883d",
+      "size": 316275,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/dbd2c369dbdd2c18d8220fc769896b769c2f883d"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881404.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f541a3cdf852f885192cbc03ecf71b5983dee25",
+      "size": 319057,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0f541a3cdf852f885192cbc03ecf71b5983dee25"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881405.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c52ece35246d03f6ad2c3807a659efc408c917f3",
+      "size": 313540,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/c52ece35246d03f6ad2c3807a659efc408c917f3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881406.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47b59de09ca988271d8c16648c9e3516dd15719a",
+      "size": 323837,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/47b59de09ca988271d8c16648c9e3516dd15719a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881407.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c4f10a593695f9c4ae72ed3f9bb4266a92e5f81",
+      "size": 319050,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7c4f10a593695f9c4ae72ed3f9bb4266a92e5f81"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881408.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c137555d25c20af0e3b9a5aea5d09c5db16a14e",
+      "size": 327216,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9c137555d25c20af0e3b9a5aea5d09c5db16a14e"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881409.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f58c7bbff101bdd9bc720ef29773e26103bcd788",
+      "size": 283810,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f58c7bbff101bdd9bc720ef29773e26103bcd788"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881410.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "32347d084928b708e1ef5264b0d3fe3a1ef9edc2",
+      "size": 325269,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/32347d084928b708e1ef5264b0d3fe3a1ef9edc2"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881411.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "617b363730f692b67f6c76c07498513bc136672e",
+      "size": 307885,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/617b363730f692b67f6c76c07498513bc136672e"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881412.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68a70a5835b843d3c7c0b94370148a7b66f61ddd",
+      "size": 325102,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/68a70a5835b843d3c7c0b94370148a7b66f61ddd"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881413.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04e61944c813dd76968dd09b65fd9a1d11d34914",
+      "size": 310148,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/04e61944c813dd76968dd09b65fd9a1d11d34914"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881414.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d49eceb86492dd994be6513779d9a26cb1b67fe9",
+      "size": 318954,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/d49eceb86492dd994be6513779d9a26cb1b67fe9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881415.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9487cd62aabdab2f01b9dcb886d0fa799aed73d5",
+      "size": 323945,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9487cd62aabdab2f01b9dcb886d0fa799aed73d5"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881416.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a687ce1e7641541b870713bd144641073c323a81",
+      "size": 316495,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a687ce1e7641541b870713bd144641073c323a81"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881417.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d48ca77f7cd1e3dfd71c76236f58f1c48b8bb54",
+      "size": 317816,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9d48ca77f7cd1e3dfd71c76236f58f1c48b8bb54"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881418.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eec7ca2c2871b24c8a795d3d452ad26f00d1c42b",
+      "size": 318452,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/eec7ca2c2871b24c8a795d3d452ad26f00d1c42b"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881419.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fc08434360c648cc3ac04d01e19e6a6f35b4668f",
+      "size": 313431,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/fc08434360c648cc3ac04d01e19e6a6f35b4668f"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881420.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f4d95f5cbf7db57b14c4965f0c9e0fb85ff3be6",
+      "size": 315319,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3f4d95f5cbf7db57b14c4965f0c9e0fb85ff3be6"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881421.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a46a376aa7ebd3805d5bbf0d380beefe19900d55",
+      "size": 306994,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/a46a376aa7ebd3805d5bbf0d380beefe19900d55"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881422.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "584f9d2381ccb641b536fb102770e19f97d8edc6",
+      "size": 314823,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/584f9d2381ccb641b536fb102770e19f97d8edc6"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881423.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "366014ed317f5d2f015915bbb1268fbf0d4d0e27",
+      "size": 316964,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/366014ed317f5d2f015915bbb1268fbf0d4d0e27"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881424.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b642b2ac8040431b5d0a8be0dd9ec31ecc1630e1",
+      "size": 322653,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b642b2ac8040431b5d0a8be0dd9ec31ecc1630e1"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881425.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6c8580eaa28f87bd967cb83ca8a78dbd83d22eb6",
+      "size": 279305,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6c8580eaa28f87bd967cb83ca8a78dbd83d22eb6"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881426.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68d9ee2ba7995243d1a2f9c0b695c28d0216fb65",
+      "size": 321919,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/68d9ee2ba7995243d1a2f9c0b695c28d0216fb65"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881427.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9db3ff2e719cd028c3ad1929d06cb33f30d744bb",
+      "size": 318491,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/9db3ff2e719cd028c3ad1929d06cb33f30d744bb"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881428.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6c122ad979748eef6e6800f02a79959e1ba252a",
+      "size": 306835,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/b6c122ad979748eef6e6800f02a79959e1ba252a"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881429.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dec017fc9830da2890b5e93a217af9175e38f85c",
+      "size": 325081,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/dec017fc9830da2890b5e93a217af9175e38f85c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881430.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ddaafa2f291cc45a1865c775ec07a101a727460f",
+      "size": 307265,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ddaafa2f291cc45a1865c775ec07a101a727460f"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881431.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4656f5d42ddea2ccdb9c5c8f2a6661a80998ab3",
+      "size": 325943,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e4656f5d42ddea2ccdb9c5c8f2a6661a80998ab3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881432.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2689c8bb3e62c619d05ff96209d85611af93267f",
+      "size": 327084,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/2689c8bb3e62c619d05ff96209d85611af93267f"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881433.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bc38b492a2b61026014ab60e253046c110ff2ac0",
+      "size": 317742,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/bc38b492a2b61026014ab60e253046c110ff2ac0"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881434.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b3ef82ce80b602611f27964ecb5a3d41dc7bfa3",
+      "size": 315995,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/3b3ef82ce80b602611f27964ecb5a3d41dc7bfa3"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881435.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7714683a4c873733dd647947ed7e4ed3b20dce53",
+      "size": 309653,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7714683a4c873733dd647947ed7e4ed3b20dce53"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881436.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0df4666085033709ce210d12220ca13f2b13e098",
+      "size": 312759,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/0df4666085033709ce210d12220ca13f2b13e098"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881437.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "898ecb6ee2a561217c41db1acd9739ad6efd56e8",
+      "size": 322343,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/898ecb6ee2a561217c41db1acd9739ad6efd56e8"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881438.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cdbcd5012bd1519da29ac31961f688109fe732cf",
+      "size": 320044,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/cdbcd5012bd1519da29ac31961f688109fe732cf"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881439.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2f5eefa0eb1a952a9bdc5a376f43d1adbf912c9",
+      "size": 313198,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/f2f5eefa0eb1a952a9bdc5a376f43d1adbf912c9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881440.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac02855cbe1231cad6e792127f33b83b068ccbee",
+      "size": 319209,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/ac02855cbe1231cad6e792127f33b83b068ccbee"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881441.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e62d5b7311ddc044786c03b76c595e0519c26baa",
+      "size": 318592,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/e62d5b7311ddc044786c03b76c595e0519c26baa"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881442.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "395e6679c1999fd840ca58922f431a5bafcffc5c",
+      "size": 315047,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/395e6679c1999fd840ca58922f431a5bafcffc5c"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881443.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6ad5ec8d2be972527912bb8f2ec618da7af870b9",
+      "size": 313052,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/6ad5ec8d2be972527912bb8f2ec618da7af870b9"
+    },
+    {
+      "path": "data/exports/raw/eng4_true/summaries/espn_summary_401881444.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7254c287de44a010097165737682e6adba263fb3",
+      "size": 317958,
+      "url": "https://api.github.com/repos/neilucirene28-stack/football-prediction/git/blobs/7254c287de44a010097165737682e6adba263fb3"
+    }
+  ],
+  "tests_passed_n": 110,
+  "history_used_n": 341,
+  "native_research_candidate_n": 40,
+  "blocked_n": 139,
+  "csv_score_observations_n": 3336,
+  "today_calendar_football_n": 8,
+  "today_saved_l3_observation_prior_n": 2,
+  "today_skipped_started_n": 6,
+  "paired_n": 0,
+  "production_gate_passed": false,
+  "temporary_failed_download_discovery_pages_not_delivered": true
+}

@@ -1,0 +1,8 @@
+{
+  "registry": "outputs/v28_prospective_registry.json",
+  "registry_sha256": "5c2bc0c0825d61596cce72761c2c71178e794aaa94dbb98741bee103f9796607",
+  "collections": [
+    {"folder": "outputs/v23_result_collection_v19_20261010_morning", "index_sha256": "821c9868d48a1cd2c8a88a0ca681b228cfd6b344225ce61174cbe556c4ab92e0"},
+    {"folder": "outputs/v23_result_collection_v22_ned2_20261010_morning", "index_sha256": "f655c90a61f72bddbe183ab5161598d33e7eff8467037b0b622eb53bf1bcc9aa"}
+  ]
+}

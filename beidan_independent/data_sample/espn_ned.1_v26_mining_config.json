@@ -1,0 +1,62 @@
+{
+  "league_slug": "ned.1",
+  "season_year": 2026,
+  "season_type": 14250,
+  "team_ids": [
+    "139",
+    "140",
+    "142",
+    "143",
+    "145",
+    "146",
+    "147",
+    "148",
+    "151",
+    "152",
+    "153",
+    "156",
+    "2565",
+    "2566",
+    "2726",
+    "3706",
+    "3735",
+    "3736"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_ned.1_mined_20261010_v26",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v26_native/ned.1",
+  "proposals": [
+    [
+      180,
+      "401875590",
+      "3706",
+      "151",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ned.1_20261009.json",
+      "sha256": "2655f7f1ebb97d948fcbcdbbfabceac120ee2da6091467fc6ab152db2433d373"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ned.1_20261010.json",
+      "sha256": "f7332643ced7384f483b88adbdcd3b19774401bb2d3415a25ecf807705025007"
+    }
+  ],
+  "additional_team_seed_receipt": {
+    "index": "data_sample/v26_additional_seed_scoreboards/HTTP_RECEIPTS.json",
+    "receipt": {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.509891+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.923574+00:00",
+      "bytes": 51331,
+      "sha256": "ae1d52808eef925638f106e73eb7852dd89fd4c6b2197a99d1be670844a52f6e",
+      "local_file": "scoreboard_ned.1_20261011.json",
+      "league_slug": "ned.1"
+    }
+  }
+}

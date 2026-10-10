@@ -1,0 +1,147 @@
+{
+  "base_commit": "0825fbabdf9529b466d7f1ca6c4b769c4b1ac2b3",
+  "files": [
+    {
+      "path": "beidan_independent/beidan_bd1/af_history.py",
+      "local_file": "beidan_bd1/af_history.py",
+      "bytes": 7479,
+      "git_blob_sha": "9e7ca4587d9bcaceb12c7735336a6e88f15a53f6",
+      "sha256": "9d61505dcc4289468426f095fac3ad00718559d17804934845ae787a2f221cba",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/audit_af_response.py",
+      "local_file": "scripts/audit_af_response.py",
+      "bytes": 4546,
+      "git_blob_sha": "ba5db4461bfc69a5d3de3943d4a419e47bd34a84",
+      "sha256": "9693c3ce7aee73e777c7127189b923e514fe653a2de4f0fa79a4f12a4570b8f0",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_af_history.py",
+      "local_file": "tests/test_beidan_af_history.py",
+      "bytes": 4984,
+      "git_blob_sha": "6067f0697898457c07949b75650fb07d06904f3d",
+      "sha256": "989a554d07cab7ffdda6b3289f73411cf88b4efe451ae139394a7e992aa52a43",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/third_party_pool.py",
+      "local_file": "beidan_bd1/third_party_pool.py",
+      "bytes": 5959,
+      "git_blob_sha": "86e61ecd29a80cc4c73fc315bf1b469da5956515",
+      "sha256": "68cce7dd510899f912062c262db02f6ce87c4d092f58306e4438498960e434ca",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_third_party_pool.py",
+      "local_file": "tests/test_third_party_pool.py",
+      "bytes": 1934,
+      "git_blob_sha": "f89f254f6641ce02cee79e7dd5309145f4311c4a",
+      "sha256": "6942f4f5ac654b0b414d8ef0bc1e71a5535594ed373162f1189dc929565ec3a8",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/audit_current_third_party_pool.py",
+      "local_file": "scripts/audit_current_third_party_pool.py",
+      "bytes": 4337,
+      "git_blob_sha": "6eb3399d9c43f89d79938d400080d09095dcb2d3",
+      "sha256": "1221e73aea63ed37839f66b87272ab5df7691b6571c9f34b604483871e56ee21",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/provider_concordance.py",
+      "local_file": "beidan_bd1/provider_concordance.py",
+      "bytes": 1774,
+      "git_blob_sha": "f91ecc8277523959913adbd6336dfb487d325af9",
+      "sha256": "1383b74ec6eabd39c2c7f98143fdef3c746ff6790e9bb28f9310bbec5bca96e9",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/tests/test_provider_concordance.py",
+      "local_file": "tests/test_provider_concordance.py",
+      "bytes": 1602,
+      "git_blob_sha": "84cc8a6a3d167d0c88dbc51a9e7f02b8f3267a53",
+      "sha256": "3cda503a872c7ea51181409cdbe354465c4247885cd4eee18b997cb4815a26d0",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/scripts/audit_provider_concordance.py",
+      "local_file": "scripts/audit_provider_concordance.py",
+      "bytes": 2437,
+      "git_blob_sha": "433747d229fb92a12f226a2ee72f6f1058b315c0",
+      "sha256": "ad4720ec4c8eb6afec26514b63c787f19636f15ed1e98b3975887deb8e3bc5f6",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v18-source-concordance.md",
+      "local_file": "docs/beidan-v18-source-concordance.md",
+      "bytes": 4323,
+      "git_blob_sha": "c64a19d468f740b73d23a669c3eb2bf36622d3d2",
+      "sha256": "ed53d197eb268261cd835116f815982e5993d0778ab40ea183f6377bcdc1cee7",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "local_file": "beidan_bd1/README.md",
+      "bytes": 15972,
+      "git_blob_sha": "b306dc33bc8162117a255ff6fa5488cd711d9ef0",
+      "sha256": "106a7dad712f2297a9826283e2acc98fe6de8da8adfc32cb896aebeb0fcad1d9",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/current_pool_third_party_probe_20261009/RECEIPT.json",
+      "local_file": "data_sample/current_pool_third_party_probe_20261009/RECEIPT.json",
+      "bytes": 1526,
+      "git_blob_sha": "14ae26b73f77dbe8ea97a38f392502add7b24e82",
+      "sha256": "2fb9e3ad10af8ed0e000f284cf770b3d1971a304084009486cd48fc579511913",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/data_sample/current_pool_third_party_probe_20261009/original_responses.tar.gz",
+      "local_file": "data_sample/current_pool_third_party_probe_20261009/original_responses.tar.gz",
+      "bytes": 90280,
+      "git_blob_sha": "c62f49c25d849a47f964216b78cf6fd972999625",
+      "sha256": "537c45d33eafa8378512dd15d8494da5163db7e8dab15799f54afcef94ed066b",
+      "encoding": "base64"
+    },
+    {
+      "path": "beidan_independent/outputs/current_third_party_pool_20261009_audit.json",
+      "local_file": "outputs/current_third_party_pool_20261009_audit.json",
+      "bytes": 373195,
+      "git_blob_sha": "79823edc98a9a03ab58282fbd047c8d9a75cac98",
+      "sha256": "d130233ef511ec97ad07a6d85dca07424b357d2b922afd652dd8201cc9442563",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/provider_concordance_20261009.json",
+      "local_file": "outputs/provider_concordance_20261009.json",
+      "bytes": 36527,
+      "git_blob_sha": "c9e5ac1f19bd6ad89e91456676084f08e10e95b4",
+      "sha256": "f8fa7207ccc8707fb4ed59ecd197a59f617064503ea194605f94becabc1bdb7e",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "beidan_independent/outputs/af_response_audit/audit_20261009T152401081861Z.json",
+      "local_file": "outputs/af_response_audit/audit_20261009T152401081861Z.json",
+      "bytes": 786302,
+      "git_blob_sha": "1752fc9a306316e80219830761b539b039bb9e9b",
+      "sha256": "ff722daf3490ac64d49c88d14c64ab02244e723e9ad464a0bc7fa66ad0e7868b",
+      "encoding": "utf-8"
+    }
+  ],
+  "verified_tests": 122,
+  "new_source_pool_observations_n": 407,
+  "archived_pool_n": 179,
+  "literal_both_names_agree_n": 98,
+  "names_differ_n": 81,
+  "priority_identity_review_seqs": [
+    12,
+    184
+  ],
+  "cross_provider_literal_name_utc_agreements_n": 15,
+  "different_year_labels_n": 3,
+  "new_model_imported_n": 0,
+  "production_eligible": false,
+  "original_frozen_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+}

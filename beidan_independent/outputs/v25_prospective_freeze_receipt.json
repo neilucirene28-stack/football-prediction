@@ -1,0 +1,14 @@
+{
+  "path": "outputs/l1_prospective/20261010T011516823318Z",
+  "cutoff_at": "2026-10-10T01:15:13.906328+00:00",
+  "full_pool_n": 179,
+  "native_candidate_n": 54,
+  "blocked_n": 125,
+  "pending_n": 54,
+  "paired_n": 0,
+  "brier": null,
+  "selected_ridge": null,
+  "production_gate_passed": false,
+  "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+  "sealed_at": "2026-10-10T01:15:17.129498+00:00"
+}
