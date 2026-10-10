@@ -84,6 +84,40 @@ def get_board_map(board="jingcai"):
     return out
 
 
+def get_board_map_with_league(board="jingcai"):
+    """当前对阵页全部场次 {(home, away): (mid, league)}，一次抓取供多次查询。
+
+    与 get_board_map 相同的行块解析，但额外保留联赛名（.saiming 的 title），
+    供需要按联赛区分的调用方（如 ESPN summary 需要联赛 slug）使用。
+    联赛名取不到时为 None。
+    """
+    html = _get_html(f"{BASE_URL}/{board}/")
+    out = {}
+    seen = set()
+    row_starts = list(re.finditer(r'<div[^>]*data-morder="\d+"[^>]*>', html))
+    for i, rs in enumerate(row_starts):
+        block_end = row_starts[i + 1].start() if i + 1 < len(row_starts) else len(html)
+        block = html[rs.start():block_end]
+        mm = re.search(r'data-mid="(\d+)"', rs.group(0))
+        if not mm:
+            continue
+        mid = mm.group(1)
+        if mid in seen:
+            continue
+        seen.add(mid)
+        teams = []
+        for t in re.findall(r'class="zhum[^"]*" title="([^"]+)"', block):
+            if t not in teams:
+                teams.append(t)
+        lg = re.search(r'class="saiming[^"]*"[^>]*title="([^"]+)"', block)
+        league_name = lg.group(1) if lg else None
+        if league_name and league_name in teams:
+            teams.remove(league_name)
+        if len(teams) >= 2:
+            out[(teams[0], teams[1])] = (mid, league_name)
+    return out
+
+
 def find_mid(home, away, board="jingcai", _board_map=None):
     """在对阵页按队名找澳客 mid。
 

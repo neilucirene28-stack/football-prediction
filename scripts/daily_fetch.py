@@ -672,14 +672,20 @@ except Exception as e:
 
 # 19. ESPN summary: 单场阵容/事件/技术统计（2026-10-09 接入，espn.py扩展）
 #     对当日board在售场次拉阵容（赛前约1小时放出，未公布返回空）
+#     2026-10-10 修：按实际联赛映射 ESPN slug，不再硬编码 eng.1；
+#     无映射的联赛跳过并记录（此前非英超场次全部404）。
 try:
     from espn import get_summary, LEAGUE_CODES as _ESPN_LC
-    from okooo import get_board_map as _ok_bm2
+    from okooo import get_board_map_with_league as _ok_bm2
     _bm = _ok_bm2("jingcai")
-    es_out, es_n = {}, 0
-    for (home, away), _mid in list(_bm.items())[:30]:  # 上限30场
+    es_out, es_n, es_skip = {}, 0, []
+    for (home, away), (_mid, _lg) in list(_bm.items())[:30]:  # 上限30场
+        _code = _ESPN_LC.get(_lg) if _lg else None
+        if not _code:
+            es_skip.append(f"{home}vs{away}({_lg or '未知联赛'})")
+            continue
         try:
-            sm = get_summary(_mid, "eng.1")  # event_id跨联赛通用
+            sm = get_summary(_mid, _code)
             if sm.get("lineups", {}).get("home"):
                 es_n += 1
             es_out[f"{home}vs{away}"] = {
@@ -692,9 +698,11 @@ try:
     save("espn_lineups", es_out)
     results["sources"]["espn_summary"] = {
         "ok": True, "matches": len(es_out), "with_lineups": es_n,
-        "note": "赛前约1小时放出阵容，未公布返回空列表",
+        "skipped_unmapped": es_skip,
+        "note": "赛前约1小时放出阵容，未公布返回空列表；无ESPN映射的联赛跳过",
     }
-    print(f"[OK] ESPN summary: {len(es_out)}场，{es_n}场有阵容")
+    print(f"[OK] ESPN summary: {len(es_out)}场，{es_n}场有阵容"
+          + (f"，跳过{len(es_skip)}场无映射" if es_skip else ""))
 except Exception as e:
     results["sources"]["espn_summary"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] ESPN summary: {e}")
