@@ -69,10 +69,12 @@ class TestIPF:
 
 
 def _payload(**kw):
+    from datetime import datetime, timedelta
+    now = datetime.now().astimezone()
     base = {
         "home": "主队A", "away": "客队B",
-        "kickoff_at": "2030-06-01T20:00:00+08:00",
-        "snapshot_at": "2030-06-01T10:00:00+08:00",
+        "kickoff_at": (now + timedelta(days=2)).isoformat(),
+        "snapshot_at": now.isoformat(),
         "competition": "测试联赛",
         "home_recent": [{"gf": 2, "ga": 1, "venue": "H"}] * 8,
         "away_recent": [{"gf": 1, "ga": 1, "venue": "A"}] * 8,

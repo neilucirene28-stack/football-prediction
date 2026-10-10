@@ -4,12 +4,14 @@
 注意：已完赛 7 场不重跑（赛后数据会污染赛前快照）。
 """
 import sys, json
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from collector.collector.sources.titan007 import (
     Titan007Source, _DETAIL_URL, _http_get, ENTRY_URL)
-from engine.predictor import predict
-from engine.poisson import handicap_1x2, score_matrix
+from engine.jingcai_predictor import predict
+from engine.jingcai_batch import with_official_handicap, handicap_output
+from engine.jingcai_calibration import load_form_only_config
 
 # 剩余 8 场（09-30 02:45 欧国联 6 场 + 09-30 08:00 美国vs智利）
 TARGETS = [
@@ -19,11 +21,7 @@ TARGETS = [
     ("保加利亚", "爱沙尼亚"), ("美国", "智利"),
 ]
 
-try:
-    _cal = json.load(open("/home/hatch/workspace/football-prediction-v2/engine/calibration.json"))
-    _PLATT = {k: tuple(v) for k, v in _cal["form_only"].items()}
-except Exception:
-    _PLATT = None
+_CALIBRATION_CONFIG, _CALIBRATION_SELECTION = load_form_only_config()
 
 
 def norm(s):
@@ -86,20 +84,13 @@ def main():
             p = dict(m)
             p["home"] = m["home_team"]
             p["away"] = m["away_team"]
-            cfg = {"platt": _PLATT} if (_PLATT and not p.get("odds")) else None
+            cfg = _CALIBRATION_CONFIG if not p.get("odds") else None
             res = predict(p, cfg)
             if res.get("status") == "insufficient_data":
                 results.append({"home": ht, "away": at_, "status": "insufficient"})
                 continue
             d = res["derivatives"]
-            h1x2 = None
-            ah = (d.get("asian") or {}).get("handicap")
-            if ah is not None:
-                line = int(round(ah))
-                mx = score_matrix(res["lambda_home"], res["lambda_away"])
-                h, dr, a = handicap_1x2(mx, line)
-                h1x2 = {"line": line, "p_home": round(h, 4),
-                        "p_draw": round(dr, 4), "p_away": round(a, 4)}
+            h1x2 = handicap_output(res)
             results.append({
                 "kickoff": m["kickoff_at"], "competition": m["competition"],
                 "home": m["home_team"], "away": m["away_team"],
@@ -116,6 +107,7 @@ def main():
                 "top_scores": d["top_scores"][:5],
                 "half_time": d.get("half_time"),
                 "handicap_1x2": h1x2,
+                "calibration_selection": _CALIBRATION_SELECTION,
                 "d_asian": d.get("asian"), "d_ou": d.get("ou"),
                 "total_goals": d.get("total_goals"),
                 "confidence": res["confidence"],

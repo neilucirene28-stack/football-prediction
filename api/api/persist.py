@@ -9,6 +9,7 @@
 import json
 import uuid
 from datetime import date
+from engine.jingcai_ledger import validate_live_record, input_digest
 
 PRED_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "football-prediction-v2")
 
@@ -26,6 +27,13 @@ _PREDICTION_COLS = (
 def build_prediction_row(match_id: int, payload: dict, result: dict,
                          deterministic_day: date | None = None) -> dict:
     """拼装 predictions 行。result 必须是 predict() 的 ok 结果。"""
+    if (result.get("model") == "jingcai"
+            and result.get("evaluation_mode") == "historical_replay"):
+        raise ValueError("历史重放不能写入真实赛前预测账本")
+    if result.get("model") == "jingcai":
+        if isinstance(match_id, bool) or not isinstance(match_id, int) or match_id <= 0:
+            raise ValueError("竞彩封存需要合法比赛match_id")
+        validate_live_record(payload, result)
     version = result.get("model_version", "unknown")
     if deterministic_day is not None:
         prediction_id = uuid.uuid5(
@@ -39,7 +47,7 @@ def build_prediction_row(match_id: int, payload: dict, result: dict,
         "model_version": version,
         "league": payload.get("competition", "") or "",
         "kickoff_at": payload.get("kickoff_at"),
-        "predicted_at": payload.get("snapshot_at"),
+        "predicted_at": result.get("prediction_generated_at", payload.get("snapshot_at")),
         "p_home": result["p_home"],
         "p_draw": result["p_draw"],
         "p_away": result["p_away"],
@@ -69,6 +77,8 @@ def build_prediction_row(match_id: int, payload: dict, result: dict,
 def save_prediction(conn, match_id: int, payload: dict, result: dict,
                     deterministic_day: date | None = None) -> str:
     """幂等写入预测。返回 prediction_id。"""
+    if result.get("model") == "jingcai":
+        return _save_jingcai_prediction(conn, match_id, payload, result, deterministic_day)
     row = build_prediction_row(match_id, payload, result, deterministic_day)
     cols = ", ".join(_PREDICTION_COLS)
     placeholders = ", ".join(["%s"] * len(_PREDICTION_COLS))
@@ -79,6 +89,39 @@ def save_prediction(conn, match_id: int, payload: dict, result: dict,
             [row[c] for c in _PREDICTION_COLS])
     conn.commit()
     return row["prediction_id"]
+
+
+def _save_jingcai_prediction(conn, match_id, payload, result, deterministic_day):
+    try:
+        row = build_prediction_row(match_id, payload, result, deterministic_day)
+        cols = ", ".join(_PREDICTION_COLS)
+        placeholders = ", ".join(["%s"] * len(_PREDICTION_COLS))
+        with conn.cursor() as cur:
+            cur.execute(
+                f"INSERT INTO predictions ({cols}) SELECT {placeholders} "
+                "WHERE clock_timestamp() < %s::timestamptz "
+                "ON CONFLICT (prediction_id) DO NOTHING RETURNING prediction_id",
+                [row[c] for c in _PREDICTION_COLS] + [row["kickoff_at"]])
+            inserted = cur.fetchone()
+            if inserted is None:
+                # 幂等命中可返回原封存；时间门控拒绝且无原封存则必须报告失败。
+                cur.execute("SELECT payload FROM predictions WHERE prediction_id = %s",
+                            (row["prediction_id"],))
+                stored = cur.fetchone()
+                if stored is None:
+                    raise ValueError("数据库写入时已开球，赛前预测未封存")
+                saved = stored["payload"] if isinstance(stored, dict) else stored[0]
+                saved = json.loads(saved) if isinstance(saved, str) else saved
+                original = saved.get("result", {})
+                if (original.get("input_sha256") != result["input_sha256"]
+                        or input_digest(saved.get("input")) != result["input_sha256"]
+                        or original.get("model_version") != row["model_version"]):
+                    raise ValueError("幂等键命中不同预测快照；原记录保留，当前预测未封存")
+        conn.commit()
+        return row["prediction_id"]
+    except Exception:
+        conn.rollback()
+        raise
 
 
 def save_settlement(conn, prediction_id: str, home_goals: int, away_goals: int,

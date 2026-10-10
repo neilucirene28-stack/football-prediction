@@ -56,7 +56,8 @@ async function predict(m, btn, out) {
     kickoff_at: m.kickoff_at, snapshot_at: m.snapshot_at || new Date().toISOString(),
     league_avg_goals: 2.7,
     home_recent: m.home_recent, away_recent: m.away_recent,
-    odds: m.odds, ou_line: 2.5, match_id: m.id
+    odds: m.odds, ou_line: 2.5, match_id: m.id,
+    cards: m.cards || (m.raw && m.raw.cards)
   };
   try {
     const r = await fetch('/api/predict', {
@@ -66,6 +67,16 @@ async function predict(m, btn, out) {
     const p = await r.json();
     if (p.status !== 'ok') { out.innerHTML = `<p class="warn">${p.reason || '数据不足'}</p>`; return; }
     const pct = x => (x * 100).toFixed(1) + '%';
+    const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const cards = p.derivatives.cards;
+    const counts = cards && cards.current_season_totals;
+    const cardHtml = cards && cards.status === 'ok' ? `
+      <p><b>红黄牌估计</b>：主队黄牌 ${cards.exp_home_yellow}，客队黄牌 ${cards.exp_away_yellow}；总黄牌≥5 ${pct(cards.p_over_4_5)}</p>
+      <p>至少一张红牌 ${pct(cards.p_red)} · 主队红牌 ${pct(cards.p_home_red)} · 客队红牌 ${pct(cards.p_away_red)}</p>
+      ${counts ? `<p>当前赛季 ${esc(cards.season)} 已观测数量：<br>
+        ${esc(p.match.home)} 黄牌 ${counts.home.yellow_observed}、红牌 ${counts.home.red_observed}（已收集赛果中统计了 ${counts.home.matches_with_cards}/${counts.home.matches_played} 场）<br>
+        ${esc(p.match.away)} 黄牌 ${counts.away.yellow_observed}、红牌 ${counts.away.red_observed}（已收集赛果中统计了 ${counts.away.matches_with_cards}/${counts.away.matches_played} 场）</p>` : '<p class="warn">当前赛季牌数缺失：以上仅为历史先验估计。</p>'}
+      <p class="meta">牌数风险暂未用于调整胜平负；缺失牌数不代表零牌。</p>` : '<p class="meta">红黄牌：未提供可用牌数数据。</p>';
     out.innerHTML = `
       <div class="probs">
         <div class="prob">主胜<b>${pct(p.p_home)}</b></div>
@@ -87,6 +98,7 @@ async function predict(m, btn, out) {
       ${p.derivatives.asian ? `<p>亚盘${p.derivatives.asian.handicap}：赢${pct(p.derivatives.asian.win)} 走${pct(p.derivatives.asian.push)} 输${pct(p.derivatives.asian.lose)} · 模型合理盘口 ${p.derivatives.asian.fair_handicap}${p.derivatives.asian.movement ? ' · ' + p.derivatives.asian.movement.direction + '/' + (p.derivatives.asian.movement.signal || '—') : ''}</p>` : ''}
       ${p.consistency_issues.length ? `<p class="warn">一致性警告：${p.consistency_issues.join('；')}</p>` : ''}
       <p>MC ${p.monte_carlo.ran ? 'n=' + p.monte_carlo.n + ' ' + pct(p.monte_carlo.p_home) + '/' + pct(p.monte_carlo.p_draw) + '/' + pct(p.monte_carlo.p_away) : '未运行（数据不足）'}</p>
+      ${cardHtml}
       ${p.value.length ? `<p>价值方向：${p.value.map(v => v.outcome + '(edge ' + v.edge + ')').join(', ')}</p>` : '<p class="warn">无显著价值方向</p>'}
       <pre>${p.notes.join('\n')}</pre>`;
   } catch (e) {
