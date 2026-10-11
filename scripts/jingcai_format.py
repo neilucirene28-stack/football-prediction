@@ -48,8 +48,18 @@ def format_handicap_1x2(pred: dict) -> str:
         return "让球胜平负：无让球数据"
     line = h["line"]
     rq = f"({line:+d})" if isinstance(line, int) else f"({line})"
-    return (f"让球胜平负{rq}：让胜({h['p_home']:.3f})/让平({h['p_draw']:.3f})"
+    text = (f"让球胜平负{rq}：让胜({h['p_home']:.3f})/让平({h['p_draw']:.3f})"
             f"/让负({h['p_away']:.3f})")
+    view = h.get("risk_view")
+    if view:
+        names = {"home": "让胜", "draw": "让平", "away": "让负"}
+        pair = "＋".join(names[k] for k in view["top2"])
+        text += (f"；首选{names[view['top1']]}"
+                 f"；让平={view['draw_interpretation']}（{view['draw_probability']:.1%}）"
+                 f"；Top2 {pair}覆盖{view['top2_coverage']:.1%}"
+                 f"，遗漏{names[view['top2_excluded']]}"
+                 f"{view['top2_excluded_probability']:.1%}")
+    return text
 
 
 def format_top_scores(pred: dict, n: int = 5) -> str:
@@ -137,7 +147,7 @@ if __name__ == "__main__":
     import sys
     from datetime import datetime, timedelta
     sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
-    from engine.predictor import predict
+    from engine.jingcai_predictor import predict
 
     def mk(gf, ga, venue):
         return [{"gf": gf, "ga": ga, "venue": venue} for _ in range(8)]
@@ -146,7 +156,7 @@ if __name__ == "__main__":
     payload = {
         "home": "法国", "away": "比利时", "competition": "欧国联",
         "kickoff_at": (now + timedelta(days=2)).isoformat(),
-        "snapshot_at": (now + timedelta(days=1)).isoformat(),
+        "snapshot_at": now.isoformat(),
         "league_avg_goals": 2.70,
         "home_recent": mk(2, 1, "H"),
         "away_recent": mk(1, 1, "A"),

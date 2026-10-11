@@ -14,7 +14,7 @@ from collections import defaultdict
 
 TZ = timezone(timedelta(hours=8))
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
-from engine.predictor import predict, PredictError
+from engine.jingcai_predictor import predict, PredictError
 
 BASE = "/home/hatch/workspace/football-prediction-v2"
 HIST = f"{BASE}/data/phase2_history.json"

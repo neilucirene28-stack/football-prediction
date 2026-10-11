@@ -54,8 +54,17 @@ def test_drift_lowers_confidence():
 def test_platt_applied_in_predict():
     # 构造"拉低主胜"的校准参数（B为负 → 往下拉）
     platt = {"home": (1.0, -0.8), "draw": (1.0, 0.0), "away": (1.0, 0.0)}
-    base = predict(_payload())
-    cal = predict(_payload(), config={"platt": platt})
+    p = _payload()
+    base = predict(p)
+    # 仅为合成接口测试声明的来源元数据，不代表真实训练或提升证据。
+    before = datetime.now(TZ) - timedelta(days=3)
+    provenance = {"model": "jingcai", "base_model_version": base["base_model_version"],
+                  "scope": "market_fused", "training_results_available_before": before.isoformat(),
+                  "validation_results_available_before": (before + timedelta(days=1)).isoformat(),
+                  "fitted_at": (before + timedelta(days=2)).isoformat(),
+                  "validation_kind": "chronological_holdout", "training_rows_sha256": "0"*64,
+                  "n_train": 100, "n_validation": 20}
+    cal = predict(p, config={"platt": platt, "platt_provenance": provenance})
     assert cal["calibrated"] is True
     assert base["calibrated"] is False
     # 输出为4位小数，round误差可达~1.5e-4；v2.9注：阈值放宽至1e-3

@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """竞彩194场回填分析：校准/背离/漂移/让球/权重。"""
 import json, math, sys
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 from collections import defaultdict
 
-REC = "/home/hatch/workspace/football-prediction-v2/hidden_backfill_jingcai.jsonl"
+REC = ROOT / "hidden_backfill_jingcai.jsonl"
 recs = [json.loads(l) for l in open(REC)]
-print(f"样本 {len(recs)} 场（2026-09-01~29 竞彩，FD覆盖10联赛）")
+print(f"样本 {len(recs)} 场（{min(r['date'] for r in recs)}~{max(r['date'] for r in recs)}）")
+print("口径：Brier为三项平方误差求和；让球D节仅为raw DC重建，不代表当前IPF+letdraw生产链路。")
+print("完整分阶段审计请运行 scripts/audit_jingcai_letdraw.py；旧回填缺版本／赛前时刻证据。")
 
 def devig(o):
     s = sum(1 / x for x in o)
@@ -15,7 +19,7 @@ def devig(o):
 def brier(ps, actual):
     # actual: 0=H,1=D,2=A
     t = [1.0 if i == actual else 0.0 for i in range(3)]
-    return sum((p - x) ** 2 for p, x in zip(ps, t)) / 2
+    return sum((p - x) ** 2 for p, x in zip(ps, t))
 
 def logloss(ps, actual):
     return -math.log(max(ps[actual], 1e-9))
@@ -59,8 +63,8 @@ for name, vs in variants.items():
     # ECE (10 bins on max prob)
     bins = defaultdict(list)
     for p, a in vs:
-        bins[min(int(max(p) * 10), 9)].append(1 if max(range(3), key=lambda i: p[i]) == a else 0)
-    ece = sum(abs(sum(v)/len(v) - (b+0.5)/10) * len(v)/n for b, v in bins.items())
+        bins[min(int(max(p) * 10), 9)].append((max(p), int(max(range(3), key=lambda i: p[i]) == a)))
+    ece = sum(abs(sum(hit for p, hit in v)/len(v) - sum(p for p, hit in v)/len(v)) * len(v)/n for v in bins.values())
     print(f"  {name:8s} n={n} Brier={br:.4f} LogLoss={ll:.4f} RPS={rp:.4f} 方向={hit:.1%} ECE={ece:.4f}")
 
 # ---------- B. 背离：模型 vs 市场(FD closing) ----------
@@ -78,7 +82,7 @@ for r in div:
     elif md == a: mw += 1
     elif sd == a: sw += 1
     else: neither += 1
-print(f"  市场赢 {mw} | 模型赢 {sw} | 都没中 {neither}")
+print(f"  市场赢 {mw} | 原始模型信号赢 {sw} | 都没中 {neither}（不等于最终融合模型）")
 dec = mw + sw
 if dec: print(f"  decisive中: 市场 {mw/dec:.1%} / 模型 {sw/dec:.1%}")
 
@@ -99,7 +103,7 @@ for label, cond in [("热门被追捧", lambda d: d > 0.02), ("基本不动", la
 # ---------- D. 竞彩让球：让平诊断 ----------
 print("\n=== D. 竞彩让球（rq）让平诊断 ===")
 from engine.poisson import score_matrix
-def margin_probs(lam_h, lam_a, rho=-0.1):
+def margin_probs(lam_h, lam_a, rho=-0.13):
     m = score_matrix(lam_h, lam_a, rho=rho)
     mp = defaultdict(float)
     for i in range(len(m)):

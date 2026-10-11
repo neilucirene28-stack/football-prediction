@@ -16,7 +16,7 @@ def _payload(**kw):
     p = {
         "home": "阿森纳", "away": "曼城", "competition": "英超",
         "kickoff_at": _future_ts(days=2),
-        "snapshot_at": _future_ts(days=1),
+        "snapshot_at": _future_ts(seconds=-1),
         "league_avg_goals": 2.70,
         "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(8)],
         "away_recent": [{"gf": 1, "ga": 1, "venue": "A"} for _ in range(8)],

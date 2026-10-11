@@ -11,7 +11,7 @@ sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
 
 from collector.collector.sources.titan007 import (
     Titan007Source, _DETAIL_URL, _http_get, ENTRY_URL)
-from engine.predictor import predict
+from engine.jingcai_predictor import predict
 from engine.poisson import handicap_1x2, score_matrix
 
 FIXTURES = "/tmp/jingcai_today_fixtures.json"
