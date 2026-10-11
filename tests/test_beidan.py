@@ -1,5 +1,6 @@
 """北单适配层测试：校准隔离性、冷门分层、adjusted goals。"""
 import math
+from datetime import datetime, timezone, timedelta
 
 import pytest
 
@@ -33,11 +34,11 @@ class TestBeidanCalibration:
         assert os.path.abspath(beidan_path) != os.path.abspath(jingcai_path)
         assert os.path.exists(beidan_path)
 
-    def test_calibration_corrects_overconfidence(self):
-        # 让球模型过度自信（0.52->实际0.29），校准后应下调
+    def test_negative_slope_is_disabled(self):
+        # 旧55场反向校准只保留诊断；未来首选置信度回退原值。
         p = 0.52
         cal = apply_beidan_calibration("rq", p)
-        assert cal < p, "让球校准应下调过度自信的概率"
+        assert cal == p, "未经时序验证的反向校准应关闭"
         assert 0 < cal < 1
 
     def test_unknown_playtype_passthrough(self):
@@ -134,8 +135,8 @@ class TestPredictModelParam:
     def _payload(self):
         return {
             "home": "测试主队", "away": "测试客队",
-            "kickoff_at": "2026-10-07T12:00:00+08:00",
-            "snapshot_at": "2026-10-06T12:00:00+08:00",
+            "kickoff_at": (datetime.now(timezone.utc) + timedelta(days=2)).isoformat(),
+            "snapshot_at": datetime.now(timezone.utc).isoformat(),
             "competition": "测试联赛",
             "odds": {"home": 2.0, "draw": 3.2, "away": 3.5},
             "home_recent": [

@@ -32,7 +32,7 @@ from .cards import predict_cards
 from .market_flow import (flow_features, apply_volume_weight,
                           movement_features)
 from .letdraw import (apply_letdraw_to_matrix, letdraw_guard)
-from .beidan_calibration import apply_beidan_calibration
+from .beidan_calibration import apply_beidan_calibration, beidan_calibration_info
 from .beidan_upset import upset_risk as beidan_upset_risk, risk_tier as beidan_risk_tier
 
 _CARDS_ALIAS = None
@@ -212,6 +212,8 @@ def predict(payload: dict, config: dict | None = None,
            # 自动触发背离警告并下调信心一档。0 = 关闭门控
            "divergence_gate": 0.15}
     cfg.update(config or {})
+    if model == "beidan":
+        cfg.setdefault("beidan_letdraw_strength", 0.0)
     version = model_version(cfg)
 
     # ---- 1. 输入校验与防泄漏 ----
@@ -417,15 +419,18 @@ def predict(payload: dict, config: dict | None = None,
                           half_full_1x2(lam_h, lam_a,
                                         ht_factor=cfg["ht_factor"],
                                         rho=cfg["rho"],
-                                        ft_matrix=matrix_cal).items()},
+                                        ft_matrix=matrix_cal, strict_ft_support=(model == "beidan")).items()},
         "half_full_1x2_full": half_full_1x2(
             lam_h, lam_a, ht_factor=cfg["ht_factor"],
-            rho=cfg["rho"], ft_matrix=matrix_cal),
+            rho=cfg["rho"], ft_matrix=matrix_cal, strict_ft_support=(model == "beidan")),
         "total_goals_exact": {str(k): round(v, 4) for k, v in
                               total_goals_exact(matrix_cal).items()},
     }
     interval, interval_p = main_goal_interval(matrix_cal)
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
+    if model == "beidan":
+        deriv["total_goals"] = dict(deriv["total_goals_exact"])
+
     if ou_line is not None:
         over, under = over_under_prob(matrix_cal, float(ou_line))
         deriv["over_under"] = {"line": ou_line, "over": round(over, 4),
@@ -450,6 +455,9 @@ def predict(payload: dict, config: dict | None = None,
             deriv["asian"]["movement"] = movement
     handicap = payload.get("handicap_line")
     if handicap is not None:
+        if model == "beidan":
+            if isinstance(handicap, bool) or not isinstance(handicap, (int, float)) or not float(handicap).is_integer():
+                raise PredictError("北单让球必须是整数，禁止将半球截断")
         # 让球口径先从校准后矩阵算 raw 值
         h, d, a = handicap_1x2(matrix_cal, int(handicap))
         # v2.9：让平修正直接作用于矩阵（区域内重分配；见 engine/letdraw.py），
@@ -457,12 +465,12 @@ def predict(payload: dict, config: dict | None = None,
         # GPT BD-1.0审计：事后投影只能保证≤，不能保证=（曾差1.85pp）。
         matrix_ld = apply_letdraw_to_matrix(
             matrix_cal, int(handicap), league=competition,
-            strength=cfg.get("letdraw_strength", 0.5))
+            strength=cfg.get("beidan_letdraw_strength", 0.0) if model == "beidan" else cfg.get("letdraw_strength", 0.5))
         h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
         # 让平选择规则（2026-10-10用户指令）：P(让平)>=0.28时选让平，
         # 否则按argmax。依据：历史回填P(让平)>=0.28时实际让平率42.9%，
         # 模型低估14pp；不选则系统性漏掉该档。
-        if d2 >= 0.28:
+        if model != "beidan" and d2 >= 0.28:
             _hcp_pick = "draw"
         else:
             _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
@@ -476,7 +484,7 @@ def predict(payload: dict, config: dict | None = None,
                                  "p_home_full": h2, "p_draw_full": d2,
                                  "p_away_full": a2,
                                  "pick": _hcp_pick,
-                                 "pick_rule": "draw>=0.28",
+                                 "pick_rule": "argmax" if model == "beidan" else "draw>=0.28",
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
 
@@ -609,20 +617,22 @@ def predict(payload: dict, config: dict | None = None,
     # ---- 北单适配层（model='beidan' 时启用，与竞彩链路隔离） ----
     beidan_out = {}
     if model == "beidan":
+        beidan_out["calibration_info"] = beidan_calibration_info()
         # 北单专属Platt校准：对胜平负首选、让球首选、总进球首选分别校准
         p_top_sp = max(p_home, p_draw, p_away)
         beidan_out["calibrated_p_top_sp"] = round(apply_beidan_calibration("sp", p_top_sp), 4)
         # 让球首选概率（从 handicap_1x2 取）
         try:
             h1x2 = deriv.get("handicap_1x2", {})
-            p_top_rq = max(h1x2.get("p_home", 0), h1x2.get("p_draw", 0), h1x2.get("p_away", 0))
+            selected = h1x2.get("pick")
+            p_top_rq = h1x2.get("p_" + selected + "_full", h1x2.get("p_" + selected)) if selected in ("home", "draw", "away") else None
         except Exception:
-            p_top_rq = p_top_sp
-        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4)
+            p_top_rq = None
+        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4) if p_top_rq is not None else None
         # 冷门分层：翻车风险分
         rq_val = 0
         try:
-            rq_val = int(payload.get("handicap", 0) or 0)
+            rq_val = int(payload.get("handicap_line", payload.get("handicap", 0)) or 0)
         except (ValueError, TypeError):
             rq_val = 0
         b_risk = beidan_upset_risk(

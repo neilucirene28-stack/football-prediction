@@ -211,7 +211,7 @@ def _outcome(h: int, a: int) -> str:
 def half_full_1x2(lambda_home: float, lambda_away: float,
                   ht_factor: float = 0.44,
                   rho: float = 0.0,
-                  ft_matrix=None) -> dict:
+                  ft_matrix=None, strict_ft_support: bool = False) -> dict:
     """半全场胜平负：9 种组合概率（竞彩官方玩法）。
 
     推导：半场比分矩阵 M_ht（λ×ht_factor，Dixon-Coles 修正，与 half_time_probs
@@ -267,8 +267,11 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
 
     def _w(fi, fj):
         # P0 Bug4: IPF重加权；网格外长尾权重=1
-        if ft_matrix is None or fi >= n_ft or fj >= n_ft:
+        if ft_matrix is None:
             return 1.0
+        if fi >= n_ft or fj >= n_ft:
+            # 北单完整六玩法以同一个有限比分矩阵为支持域。
+            return 0.0 if strict_ft_support else 1.0
         pj = ft_j.get((fi, fj), 0.0)
         if pj <= 0:
             return 0.0
