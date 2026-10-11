@@ -35,7 +35,7 @@ from .letdraw import (apply_letdraw_to_matrix, letdraw_guard,
                       TIER_PRIOR, LEAGUE_PRIOR_1)
 from .jingcai_handicap import (integer_handicap, handicap_view, matrix_summary,
                                PIPELINE_REVISION, LETDRAW_FIT_BEFORE)
-from .beidan_calibration import apply_beidan_calibration
+from .beidan_calibration import apply_beidan_calibration, beidan_calibration_info
 from .beidan_upset import upset_risk as beidan_upset_risk, risk_tier as beidan_risk_tier
 from .jingcai_inputs import validate_config, validate_payload, aware_datetime
 from .jingcai_grid import score_grid, validate_dc, TAIL_TOLERANCE
@@ -244,6 +244,8 @@ def predict(payload: dict, config: dict | None = None,
         base_cfg = {k: v for k, v in cfg.items() if k != "platt_provenance"}
         base_cfg["platt"] = None
         base_version = model_version(base_cfg)
+    if model == "beidan":
+        cfg.setdefault("beidan_letdraw_strength", 0.0)
     version = model_version(cfg)
 
     # ---- 1. 输入校验与防泄漏 ----
@@ -495,7 +497,8 @@ def predict(payload: dict, config: dict | None = None,
     fair = fair_handicap(matrix_cal)
     half_full = half_full_1x2(lam_h, lam_a, ht_factor=cfg["ht_factor"],
                              rho=cfg["rho"], ft_matrix=matrix_cal,
-                             strict_ft_grid=model == "jingcai")
+                             strict_ft_grid=model == "jingcai",
+                             strict_ft_support=model == "beidan")
     deriv = {
         "btts": round(btts_prob(matrix_cal), 4),
         "over_under": None,
@@ -547,6 +550,9 @@ def predict(payload: dict, config: dict | None = None,
         except (ValueError, TypeError, KeyError) as e:
             raise PredictError(f"竞彩牌数输入无效：{e}") from e
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
+    if model == "beidan":
+        deriv["total_goals"] = dict(deriv["total_goals_exact"])
+
     if ou_line is not None:
         over, under = over_under_prob(matrix_cal, float(ou_line))
         deriv["over_under"] = {"line": ou_line, "over": round(over, 4),
@@ -570,24 +576,25 @@ def predict(payload: dict, config: dict | None = None,
                 p_home)
             deriv["asian"]["movement"] = movement
     if handicap is not None:
+        if model == "beidan":
+            if isinstance(handicap, bool) or not isinstance(handicap, (int, float)) or not float(handicap).is_integer():
+                raise PredictError("北单让球必须是整数，禁止将半球截断")
         # 让球口径先从校准后矩阵算 raw 值
         h, d, a = handicap_1x2(matrix_pre_letdraw, int(handicap))
         # v2.9：让平修正直接作用于矩阵（区域内重分配；见 engine/letdraw.py），
         # 修正后让球概率从矩阵聚合，P(让胜)+P(让平)≡P(主胜)天然成立。
         # GPT BD-1.0审计：事后投影只能保证≤，不能保证=（曾差1.85pp）。
         if matrix_ld is None:
-            # 北单保留原链路；本次不改变北单的矩阵、输出与选择策略。
+            # 北单v2.10 R2：北单不继承竞彩letdraw先验强度，单独强度0.0；
+            # 竞彩沿用v12链路（matrix_ld已在上游设置，此处仅兜底）。
             matrix_ld = apply_letdraw_to_matrix(
                 matrix_cal, int(handicap), league=competition,
-                strength=cfg.get("letdraw_strength", 0.5))
+                strength=cfg.get("beidan_letdraw_strength", 0.0) if model == "beidan" else cfg.get("letdraw_strength", 0.5))
         h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
-        # 竞彩恢复真正argmax：原0.28阈值误用了普通平局统计。
-        # 北单的既有规则在本次竞彩修复中保留，另行审查。
-        if model == "beidan" and d2 >= 0.28:
-            _hcp_pick = "draw"
-        else:
-            _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
-                            key=lambda x: x[1])[0]
+        # 让平选择：竞彩v6与北单R2均恢复纯argmax
+        # （原0.28阈值误用了普通平局统计，回测证明有害，已废除）。
+        _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
+                        key=lambda x: x[1])[0]
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),
@@ -597,8 +604,7 @@ def predict(payload: dict, config: dict | None = None,
                                  "p_home_full": h2, "p_draw_full": d2,
                                  "p_away_full": a2,
                                  "pick": _hcp_pick,
-                                 "pick_rule": ("argmax" if model == "jingcai"
-                                               else "draw>=0.28"),
+                                 "pick_rule": "argmax",
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
         if model == "jingcai":
@@ -760,20 +766,22 @@ def predict(payload: dict, config: dict | None = None,
     # ---- 北单适配层（model='beidan' 时启用，与竞彩链路隔离） ----
     beidan_out = {}
     if model == "beidan":
+        beidan_out["calibration_info"] = beidan_calibration_info()
         # 北单专属Platt校准：对胜平负首选、让球首选、总进球首选分别校准
         p_top_sp = max(p_home, p_draw, p_away)
         beidan_out["calibrated_p_top_sp"] = round(apply_beidan_calibration("sp", p_top_sp), 4)
         # 让球首选概率（从 handicap_1x2 取）
         try:
             h1x2 = deriv.get("handicap_1x2", {})
-            p_top_rq = max(h1x2.get("p_home", 0), h1x2.get("p_draw", 0), h1x2.get("p_away", 0))
+            selected = h1x2.get("pick")
+            p_top_rq = h1x2.get("p_" + selected + "_full", h1x2.get("p_" + selected)) if selected in ("home", "draw", "away") else None
         except Exception:
-            p_top_rq = p_top_sp
-        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4)
+            p_top_rq = None
+        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4) if p_top_rq is not None else None
         # 冷门分层：翻车风险分
         rq_val = 0
         try:
-            rq_val = int(payload.get("handicap", 0) or 0)
+            rq_val = int(payload.get("handicap_line", payload.get("handicap", 0)) or 0)
         except (ValueError, TypeError):
             rq_val = 0
         b_risk = beidan_upset_risk(

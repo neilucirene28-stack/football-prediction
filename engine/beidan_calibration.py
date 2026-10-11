@@ -41,13 +41,20 @@ def apply_beidan_calibration(playtype: str, p: float) -> float:
 
     无参数时原样返回（不编造）。
     """
+    if type(p) not in (int, float) or not math.isfinite(p) or not 0 <= p <= 1:
+        raise ValueError("北单校准输入必须是0–1有限概率")
     ab = get_beidan_params(playtype)
     if ab is None:
         return p
     a, b = ab
+    # 首选命中率校准不是三向向量。反向拟合只保留为历史诊断，
+    # 禁止把未外推验证的负斜率用于未来置信度。
+    if not (math.isfinite(a) and math.isfinite(b)) or a <= 0:
+        return p
     p = min(max(p, 1e-6), 1 - 1e-6)
     x = math.log(p / (1 - p))
-    return 1.0 / (1.0 + math.exp(-(a * x + b)))
+    z = a * x + b
+    return 1.0 / (1.0 + math.exp(-z)) if z >= 0 else math.exp(z) / (1.0 + math.exp(z))
 
 
 def beidan_calibration_info() -> dict:
@@ -55,6 +62,8 @@ def beidan_calibration_info() -> dict:
     d = _load()
     return {
         "version": d.get("version"),
+        "scope": "binary_top_pick_hit_rate_not_multiclass_vector",
+        "disabled_nonpositive_slope": [k for k, v in d.get("params", {}).items() if v.get("a", 0) <= 0],
         "trained_on": d.get("trained_on"),
         "playtypes": sorted(d.get("params", {}).keys()),
     }
