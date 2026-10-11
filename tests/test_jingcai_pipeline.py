@@ -7,8 +7,8 @@ import pytest
 from engine.jingcai_handicap import handicap_view, integer_handicap
 from engine.jingcai_predictor import PredictError, predict
 from engine.poisson import (score_matrix, match_probs, handicap_1x2,
-                            top_scores, total_goals_exact, expected_total_goals,
-                            half_full_1x2, btts_prob)
+                            top_scores, top_scores_diverse, total_goals_exact,
+                            expected_total_goals, half_full_1x2, btts_prob)
 from scripts.scoreboard import score_one
 from scripts.jingcai_format import format_handicap_1x2
 from api.api.persist import build_prediction_row
@@ -34,7 +34,11 @@ def test_all_jingcai_full_time_derivatives_share_final_matrix(rq):
     hp = handicap_1x2(m, rq)
     assert hp == pytest.approx(tuple(d["handicap_1x2"][f"p_{k}_full"] for k in ("home", "draw", "away")), abs=1e-12)
     assert match_probs(m) == pytest.approx(r["p_final_full"], abs=1e-12)
-    assert d["top_scores"] == [{"score": s, "prob": round(p, 4)} for s, p in top_scores(m, n=5)]
+    # top_scores uses diverse ordering (v2 output-layer fix, 2026-10-10): same matrix, re-ranked by expected goals
+    assert d["top_scores"] == [{"score": s, "prob": round(p, 4)}
+                               for s, p in top_scores_diverse(m, n=5,
+                                                             lam_h=r["lambda_home"],
+                                                             lam_a=r["lambda_away"])]
     assert d["total_goals_exact"] == {str(k): round(v, 4) for k, v in total_goals_exact(m).items()}
     assert d["expected_goals"] == round(expected_total_goals(m), 2)
     assert d["btts"] == round(btts_prob(m), 4)
