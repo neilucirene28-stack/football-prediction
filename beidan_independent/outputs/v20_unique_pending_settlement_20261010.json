@@ -1,0 +1,1123 @@
+{
+  "label": "unique_earliest_frozen_settlement_no_refit",
+  "executed_at": "2026-10-09T16:05:14.278428+00:00",
+  "evaluated_at": "2026-10-09T16:05:07.987297+00:00",
+  "registry_sha256": "a24eb601250826f7da688c02a547459dc6e13f1731aa424e252230e0b9691ba7",
+  "offered_n": 179,
+  "football_offered_n": 179,
+  "execution_code_sha256": {
+    "unique_settlement.py": "54590973696b061e1ad3e23d6b7ae16c84f0eaf5df24f79613b7bdc0d7f25167",
+    "frozen_settlement.py": "57533cc1421dbf413657801f3b08176de48d9a9b887ae7dcd6687f9a701ca1c0",
+    "walk_forward.py": "93ab34c7360383ed74636a176c1e1b2b0f8382a06c1d2849eddca97a98c6593e"
+  },
+  "predicted_n": 57,
+  "blocked_n": 122,
+  "paired_n": 0,
+  "pending_ids": [
+    "26103-18",
+    "26103-19",
+    "26103-89",
+    "26103-90",
+    "26103-91",
+    "26103-98",
+    "26103-99",
+    "26103-138",
+    "26103-139",
+    "26103-140",
+    "26103-141",
+    "26103-142",
+    "26103-143",
+    "26103-144",
+    "26103-145",
+    "26103-146",
+    "26103-147",
+    "26103-65",
+    "26103-95",
+    "26103-96",
+    "26103-97",
+    "26103-100",
+    "26103-101",
+    "26103-131",
+    "26103-132",
+    "26103-133",
+    "26103-134",
+    "26103-135",
+    "26103-136",
+    "26103-137",
+    "26103-148",
+    "26103-149",
+    "26103-150",
+    "26103-151",
+    "26103-152",
+    "26103-153",
+    "26103-154",
+    "26103-155",
+    "26103-156",
+    "26103-157",
+    "26103-22",
+    "26103-24",
+    "26103-72",
+    "26103-80",
+    "26103-81",
+    "26103-87",
+    "26103-115",
+    "26103-116",
+    "26103-163",
+    "26103-188",
+    "26103-32",
+    "26103-33",
+    "26103-34",
+    "26103-35",
+    "26103-36",
+    "26103-104",
+    "26103-105"
+  ],
+  "later_duplicate_predictions_excluded_n": 107,
+  "prediction_coverage": 0.31843575418994413,
+  "settled_scoring_coverage": 0.0,
+  "brier_baseline": null,
+  "brier_candidate": null,
+  "delta_brier": null,
+  "score31_logloss_baseline": null,
+  "score31_logloss_candidate": null,
+  "paired_scores": [],
+  "matches": [
+    {
+      "period": "26103",
+      "match_id": "26103-11",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-12",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-13",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-14",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-15",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-16",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-17",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-18",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-19",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-20",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-21",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-22",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-23",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-24",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-25",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-26",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-27",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-28",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-29",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-30",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-31",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-32",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "match_id": "26103-33",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "match_id": "26103-34",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "match_id": "26103-35",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "match_id": "26103-36",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-37",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-38",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-39",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-40",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-41",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-42",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-43",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-44",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-45",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-46",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-47",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-48",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-49",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-50",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-51",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-52",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-53",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-54",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-55",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-56",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-57",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-58",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-59",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-60",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-61",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-62",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-63",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-64",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-65",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-66",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-67",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-68",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-69",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-70",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-71",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-72",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-73",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-74",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-75",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-76",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-77",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-78",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-79",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-80",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "match_id": "26103-81",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-82",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-83",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-84",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-85",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-86",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-87",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-88",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-89",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-90",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-91",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-92",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-93",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-94",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-95",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-96",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-97",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-98",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-99",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-100",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-101",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-102",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-103",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-104",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "match_id": "26103-105",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-106",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-107",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-108",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-109",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-110",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-111",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-112",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-113",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-114",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-115",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "match_id": "26103-116",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-117",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-118",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-119",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-120",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-121",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-122",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-123",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-124",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-125",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-126",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-127",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-128",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-129",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-130",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-131",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-132",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-133",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-134",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-135",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-136",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-137",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-138",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-139",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-140",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-141",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-142",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-143",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-144",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-145",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-146",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-147",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "original_manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37"
+    },
+    {
+      "match_id": "26103-148",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-149",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-150",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-151",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-152",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-153",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-154",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-155",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-156",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "match_id": "26103-157",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "original_manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-158",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-159",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-160",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-161",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-162",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-163",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-164",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-165",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-166",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-167",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-168",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-169",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-170",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-171",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-172",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-173",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-174",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-175",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-176",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-177",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-178",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-179",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-180",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-181",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-182",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-183",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-184",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-185",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-186",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-187",
+      "status": "blocked_in_all_registered_freezes"
+    },
+    {
+      "match_id": "26103-188",
+      "period": "26103",
+      "status": "pending_verified_result",
+      "original_bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "original_manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-189",
+      "status": "blocked_in_all_registered_freezes"
+    }
+  ],
+  "numerical_gate": {
+    "settled_period_n": 0,
+    "min_settled_periods": 5,
+    "min_pairs": 500,
+    "sample_threshold_met": false,
+    "full_settled_football_coverage": false,
+    "paired_delta_brier": null,
+    "block_bootstrap_upper_95": null,
+    "paired_delta_score31_logloss": null,
+    "no_logloss_floor_events": false,
+    "bootstrap_replicates": 0,
+    "numerical_nondegradation_gate": false,
+    "production_gate_passed": false
+  },
+  "goal_mean_gate": {
+    "complete": false,
+    "mean_nondegradation_gate": false,
+    "baseline_bias": null,
+    "candidate_bias": null
+  },
+  "refitted": false,
+  "reselected_after_results": false,
+  "production_gate_passed": false,
+  "limitations": [
+    "digests_do_not_authenticate_sources_or_clocks",
+    "canonical_bindings_unapproved",
+    "complete_official_pool_requires_independent_audit"
+  ]
+}

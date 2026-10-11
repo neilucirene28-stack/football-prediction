@@ -1,0 +1,1792 @@
+{
+  "executed_at": "2026-10-10T01:53:39.884486+00:00",
+  "registry_sha256": "e314e39f5239be7a00e6ad9a68851e65f4fc60d618716dea1b88a84bf9dffd23",
+  "freeze_manifest_sha256": "3f6c05791fd39d1c01913cea651eb6e7837dd274a7f376a136877798044f1502",
+  "original_probe_manifest_sha256": "23e3dff821d5f54ba79f10b708a4517ad64ef981ad4b23c033ee3cb59726fdb1",
+  "full_pool_n": 179,
+  "unique_forecast_n": 95,
+  "unpredicted_n": 84,
+  "counts": {
+    "expired_without_qualified_forecast": 41,
+    "future_fixture_source_missing": 38,
+    "future_history_below_threshold": 5
+  },
+  "by_league": {
+    "捷甲": {
+      "expired_without_qualified_forecast": 1,
+      "future_fixture_source_missing": 3
+    },
+    "波兰甲": {
+      "expired_without_qualified_forecast": 2,
+      "future_fixture_source_missing": 2
+    },
+    "丹甲": {
+      "expired_without_qualified_forecast": 2,
+      "future_fixture_source_missing": 2
+    },
+    "芬甲": {
+      "expired_without_qualified_forecast": 4
+    },
+    "奥乙": {
+      "expired_without_qualified_forecast": 3,
+      "future_fixture_source_missing": 4
+    },
+    "丹超": {
+      "expired_without_qualified_forecast": 1
+    },
+    "葡甲": {
+      "expired_without_qualified_forecast": 1,
+      "future_fixture_source_missing": 3
+    },
+    "瑞士甲": {
+      "expired_without_qualified_forecast": 5
+    },
+    "阿甲": {
+      "expired_without_qualified_forecast": 4
+    },
+    "葡超": {
+      "expired_without_qualified_forecast": 2
+    },
+    "荷甲": {
+      "expired_without_qualified_forecast": 1
+    },
+    "罗甲": {
+      "expired_without_qualified_forecast": 1,
+      "future_fixture_source_missing": 1
+    },
+    "比乙": {
+      "expired_without_qualified_forecast": 2,
+      "future_fixture_source_missing": 2
+    },
+    "德甲": {
+      "expired_without_qualified_forecast": 1,
+      "future_history_below_threshold": 5
+    },
+    "意乙": {
+      "expired_without_qualified_forecast": 1
+    },
+    "法甲": {
+      "expired_without_qualified_forecast": 1
+    },
+    "爱超": {
+      "expired_without_qualified_forecast": 1
+    },
+    "爱足总杯": {
+      "expired_without_qualified_forecast": 1,
+      "future_fixture_source_missing": 1
+    },
+    "爱甲": {
+      "expired_without_qualified_forecast": 5
+    },
+    "西甲": {
+      "expired_without_qualified_forecast": 1
+    },
+    "墨联": {
+      "expired_without_qualified_forecast": 1
+    },
+    "K联赛": {
+      "future_fixture_source_missing": 2
+    },
+    "J2联赛": {
+      "future_fixture_source_missing": 6
+    },
+    "K2联赛": {
+      "future_fixture_source_missing": 4
+    },
+    "瑞典甲": {
+      "future_fixture_source_missing": 4
+    },
+    "芬超": {
+      "future_fixture_source_missing": 1
+    },
+    "冰岛超": {
+      "future_fixture_source_missing": 3
+    }
+  },
+  "rows": [
+    {
+      "period": "26103",
+      "match_id": "26103-11",
+      "seq": 11,
+      "league": "捷甲",
+      "home": "兹林",
+      "away": "布拉格斯拉维亚",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "cze.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-12",
+      "seq": 12,
+      "league": "波兰甲",
+      "home": "比托姆 波罗尼亚",
+      "away": "普沃茨克",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "pol.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-13",
+      "seq": 13,
+      "league": "丹甲",
+      "home": "瓦埃勒",
+      "away": "哈维德夫",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "den.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-14",
+      "seq": 14,
+      "league": "芬甲",
+      "home": "哈卡",
+      "away": "Pk-35万塔",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fin.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-15",
+      "seq": 15,
+      "league": "芬甲",
+      "home": "克鲁比04",
+      "away": "埃克纳斯",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fin.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-16",
+      "seq": 16,
+      "league": "芬甲",
+      "home": "卡帕",
+      "away": "MP 米克力",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fin.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-17",
+      "seq": 17,
+      "league": "芬甲",
+      "home": "雅普斯",
+      "away": "吉波",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fin.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-20",
+      "seq": 20,
+      "league": "奥乙",
+      "home": "阿姆施泰滕",
+      "away": "林茨蓝白",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-21",
+      "seq": 21,
+      "league": "奥乙",
+      "home": "卡芬堡",
+      "away": "奥维也纳青年",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-23",
+      "seq": 23,
+      "league": "丹超",
+      "home": "北西兰",
+      "away": "欧登塞",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": "401874517",
+      "retained_probe": {
+        "league_slug": null,
+        "http_status": null,
+        "events_n": null
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-25",
+      "seq": 25,
+      "league": "葡甲",
+      "home": "佩纳菲耶尔",
+      "away": "阿维SAD",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-26",
+      "seq": 26,
+      "league": "丹甲",
+      "home": "AB哥本哈根",
+      "away": "阿尔胡斯",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "den.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-27",
+      "seq": 27,
+      "league": "瑞士甲",
+      "home": "纳沙泰尔",
+      "away": "温特图尔",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "sui.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-28",
+      "seq": 28,
+      "league": "瑞士甲",
+      "home": "克林斯",
+      "away": "韦尔",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "sui.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-29",
+      "seq": 29,
+      "league": "瑞士甲",
+      "home": "拉珀斯维尔",
+      "away": "洛桑乌契",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "sui.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-30",
+      "seq": 30,
+      "league": "阿甲",
+      "home": "阿尔多希维",
+      "away": "萨米恩托",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "arg.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-31",
+      "seq": 31,
+      "league": "葡超",
+      "home": "摩雷伦斯",
+      "away": "吉维森特",
+      "kickoff_at": "2026-10-10T01:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.1",
+        "http_status": 200,
+        "events_n": 3
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-37",
+      "seq": 37,
+      "league": "荷甲",
+      "home": "埃因霍温",
+      "away": "海伦芬",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "ned.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-38",
+      "seq": 38,
+      "league": "罗甲",
+      "home": "塞普西",
+      "away": "布加勒斯特迪纳摩",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "rou.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-48",
+      "seq": 48,
+      "league": "比乙",
+      "home": "登德",
+      "away": "布鲁日B队",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "bel.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-49",
+      "seq": 49,
+      "league": "比乙",
+      "home": "安德莱赫特B队",
+      "away": "欧本",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "bel.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-50",
+      "seq": 50,
+      "league": "瑞士甲",
+      "home": "尼奈斯",
+      "away": "阿劳",
+      "kickoff_at": "2026-10-10T02:15:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "sui.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-51",
+      "seq": 51,
+      "league": "瑞士甲",
+      "home": "艾托雷",
+      "away": "伊韦尔东",
+      "kickoff_at": "2026-10-10T02:15:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "sui.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-52",
+      "seq": 52,
+      "league": "德甲",
+      "home": "多特蒙德",
+      "away": "不来梅",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": "401884781",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-53",
+      "seq": 53,
+      "league": "意乙",
+      "home": "阿韦利诺",
+      "away": "桑普多利亚",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "ita.2",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-54",
+      "seq": 54,
+      "league": "波兰甲",
+      "home": "琴斯托霍瓦",
+      "away": "卡托华斯",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "pol.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-55",
+      "seq": 55,
+      "league": "奥乙",
+      "home": "1894 维也纳",
+      "away": "圣珀尔滕",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-56",
+      "seq": 56,
+      "league": "法甲",
+      "home": "朗斯",
+      "away": "里昂",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fra.1",
+        "http_status": 200,
+        "events_n": 5
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-57",
+      "seq": 57,
+      "league": "爱超",
+      "home": "谢尔伯恩",
+      "away": "斯莱戈流浪",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-58",
+      "seq": 58,
+      "league": "爱足总杯",
+      "home": "波希米亚人",
+      "away": "沃特福德联队",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": null,
+        "http_status": null,
+        "events_n": null
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-59",
+      "seq": 59,
+      "league": "爱甲",
+      "home": "阿斯隆城",
+      "away": "条约联",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-60",
+      "seq": 60,
+      "league": "爱甲",
+      "home": "布雷",
+      "away": "威福特青年",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-61",
+      "seq": 61,
+      "league": "爱甲",
+      "home": "科布漫步",
+      "away": "克里",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-62",
+      "seq": 62,
+      "league": "爱甲",
+      "home": "科克城",
+      "away": "费恩哈普",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-63",
+      "seq": 63,
+      "league": "爱甲",
+      "home": "都柏林大学",
+      "away": "朗福德城",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "irl.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-64",
+      "seq": 64,
+      "league": "西甲",
+      "home": "马拉加",
+      "away": "西班牙人",
+      "kickoff_at": "2026-10-10T03:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "esp.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-66",
+      "seq": 66,
+      "league": "葡超",
+      "home": "布拉加",
+      "away": "里斯本",
+      "kickoff_at": "2026-10-10T03:15:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.1",
+        "http_status": 200,
+        "events_n": 3
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-67",
+      "seq": 67,
+      "league": "阿甲",
+      "home": "拉普拉塔体操",
+      "away": "图库曼竞技",
+      "kickoff_at": "2026-10-10T05:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "arg.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-68",
+      "seq": 68,
+      "league": "阿甲",
+      "home": "科尔多瓦学院",
+      "away": "博卡青年",
+      "kickoff_at": "2026-10-10T06:30:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "arg.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-69",
+      "seq": 69,
+      "league": "阿甲",
+      "home": "圣菲联合",
+      "away": "防御与正义",
+      "kickoff_at": "2026-10-10T08:45:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "arg.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-70",
+      "seq": 70,
+      "league": "墨联",
+      "home": "普埃布拉",
+      "away": "莱昂",
+      "kickoff_at": "2026-10-10T09:00:00+08:00",
+      "blocker": "expired_without_qualified_forecast",
+      "latest_freeze_reason": "ValueError: 决策时已经开球；仅保留完整池阻断行",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "mex.1",
+        "http_status": 200,
+        "events_n": 4
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-73",
+      "seq": 73,
+      "league": "K联赛",
+      "home": "首尔FC",
+      "away": "济州联",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-74",
+      "seq": 74,
+      "league": "J2联赛",
+      "home": "大宫松鼠",
+      "away": "八户南源",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-75",
+      "seq": 75,
+      "league": "J2联赛",
+      "home": "横滨FC",
+      "away": "大分三神",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-76",
+      "seq": 76,
+      "league": "J2联赛",
+      "home": "德岛漩涡",
+      "away": "FC今治",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-77",
+      "seq": 77,
+      "league": "J2联赛",
+      "home": "鸟栖沙岩",
+      "away": "藤枝MYFC",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-78",
+      "seq": 78,
+      "league": "K2联赛",
+      "home": "全南天龙",
+      "away": "龙仁",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-79",
+      "seq": 79,
+      "league": "K2联赛",
+      "home": "坡州市民",
+      "away": "釜山偶像",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-82",
+      "seq": 82,
+      "league": "J2联赛",
+      "home": "甲府风林",
+      "away": "枥木Uva FC",
+      "kickoff_at": "2026-10-10T15:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-83",
+      "seq": 83,
+      "league": "K联赛",
+      "home": "金泉尚武",
+      "away": "安养FC",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-84",
+      "seq": 84,
+      "league": "K2联赛",
+      "home": "天安城",
+      "away": "庆南FC",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-85",
+      "seq": 85,
+      "league": "K2联赛",
+      "home": "金海",
+      "away": "忠清南道",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "kor.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-86",
+      "seq": 86,
+      "league": "J2联赛",
+      "home": "磐田喜悦",
+      "away": "札幌冈萨多",
+      "kickoff_at": "2026-10-10T17:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "jpn.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-88",
+      "seq": 88,
+      "league": "葡甲",
+      "home": "通德拉",
+      "away": "杜连斯",
+      "kickoff_at": "2026-10-10T18:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-92",
+      "seq": 92,
+      "league": "丹甲",
+      "home": "希勒罗德",
+      "away": "腓特烈西亚",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "den.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-93",
+      "seq": 93,
+      "league": "瑞典甲",
+      "home": "兰斯克鲁纳",
+      "away": "桑德维肯斯",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "swe.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-102",
+      "seq": 102,
+      "league": "丹甲",
+      "home": "埃斯比约",
+      "away": "奥尔堡",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "den.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-106",
+      "seq": 106,
+      "league": "波兰甲",
+      "home": "克拉科维亚",
+      "away": "卢宾扎格勒比",
+      "kickoff_at": "2026-10-10T20:45:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "pol.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-112",
+      "seq": 112,
+      "league": "捷甲",
+      "home": "比尔森",
+      "away": "博莱斯拉夫",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "cze.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-113",
+      "seq": 113,
+      "league": "捷甲",
+      "home": "布尔诺",
+      "away": "亚布洛内茨",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "cze.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-114",
+      "seq": 114,
+      "league": "捷甲",
+      "home": "赫拉德茨",
+      "away": "里森",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "cze.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-117",
+      "seq": 117,
+      "league": "葡甲",
+      "home": "阿马兰特",
+      "away": "波尔蒂芒斯",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-118",
+      "seq": 118,
+      "league": "瑞典甲",
+      "home": "厄斯特松德",
+      "away": "瓦尔贝里",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "swe.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-119",
+      "seq": 119,
+      "league": "德甲",
+      "home": "霍芬海姆",
+      "away": "汉堡",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_history_below_threshold",
+      "latest_freeze_reason": "ValueError: L1对阵双方规范ID历史样本不足",
+      "provider_match_id": "401884779",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-120",
+      "seq": 120,
+      "league": "德甲",
+      "home": "奥格斯堡",
+      "away": "拜仁",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_history_below_threshold",
+      "latest_freeze_reason": "ValueError: L1对阵双方规范ID历史样本不足",
+      "provider_match_id": "401884777",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-121",
+      "seq": 121,
+      "league": "德甲",
+      "home": "美因茨",
+      "away": "勒沃库森",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_history_below_threshold",
+      "latest_freeze_reason": "ValueError: L1对阵双方规范ID历史样本不足",
+      "provider_match_id": "401884776",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-122",
+      "seq": 122,
+      "league": "德甲",
+      "home": "柏林联合",
+      "away": "艾禾斯堡",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_history_below_threshold",
+      "latest_freeze_reason": "ValueError: L1对阵双方规范ID历史样本不足",
+      "provider_match_id": "401884775",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-123",
+      "seq": 123,
+      "league": "德甲",
+      "home": "帕德博恩",
+      "away": "斯图加特",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_history_below_threshold",
+      "latest_freeze_reason": "ValueError: L1对阵双方规范ID历史样本不足",
+      "provider_match_id": "401884773",
+      "retained_probe": {
+        "league_slug": "ger.1",
+        "http_status": 200,
+        "events_n": 6
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-124",
+      "seq": 124,
+      "league": "奥乙",
+      "home": "列夫林",
+      "away": "格拉茨风暴二队",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-125",
+      "seq": 125,
+      "league": "奥乙",
+      "home": "奥地利萨尔茨堡",
+      "away": "维也纳FAC",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-126",
+      "seq": 126,
+      "league": "奥乙",
+      "home": "韦尔斯赫塔",
+      "away": "布雷根茨",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-127",
+      "seq": 127,
+      "league": "奥乙",
+      "home": "维迅速青年",
+      "away": "因斯布鲁克",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "aut.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-164",
+      "seq": 164,
+      "league": "芬超",
+      "home": "TPS土尔库",
+      "away": "雅罗",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "fin.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-165",
+      "seq": 165,
+      "league": "冰岛超",
+      "home": "斯塔尔南",
+      "away": "KA阿克雷里",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "isl.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-166",
+      "seq": 166,
+      "league": "冰岛超",
+      "home": "瓦路尔",
+      "away": "哈夫纳夫约杜尔",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "isl.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-167",
+      "seq": 167,
+      "league": "冰岛超",
+      "home": "索尔",
+      "away": "韦斯特",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "isl.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-168",
+      "seq": 168,
+      "league": "爱足总杯",
+      "home": "戈尔韦联队",
+      "away": "德里城",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": null,
+        "http_status": null,
+        "events_n": null
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-174",
+      "seq": 174,
+      "league": "比乙",
+      "home": "维尔通",
+      "away": "哈瑟特",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "bel.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-175",
+      "seq": 175,
+      "league": "比乙",
+      "home": "利尔斯",
+      "away": "博莱斯",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "bel.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-178",
+      "seq": 178,
+      "league": "罗甲",
+      "home": "博托沙尼",
+      "away": "阿拉德联合",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "rou.1",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-181",
+      "seq": 181,
+      "league": "葡甲",
+      "home": "雷克斯欧斯",
+      "away": "波尔图B队",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "por.2",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-184",
+      "seq": 184,
+      "league": "瑞典甲",
+      "home": "奥迪沃特",
+      "away": "慕达拉",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "swe.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-185",
+      "seq": 185,
+      "league": "瑞典甲",
+      "home": "诺尔比",
+      "away": "厄斯特什",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "swe.2",
+        "http_status": 200,
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-189",
+      "seq": 189,
+      "league": "波兰甲",
+      "home": "斯拉斯克",
+      "away": "波兹南",
+      "kickoff_at": "2026-10-10T23:30:00+08:00",
+      "blocker": "future_fixture_source_missing",
+      "latest_freeze_reason": "ValueError: 赛程原始来源或真实可得时间缺失",
+      "provider_match_id": null,
+      "retained_probe": {
+        "league_slug": "pol.1",
+        "http_status": "ERROR: HTTP Error 400: Bad Request",
+        "events_n": 0
+      },
+      "can_add_retrospective_forecast": false,
+      "canonical_identity_approved": false,
+      "production_eligible": false
+    }
+  ],
+  "official_identity_approved_n": 0,
+  "official_handicap_available_n": 0,
+  "official_sp_available_n": 0,
+  "production_gate_passed": false
+}

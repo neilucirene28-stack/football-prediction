@@ -1,0 +1,83 @@
+{
+  "receipts": [
+    {
+      "source": "2026101014",
+      "url": "https://www.jleague.jp/match/j2/2026/101014/",
+      "start_utc": "2026-10-10T02:40:50.045766+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:54.737432+00:00",
+      "bytes": 1159935,
+      "sha256": "73b8c6a165758777a28dbe3da46a86ee86f2b5e2a8aad60ae329995b8c0ff69b",
+      "local_file": "2026101014.raw"
+    },
+    {
+      "source": "2026101015",
+      "url": "https://www.jleague.jp/match/j2/2026/101015/",
+      "start_utc": "2026-10-10T02:40:50.046506+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:54.175591+00:00",
+      "bytes": 1055356,
+      "sha256": "fdb7bb722a77cf72ac0cff5703cc00b804a34765c9f168d1d30d386d3e46fe1b",
+      "local_file": "2026101015.raw"
+    },
+    {
+      "source": "2026101016",
+      "url": "https://www.jleague.jp/match/j2/2026/101016/",
+      "start_utc": "2026-10-10T02:40:50.047095+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:54.021899+00:00",
+      "bytes": 1022072,
+      "sha256": "f608cf2d3803474dae106c7aa7585e8004d5ad335fea8c2d5437dffd86213c6e",
+      "local_file": "2026101016.raw"
+    },
+    {
+      "source": "2026101017",
+      "url": "https://www.jleague.jp/match/j2/2026/101017/",
+      "start_utc": "2026-10-10T02:40:50.047511+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:54.526947+00:00",
+      "bytes": 993577,
+      "sha256": "c2de280e0ba09ee087532e788ccefbd2fee4aa82d02d8e4671dc04a98249e5b8",
+      "local_file": "2026101017.raw"
+    },
+    {
+      "source": "2026101018",
+      "url": "https://www.jleague.jp/match/j2/2026/101018/",
+      "start_utc": "2026-10-10T02:40:54.023642+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:57.878790+00:00",
+      "bytes": 1052555,
+      "sha256": "d0f33b490cc24822f2be26e1d05eee753e385c9c09678db79e79dd0c30887ae1",
+      "local_file": "2026101018.raw"
+    },
+    {
+      "source": "omiya_club",
+      "url": "https://www.jleague.jp/club/omiya/",
+      "start_utc": "2026-10-10T02:40:54.176722+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:57.827374+00:00",
+      "bytes": 1193363,
+      "sha256": "1f58b40475c811ce4ab089baad3776124babf56b9cfbd7e7ad562973af639a1e",
+      "local_file": "omiya_club.raw"
+    },
+    {
+      "source": "kleague2",
+      "url": "https://www.kleague.com/getScheduleList.do",
+      "start_utc": "2026-10-10T02:40:54.528030+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:40:59.204485+00:00",
+      "bytes": 48804,
+      "sha256": "43e8f0f15221af463a87a3224ffe33171b5c797369c63e7860618b49f7978fc7",
+      "local_file": "kleague2.raw",
+      "method": "POST",
+      "request_body": {
+        "leagueId": 2,
+        "teamId": "",
+        "year": "2026",
+        "month": "10",
+        "ticketYn": ""
+      }
+    }
+  ],
+  "retries": 0
+}

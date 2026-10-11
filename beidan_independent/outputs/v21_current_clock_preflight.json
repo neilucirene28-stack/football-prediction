@@ -1,0 +1,1086 @@
+{
+  "verified_at": "2026-10-09T16:09:33.667441+00:00",
+  "original_manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+  "complete_pool_n": 179,
+  "original_predicted_n": 57,
+  "future_original_predicted_n": 57,
+  "expired_original_blocked_n": 7,
+  "new_predictions_generated_n": 0,
+  "old_freeze_changed": false,
+  "rows": [
+    {
+      "match_id": "26103-11",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-12",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-13",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-14",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-15",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-16",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-17",
+      "kickoff_at": "2026-10-10T00:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": true
+    },
+    {
+      "match_id": "26103-18",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-19",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-20",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-21",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-22",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-23",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-24",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-25",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-26",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-27",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-28",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-29",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-30",
+      "kickoff_at": "2026-10-10T01:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-31",
+      "kickoff_at": "2026-10-10T01:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-32",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-33",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-34",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-35",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-36",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-37",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-38",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-39",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-40",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-41",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-42",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-43",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-44",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-45",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-46",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-47",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-48",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-49",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-50",
+      "kickoff_at": "2026-10-10T02:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-51",
+      "kickoff_at": "2026-10-10T02:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-52",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-53",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-54",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-55",
+      "kickoff_at": "2026-10-10T02:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-56",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-57",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-58",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-59",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-60",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-61",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-62",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-63",
+      "kickoff_at": "2026-10-10T02:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-64",
+      "kickoff_at": "2026-10-10T03:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-65",
+      "kickoff_at": "2026-10-10T03:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-66",
+      "kickoff_at": "2026-10-10T03:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-67",
+      "kickoff_at": "2026-10-10T05:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-68",
+      "kickoff_at": "2026-10-10T06:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-69",
+      "kickoff_at": "2026-10-10T08:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-70",
+      "kickoff_at": "2026-10-10T09:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-71",
+      "kickoff_at": "2026-10-10T11:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-72",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-73",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-74",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-75",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-76",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-77",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-78",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-79",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-80",
+      "kickoff_at": "2026-10-10T14:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-81",
+      "kickoff_at": "2026-10-10T14:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-82",
+      "kickoff_at": "2026-10-10T15:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-83",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-84",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-85",
+      "kickoff_at": "2026-10-10T15:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-86",
+      "kickoff_at": "2026-10-10T17:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-87",
+      "kickoff_at": "2026-10-10T18:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-88",
+      "kickoff_at": "2026-10-10T18:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-89",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-90",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-91",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-92",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-93",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-94",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-95",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-96",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-97",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-98",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-99",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-100",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-101",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-102",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-103",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-104",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-105",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-106",
+      "kickoff_at": "2026-10-10T20:45:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-107",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-108",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-109",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-110",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-111",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-112",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-113",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-114",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-115",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-116",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-117",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-118",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-119",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-120",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-121",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-122",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-123",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-124",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-125",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-126",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-127",
+      "kickoff_at": "2026-10-10T21:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-128",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-129",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-130",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-131",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-132",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-133",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-134",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-135",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-136",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-137",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-138",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-139",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-140",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-141",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-142",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-143",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-144",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-145",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-146",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-147",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-148",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-149",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-150",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-151",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-152",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-153",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-154",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-155",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-156",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-157",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-158",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-159",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-160",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-161",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-162",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-163",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-164",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-165",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-166",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-167",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-168",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-169",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-170",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-171",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-172",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-173",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-174",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-175",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-176",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-177",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-178",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-179",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-180",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-181",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-182",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-183",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-184",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-185",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-186",
+      "kickoff_at": "2026-10-10T23:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-187",
+      "kickoff_at": "2026-10-10T23:15:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-188",
+      "kickoff_at": "2026-10-10T23:30:00+08:00",
+      "originally_predicted": true,
+      "already_kicked_off": false
+    },
+    {
+      "match_id": "26103-189",
+      "kickoff_at": "2026-10-10T23:30:00+08:00",
+      "originally_predicted": false,
+      "already_kicked_off": false
+    }
+  ]
+}

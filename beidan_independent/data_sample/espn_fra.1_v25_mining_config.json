@@ -1,0 +1,43 @@
+{
+  "league_slug": "fra.1",
+  "season_year": 2026,
+  "season_type": 14252,
+  "team_ids": [
+    "160",
+    "166",
+    "167",
+    "174",
+    "175",
+    "179",
+    "2697",
+    "273",
+    "3236",
+    "6851",
+    "6997",
+    "7868"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_fra.1_mined_20261010_v25",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v25_native/fra.1",
+  "proposals": [
+    [
+      186,
+      "401876446",
+      "166",
+      "3236",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_fra.1_20261009.json",
+      "sha256": "48ae7cedf2dfd3d94043daa083464fef07d10e44baabefb6c0af448f91c8820e"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_fra.1_20261010.json",
+      "sha256": "e0ef889ed6a2f9d38c0b6e4986ad402ac3f4a4bbc407f13d4d93e61fd718f4b4"
+    }
+  ]
+}

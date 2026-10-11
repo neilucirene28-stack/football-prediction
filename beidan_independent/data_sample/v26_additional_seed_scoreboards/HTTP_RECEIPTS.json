@@ -1,0 +1,96 @@
+{
+  "created_at": "2026-10-10T01:27:34.166326+00:00",
+  "files": [
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.509891+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.923574+00:00",
+      "bytes": 51331,
+      "sha256": "ae1d52808eef925638f106e73eb7852dd89fd4c6b2197a99d1be670844a52f6e",
+      "local_file": "scoreboard_ned.1_20261011.json",
+      "league_slug": "ned.1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/por.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.510673+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.838990+00:00",
+      "bytes": 38363,
+      "sha256": "5af1b142ba7c732eb4a320fd94614901d23b3729a043675b4edba514dc8724c8",
+      "local_file": "scoreboard_por.1_20261011.json",
+      "league_slug": "por.1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.511087+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.920365+00:00",
+      "bytes": 63579,
+      "sha256": "e2b5875e03d2d89a102cc76d432019b72bd3b7729226ccd8867e61d831cc24f7",
+      "local_file": "scoreboard_ita.1_20261011.json",
+      "league_slug": "ita.1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.2/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.511496+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.901603+00:00",
+      "bytes": 38093,
+      "sha256": "9ce72947a24024fbf626bcf5c61f7f882b4854572d2020f9b590e58f1d8fb71a",
+      "local_file": "scoreboard_ita.2_20261011.json",
+      "league_slug": "ita.2"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/sco.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.839250+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:30.863135+00:00",
+      "bytes": 26208,
+      "sha256": "0683005f359dcf2b45a0d24c210b7746f021d4ce0b4af4331e03492e0bd3c1e6",
+      "local_file": "scoreboard_sco.1_20261011.json",
+      "league_slug": "sco.1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/sco.2/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.901935+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:31.090580+00:00",
+      "bytes": 1869,
+      "sha256": "5c2f22b5799246d036c6702af756c96b5d2bf6f8032513a14e03318242865800",
+      "local_file": "scoreboard_sco.2_20261011.json",
+      "league_slug": "sco.2"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.920598+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:30.941736+00:00",
+      "bytes": 50556,
+      "sha256": "576334b0d182a3b9daf7381f4f15bcb30ba6a6d7b10270636dbfe7399f1aa46d",
+      "local_file": "scoreboard_bel.1_20261011.json",
+      "league_slug": "bel.1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.2/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.923754+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:30.967777+00:00",
+      "bytes": 51384,
+      "sha256": "a5f8e0d8afa67f5111987e1e94776f27f99baf0e5c33fe5456fd757b23bf863d",
+      "local_file": "scoreboard_esp.2_20261011.json",
+      "league_slug": "esp.2"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/aut.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:30.863433+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:34.165537+00:00",
+      "bytes": 38345,
+      "sha256": "7dbf1bc066ede23e181a5d4cd5f556dbcde8434ad7d0ea02fc3bbe07df93024d",
+      "local_file": "scoreboard_aut.1_20261011.json",
+      "league_slug": "aut.1"
+    }
+  ],
+  "capture_clock_independently_authenticated": false
+}

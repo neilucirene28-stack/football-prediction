@@ -1,0 +1,16 @@
+{
+  "path": "outputs/l1_prospective/20261010T022340230825Z",
+  "cutoff_at": "2026-10-10T02:23:27.351558+00:00",
+  "full_pool_n": 179,
+  "native_candidate_n": 76,
+  "blocked_n": 103,
+  "pending_n": 76,
+  "paired_n": 0,
+  "brier": null,
+  "selected_ridge": null,
+  "production_gate_passed": false,
+  "feedback_available_paired_n": 19,
+  "feedback_selection_n": 19,
+  "manifest_sha256": "1306df98c0df1d57dab3ef51adb3f28b3d754242e40f12521b2ecf757e965427",
+  "sealed_at": "2026-10-10T02:23:45.239494+00:00"
+}

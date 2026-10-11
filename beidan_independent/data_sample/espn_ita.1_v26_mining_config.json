@@ -1,0 +1,60 @@
+{
+  "league_slug": "ita.1",
+  "season_year": 2026,
+  "season_type": 14240,
+  "team_ids": [
+    "103",
+    "104",
+    "107",
+    "109",
+    "110",
+    "111",
+    "112",
+    "113",
+    "114",
+    "115",
+    "2572",
+    "2925",
+    "3263",
+    "3997",
+    "4007",
+    "4057"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_ita.1_mined_20261010_v26",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v26_native/ita.1",
+  "proposals": [
+    [
+      107,
+      "401874947",
+      "3263",
+      "109",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ita.1_20261009.json",
+      "sha256": "2048ebfe872d9a0cca6236e6397c9e0a3044969672cee3a2dfa21cf34c450d5b"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ita.1_20261010.json",
+      "sha256": "a6a1a2233546963f57c4d6dad0c1c5d559fbf4055283455d5e12fc1d2772e382"
+    }
+  ],
+  "additional_team_seed_receipt": {
+    "index": "data_sample/v26_additional_seed_scoreboards/HTTP_RECEIPTS.json",
+    "receipt": {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.511087+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.920365+00:00",
+      "bytes": 63579,
+      "sha256": "e2b5875e03d2d89a102cc76d432019b72bd3b7729226ccd8867e61d831cc24f7",
+      "local_file": "scoreboard_ita.1_20261011.json",
+      "league_slug": "ita.1"
+    }
+  }
+}

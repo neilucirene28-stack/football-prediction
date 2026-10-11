@@ -1,0 +1,1379 @@
+{
+  "created_at": "2026-10-10T01:32:47.002706+00:00",
+  "offered_n": 179,
+  "predicted_n": 94,
+  "settled_n": 19,
+  "pending_n": 75,
+  "due_for_poll_n": 0,
+  "next_poll_not_before": "2026-10-10T06:45:00+00:00",
+  "rows": [
+    {
+      "period": "26103",
+      "match_id": "26103-11",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-12",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-13",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-14",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-15",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-16",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-17",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-18",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "poll_not_before": "2026-10-09T18:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401885100"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-19",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T00:30:00+08:00",
+      "poll_not_before": "2026-10-09T18:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401885094"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-20",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-21",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-22",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "poll_not_before": "2026-10-09T18:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401843455"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-23",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-24",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T01:00:00+08:00",
+      "poll_not_before": "2026-10-09T18:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401874089"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-25",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-26",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-27",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-28",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-29",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-30",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-31",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-32",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876734"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-33",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876733"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-34",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876732"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-35",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876730"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-36",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876728"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-37",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-38",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-39",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875896"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-40",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875897"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-41",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875898"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-42",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875899"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-43",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875900"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-44",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875901"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-45",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875902"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-46",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875903"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-47",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T02:00:00+08:00",
+      "poll_not_before": "2026-10-09T19:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+      "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+      "provider_match_id": "401875904"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-48",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-49",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-50",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-51",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-52",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-53",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-54",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-55",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-56",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-57",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-58",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-59",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-60",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-61",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-62",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-63",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-64",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-65",
+      "status": "settled",
+      "kickoff_at": "2026-10-10T03:00:00+08:00",
+      "poll_not_before": "2026-10-09T20:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880233"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-66",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-67",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-68",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-69",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-70",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-71",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-72",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T13:00:00+08:00",
+      "poll_not_before": "2026-10-10T06:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401877606"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-73",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-74",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-75",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-76",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-77",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-78",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-79",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-80",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T14:00:00+08:00",
+      "poll_not_before": "2026-10-10T07:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401877575"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-81",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T14:00:00+08:00",
+      "poll_not_before": "2026-10-10T07:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401877605"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-82",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-83",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-84",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-85",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-86",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-87",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T18:00:00+08:00",
+      "poll_not_before": "2026-10-10T11:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401877607"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-88",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-89",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "poll_not_before": "2026-10-10T12:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401885099"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-90",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "poll_not_before": "2026-10-10T12:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401885095"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-91",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:00:00+08:00",
+      "poll_not_before": "2026-10-10T12:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401885093"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-92",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-93",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-94",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401879268"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-95",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880242"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-96",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880236"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-97",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880234"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-98",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880807"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-99",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880806"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-100",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881331"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-101",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T19:30:00+08:00",
+      "poll_not_before": "2026-10-10T13:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881327"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-102",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-103",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "poll_not_before": "2026-10-10T13:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401882849"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-104",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "poll_not_before": "2026-10-10T13:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876736"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-105",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T20:00:00+08:00",
+      "poll_not_before": "2026-10-10T13:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+      "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+      "provider_match_id": "401876731"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-106",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-107",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401874947"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-108",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401899607"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-109",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401899605"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-110",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401899601"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-111",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401899600"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-112",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-113",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-114",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-115",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401874022"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-116",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T21:00:00+08:00",
+      "poll_not_before": "2026-10-10T14:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401874016"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-117",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-118",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-119",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-120",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-121",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-122",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-123",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-124",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-125",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-126",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-127",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-128",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401878776"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-129",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401878775"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-130",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401879265"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-131",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880244"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-132",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880243"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-133",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880241"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-134",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880240"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-135",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880239"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-136",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880238"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-137",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401880235"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-138",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880814"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-139",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880813"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-140",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880812"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-141",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880811"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-142",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880810"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-143",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880809"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-144",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880808"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-145",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880805"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-146",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880804"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-147",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T135028491435Z",
+      "manifest_sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "provider_match_id": "401880803"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-148",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881336"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-149",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881335"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-150",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881334"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-151",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881333"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-152",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881332"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-153",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881330"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-154",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881329"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-155",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881328"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-156",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881326"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-157",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T143301921759Z",
+      "manifest_sha256": "fd34f7edc0df7d7adde4660cb42f1ce3baf7d659dc1b040460e9630a1f206b13",
+      "provider_match_id": "401881325"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-158",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878373"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-159",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878372"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-160",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878371"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-161",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878369"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-162",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878977"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-163",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401843456"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-164",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-165",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-166",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-167",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-168",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-169",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878551"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-170",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878550"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-171",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878549"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-172",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878548"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-173",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:00:00+08:00",
+      "poll_not_before": "2026-10-10T15:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401878547"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-174",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-175",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-176",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "poll_not_before": "2026-10-10T16:00:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401882856"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-177",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:15:00+08:00",
+      "poll_not_before": "2026-10-10T16:00:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401883185"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-178",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-179",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "poll_not_before": "2026-10-10T16:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401885426"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-180",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T22:30:00+08:00",
+      "poll_not_before": "2026-10-10T16:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401875590"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-181",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-182",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "poll_not_before": "2026-10-10T16:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401881776"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-183",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T23:00:00+08:00",
+      "poll_not_before": "2026-10-10T16:45:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401881774"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-184",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-185",
+      "status": "originally_uncovered"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-186",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T23:15:00+08:00",
+      "poll_not_before": "2026-10-10T17:00:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T011516823318Z",
+      "manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+      "provider_match_id": "401876446"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-187",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T23:15:00+08:00",
+      "poll_not_before": "2026-10-10T17:00:00+00:00",
+      "bundle": "outputs/l1_prospective/20261010T013213771738Z",
+      "manifest_sha256": "ee6bc9cb898ee57ffa440133a68d3b490bcdc72bd8a530c78d45ea9fdae615bf",
+      "provider_match_id": "401899604"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-188",
+      "status": "not_due",
+      "kickoff_at": "2026-10-10T23:30:00+08:00",
+      "poll_not_before": "2026-10-10T17:15:00+00:00",
+      "bundle": "outputs/l1_prospective/20261009T150800070498Z",
+      "manifest_sha256": "5161386da56380f4faf8713c007f67e9b911a34c3b6e5314ba9b2b65086a57d0",
+      "provider_match_id": "401874087"
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-189",
+      "status": "originally_uncovered"
+    }
+  ],
+  "collection_groups": [],
+  "poll_delay_is_not_full_time_evidence": true,
+  "production_gate_passed": false
+}

@@ -1,0 +1,122 @@
+[
+ {
+  "team_cn": "欧登塞",
+  "espn_id": 11550,
+  "league": "den.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/11550/schedule",
+  "start_utc": "2026-10-09T10:02:33.341120+00:00",
+  "end_utc": "2026-10-09T10:02:34.901797+00:00",
+  "http_status": 200,
+  "sha256_16": "0c0eb39b0d052225",
+  "n_events": 9,
+  "size": 81724
+ },
+ {
+  "team_cn": "凯泽斯劳滕",
+  "espn_id": 130,
+  "league": "ger.2",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/teams/130/schedule",
+  "start_utc": "2026-10-09T10:02:36.904562+00:00",
+  "end_utc": "2026-10-09T10:02:38.299851+00:00",
+  "http_status": 200,
+  "sha256_16": "177a069b9a73b318",
+  "n_events": 6,
+  "size": 54794
+ },
+ {
+  "team_cn": "韦斯特罗斯",
+  "espn_id": 22163,
+  "league": "swe.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/swe.1/teams/22163/schedule",
+  "start_utc": "2026-10-09T10:02:40.302619+00:00",
+  "end_utc": "2026-10-09T10:02:41.324487+00:00",
+  "http_status": 200,
+  "sha256_16": "d9d134d7d9042ee4",
+  "n_events": 22,
+  "size": 194593
+ },
+ {
+  "team_cn": "哥德堡",
+  "espn_id": 2556,
+  "league": "swe.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/swe.1/teams/2556/schedule",
+  "start_utc": "2026-10-09T10:02:43.329079+00:00",
+  "end_utc": "2026-10-09T10:02:44.068758+00:00",
+  "http_status": 200,
+  "sha256_16": "c26cea6b39985344",
+  "n_events": 22,
+  "size": 198093
+ },
+ {
+  "team_cn": "不伦瑞克",
+  "espn_id": 3067,
+  "league": "ger.2",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/teams/3067/schedule",
+  "start_utc": "2026-10-09T10:02:46.073747+00:00",
+  "end_utc": "2026-10-09T10:02:46.765146+00:00",
+  "http_status": 200,
+  "sha256_16": "819f0a2850b10034",
+  "n_events": 6,
+  "size": 55603
+ },
+ {
+  "team_cn": "北西兰",
+  "espn_id": 3101,
+  "league": "den.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/den.1/teams/3101/schedule",
+  "start_utc": "2026-10-09T10:02:48.767108+00:00",
+  "end_utc": "2026-10-09T10:02:49.513054+00:00",
+  "http_status": 200,
+  "sha256_16": "9c0b06bcfcfeea55",
+  "n_events": 9,
+  "size": 81745
+ },
+ {
+  "team_cn": "维京",
+  "espn_id": 510,
+  "league": "nor.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/nor.1/teams/510/schedule",
+  "start_utc": "2026-10-09T10:02:51.515762+00:00",
+  "end_utc": "2026-10-09T10:02:52.703875+00:00",
+  "http_status": 200,
+  "sha256_16": "c0cb97b5f271b7c5",
+  "n_events": 21,
+  "size": 187093
+ },
+ {
+  "team_cn": "布兰",
+  "espn_id": 620,
+  "league": "nor.1",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/nor.1/teams/620/schedule",
+  "start_utc": "2026-10-09T10:02:54.708547+00:00",
+  "end_utc": "2026-10-09T10:02:55.570118+00:00",
+  "http_status": 200,
+  "sha256_16": "532890d6943f2641",
+  "n_events": 21,
+  "size": 183631
+ },
+ {
+  "team_cn": "海登海姆",
+  "espn_id": 6418,
+  "league": "ger.2",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/teams/6418/schedule",
+  "start_utc": "2026-10-09T10:02:57.574326+00:00",
+  "end_utc": "2026-10-09T10:02:58.811320+00:00",
+  "http_status": 200,
+  "sha256_16": "94fb3b248a2cba83",
+  "n_events": 6,
+  "size": 55295
+ },
+ {
+  "team_cn": "基尔",
+  "espn_id": 7884,
+  "league": "ger.2",
+  "url": "http://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/teams/7884/schedule",
+  "start_utc": "2026-10-09T10:03:00.813197+00:00",
+  "end_utc": "2026-10-09T10:03:02.308754+00:00",
+  "http_status": 200,
+  "sha256_16": "1ce5328a924d0a06",
+  "n_events": 6,
+  "size": 54909
+ }
+]

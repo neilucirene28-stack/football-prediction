@@ -1,0 +1,836 @@
+{
+  "bundle": "outputs/l1_prospective/20261009T164056789363Z",
+  "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+  "started_at": "2026-10-10T00:03:59.116099+00:00",
+  "completed_at": "2026-10-10T00:04:35.972777+00:00",
+  "receipts": [
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875896",
+      "start_utc": "2026-10-10T00:03:59.399261+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:04.228405+00:00",
+      "bytes": 322802,
+      "sha256": "cd00b2f4b73bce9c776fef7d24aa96850f4cd3c4f5d8155fba0b4aebd61602e1",
+      "local_file": "summary_401875896.json",
+      "match_id": "26103-39"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875897",
+      "start_utc": "2026-10-10T00:04:04.235135+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:07.604816+00:00",
+      "bytes": 303062,
+      "sha256": "89dc3d543b28ab3fe18bdedb7ed4b29d233efd3b148a5722d0530b6393f3bd5e",
+      "local_file": "summary_401875897.json",
+      "match_id": "26103-40"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875898",
+      "start_utc": "2026-10-10T00:04:07.623763+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:11.056198+00:00",
+      "bytes": 310728,
+      "sha256": "0d1dcb5893d12e007fc5acf80af6788e9cfca620ddd195d22a50880486dfce48",
+      "local_file": "summary_401875898.json",
+      "match_id": "26103-41"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875899",
+      "start_utc": "2026-10-10T00:04:11.062345+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:15.259513+00:00",
+      "bytes": 302399,
+      "sha256": "f43378555ad3716dbe2f4a4475b117998aa49b6506f29ee0a09e73a3eebaa694",
+      "local_file": "summary_401875899.json",
+      "match_id": "26103-42"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875900",
+      "start_utc": "2026-10-10T00:04:15.264946+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:18.542200+00:00",
+      "bytes": 323399,
+      "sha256": "7ffa2d841fbbf42e5af44f3444cd1d0bbc452af4248f461b13a846b5c496957c",
+      "local_file": "summary_401875900.json",
+      "match_id": "26103-43"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875901",
+      "start_utc": "2026-10-10T00:04:18.548246+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:21.755023+00:00",
+      "bytes": 322215,
+      "sha256": "e913d1c0d404778cea7643573a79bfab09cb056f61f67999c73bd7bd83026488",
+      "local_file": "summary_401875901.json",
+      "match_id": "26103-44"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875902",
+      "start_utc": "2026-10-10T00:04:21.761431+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:28.368503+00:00",
+      "bytes": 318082,
+      "sha256": "da2e463a23f9b5bb0222685a39922a0b6909280deadee13477fe16d47f8fb942",
+      "local_file": "summary_401875902.json",
+      "match_id": "26103-45"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875903",
+      "start_utc": "2026-10-10T00:04:28.375742+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:32.017621+00:00",
+      "bytes": 307909,
+      "sha256": "aa86b0428210a19a0ec7e4f33559bc2dbeccb48747d3b6e526a366082eb72d0c",
+      "local_file": "summary_401875903.json",
+      "match_id": "26103-46"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/summary?event=401875904",
+      "start_utc": "2026-10-10T00:04:32.024535+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T00:04:35.686975+00:00",
+      "bytes": 326549,
+      "sha256": "0719090419455853f6e72b69d98deae3e6f3d4f418c75a91dc27316721bc1e5f",
+      "local_file": "summary_401875904.json",
+      "match_id": "26103-47"
+    }
+  ],
+  "complete_pool_ledger": [
+    {
+      "match_id": "26103-11",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-12",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-13",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-14",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-15",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-16",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-17",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-18",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-19",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-20",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-21",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-22",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-23",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-24",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-25",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-26",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-27",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-28",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-29",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-30",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-31",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-32",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-33",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-34",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-35",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-36",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-37",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-38",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-39",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-40",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-41",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-42",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-43",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-44",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-45",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-46",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-47",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-48",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-49",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-50",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-51",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-52",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-53",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-54",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-55",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-56",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-57",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-58",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-59",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-60",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-61",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-62",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-63",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-64",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-65",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-66",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-67",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-68",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-69",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-70",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-71",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-72",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-73",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-74",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-75",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-76",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-77",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-78",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-79",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-80",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-81",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-82",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-83",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-84",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-85",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-86",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-87",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-88",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-89",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-90",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-91",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-92",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-93",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-94",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-95",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-96",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-97",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-98",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-99",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-100",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-101",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-102",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-103",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-104",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-105",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-106",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-107",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-108",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-109",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-110",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-111",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-112",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-113",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-114",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-115",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-116",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-117",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-118",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-119",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-120",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-121",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-122",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-123",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-124",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-125",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-126",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-127",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-128",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-129",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-130",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-131",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-132",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-133",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-134",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-135",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-136",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-137",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-138",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-139",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-140",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-141",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-142",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-143",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-144",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-145",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-146",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-147",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-148",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-149",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-150",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-151",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-152",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-153",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-154",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-155",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-156",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-157",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-158",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-159",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-160",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-161",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-162",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-163",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-164",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-165",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-166",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-167",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-168",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-169",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-170",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-171",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-172",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-173",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-174",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-175",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-176",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-177",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-178",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-179",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-180",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-181",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-182",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-183",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-184",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-185",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-186",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-187",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-188",
+      "status": "outside_collection_scope"
+    },
+    {
+      "match_id": "26103-189",
+      "status": "originally_blocked"
+    }
+  ],
+  "original_probabilities_only": true,
+  "refitted": false,
+  "reselected": false,
+  "execution_code_sha256": {
+    "result_collection.py": "f9ed464b6d3b0a820542cbc03c28d0350e0734f7ca6507843624d32db0ec703c",
+    "http_archive.py": "7db6a363c36abf46cab41b93f507f0917d6d154e28ad073f2f37e28e8aa1b79d",
+    "frozen_results.py": "6634b78a104fc87cd0a119a1ac8958711568930a13669e2085f9786fa438ce01",
+    "espn_summary.py": "7ac5f9f8dd20073b5633148295e2722ad40f50959744bc0f998e40e5e43ab2a5"
+  },
+  "collection_scope_match_ids": [
+    "26103-39",
+    "26103-40",
+    "26103-41",
+    "26103-42",
+    "26103-43",
+    "26103-44",
+    "26103-45",
+    "26103-46",
+    "26103-47"
+  ]
+}

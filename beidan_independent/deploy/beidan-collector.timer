@@ -1,0 +1,10 @@
+[Unit]
+Description=Hourly Beidan research collection
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=beidan-collector.service
+
+[Install]
+WantedBy=timers.target

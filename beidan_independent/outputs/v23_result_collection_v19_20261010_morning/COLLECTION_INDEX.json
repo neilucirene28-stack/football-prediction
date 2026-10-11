@@ -1,0 +1,835 @@
+{
+  "bundle": "outputs/l1_prospective/20261009T154735195166Z",
+  "manifest_sha256": "0c792767213c61d1b25e41e43803fe62610a632564f3776e415de42449eaefe1",
+  "started_at": "2026-10-09T23:53:37.445051+00:00",
+  "completed_at": "2026-10-09T23:54:11.668616+00:00",
+  "receipts": [
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/summary?event=401885100",
+      "start_utc": "2026-10-09T23:53:37.690867+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:41.640787+00:00",
+      "bytes": 312860,
+      "sha256": "797424b36a7343ae356b13912c6d88718b6a2685de11ebc84af80e13d0ddb6e6",
+      "local_file": "summary_401885100.json",
+      "match_id": "26103-18"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/summary?event=401885094",
+      "start_utc": "2026-10-09T23:53:41.647297+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:44.610654+00:00",
+      "bytes": 327662,
+      "sha256": "dce24c0fd393c46f6a24632acc66fe00818f9454be9705f5c3351aaaf2bc867c",
+      "local_file": "summary_401885094.json",
+      "match_id": "26103-19"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/nor.1/summary?event=401843455",
+      "start_utc": "2026-10-09T23:53:44.616652+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:47.584878+00:00",
+      "bytes": 279370,
+      "sha256": "f9d60ae8a19bfb7106981eb9738ff215ef5b30375d010cf62f8819020780cc4b",
+      "local_file": "summary_401843455.json",
+      "match_id": "26103-22"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/swe.1/summary?event=401874089",
+      "start_utc": "2026-10-09T23:53:47.590385+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:50.635645+00:00",
+      "bytes": 277492,
+      "sha256": "5453e5d2c86c14e70aa106d85539170d57ea6d598231b28a8af450da37300416",
+      "local_file": "summary_401874089.json",
+      "match_id": "26103-24"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/summary?event=401876734",
+      "start_utc": "2026-10-09T23:53:50.640782+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:53.752304+00:00",
+      "bytes": 324581,
+      "sha256": "9988cbd5e57f796c5f71bdbd4523a228c3d6da07d7cc1b48f30438ff812fbe6c",
+      "local_file": "summary_401876734.json",
+      "match_id": "26103-32"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/summary?event=401876733",
+      "start_utc": "2026-10-09T23:53:53.758555+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:53:56.886927+00:00",
+      "bytes": 332671,
+      "sha256": "44d16337f0c3f092253c1f82922b98b7025249e80d70daeea8369a6c84e0fec4",
+      "local_file": "summary_401876733.json",
+      "match_id": "26103-33"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/summary?event=401876732",
+      "start_utc": "2026-10-09T23:53:56.893353+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:54:00.452428+00:00",
+      "bytes": 335126,
+      "sha256": "6f6979841eebad046c97b37bf8387512aeae2bc053dac5eedaf121cdf6aab8b7",
+      "local_file": "summary_401876732.json",
+      "match_id": "26103-34"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/summary?event=401876730",
+      "start_utc": "2026-10-09T23:54:00.458575+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:54:03.568104+00:00",
+      "bytes": 335703,
+      "sha256": "1ef6362e4f29b51fe6381c2e941827fa9283303196d989f0c3440961c4ed621c",
+      "local_file": "summary_401876730.json",
+      "match_id": "26103-35"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/summary?event=401876728",
+      "start_utc": "2026-10-09T23:54:03.577116+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:54:08.364030+00:00",
+      "bytes": 322552,
+      "sha256": "7a4eaef06f77499f25575c40b0d8b7af7039ba1811c6f19128eb65d04c943917",
+      "local_file": "summary_401876728.json",
+      "match_id": "26103-36"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.2/summary?event=401880233",
+      "start_utc": "2026-10-09T23:54:08.370990+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-09T23:54:11.414891+00:00",
+      "bytes": 395030,
+      "sha256": "a6bb7e5253a95bcb09f08297a9c26c1f262dbf3f360eb022e532a0c849e3b548",
+      "local_file": "summary_401880233.json",
+      "match_id": "26103-65"
+    }
+  ],
+  "complete_pool_ledger": [
+    {
+      "match_id": "26103-11",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-12",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-13",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-14",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-15",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-16",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-17",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-18",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-19",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-20",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-21",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-22",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-23",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-24",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-25",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-26",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-27",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-28",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-29",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-30",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-31",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-32",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-33",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-34",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-35",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-36",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-37",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-38",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-39",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-40",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-41",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-42",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-43",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-44",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-45",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-46",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-47",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-48",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-49",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-50",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-51",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-52",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-53",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-54",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-55",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-56",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-57",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-58",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-59",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-60",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-61",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-62",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-63",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-64",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-65",
+      "status": "verified_regular_time_ft"
+    },
+    {
+      "match_id": "26103-66",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-67",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-68",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-69",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-70",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-71",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-72",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-73",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-74",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-75",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-76",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-77",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-78",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-79",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-80",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-81",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-82",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-83",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-84",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-85",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-86",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-87",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-88",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-89",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-90",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-91",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-92",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-93",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-94",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-95",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-96",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-97",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-98",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-99",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-100",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-101",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-102",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-103",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-104",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-105",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-106",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-107",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-108",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-109",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-110",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-111",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-112",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-113",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-114",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-115",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-116",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-117",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-118",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-119",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-120",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-121",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-122",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-123",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-124",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-125",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-126",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-127",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-128",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-129",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-130",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-131",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-132",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-133",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-134",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-135",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-136",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-137",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-138",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-139",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-140",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-141",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-142",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-143",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-144",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-145",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-146",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-147",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-148",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-149",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-150",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-151",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-152",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-153",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-154",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-155",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-156",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-157",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-158",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-159",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-160",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-161",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-162",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-163",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-164",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-165",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-166",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-167",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-168",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-169",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-170",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-171",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-172",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-173",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-174",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-175",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-176",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-177",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-178",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-179",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-180",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-181",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-182",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-183",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-184",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-185",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-186",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-187",
+      "status": "originally_blocked"
+    },
+    {
+      "match_id": "26103-188",
+      "status": "not_due"
+    },
+    {
+      "match_id": "26103-189",
+      "status": "originally_blocked"
+    }
+  ],
+  "original_probabilities_only": true,
+  "refitted": false,
+  "reselected": false,
+  "execution_code_sha256": {
+    "result_collection.py": "d1a4b0e951648ea9ecd5f0b90376835e514f2fd9f9d1bc7a3272bd9c17af01ea",
+    "http_archive.py": "7db6a363c36abf46cab41b93f507f0917d6d154e28ad073f2f37e28e8aa1b79d",
+    "frozen_results.py": "6634b78a104fc87cd0a119a1ac8958711568930a13669e2085f9786fa438ce01",
+    "espn_summary.py": "7ac5f9f8dd20073b5633148295e2722ad40f50959744bc0f998e40e5e43ab2a5"
+  }
+}

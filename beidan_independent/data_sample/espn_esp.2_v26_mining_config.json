@@ -1,0 +1,58 @@
+{
+  "league_slug": "esp.2",
+  "season_year": 2026,
+  "season_type": 14356,
+  "team_ids": [
+    "84",
+    "98",
+    "3788",
+    "3842",
+    "4438",
+    "5404",
+    "6832",
+    "7320",
+    "8447",
+    "11487",
+    "17534",
+    "20179",
+    "20983",
+    "131858"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_esp.2_mined_20261010_v26",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v26_native/esp.2",
+  "proposals": [
+    [
+      177,
+      "401883185",
+      "5404",
+      "11487",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_esp.2_20261009.json",
+      "sha256": "af973b62a5f8c9a3e89c2da7ee6bc178de151317a78a845a4fb2458e70c065bf"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_esp.2_20261010.json",
+      "sha256": "d031a100aa8ddf7d728b5d3346577662ef7cc483b9f76ee39318ccdd32a1f721"
+    }
+  ],
+  "additional_team_seed_receipt": {
+    "index": "data_sample/v26_additional_seed_scoreboards/HTTP_RECEIPTS.json",
+    "receipt": {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.2/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:26.923754+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:30.967777+00:00",
+      "bytes": 51384,
+      "sha256": "a5f8e0d8afa67f5111987e1e94776f27f99baf0e5c33fe5456fd757b23bf863d",
+      "local_file": "scoreboard_esp.2_20261011.json",
+      "league_slug": "esp.2"
+    }
+  }
+}

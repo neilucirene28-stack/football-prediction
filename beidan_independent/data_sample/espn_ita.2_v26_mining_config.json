@@ -1,0 +1,92 @@
+{
+  "league_slug": "ita.2",
+  "season_year": 2026,
+  "season_type": 14422,
+  "team_ids": [
+    "119",
+    "120",
+    "2573",
+    "2574",
+    "2734",
+    "2923",
+    "3257",
+    "3337",
+    "3345",
+    "3346",
+    "3952",
+    "3956",
+    "3975",
+    "3988",
+    "3991",
+    "4050",
+    "4055",
+    "4059",
+    "11137",
+    "11139"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_ita.2_mined_20261010_v26",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v26_native/ita.2",
+  "proposals": [
+    [
+      108,
+      "401899607",
+      "4059",
+      "3337",
+      "20261010"
+    ],
+    [
+      109,
+      "401899605",
+      "2574",
+      "2923",
+      "20261010"
+    ],
+    [
+      110,
+      "401899601",
+      "11139",
+      "3346",
+      "20261010"
+    ],
+    [
+      111,
+      "401899600",
+      "11137",
+      "3975",
+      "20261010"
+    ],
+    [
+      187,
+      "401899604",
+      "120",
+      "3956",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ita.2_20261009.json",
+      "sha256": "d4d411f4261cf7b4612e2c0662a7ee7497111f9cfedfaea46cb8b819044c273a"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_ita.2_20261010.json",
+      "sha256": "54046c7f8a351237acbb116a9e515b708058e22b2de81fd08e90c48934ede93f"
+    }
+  ],
+  "additional_team_seed_receipt": {
+    "index": "data_sample/v26_additional_seed_scoreboards/HTTP_RECEIPTS.json",
+    "receipt": {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.2/scoreboard?dates=20261011",
+      "start_utc": "2026-10-10T01:27:20.511496+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T01:27:26.901603+00:00",
+      "bytes": 38093,
+      "sha256": "9ce72947a24024fbf626bcf5c61f7f882b4854572d2020f9b590e58f1d8fb71a",
+      "local_file": "scoreboard_ita.2_20261011.json",
+      "league_slug": "ita.2"
+    }
+  }
+}

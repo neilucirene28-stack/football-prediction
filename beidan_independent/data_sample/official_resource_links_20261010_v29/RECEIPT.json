@@ -1,0 +1,36 @@
+{
+  "captured_at": "2026-10-10T02:37:04.201647+00:00",
+  "receipts": [
+    {
+      "source": "jleague_j2_week",
+      "url": "https://www.jleague.jp/j2/match/",
+      "start_utc": "2026-10-10T02:36:58.807287+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:37:03.489121+00:00",
+      "bytes": 1004956,
+      "sha256": "15c0dcb274712ecf9f4169b063470986dbde640688e94de122d6aa9d02d9e0af",
+      "local_file": "jleague_j2_week.html"
+    },
+    {
+      "source": "jleague_j2_omiya_hachinohe",
+      "url": "https://www.jleague.jp/match/j2/2026/101013/",
+      "start_utc": "2026-10-10T02:36:58.807725+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:37:04.200094+00:00",
+      "bytes": 1025504,
+      "sha256": "ee78ba9b185a5929a3f15b6428c9aa5a2e9639a20130b5719db902e8fe342cc5",
+      "local_file": "jleague_j2_omiya_hachinohe.html"
+    },
+    {
+      "source": "kleague_schedule",
+      "url": "https://www.kleague.com/schedule.do",
+      "start_utc": "2026-10-10T02:36:58.808189+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:37:02.738665+00:00",
+      "bytes": 146563,
+      "sha256": "7e698b03bb65cec00d705fbcbf1bbcf5eab3b33767fceac8ffe30d2d6cc50e8b",
+      "local_file": "kleague_schedule.html"
+    }
+  ],
+  "retries": 0
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Beidan audited research result collection
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/football-prediction/beidan_independent
+Environment=PYTHONPATH=.
+ExecStart=/usr/bin/python3 -m beidan_bd1.scheduled_collection --config data_sample/scheduled_collection_v29.json --state-dir /var/lib/beidan-collector/v29
+TimeoutStartSec=20min

@@ -1,0 +1,1930 @@
+{
+  "label": "frozen_prospective_settlement_no_refit",
+  "executed_at": "2026-10-10T00:04:35.969720+00:00",
+  "evaluated_at": "2026-10-10T00:04:35.693482+00:00",
+  "manifest_sha256": "ee61dd64aaf80be8d65e1ef8e8f2fc5b0bb00765cfd675a1380f4a4d70dced3f",
+  "original_generation_completed_at": "2026-10-09T16:40:56.780473+00:00",
+  "refitted": false,
+  "reselected_after_results": false,
+  "offered_n": 179,
+  "football_offered_n": 179,
+  "predicted_n": 64,
+  "blocked_n": 115,
+  "paired_n": 9,
+  "pending_ids": [
+    "26103-22",
+    "26103-24",
+    "26103-32",
+    "26103-33",
+    "26103-34",
+    "26103-35",
+    "26103-36",
+    "26103-65",
+    "26103-72",
+    "26103-80",
+    "26103-81",
+    "26103-87",
+    "26103-89",
+    "26103-90",
+    "26103-91",
+    "26103-95",
+    "26103-96",
+    "26103-97",
+    "26103-98",
+    "26103-99",
+    "26103-100",
+    "26103-101",
+    "26103-104",
+    "26103-105",
+    "26103-115",
+    "26103-116",
+    "26103-131",
+    "26103-132",
+    "26103-133",
+    "26103-134",
+    "26103-135",
+    "26103-136",
+    "26103-137",
+    "26103-138",
+    "26103-139",
+    "26103-140",
+    "26103-141",
+    "26103-142",
+    "26103-143",
+    "26103-144",
+    "26103-145",
+    "26103-146",
+    "26103-147",
+    "26103-148",
+    "26103-149",
+    "26103-150",
+    "26103-151",
+    "26103-152",
+    "26103-153",
+    "26103-154",
+    "26103-155",
+    "26103-156",
+    "26103-157",
+    "26103-163",
+    "26103-188"
+  ],
+  "prediction_coverage": 0.3575418994413408,
+  "settled_scoring_coverage": 0.05027932960893855,
+  "brier_definition": "sum((p-y)^2)/3",
+  "brier_baseline": 0.1976830734388345,
+  "brier_candidate": 0.1976830734388345,
+  "delta_brier": 0.0,
+  "paired_scores": [
+    {
+      "period": "26103",
+      "match_id": "26103-39",
+      "baseline": 0.13889540932815347,
+      "candidate": 0.13889540932815347,
+      "score31_logloss_baseline": 2.9365848296162014,
+      "score31_logloss_candidate": 2.9365848296162014,
+      "goal_error_baseline": -1.0400000006450578,
+      "goal_error_candidate": -1.0400000006450578,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-40",
+      "baseline": 0.29540586971212296,
+      "candidate": 0.29540586971212296,
+      "score31_logloss_baseline": 2.1966478827562095,
+      "score31_logloss_candidate": 2.1966478827562095,
+      "goal_error_baseline": 0.9599999993549422,
+      "goal_error_candidate": 0.9599999993549422,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-41",
+      "baseline": 0.13889540932815347,
+      "candidate": 0.13889540932815347,
+      "score31_logloss_baseline": 2.4340887387712433,
+      "score31_logloss_candidate": 2.4340887387712433,
+      "goal_error_baseline": 1.9599999993549422,
+      "goal_error_candidate": 1.9599999993549422,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-42",
+      "baseline": 0.2630882481988735,
+      "candidate": 0.2630882481988735,
+      "score31_logloss_baseline": 2.722559143940241,
+      "score31_logloss_candidate": 2.722559143940241,
+      "goal_error_baseline": 1.9599999993549422,
+      "goal_error_candidate": 1.9599999993549422,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-43",
+      "baseline": 0.2630882481988735,
+      "candidate": 0.2630882481988735,
+      "score31_logloss_baseline": 4.039436901138227,
+      "score31_logloss_candidate": 4.039436901138227,
+      "goal_error_baseline": -0.04000000064505782,
+      "goal_error_candidate": -0.04000000064505782,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-44",
+      "baseline": 0.13889540932815347,
+      "candidate": 0.13889540932815347,
+      "score31_logloss_baseline": 3.1740256856312357,
+      "score31_logloss_candidate": 3.1740256856312357,
+      "goal_error_baseline": -0.04000000064505782,
+      "goal_error_candidate": -0.04000000064505782,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-45",
+      "baseline": 0.13889540932815347,
+      "candidate": 0.13889540932815347,
+      "score31_logloss_baseline": 2.3638838021321233,
+      "score31_logloss_candidate": 2.3638838021321233,
+      "goal_error_baseline": -0.04000000064505782,
+      "goal_error_candidate": -0.04000000064505782,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-46",
+      "baseline": 0.2630882481988735,
+      "candidate": 0.2630882481988735,
+      "score31_logloss_baseline": 4.039436901138227,
+      "score31_logloss_candidate": 4.039436901138227,
+      "goal_error_baseline": -0.04000000064505782,
+      "goal_error_candidate": -0.04000000064505782,
+      "floored_probabilities": 0
+    },
+    {
+      "period": "26103",
+      "match_id": "26103-47",
+      "baseline": 0.13889540932815347,
+      "candidate": 0.13889540932815347,
+      "score31_logloss_baseline": 3.1740256856312357,
+      "score31_logloss_candidate": 3.1740256856312357,
+      "goal_error_baseline": -0.04000000064505782,
+      "goal_error_candidate": -0.04000000064505782,
+      "floored_probabilities": 0
+    }
+  ],
+  "matches": [
+    {
+      "match_id": "26103-11",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-12",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-13",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-14",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-15",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-16",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-17",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-18",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-19",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-20",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-21",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-22",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-23",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-24",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-25",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-26",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-27",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-28",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-29",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-30",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-31",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-32",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-33",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-34",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-35",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-36",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-37",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-38",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-39",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:04.229445+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:04.229445+00:00",
+        "raw_sha256": "cd00b2f4b73bce9c776fef7d24aa96850f4cd3c4f5d8155fba0b4aebd61602e1"
+      },
+      "actual_ft": [
+        3,
+        1
+      ],
+      "baseline": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-1",
+        "score31_logloss": 2.9365848296162014,
+        "floored_probabilities": 0,
+        "goal_error": -1.0400000006450578,
+        "total_goals_logloss": 1.7972967569593448,
+        "odd_even_logloss": 1.5027590986309372,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "candidate": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-1",
+        "score31_logloss": 2.9365848296162014,
+        "floored_probabilities": 0,
+        "goal_error": -1.0400000006450578,
+        "total_goals_logloss": 1.7972967569593448,
+        "odd_even_logloss": 1.5027590986309372,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.13889540932815347,
+          "score31_category": "3-1",
+          "score31_logloss": 2.9365848296162014,
+          "floored_probabilities": 0,
+          "goal_error": -1.0400000006450578,
+          "total_goals_logloss": 1.7972967569593448,
+          "odd_even_logloss": 1.5027590986309372,
+          "handicap_brier": null,
+          "half_full_logloss": 1.2383449245595795
+        },
+        "2.0": {
+          "brier": 0.06319586807168183,
+          "score31_category": "3-1",
+          "score31_logloss": 2.5877370000057835,
+          "floored_probabilities": 0,
+          "goal_error": -0.5289747547844921,
+          "total_goals_logloss": 1.6712790217470688,
+          "odd_even_logloss": 1.2653488944586144,
+          "handicap_brier": null,
+          "half_full_logloss": 0.7966587880023931
+        },
+        "5.0": {
+          "brier": 0.06860713168418074,
+          "score31_category": "3-1",
+          "score31_logloss": 2.595549772219152,
+          "floored_probabilities": 0,
+          "goal_error": -0.43845038323003793,
+          "total_goals_logloss": 1.6588204912965085,
+          "odd_even_logloss": 1.231276966761448,
+          "handicap_brier": null,
+          "half_full_logloss": 0.8224364647923504
+        },
+        "10.0": {
+          "brier": 0.07429672025119008,
+          "score31_category": "3-1",
+          "score31_logloss": 2.610033532376614,
+          "floored_probabilities": 0,
+          "goal_error": -0.3924336718864678,
+          "total_goals_logloss": 1.6534865567766972,
+          "odd_even_logloss": 1.2147392268864794,
+          "handicap_brier": null,
+          "half_full_logloss": 0.8502507331008865
+        },
+        "20.0": {
+          "brier": 0.08020251917235713,
+          "score31_category": "3-1",
+          "score31_logloss": 2.6276730346443142,
+          "floored_probabilities": 0,
+          "goal_error": -0.3709274110625085,
+          "total_goals_logloss": 1.651217888159878,
+          "odd_even_logloss": 1.207184246380647,
+          "handicap_brier": null,
+          "half_full_logloss": 0.8791828986424582
+        }
+      }
+    },
+    {
+      "match_id": "26103-40",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:07.605263+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:07.605263+00:00",
+        "raw_sha256": "89dc3d543b28ab3fe18bdedb7ed4b29d233efd3b148a5722d0530b6393f3bd5e"
+      },
+      "actual_ft": [
+        1,
+        1
+      ],
+      "baseline": {
+        "brier": 0.29540586971212296,
+        "score31_category": "1-1",
+        "score31_logloss": 2.1966478827562095,
+        "floored_probabilities": 0,
+        "goal_error": 0.9599999993549422,
+        "total_goals_logloss": 1.4827686438432823,
+        "odd_even_logloss": 1.2771629379514071,
+        "handicap_brier": null,
+        "half_full_logloss": 1.997133494717577
+      },
+      "candidate": {
+        "brier": 0.29540586971212296,
+        "score31_category": "1-1",
+        "score31_logloss": 2.1966478827562095,
+        "floored_probabilities": 0,
+        "goal_error": 0.9599999993549422,
+        "total_goals_logloss": 1.4827686438432823,
+        "odd_even_logloss": 1.2771629379514071,
+        "handicap_brier": null,
+        "half_full_logloss": 1.997133494717577
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.29540586971212296,
+          "score31_category": "1-1",
+          "score31_logloss": 2.1966478827562095,
+          "floored_probabilities": 0,
+          "goal_error": 0.9599999993549422,
+          "total_goals_logloss": 1.4827686438432823,
+          "odd_even_logloss": 1.2771629379514071,
+          "handicap_brier": null,
+          "half_full_logloss": 1.997133494717577
+        },
+        "2.0": {
+          "brier": 0.2852109243047009,
+          "score31_category": "1-1",
+          "score31_logloss": 2.1610711497300414,
+          "floored_probabilities": 0,
+          "goal_error": -0.015916570848824696,
+          "total_goals_logloss": 1.306916491784695,
+          "odd_even_logloss": 0.8960962115353904,
+          "handicap_brier": null,
+          "half_full_logloss": 1.58333322417431
+        },
+        "5.0": {
+          "brier": 0.30240044255342274,
+          "score31_category": "1-1",
+          "score31_logloss": 2.1490139352306734,
+          "floored_probabilities": 0,
+          "goal_error": 0.32591854147688704,
+          "total_goals_logloss": 1.3308356568070647,
+          "odd_even_logloss": 1.016249174709997,
+          "handicap_brier": null,
+          "half_full_logloss": 1.766190859854381
+        },
+        "10.0": {
+          "brier": 0.3147497925319476,
+          "score31_category": "1-1",
+          "score31_logloss": 2.1878943425877804,
+          "floored_probabilities": 0,
+          "goal_error": 0.649708157404842,
+          "total_goals_logloss": 1.393956328820126,
+          "odd_even_logloss": 1.1433053202730143,
+          "handicap_brier": null,
+          "half_full_logloss": 1.9207499794438778
+        },
+        "20.0": {
+          "brier": 0.32424786285240764,
+          "score31_category": "1-1",
+          "score31_logloss": 2.261313823696075,
+          "floored_probabilities": 0,
+          "goal_error": 0.9678910341204796,
+          "total_goals_logloss": 1.4853349934195004,
+          "odd_even_logloss": 1.2807167167220892,
+          "handicap_brier": null,
+          "half_full_logloss": 2.056989362680912
+        }
+      }
+    },
+    {
+      "match_id": "26103-41",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:11.056658+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:11.056658+00:00",
+        "raw_sha256": "0d1dcb5893d12e007fc5acf80af6788e9cfca620ddd195d22a50880486dfce48"
+      },
+      "actual_ft": [
+        1,
+        0
+      ],
+      "baseline": {
+        "brier": 0.13889540932815347,
+        "score31_category": "1-0",
+        "score31_logloss": 2.4340887387712433,
+        "floored_probabilities": 0,
+        "goal_error": 1.9599999993549422,
+        "total_goals_logloss": 1.8748107316193061,
+        "odd_even_logloss": 1.8748107316193061,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "candidate": {
+        "brier": 0.13889540932815347,
+        "score31_category": "1-0",
+        "score31_logloss": 2.4340887387712433,
+        "floored_probabilities": 0,
+        "goal_error": 1.9599999993549422,
+        "total_goals_logloss": 1.8748107316193061,
+        "odd_even_logloss": 1.8748107316193061,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.13889540932815347,
+          "score31_category": "1-0",
+          "score31_logloss": 2.4340887387712433,
+          "floored_probabilities": 0,
+          "goal_error": 1.9599999993549422,
+          "total_goals_logloss": 1.8748107316193061,
+          "odd_even_logloss": 1.8748107316193061,
+          "handicap_brier": null,
+          "half_full_logloss": 1.2383449245595795
+        },
+        "2.0": {
+          "brier": 0.010292940806075701,
+          "score31_category": "1-0",
+          "score31_logloss": 4.479897930453318,
+          "floored_probabilities": 0,
+          "goal_error": 4.987715582145955,
+          "total_goals_logloss": 4.1980056147470535,
+          "odd_even_logloss": 4.1980056147470535,
+          "handicap_brier": null,
+          "half_full_logloss": 0.36975202945578384
+        },
+        "5.0": {
+          "brier": 0.01775005698549749,
+          "score31_category": "1-0",
+          "score31_logloss": 3.969935842707124,
+          "floored_probabilities": 0,
+          "goal_error": 4.337235653806229,
+          "total_goals_logloss": 3.6625278207785184,
+          "odd_even_logloss": 3.6625278207785184,
+          "handicap_brier": null,
+          "half_full_logloss": 0.45599299497484835
+        },
+        "10.0": {
+          "brier": 0.02858724549892756,
+          "score31_category": "1-0",
+          "score31_logloss": 3.576166055123641,
+          "floored_probabilities": 0,
+          "goal_error": 3.808173294563839,
+          "total_goals_logloss": 3.2378560567079804,
+          "odd_even_logloss": 3.2378560567079804,
+          "handicap_brier": null,
+          "half_full_logloss": 0.5525247349081088
+        },
+        "20.0": {
+          "brier": 0.04389899380264874,
+          "score31_category": "1-0",
+          "score31_logloss": 3.2612940197826505,
+          "floored_probabilities": 0,
+          "goal_error": 3.3571586575541126,
+          "total_goals_logloss": 2.8853384968244957,
+          "odd_even_logloss": 2.8853384968244957,
+          "handicap_brier": null,
+          "half_full_logloss": 0.6629746680460258
+        }
+      }
+    },
+    {
+      "match_id": "26103-42",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:15.259953+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:15.259953+00:00",
+        "raw_sha256": "f43378555ad3716dbe2f4a4475b117998aa49b6506f29ee0a09e73a3eebaa694"
+      },
+      "actual_ft": [
+        0,
+        1
+      ],
+      "baseline": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-1",
+        "score31_logloss": 2.722559143940241,
+        "floored_probabilities": 0,
+        "goal_error": 1.9599999993549422,
+        "total_goals_logloss": 1.8748107316193061,
+        "odd_even_logloss": 1.8748107316193061,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "candidate": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-1",
+        "score31_logloss": 2.722559143940241,
+        "floored_probabilities": 0,
+        "goal_error": 1.9599999993549422,
+        "total_goals_logloss": 1.8748107316193061,
+        "odd_even_logloss": 1.8748107316193061,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.2630882481988735,
+          "score31_category": "0-1",
+          "score31_logloss": 2.722559143940241,
+          "floored_probabilities": 0,
+          "goal_error": 1.9599999993549422,
+          "total_goals_logloss": 1.8748107316193061,
+          "odd_even_logloss": 1.8748107316193061,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8149533935338407
+        },
+        "2.0": {
+          "brier": 0.5483515616891522,
+          "score31_category": "0-1",
+          "score31_logloss": 4.196722564352515,
+          "floored_probabilities": 0,
+          "goal_error": 2.761762670016308,
+          "total_goals_logloss": 2.4368750275320386,
+          "odd_even_logloss": 2.4368750275320386,
+          "handicap_brier": null,
+          "half_full_logloss": 3.778687140531579
+        },
+        "5.0": {
+          "brier": 0.5125513745490877,
+          "score31_category": "0-1",
+          "score31_logloss": 4.025607484230828,
+          "floored_probabilities": 0,
+          "goal_error": 2.8154935613524676,
+          "total_goals_logloss": 2.4764235312546687,
+          "odd_even_logloss": 2.4764235312546687,
+          "handicap_brier": null,
+          "half_full_logloss": 3.3663262695075846
+        },
+        "10.0": {
+          "brier": 0.47130813926105325,
+          "score31_category": "0-1",
+          "score31_logloss": 3.857686309100306,
+          "floored_probabilities": 0,
+          "goal_error": 2.8212638092664437,
+          "total_goals_logloss": 2.4806826013019307,
+          "odd_even_logloss": 2.4806826013019307,
+          "handicap_brier": null,
+          "half_full_logloss": 3.003704497557684
+        },
+        "20.0": {
+          "brier": 0.4242830945881119,
+          "score31_category": "0-1",
+          "score31_logloss": 3.6827514649408526,
+          "floored_probabilities": 0,
+          "goal_error": 2.7890608123275826,
+          "total_goals_logloss": 2.456942630734565,
+          "odd_even_logloss": 2.456942630734565,
+          "handicap_brier": null,
+          "half_full_logloss": 2.671892551753486
+        }
+      }
+    },
+    {
+      "match_id": "26103-43",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:18.542788+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:18.542788+00:00",
+        "raw_sha256": "7ffa2d841fbbf42e5af44f3444cd1d0bbc452af4248f461b13a846b5c496957c"
+      },
+      "actual_ft": [
+        0,
+        3
+      ],
+      "baseline": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-3",
+        "score31_logloss": 4.039436901138227,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "candidate": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-3",
+        "score31_logloss": 4.039436901138227,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.2630882481988735,
+          "score31_category": "0-3",
+          "score31_logloss": 4.039436901138227,
+          "floored_probabilities": 0,
+          "goal_error": -0.04000000064505782,
+          "total_goals_logloss": 1.4961916641754232,
+          "odd_even_logloss": 1.0634186973184425,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8149533935338407
+        },
+        "2.0": {
+          "brier": 0.08966743776383283,
+          "score31_category": "0-3",
+          "score31_logloss": 2.964017800144564,
+          "floored_probabilities": 0,
+          "goal_error": 0.6073395717355385,
+          "total_goals_logloss": 1.5501874246011724,
+          "odd_even_logloss": 0.9118332132368973,
+          "handicap_brier": null,
+          "half_full_logloss": 1.0390218986805826
+        },
+        "5.0": {
+          "brier": 0.1263173508484363,
+          "score31_category": "0-3",
+          "score31_logloss": 3.197381039820775,
+          "floored_probabilities": 0,
+          "goal_error": 0.5163084829566453,
+          "total_goals_logloss": 1.5358328141525015,
+          "odd_even_logloss": 0.9286340476054802,
+          "handicap_brier": null,
+          "half_full_logloss": 1.217051685021234
+        },
+        "10.0": {
+          "brier": 0.16755594325773962,
+          "score31_category": "0-3",
+          "score31_logloss": 3.4576074251809352,
+          "floored_probabilities": 0,
+          "goal_error": 0.4790707785341555,
+          "total_goals_logloss": 1.5305345265192236,
+          "odd_even_logloss": 0.9358717846803948,
+          "handicap_brier": null,
+          "half_full_logloss": 1.4044630952299468
+        },
+        "20.0": {
+          "brier": 0.21317676278950096,
+          "score31_category": "0-3",
+          "score31_logloss": 3.7460824352890776,
+          "floored_probabilities": 0,
+          "goal_error": 0.48449037044639365,
+          "total_goals_logloss": 1.531284444773859,
+          "odd_even_logloss": 0.9348047644535771,
+          "handicap_brier": null,
+          "half_full_logloss": 1.606633441324874
+        }
+      }
+    },
+    {
+      "match_id": "26103-44",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:21.755661+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:21.755661+00:00",
+        "raw_sha256": "e913d1c0d404778cea7643573a79bfab09cb056f61f67999c73bd7bd83026488"
+      },
+      "actual_ft": [
+        3,
+        0
+      ],
+      "baseline": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-0",
+        "score31_logloss": 3.1740256856312357,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8636607200473978
+      },
+      "candidate": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-0",
+        "score31_logloss": 3.1740256856312357,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8636607200473978
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.13889540932815347,
+          "score31_category": "3-0",
+          "score31_logloss": 3.1740256856312357,
+          "floored_probabilities": 0,
+          "goal_error": -0.04000000064505782,
+          "total_goals_logloss": 1.4961916641754232,
+          "odd_even_logloss": 1.0634186973184425,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8636607200473978
+        },
+        "2.0": {
+          "brier": 0.03126395143824501,
+          "score31_category": "3-0",
+          "score31_logloss": 2.528365817083251,
+          "floored_probabilities": 0,
+          "goal_error": 0.8935697364567017,
+          "total_goals_logloss": 1.6073499850942534,
+          "odd_even_logloss": 0.8663803291256944,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8018494576270458
+        },
+        "5.0": {
+          "brier": 0.0429866426719267,
+          "score31_category": "3-0",
+          "score31_logloss": 2.6406582559239373,
+          "floored_probabilities": 0,
+          "goal_error": 0.8392776924671415,
+          "total_goals_logloss": 1.5951844177414698,
+          "odd_even_logloss": 0.874215567295629,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8182289331944632
+        },
+        "10.0": {
+          "brier": 0.0556488208661573,
+          "score31_category": "3-0",
+          "score31_logloss": 2.745001555398449,
+          "floored_probabilities": 0,
+          "goal_error": 0.7872430634313243,
+          "total_goals_logloss": 1.5840875411720252,
+          "odd_even_logloss": 0.8820535189276466,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8406925029020615
+        },
+        "20.0": {
+          "brier": 0.06894721104883764,
+          "score31_category": "3-0",
+          "score31_logloss": 2.841992911210919,
+          "floored_probabilities": 0,
+          "goal_error": 0.7339335519363339,
+          "total_goals_logloss": 1.5733062859862295,
+          "odd_even_logloss": 0.8904317634566452,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8666933937269
+        }
+      }
+    },
+    {
+      "match_id": "26103-45",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:28.369266+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:28.369266+00:00",
+        "raw_sha256": "da2e463a23f9b5bb0222685a39922a0b6909280deadee13477fe16d47f8fb942"
+      },
+      "actual_ft": [
+        2,
+        1
+      ],
+      "baseline": {
+        "brier": 0.13889540932815347,
+        "score31_category": "2-1",
+        "score31_logloss": 2.3638838021321233,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 3.5502444948066976
+      },
+      "candidate": {
+        "brier": 0.13889540932815347,
+        "score31_category": "2-1",
+        "score31_logloss": 2.3638838021321233,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 3.5502444948066976
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.13889540932815347,
+          "score31_category": "2-1",
+          "score31_logloss": 2.3638838021321233,
+          "floored_probabilities": 0,
+          "goal_error": -0.04000000064505782,
+          "total_goals_logloss": 1.4961916641754232,
+          "odd_even_logloss": 1.0634186973184425,
+          "handicap_brier": null,
+          "half_full_logloss": 3.5502444948066976
+        },
+        "2.0": {
+          "brier": 0.28143876276428187,
+          "score31_category": "2-1",
+          "score31_logloss": 2.719867021512706,
+          "floored_probabilities": 0,
+          "goal_error": 0.3474654849973762,
+          "total_goals_logloss": 1.514614490856777,
+          "odd_even_logloss": 0.9632782774664741,
+          "handicap_brier": null,
+          "half_full_logloss": 4.032420687355027
+        },
+        "5.0": {
+          "brier": 0.23419961075432363,
+          "score31_category": "2-1",
+          "score31_logloss": 2.595216322596278,
+          "floored_probabilities": 0,
+          "goal_error": 0.37980170932552326,
+          "total_goals_logloss": 1.5181100529638576,
+          "odd_even_logloss": 0.9562701396387085,
+          "handicap_brier": null,
+          "half_full_logloss": 3.852677488788439
+        },
+        "10.0": {
+          "brier": 0.19144085374664432,
+          "score31_category": "2-1",
+          "score31_logloss": 2.5033041460213137,
+          "floored_probabilities": 0,
+          "goal_error": 0.4277988856138628,
+          "total_goals_logloss": 1.5238033623049312,
+          "odd_even_logloss": 0.9462019402572831,
+          "handicap_brier": null,
+          "half_full_logloss": 3.708416762818981
+        },
+        "20.0": {
+          "brier": 0.15371617162688014,
+          "score31_category": "2-1",
+          "score31_logloss": 2.439400641561723,
+          "floored_probabilities": 0,
+          "goal_error": 0.48762108438161,
+          "total_goals_logloss": 1.5317209555993028,
+          "odd_even_logloss": 0.9341905168634853,
+          "handicap_brier": null,
+          "half_full_logloss": 3.595498013354447
+        }
+      }
+    },
+    {
+      "match_id": "26103-46",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:32.018051+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:32.018051+00:00",
+        "raw_sha256": "aa86b0428210a19a0ec7e4f33559bc2dbeccb48747d3b6e526a366082eb72d0c"
+      },
+      "actual_ft": [
+        0,
+        3
+      ],
+      "baseline": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-3",
+        "score31_logloss": 4.039436901138227,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "candidate": {
+        "brier": 0.2630882481988735,
+        "score31_category": "0-3",
+        "score31_logloss": 4.039436901138227,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.8149533935338407
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.2630882481988735,
+          "score31_category": "0-3",
+          "score31_logloss": 4.039436901138227,
+          "floored_probabilities": 0,
+          "goal_error": -0.04000000064505782,
+          "total_goals_logloss": 1.4961916641754232,
+          "odd_even_logloss": 1.0634186973184425,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8149533935338407
+        },
+        "2.0": {
+          "brier": 0.22824606209020093,
+          "score31_category": "0-3",
+          "score31_logloss": 4.11571560120837,
+          "floored_probabilities": 0,
+          "goal_error": 1.5736373282085099,
+          "total_goals_logloss": 1.8044704250231975,
+          "odd_even_logloss": 0.7924257873997612,
+          "handicap_brier": null,
+          "half_full_logloss": 1.6290761137711636
+        },
+        "5.0": {
+          "brier": 0.24164087294890288,
+          "score31_category": "0-3",
+          "score31_logloss": 4.115750316206317,
+          "floored_probabilities": 0,
+          "goal_error": 1.3434957839572084,
+          "total_goals_logloss": 1.7292167602933375,
+          "odd_even_logloss": 0.8130820219929166,
+          "handicap_brier": null,
+          "half_full_logloss": 1.6955479847517314
+        },
+        "10.0": {
+          "brier": 0.2572827681400405,
+          "score31_category": "0-3",
+          "score31_logloss": 4.153792839019382,
+          "floored_probabilities": 0,
+          "goal_error": 1.159902892335202,
+          "total_goals_logloss": 1.6751871817280617,
+          "odd_even_logloss": 0.832533506771571,
+          "handicap_brier": null,
+          "half_full_logloss": 1.772273455755019
+        },
+        "20.0": {
+          "brier": 0.2753026216066236,
+          "score31_category": "0-3",
+          "score31_logloss": 4.22076212060339,
+          "floored_probabilities": 0,
+          "goal_error": 0.9900734081990641,
+          "total_goals_logloss": 1.630403999845401,
+          "odd_even_logloss": 0.8532710768322057,
+          "handicap_brier": null,
+          "half_full_logloss": 1.8617969856300047
+        }
+      }
+    },
+    {
+      "match_id": "26103-47",
+      "period": "26103",
+      "status": "settled_frozen_probabilities",
+      "selected_parameter": null,
+      "result_available_at": "2026-10-10T00:04:35.687434+00:00",
+      "result_source": {
+        "name": "ESPN_summary_structure_audit",
+        "status": "ok",
+        "available_at": "2026-10-10T00:04:35.687434+00:00",
+        "raw_sha256": "0719090419455853f6e72b69d98deae3e6f3d4f418c75a91dc27316721bc1e5f"
+      },
+      "actual_ft": [
+        3,
+        0
+      ],
+      "baseline": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-0",
+        "score31_logloss": 3.1740256856312357,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "candidate": {
+        "brier": 0.13889540932815347,
+        "score31_category": "3-0",
+        "score31_logloss": 3.1740256856312357,
+        "floored_probabilities": 0,
+        "goal_error": -0.04000000064505782,
+        "total_goals_logloss": 1.4961916641754232,
+        "odd_even_logloss": 1.0634186973184425,
+        "handicap_brier": null,
+        "half_full_logloss": 1.2383449245595795
+      },
+      "declared_alternative_scores": {
+        "None": {
+          "brier": 0.13889540932815347,
+          "score31_category": "3-0",
+          "score31_logloss": 3.1740256856312357,
+          "floored_probabilities": 0,
+          "goal_error": -0.04000000064505782,
+          "total_goals_logloss": 1.4961916641754232,
+          "odd_even_logloss": 1.0634186973184425,
+          "handicap_brier": null,
+          "half_full_logloss": 1.2383449245595795
+        },
+        "2.0": {
+          "brier": 0.04009916665327123,
+          "score31_category": "3-0",
+          "score31_logloss": 2.2856927776855613,
+          "floored_probabilities": 0,
+          "goal_error": -0.24204769085887312,
+          "total_goals_logloss": 1.5062463136413005,
+          "odd_even_logloss": 1.1298696168309392,
+          "handicap_brier": null,
+          "half_full_logloss": 0.6849985180920235
+        },
+        "5.0": {
+          "brier": 0.043818442783056466,
+          "score31_category": "3-0",
+          "score31_logloss": 2.388437776147479,
+          "floored_probabilities": 0,
+          "goal_error": 0.01680223204111231,
+          "total_goals_logloss": 1.4959694785962627,
+          "odd_even_logloss": 1.046665914524225,
+          "handicap_brier": null,
+          "half_full_logloss": 0.6998696853480575
+        },
+        "10.0": {
+          "brier": 0.05018547604392543,
+          "score31_category": "3-0",
+          "score31_logloss": 2.511792969418824,
+          "floored_probabilities": 0,
+          "goal_error": 0.22512873436630132,
+          "total_goals_logloss": 1.5039696022260083,
+          "odd_even_logloss": 0.9915291253046189,
+          "handicap_brier": null,
+          "half_full_logloss": 0.7315338274023364
+        },
+        "20.0": {
+          "brier": 0.05988037777191008,
+          "score31_category": "3-0",
+          "score31_logloss": 2.6539465678452734,
+          "floored_probabilities": 0,
+          "goal_error": 0.39264547163690056,
+          "total_goals_logloss": 1.5195749667087886,
+          "odd_even_logloss": 0.9535373153047685,
+          "handicap_brier": null,
+          "half_full_logloss": 0.7811528783138241
+        }
+      }
+    },
+    {
+      "match_id": "26103-48",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-49",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-50",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-51",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-52",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-53",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-54",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-55",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-56",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-57",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-58",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-59",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-60",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-61",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-62",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-63",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-64",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-65",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-66",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-67",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-68",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-69",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-70",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-71",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-72",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-73",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-74",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-75",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-76",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-77",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-78",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-79",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-80",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-81",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-82",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-83",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-84",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-85",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-86",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-87",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-88",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-89",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-90",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-91",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-92",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-93",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-94",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-95",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-96",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-97",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-98",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-99",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-100",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-101",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-102",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-103",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-104",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-105",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-106",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-107",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-108",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-109",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-110",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-111",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-112",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-113",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-114",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-115",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-116",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-117",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-118",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-119",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-120",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-121",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-122",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-123",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-124",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-125",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-126",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-127",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-128",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-129",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-130",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-131",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-132",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-133",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-134",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-135",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-136",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-137",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-138",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-139",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-140",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-141",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-142",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-143",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-144",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-145",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-146",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-147",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-148",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-149",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-150",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-151",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-152",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-153",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-154",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-155",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-156",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-157",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-158",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-159",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-160",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-161",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-162",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-163",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-164",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-165",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-166",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-167",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-168",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-169",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-170",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-171",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-172",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-173",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-174",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-175",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-176",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-177",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-178",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-179",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-180",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-181",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-182",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-183",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-184",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-185",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-186",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-187",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    },
+    {
+      "match_id": "26103-188",
+      "period": "26103",
+      "status": "pending_verified_result"
+    },
+    {
+      "match_id": "26103-189",
+      "period": "26103",
+      "status": "blocked_in_original_freeze"
+    }
+  ],
+  "numerical_gate": {
+    "settled_period_n": 1,
+    "min_settled_periods": 5,
+    "min_pairs": 500,
+    "sample_threshold_met": false,
+    "full_settled_football_coverage": false,
+    "paired_delta_brier": 0.0,
+    "block_bootstrap_upper_95": null,
+    "paired_delta_score31_logloss": 0.0,
+    "no_logloss_floor_events": true,
+    "bootstrap_replicates": 0,
+    "numerical_nondegradation_gate": false,
+    "production_gate_passed": false
+  },
+  "goal_mean_gate": {
+    "complete": true,
+    "baseline_bias": 0.4044444437993866,
+    "candidate_bias": 0.4044444437993866,
+    "absolute_bias_delta": 0.0,
+    "absolute_bias_delta_bootstrap_upper_95": null,
+    "candidate_bias_block_interval_95": [
+      null,
+      null
+    ],
+    "sample_threshold_met": false,
+    "mean_nondegradation_gate": false,
+    "statistical_unbiasedness_proved": false
+  },
+  "research_qualification_gate": false,
+  "production_gate_passed": false,
+  "limitations": [
+    "digests_do_not_authenticate_provider_or_clocks",
+    "canonical_bindings_remain_unapproved",
+    "complete_official_pool_and_sample_power_require_independent_audit",
+    "alternative_scores_are_diagnostics_not_retrospective_parameter_selection"
+  ]
+}

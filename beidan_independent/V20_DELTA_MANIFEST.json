@@ -1,0 +1,82 @@
+{
+  "base_commit": "09d12957f3a909cd587df58c6f6742195bf15aae",
+  "files": [
+    {
+      "path": "beidan_independent/beidan_bd1/unique_settlement.py",
+      "local_file": "beidan_bd1/unique_settlement.py",
+      "git_blob_sha": "f6566eb89410292b8bb1421108e1e6e30fef0aa4",
+      "sha256": "54590973696b061e1ad3e23d6b7ae16c84f0eaf5df24f79613b7bdc0d7f25167",
+      "bytes": 8731
+    },
+    {
+      "path": "beidan_independent/scripts/register_prospective_freezes.py",
+      "local_file": "scripts/register_prospective_freezes.py",
+      "git_blob_sha": "18c592a298c939e154dbcdc17b9ac1625220fcce",
+      "sha256": "4e9bf9855d3483497b6cd49f0a5124ed63ebadbbf095caebf52a1ca8be5c7976",
+      "bytes": 2769
+    },
+    {
+      "path": "beidan_independent/tests/test_unique_settlement.py",
+      "local_file": "tests/test_unique_settlement.py",
+      "git_blob_sha": "e8fa9041773d97d1c5dadc8cedfcddc72cfff2a3",
+      "sha256": "9b0733c50bf9fc1c2aeccc013d480fa9f336f25685c9d8822fe0b0cf2d23d53a",
+      "bytes": 4689
+    },
+    {
+      "path": "beidan_independent/tests/test_prospective_registry.py",
+      "local_file": "tests/test_prospective_registry.py",
+      "git_blob_sha": "cebaf3e9ca5f88e6bb16e20bd18005e0c1484a37",
+      "sha256": "8b5b242d1e632259e13857c43f90ed6b840df4e7411f43a0babf8ae0128a6975",
+      "bytes": 3060
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v20-unique-settlement.md",
+      "local_file": "docs/beidan-v20-unique-settlement.md",
+      "git_blob_sha": "4f54ab86eca97cc939588c80fc7098542eee5e13",
+      "sha256": "71aed4f3c525ffebcc50c881a9b7d45289a9a55b66861612da6722d3575ffe14",
+      "bytes": 3170
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "local_file": "beidan_bd1/README.md",
+      "git_blob_sha": "5e501b6b3fc95923437e33cdc4cfda989a7a38b6",
+      "sha256": "fe471a057e9dc3ce64e1737fcd9501258a9cb151ed344e1ea067618bf5f4a6ab",
+      "bytes": 16903
+    },
+    {
+      "path": "beidan_independent/outputs/v20_unique_pending_settlement.json",
+      "local_file": "outputs/v20_unique_pending_settlement.json",
+      "git_blob_sha": "e6ae1e0c5bd44f1785847c80f6aa038c76465236",
+      "sha256": "a3a465d81d5323f2488c17a8da6070ed7c336f2bde68a48b4b5f0f47fd360a12",
+      "bytes": 33538
+    },
+    {
+      "path": "beidan_independent/outputs/v20_unique_pending_settlement_20261010.json",
+      "local_file": "outputs/v20_unique_pending_settlement_20261010.json",
+      "git_blob_sha": "6a167cd6ee26d8af94ca7bb853ff162157499d46",
+      "sha256": "c90a4da79692880afe23722c2f3edf6b545d648a6aed19e411da4ccb3a6a8249",
+      "bytes": 33854
+    },
+    {
+      "path": "beidan_independent/outputs/v20_result_collection_initial/results.jsonl",
+      "local_file": "outputs/v20_result_collection_initial/results.jsonl",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "beidan_independent/outputs/v20_result_collection_initial/settlement.json",
+      "local_file": "outputs/v20_result_collection_initial/settlement.json",
+      "git_blob_sha": "32f13f8a51ee08f91c66b3ab4381eed992300bdf",
+      "sha256": "01d0473d436ad587e087bfef26e1e9325d68b1ecf703d5b412db10ee98641ca8",
+      "bytes": 22784
+    },
+    {
+      "path": "beidan_independent/outputs/v20_result_collection_initial/COLLECTION_INDEX.json",
+      "local_file": "outputs/v20_result_collection_initial/COLLECTION_INDEX.json",
+      "git_blob_sha": "9f9fb27fd3a2fc9a29a0a47b6d797c22a569a815",
+      "sha256": "c7b98fdcd9bff67e4977b8d78105199810366bba74257dc1df37b71a8c78280f",
+      "bytes": 14174
+    }
+  ]
+}

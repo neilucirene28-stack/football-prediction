@@ -1,0 +1,47 @@
+{
+  "base_commit": "515a3af2caf1544d3ba581ed62b23b69f20bb1e7",
+  "files": [
+    {
+      "path": "beidan_independent/beidan_bd1/frozen_settlement.py",
+      "local_file": "beidan_bd1/frozen_settlement.py",
+      "git_blob_sha": "0afca6a854427b74d84f83f7bdffdcbb99f4232c",
+      "bytes": 19817,
+      "sha256": "d8cd152fb652bc6a1c5fc7025736c3f20d355b71e54e6a9b888c17cf9ccad493"
+    },
+    {
+      "path": "beidan_independent/scripts/freeze_native_pool.py",
+      "local_file": "scripts/freeze_native_pool.py",
+      "git_blob_sha": "a5f2e4806dc72aaab5bf44c81fd6f425b442f212",
+      "bytes": 4555,
+      "sha256": "a9835f8cabb006c183750472e67d2d5090c595dab6d70e1751ca40d71e84fa92"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_frozen_settlement.py",
+      "local_file": "tests/test_beidan_frozen_settlement.py",
+      "git_blob_sha": "aa60f67dcc893ff6c7c0a5cf5333aeb1f9c36ff5",
+      "bytes": 10433,
+      "sha256": "977e092db0b7015b3945ae5d5b3faaddd68d329e403a0c9817c282c2b63b1768"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v21-expired-blocked-freeze.md",
+      "local_file": "docs/beidan-v21-expired-blocked-freeze.md",
+      "git_blob_sha": "9e7cdb5c34397d12e215b320d9a79d5ef4467338",
+      "bytes": 2068,
+      "sha256": "e2f0c28c7f3157c74ff3b90b44aaa5cadd5071522828e356a0de8800f7a9800c"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "local_file": "beidan_bd1/README.md",
+      "git_blob_sha": "cbeca0c22d6c3d93559d51987f90ea7c972a35c3",
+      "bytes": 17325,
+      "sha256": "b8c2588ed872dbe39045728b54b0a32e0954b132844dae2c9b06b7dc81e3a50d"
+    },
+    {
+      "path": "beidan_independent/outputs/v21_current_clock_preflight.json",
+      "local_file": "outputs/v21_current_clock_preflight.json",
+      "git_blob_sha": "c63218245f7bbf94a95f47af67c298f0dd75c130",
+      "bytes": 29567,
+      "sha256": "e4169e56b8a77e5ec92409602f42d29276c51b237dc969e194f70c72d0035d74"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "url_no_key": "https://v3.football.api-sports.io/fixtures?date=2026-10-10&timezone=Asia%2FShanghai",
+  "params": {
+    "date": "2026-10-10",
+    "timezone": "Asia/Shanghai"
+  },
+  "start_utc": "2026-10-09T10:16:05.526854+00:00",
+  "end_utc": "2026-10-09T10:16:08.140300+00:00",
+  "http_status": 200,
+  "size_bytes": 1431119,
+  "sha256": "bb1ce501e5078854e25d17a4ad1b5fd6cbe3d456e35e70c6c25b926280252ed3"
+}

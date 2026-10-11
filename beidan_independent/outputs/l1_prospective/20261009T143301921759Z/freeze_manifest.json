@@ -1,0 +1,27 @@
+{
+  "schema": "bd1-frozen-bundle-1",
+  "sealed_at": "2026-10-09T14:33:02.958658+00:00",
+  "generation_completed_at": "2026-10-09T14:33:01.904702+00:00",
+  "files": {
+    "history.jsonl": {
+      "sha256": "f1cdc6593876e7fe6fd32cec872d4eba93c9ab22c990911bf90bf5ace8af4bbd",
+      "size_bytes": 243579
+    },
+    "folds.json": {
+      "sha256": "2de4372b802feb6c3c23916b66ff28413a32722067ebbf0ca34f882e276bbe93",
+      "size_bytes": 153083
+    },
+    "report.json": {
+      "sha256": "5887a4949963493a1661a7a33dd5cdb9f54145ff24594b044b84a1eb06926fc9",
+      "size_bytes": 4159823
+    },
+    "results.jsonl": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  },
+  "offered_n": 179,
+  "predicted_n": 40,
+  "production_gate_passed": false,
+  "independent_clock_authentication": false
+}

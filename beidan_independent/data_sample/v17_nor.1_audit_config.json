@@ -1,0 +1,33 @@
+{
+  "league_slug": "nor.1",
+  "season_type": 13943,
+  "season_year": 2026,
+  "team_ids": [
+    "620",
+    "510",
+    "2980",
+    "6672",
+    "438",
+    "3279"
+  ],
+  "recent_per_team": 8,
+  "folder": "data_sample/espn_nor.1_mined_20261009",
+  "scoreboard_folder": "data_sample/espn_scoreboard_bb0c436",
+  "output_folder": "outputs/v17_native/nor.1",
+  "proposals": [
+    [
+      22,
+      "401843455",
+      "620",
+      "510",
+      "20261009"
+    ],
+    [
+      163,
+      "401843456",
+      "2980",
+      "6672",
+      "20261010"
+    ]
+  ]
+}

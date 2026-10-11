@@ -1,0 +1,48 @@
+{
+  "league_slug": "esp.1",
+  "season_year": 2026,
+  "season_type": 14357,
+  "team_ids": [
+    "101",
+    "102",
+    "1068",
+    "2922",
+    "83",
+    "86",
+    "88",
+    "93",
+    "96",
+    "99"
+  ],
+  "recent_per_team": 6,
+  "folder": "data_sample/espn_esp.1_mined_20261010_v25",
+  "scoreboard_folder": "data_sample/coverage_7c1799b",
+  "output_folder": "outputs/v25_native/esp.1",
+  "proposals": [
+    [
+      103,
+      "401882849",
+      "101",
+      "93",
+      "20261010"
+    ],
+    [
+      176,
+      "401882856",
+      "96",
+      "1068",
+      "20261010"
+    ]
+  ],
+  "proposals_status": "manual_source_native_research_only_cn_binding_unapproved",
+  "seed_scoreboard_receipts": [
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_esp.1_20261009.json",
+      "sha256": "fdcc2a8a9dec458c28ab003545d9741a2776303fb0d945c994099ec2fc5926d5"
+    },
+    {
+      "file": "data_sample/coverage_7c1799b/scoreboard_esp.1_20261010.json",
+      "sha256": "3caa9f6c975444b61064648b718bc12d93711c2dbefc2936fef62e39346ae92f"
+    }
+  ]
+}

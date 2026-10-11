@@ -1,0 +1,43 @@
+{
+  "verified_at": "2026-10-10T01:17:35.868867+00:00",
+  "native_audits": [
+    {
+      "league_slug": "eng.1",
+      "audited_n": 42,
+      "explicit_ht_n": 42,
+      "all_result_content_reproduced": true,
+      "failed_http_n": 0,
+      "original_audit_sha256": "b4c33fe41e186e02fd288d5fb4ca97b046d7d7507ab28fcd50e604e9b4a74dbb",
+      "post_archive_verified_at": "2026-10-10T01:17:32.203893+00:00"
+    },
+    {
+      "league_slug": "esp.1",
+      "audited_n": 46,
+      "explicit_ht_n": 46,
+      "all_result_content_reproduced": true,
+      "failed_http_n": 0,
+      "original_audit_sha256": "58925fbb8001c223f9705f9c8bb42e5446ae4bbe9aa6354ad0f21012f8183a1d",
+      "post_archive_verified_at": "2026-10-10T01:17:32.663499+00:00"
+    },
+    {
+      "league_slug": "fra.1",
+      "audited_n": 41,
+      "explicit_ht_n": 41,
+      "all_result_content_reproduced": true,
+      "failed_http_n": 1,
+      "original_audit_sha256": "3470a5b8950c4ad5a9f859a9893c397da91cfe619c6ff3ad3381164ff2462b2e",
+      "post_archive_verified_at": "2026-10-10T01:17:35.635067+00:00"
+    }
+  ],
+  "archive_response_n": 164,
+  "history_n": 754,
+  "freeze_manifest_sha256": "d56e58bd4379efa0db2b41c5a3a62b38444e41c68bde7f1b8351700feb900c14",
+  "freeze_loaded_pool_n": 179,
+  "freeze_loaded_predictions_n": 54,
+  "blocked_reason_counts": {
+    "ValueError: 决策时已经开球；仅保留完整池阻断行": 60,
+    "ValueError: 赛程原始来源或真实可得时间缺失": 60,
+    "ValueError: L1对阵双方规范ID历史样本不足": 5
+  },
+  "old_result_bytes_equal": true
+}

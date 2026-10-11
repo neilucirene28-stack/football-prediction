@@ -1,0 +1,26 @@
+{
+  "executed_at": "2026-10-10T01:52:31.834951+00:00",
+  "native_archive": {
+    "archived_at": "2026-10-10T01:52:27.443769+00:00",
+    "receipt_index_sha256": "1cd726639525b370fc6217ba3d381ea37598af2b543a72627ef4d0e667ba2b67",
+    "archived_body_n": 61,
+    "receipts_n": 61,
+    "failed_http_n": 0,
+    "archive_sha256": "c7931af3f81f82c549a15e719173fe9ba35eb3d9e90f8ad1474d51a39aa0a825",
+    "archive_bytes": 1500160,
+    "capture_clock_independently_authenticated": false,
+    "execution_code_sha256": {
+      "http_batch_archive.py": "a9a294d70475509583a2bbff0a6d9eedd3cc8e804b222fc86ab1561f0cc634d4",
+      "artifact_io.py": "d436547479c7d73f911a92a29a60c43af20a56edbe2e77d1dc94a612213c1519",
+      "archive_io.py": "62d4f771592e177dbbfa4da7e4d95c48e24ba2fce9be979a7cc8332c7571b8da"
+    }
+  },
+  "new_history_n": 49,
+  "explicit_ht_n": 49,
+  "original_history_availability_preserved": true,
+  "history_n": 1231,
+  "full_pool_n": 179,
+  "latest_prediction_n": 76,
+  "freeze_manifest_sha256": "3f6c05791fd39d1c01913cea651eb6e7837dd274a7f376a136877798044f1502",
+  "production_gate_passed": false
+}

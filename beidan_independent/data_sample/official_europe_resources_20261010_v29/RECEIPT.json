@@ -1,0 +1,55 @@
+{
+  "receipts": [
+    {
+      "source": "czech_federation",
+      "url": "https://www.fotbal.cz/souteze/rozpis-celostatnich-soutezi-2026-27/p82",
+      "start_utc": "2026-10-10T02:44:06.510030+00:00",
+      "http_status": 403,
+      "end_utc": "2026-10-10T02:44:09.812759+00:00",
+      "bytes": 4922,
+      "sha256": "a5cacf66ee9c0fa6270de06f55153a6d83e5d25c1069f846fc417c9570e19e62",
+      "local_file": "czech_federation.html"
+    },
+    {
+      "source": "austria_league",
+      "url": "https://www.oefbl.at/de/medienbereich/mediainfos/2026/spielplan-der-admiral-2-liga-2026-27-2",
+      "start_utc": "2026-10-10T02:44:06.510779+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:44:10.589527+00:00",
+      "bytes": 188255,
+      "sha256": "d268f3dd330bed3ec03881fc2551802432cbd2d71626ceb6bcb327d2760b16cb",
+      "local_file": "austria_league.html"
+    },
+    {
+      "source": "sweden_federation",
+      "url": "https://www.svenskfotboll.se/serier-cuper/spelprogram/superettan-2026/133340/",
+      "start_utc": "2026-10-10T02:44:06.511387+00:00",
+      "http_status": 403,
+      "end_utc": "2026-10-10T02:44:11.236838+00:00",
+      "bytes": 4562,
+      "sha256": "6cc41a947c70ac0073cf7a2cfdb635f51a622419d0890e8a22442dde4cc07d5e",
+      "local_file": "sweden_federation.html"
+    },
+    {
+      "source": "portugal_league2",
+      "url": "https://www.ligaportugal.pt/competition/912/liga-portugal-meu-super/round/20262027",
+      "start_utc": "2026-10-10T02:44:06.511801+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:44:12.649765+00:00",
+      "bytes": 1256163,
+      "sha256": "b96192cf4a3185a27441c13e7ed85b3f41e9887214ee2808da1e0506449ad60b",
+      "local_file": "portugal_league2.html"
+    },
+    {
+      "source": "iceland_federation",
+      "url": "https://www.ksi.is/oll-mot/mot?banner-tab=matches-and-results&id=7025510",
+      "start_utc": "2026-10-10T02:44:09.813071+00:00",
+      "http_status": 200,
+      "end_utc": "2026-10-10T02:44:14.062008+00:00",
+      "bytes": 499266,
+      "sha256": "7c371d3b130cf61ffe57fcd7fce96c6b65f4e17647afbd70f67f230b4cf4a456",
+      "local_file": "iceland_federation.html"
+    }
+  ],
+  "retries": 0
+}

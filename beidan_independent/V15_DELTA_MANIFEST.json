@@ -1,0 +1,131 @@
+{
+  "base_commit": "c4712fc3dd44e7ec4a8d8531f6a11c813c618667",
+  "version": "BD-1 v15",
+  "unittest_passed_n": 104,
+  "same_17_native_probability_candidates_as_v14": true,
+  "offered_n": 179,
+  "predicted_n": 17,
+  "paired_n": 0,
+  "production_gate_passed": false,
+  "changes": [
+    {
+      "path": "beidan_independent/START_HERE.md",
+      "size_bytes": 6129,
+      "sha256": "9870f57465c8c71ef7c4ed02032c39b1591801a3cf32c3012e0fbf296ec046d1",
+      "git_blob_sha": "3e325b5e8d5b230ed67b5cd84b9bedd76bae4491",
+      "change": "modified"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/README.md",
+      "size_bytes": 14413,
+      "sha256": "b077abd3879054ec9f1ffb48ef56dc60119a411373be41cddba051c21547e03c",
+      "git_blob_sha": "b053af45897343fa768f11172d81097be4f9958e",
+      "change": "modified"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/frozen_results.py",
+      "size_bytes": 3646,
+      "sha256": "2c60923dd27a8c902762c2d776e6863a7a4aaed0250a1481034152a125c45849",
+      "git_blob_sha": "df49b4b25c3529e0dbed39fc75771b2f4c129595",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/frozen_settlement.py",
+      "size_bytes": 18624,
+      "sha256": "57533cc1421dbf413657801f3b08176de48d9a9b887ae7dcd6687f9a701ca1c0",
+      "git_blob_sha": "99f2746698c0a81f12a71125fcc4941811f77ee5",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/beidan_bd1/walk_forward.py",
+      "size_bytes": 25465,
+      "sha256": "93ab34c7360383ed74636a176c1e1b2b0f8382a06c1d2849eddca97a98c6593e",
+      "git_blob_sha": "d4c3f05582d0394cbbb39b73845560bb2973143b",
+      "change": "modified"
+    },
+    {
+      "path": "beidan_independent/docs/beidan-v15-frozen-settlement.md",
+      "size_bytes": 4932,
+      "sha256": "079fa204d65b72e971e55bb7b040344a1fd8fc72a4daaa45fbe68c0d9f09dbac",
+      "git_blob_sha": "651d7ce59f662e1fb38ce69538ff795d436ab39f",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T135028491435Z/folds.json",
+      "size_bytes": 136266,
+      "sha256": "828dd5edc9834d2780748a3d300e2dab0ab82f905cb29cb04fb4c322a44e12a7",
+      "git_blob_sha": "a785906318b27a3ba35fa4349f314fb94459b158",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T135028491435Z/freeze_manifest.json",
+      "size_bytes": 847,
+      "sha256": "8cf95372822fed74b7c028d6679636bc9cbc55c601de4094df6386f197155d37",
+      "git_blob_sha": "dd023c25835bc5377b4e43519ea97507295333ee",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T135028491435Z/history.jsonl",
+      "size_bytes": 103156,
+      "sha256": "4f78f81a7b18a0e637a8ad54211df1b75cff0267c54d049119cfc5c177c910fe",
+      "git_blob_sha": "31778c88398a1c361cdacc0ba9e941cae1189eb3",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T135028491435Z/report.json",
+      "size_bytes": 1803992,
+      "sha256": "8dc36ff80d206064912f53b46a86fb44f5570efdad1716f3d86f385515bf2867",
+      "git_blob_sha": "f3fa41b359247c19e9a48781cc3943dbfa44b571",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/l1_prospective/20261009T135028491435Z/results.jsonl",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/outputs/v15_pending_settlement.json",
+      "size_bytes": 17005,
+      "sha256": "ea0575eea69cd240f31fe5ae4bbe3416b8d1c871125378d2fa5e4f4afa66d87b",
+      "git_blob_sha": "b9b4e41c77e79a6be4c3648f572c4dc512487817",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/scripts/freeze_l1_prospective.py",
+      "size_bytes": 4043,
+      "sha256": "82387ba7319b0ea219d54a1f2b382bcc929cdf739e13dd98cd912322b6526d97",
+      "git_blob_sha": "d947e78fb2c3bf412fb4b32061ce6f4498ed676f",
+      "change": "modified"
+    },
+    {
+      "path": "beidan_independent/scripts/freeze_native_pool.py",
+      "size_bytes": 4294,
+      "sha256": "c0bbcb2a6915093a77d810ab63d0f1078c79dfec0b0a8f8a1fa76b08a69ddd75",
+      "git_blob_sha": "9d5a28c2bb79238dab351bb20deaf9a79f4bb405",
+      "change": "modified"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_frozen_results.py",
+      "size_bytes": 2921,
+      "sha256": "6d7c99d16e0178ae810a0c454b5090c5edb41ac854d22b1a990b6e8c8dbc60e9",
+      "git_blob_sha": "93048f512a4a4de678c82407bba5fa7d9b69715a",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_frozen_settlement.py",
+      "size_bytes": 7989,
+      "sha256": "86ac496ab9ee667d5b753ad90549dfe078ae6237b13199f5db98c359378b2541",
+      "git_blob_sha": "71b9c07df42d601abb7a9bf02e2c1e7fe49d2b88",
+      "change": "added"
+    },
+    {
+      "path": "beidan_independent/tests/test_beidan_l1_walk_forward.py",
+      "size_bytes": 5849,
+      "sha256": "2b9f7a56e9bf6fa232eb614737b12de6b7db2d59c5defc9872b54b4c9303274b",
+      "git_blob_sha": "9879fae81e526ca97689cf76bc3273b1a6239ec0",
+      "change": "modified"
+    }
+  ]
+}

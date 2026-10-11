@@ -1,0 +1,30 @@
+{
+  "url": "https://liansai.500.com/team/3962/teamfixture/",
+  "start_utc": "2026-10-09T15:37:04.290759+00:00",
+  "end_utc": "2026-10-09T15:37:12.082252+00:00",
+  "http_status": 200,
+  "sha256": "50514d381dce8f6ae6c227247636f98421f1869da536adb8471761e7c682a23c",
+  "bytes": 131854,
+  "headers": {
+    "Server": "Byte-nginx",
+    "Content-Type": "text/html; charset=gbk",
+    "Transfer-Encoding": "chunked",
+    "Connection": "close",
+    "Age": "0",
+    "Content-Security-Policy": "frame-ancestors 'self' *.500.com tongji.baidu.com",
+    "Vary": "Accept-Encoding",
+    "Via": "pic20.tzmp,cache02.hbhuangshi-cu27",
+    "X-Bdcdn-Cache-Status": "TCP_MISS,TCP_MISS",
+    "X-Content-Type-Options": "nosniff",
+    "X-Powered-By": "EsunPHP",
+    "X-Request-Id": "b73e75dcf46d977042ad62a8e56c114b",
+    "X-Request-Ip": "2a13:9500:1e4:a97::4cf:38",
+    "X-Response-Cache": "miss",
+    "X-Response-Cinfo": "2a13:9500:1e4:a97::4cf:38",
+    "X-Tt-Trace-Tag": "id=5",
+    "X-Xss-Protection": "1;mode=block",
+    "Date": "Fri, 09 Oct 2026 15:37:11 GMT",
+    "Strict-Transport-Security": "max-age=2592000; includeSubDomains"
+  },
+  "official_source": false
+}
