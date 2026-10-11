@@ -595,19 +595,39 @@ except Exception as e:
     print(f"[FAIL] soccerdata: {e}")
 
 # 16. OddsPapi: 350+博彩公司赔率（2026-10-09 接入）
-#     免费250req/月；历史赔率端点免费不计配额。无key时整节跳过（用户需注册）。
+#     免费250req/月；历史赔率端点免费不计配额。key不可用时整节跳过。
+#     key来源：环境变量 ODDSPAPI_KEY，或 Secure Vault custom.oddspapi（模块经 surrogate 注入）。
 try:
-    _op_key = os.environ.get("ODDSPAPI_KEY")
+    from oddspapi import _get_key as _op_get_key
+    _op_key, _op_key_err = None, ""
+    try:
+        _op_key = _op_get_key()  # 环境变量，或 "__VAULT__" 哨兵（走 Secure Vault）
+    except Exception as _ke:
+        _op_key_err = str(_ke)[:120]
     if not _op_key:
         results["sources"]["oddspapi"] = {
             "ok": False, "skipped": True,
-            "error": "ODDSPAPI_KEY 未设置（oddspapi.io注册→Secure Vault授权）",
+            "error": "key不可用: %s" % _op_key_err,
         }
-        print("[SKIP] OddsPapi: 无key，跳过（用户注册后启用）")
+        print("[SKIP] OddsPapi: key不可用，跳过")
     else:
         from oddspapi import get_fixtures as op_fixtures, get_odds as op_odds, \
             get_quota as op_quota
         op_fx = op_fixtures()
+        # 免费档无 live 赔率权限：已开球场次 /v4/odds 必 403 且照计费，先过滤只留未开球
+        _now = datetime.now(timezone.utc)
+
+        def _upcoming(fx):
+            try:
+                st = datetime.fromisoformat(
+                    str(fx.get("start_time", "")).replace("Z", "+00:00"))
+                if st.tzinfo is None:
+                    st = st.replace(tzinfo=timezone.utc)
+                return st > _now
+            except Exception:
+                return True  # 解析失败不误杀
+
+        op_fx = [fx for fx in op_fx if _upcoming(fx)]
         op_odds_data, op_n = {}, 0
         for fx in op_fx[:20]:  # 每日上限20场，省配额
             try:

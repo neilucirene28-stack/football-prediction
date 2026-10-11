@@ -149,6 +149,11 @@ def _request(endpoint, params=None, billable=True):
     key = _get_key()
     if billable:
         _check_quota(1)
+        # 官方口径：请求到达服务端即计费（200/4xx/5xx 都计）。
+        # 先记账再请求：HTTP 错误会抛异常，若后记账则本地计数永远追不上服务端
+        # （2026-10-11 实测：16 个 live 场次 403，本地只记了 6/22）。
+        # 纯网络层失败会多记 1 次，方向为 fail-safe（宁可早停，不超额）。
+        _charge(1)
     if key == "__VAULT__":
         # Secure Vault 路径：surrogate 注入 apiKey，不接触明文
         url = _vault_url(endpoint, params)
@@ -157,9 +162,6 @@ def _request(endpoint, params=None, billable=True):
         qs = "&".join("%s=%s" % (k, v) for k, v in params.items())
         url = "%s%s?%s" % (BASE_URL, endpoint, qs)
     data = fetch_with_retry(url, timeout=25)
-    if billable:
-        # 官方口径：请求到达服务端即计费（200/4xx/5xx 都计），网络层失败不计
-        _charge(1)
     return data
 
 
