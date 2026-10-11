@@ -16,6 +16,7 @@ from .poisson import (
     asian_handicap_probs,
     handicap_1x2,
     top_scores,
+    top_scores_diverse,
     total_goals_distribution,
     expected_total_goals,
     main_goal_interval,
@@ -440,7 +441,8 @@ def predict(
         "asian": None,
         "handicap_1x2": None,
         "top_scores": [
-            {"score": s, "prob": round(p, 4)} for s, p in top_scores(matrix_cal, n=5)
+            {"score": s, "prob": round(p, 4)}
+            for s, p in top_scores_diverse(matrix_cal, n=5, lam_h=lam_h, lam_a=lam_a)
         ],
         "top_scores_raw": [
             {"score": s, "prob": round(p, 4)} for s, p in top_scores(matrix, n=5)
