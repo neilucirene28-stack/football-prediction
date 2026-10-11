@@ -35,7 +35,7 @@ def validate_provenance(provenance, *, base_version, asof, has_market, has_elo=F
 
 def load_form_only_config(path=None):
     """仅接受有provenance的参数包；旧文件保留，不猜测其训练版本或时间。"""
-    path = Path(path) if path is not None else Path(__file__).with_name("calibration.json")
+    path = Path(path) if path is not None else Path(__file__).with_name("jingcai_calibration.json")
     try:
         artifact = json.loads(path.read_text())
         params = artifact.get("form_only")

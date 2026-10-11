@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 
 from engine.jingcai_grid import score_grid
-from engine.predictor import PredictError, predict
+from engine.jingcai_predictor import PredictError, predict
 from engine.poisson import match_probs, pmf, score_matrix, half_full_1x2
 
 ASOF = datetime.fromisoformat("2030-01-01T11:00:00+08:00")
@@ -163,7 +163,7 @@ def test_adaptive_grid_joint_tail_and_reference_distribution(lh, la):
 
 
 def test_high_goal_match_half_full_marginal_exact_and_tail_bounded():
-    with patch("engine.predictor.estimate_lambdas", return_value=(4.5, 4, {})):
+    with patch("engine.jingcai_core.estimate_lambdas", return_value=(4.5, 4, {})):
         r = predict(payload(), CONFIG, asof=ASOF)
     assert r["score_grid"]["max_goals"] > 10
     assert r["score_grid"]["poisson_tail_mass_before_normalization"] <= 1e-6

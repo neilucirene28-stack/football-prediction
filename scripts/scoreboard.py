@@ -87,11 +87,10 @@ def score_one(pred: dict, st: dict) -> dict:
     # 让球胜平负
     h = (pred.get("derivatives") or {}).get("handicap_1x2") or {}
     if h.get("line") is not None:
-        from engine.jingcai_handicap import integer_handicap
+        from engine.jingcai_handicap import handicap_outcome
         hp = checked_probabilities([h[f"p_{k}_full"] if f"p_{k}_full" in h else h[f"p_{k}"]
                                     for k in ("home", "draw", "away")])
-        diff = (hg - ag) + integer_handicap(h["line"])
-        h_out = 0 if diff > 0 else (1 if diff == 0 else 2)
+        h_out = handicap_outcome(hg, ag, h["line"])
         hb, hll = _brier_logloss(hp, h_out)
         m["handicap_hit"] = int(max(range(3), key=lambda i: hp[i]) == h_out)
         m["handicap_brier"] = round(hb, 4)

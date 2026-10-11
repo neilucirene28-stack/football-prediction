@@ -10,7 +10,7 @@ from engine.jingcai_ledger import input_digest, validate_live_record
 from engine.jingcai_review import build_review, load_review_rows
 from engine.jingcai_calibration import load_form_only_config
 from engine.jingcai_batch import with_official_handicap, handicap_output
-from engine.predictor import predict, PredictError
+from engine.jingcai_predictor import predict, PredictError
 from api.api.persist import build_prediction_row, save_prediction
 from scripts.scoreboard import score_one, aggregate
 

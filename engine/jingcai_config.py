@@ -1,0 +1,25 @@
+"""竞彩独立默认参数；复制v11数值，不表示重新拟合。"""
+
+from copy import deepcopy
+
+ENGINE_VERSION = "2.10"
+DEFAULT_CONFIG = {
+    "rho": -0.13,
+    "kelly_fraction": 0.25,
+    "model_edge": 0.0,
+    "decay": 0.9,
+    "ht_factor": 0.44,
+    "mc_n": 20000,
+    "mc_min_score": 60,
+    "platt": None,
+    "shrink_prior": 3.0,
+    "weak_shrink_prior": 6.0,
+    "weak_goal_cap": 2.8,
+    "letdraw_strength": 0.5,
+    "divergence_gate": 0.15,
+}
+WEAK_COMPETITIONS = {"欧国联", "友谊赛", "球会友谊", "亚运男足", "亚运女足"}
+
+
+def default_config():
+    return deepcopy(DEFAULT_CONFIG)

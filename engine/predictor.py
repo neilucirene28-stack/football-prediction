@@ -17,7 +17,6 @@ from .elo import win_probability_from_elo
 from .strengths import estimate_lambdas, team_tier
 from .poisson import (score_matrix, match_probs, btts_prob, over_under_prob,
                       asian_handicap_probs, handicap_1x2, top_scores,
-                      top_scores_diverse,
                       total_goals_distribution, expected_total_goals,
                       main_goal_interval, half_time_probs,
                       half_full_1x2, total_goals_exact, ipf_to_marginals)
@@ -82,8 +81,7 @@ def _cards_block(payload):
                          derby_mult=1.1 if spec.get("derby") else 1.0)
 
 
-class PredictError(ValueError):
-    pass
+from .errors import PredictError
 
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
@@ -142,19 +140,19 @@ def _goal_interval_probs(matrix) -> dict:
     }
 
 
-def consistency_check(p_final, top3, asian, ou) -> list[str]:
+def consistency_check(p_final, top3, asian, ou, *, check_modal_score=True) -> list[str]:
     """十七节：所有市场必须方向一致，否则报告冲突。"""
     issues = []
     fav = max(range(3), key=lambda i: p_final[i])
     w0 = _score_winner(top3[0]["score"])
-    if w0 != fav and p_final[fav] - p_final[w0] > 0.08:
+    if check_modal_score and w0 != fav and p_final[fav] - p_final[w0] > 0.08:
         issues.append(
             f"首选比分 {top3[0]['score']} 的胜负方向与 1X2 首选不一致")
     if asian and fav == 0 and asian["win"] < 0.35:
         issues.append("1X2 看好主胜但亚盘赢盘概率过低，方向存疑")
     if asian and fav == 2 and asian["lose"] < 0.35:
         issues.append("1X2 看好客胜但亚盘输盘概率过低，方向存疑")
-    if ou and ou["over"] > 0.6 and top3[0]["prob"] > 0 and \
+    if check_modal_score and ou and ou["over"] > 0.6 and top3[0]["prob"] > 0 and \
             sum(int(x) for x in top3[0]["score"].split("-")) <= 1:
         issues.append("大小球倾向大球但首选比分为小比分，进球模型冲突")
     return issues
@@ -503,8 +501,7 @@ def predict(payload: dict, config: dict | None = None,
         "asian": None,
         "handicap_1x2": None,
         "top_scores": [{"score": s, "prob": round(p, 4)}
-                       for s, p in top_scores_diverse(matrix_cal, n=5,
-                                                     lam_h=lam_h, lam_a=lam_a)],
+                       for s, p in top_scores(matrix_cal, n=5)],
         "top_scores_raw": [{"score": s, "prob": round(p, 4)}
                            for s, p in top_scores(matrix, n=5)],
         "p_1x2_raw": [round(p, 4) for p in p_model],
@@ -633,15 +630,22 @@ def predict(payload: dict, config: dict | None = None,
     # ---- 10. 一致性检查 ----
     issues = consistency_check((p_home, p_draw, p_away),
                                deriv["top_scores"], deriv["asian"],
-                               deriv["over_under"])
+                               deriv["over_under"], check_modal_score=model != "jingcai")
 
     # ---- 11. 置信度与冷门风险 ----
     signals = [p for p in (p_model, p_market, p_elo) if p is not None]
     drift_n = (len(market["drift"]["signals"])
                if market and market.get("drift") else 0)
+    lineup_audit = None
+    has_confirmed_lineup = bool(payload.get("injury"))
+    if model == "jingcai":
+        from .jingcai_reporting import lineup_confirmation, score_explanation
+        lineup_audit = lineup_confirmation(input_audit)
+        has_confirmed_lineup = lineup_audit["both_confirmed"]
+        deriv["score_explanation"] = score_explanation(matrix_cal, p_final)
     conf_score = _confidence_score(
         score, signals, market["overround"] if market else 0.0,
-        bool(payload.get("injury")), issues, drift_signals=drift_n)
+        has_confirmed_lineup, issues, drift_signals=drift_n)
     confidence = {"S": "S", "A": "A", "B": "B", "C": "C"}[grade]
     if lam_notes.get("degraded") or issues or conf_score < 50:
         confidence = {"S": "A", "A": "B", "B": "C", "C": "C"}[confidence]
@@ -846,6 +850,46 @@ def predict(payload: dict, config: dict | None = None,
                                "market": list(p_market) if p_market is not None else None,
                                "elo": list(p_elo) if p_elo is not None else None}
         out["input_audit"] = input_audit
+        out["confidence_audit"] = {
+            "kind": "heuristic_data_quality_score_not_hit_probability",
+            "lineup": lineup_audit,
+            "lineup_factor": 1.0 if has_confirmed_lineup else 0.60,
+            "grade_policy": "legacy_completeness_grade_with_risk_downgrades",
+            "qualification": "not empirically calibrated; confidence letter is not a score bucket",
+        }
+        out["notes"].append("置信评分衡量数据质量与信号一致性，不代表命中概率；字母等级沿用完整度和风险降档规则。")
+        out["team_intelligence"] = input_audit["team_intelligence"]
+        out["team_observations"] = input_audit["team_observations"]
+        if out["team_observations"]["status"] in ("ok", "partial"):
+            out["notes"].append("已校验竞彩多源情报并输出分来源特征；缺失保留未知，概率影响系数尚未启用。")
+        if out["team_intelligence"]["status"] in ("missing", "partial"):
+            out["notes"].append("球队/外援阵容情报缺失或仅覆盖一方，未作概率修正。")
+        else:
+            out["notes"].append("已记录球队/外援阵容情报；影响系数待验证，未作概率修正。")
+        hsp_state = input_audit["optional_signal_status"]["handicap_sp"]
+        hsp = payload.get("handicap_sp")
+        out["handicap_market_diagnostic"] = {"status": hsp_state["status"],
+                                              "probability_fusion": False}
+        if hsp:
+            try:
+                hmarket = shin_probs(tuple(hsp)); method = "shin"
+            except Exception:
+                hmarket = implied_proportional(tuple(hsp)); method = "proportional_fallback"
+            hcap = deriv.get("handicap_1x2")
+            out["handicap_market_diagnostic"].update(
+                probabilities_full=list(hmarket), method=method,
+                available_at=hsp_state.get("available_at"), source=hsp_state.get("source"),
+                provenance_status=hsp_state["provenance_status"],
+                line=hcap.get("line") if hcap else None,
+                divergence=_divergence_gate(
+                    [hcap[f"p_{k}_full"] for k in ("home", "draw", "away")], hmarket
+                ) if hcap and gate > 0 else None,
+                used_for_divergence_gate=bool(p_market is None and hcap and gate > 0),
+                diagnostic_only=not bool(p_market is None and hcap and gate > 0))
+        if hsp_state["status"] == "excluded":
+            out["notes"].append("让球赔率未使用：" + hsp_state["reason"])
+        elif hsp_state["status"] == "accepted" and not hsp_state.get("available_at"):
+            out["notes"].append("让球赔率缺可得时间；可作诊断，不能视为已核验赛前数据。")
         out["score_grid"] = {"max_goals": max_goals,
                              "poisson_tail_mass_before_normalization": tail_mass,
                              "poisson_tail_tolerance": TAIL_TOLERANCE}

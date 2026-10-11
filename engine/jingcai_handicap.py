@@ -4,7 +4,7 @@ import re
 
 OUTCOMES = ("home", "draw", "away")
 LABELS = {"home": "让胜", "draw": "让平", "away": "让负"}
-PIPELINE_REVISION = "jingcai-cards-joint-ht-final-mc-20261010-v5"
+PIPELINE_REVISION = "jingcai-independent-core-20261011-v12"
 # 固定先验来自 2026-09-01~30，不能用于这个训练期内的历史验证。
 LETDRAW_FIT_BEFORE = "2026-10-01T00:00:00+08:00"
 
@@ -48,6 +48,15 @@ def handicap_view(probabilities, rq):
         "pair_including_draw_excluded_probability": p[pair_excluded],
         "coverage_note": "覆盖率是互斥结果概率和，不是收益或实战命中保证",
     }
+
+
+def handicap_outcome(home_goals, away_goals, rq):
+    """固定主队视角；未知/小数比分不得被转成0或截断。"""
+    if any(isinstance(v, bool) or not isinstance(v, int) or v < 0
+           for v in (home_goals, away_goals)):
+        raise ValueError("最终比分必须为非负整数")
+    margin = home_goals - away_goals + integer_handicap(rq)
+    return 0 if margin > 0 else 1 if margin == 0 else 2
 
 
 def matrix_summary(matrix):

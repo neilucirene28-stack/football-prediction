@@ -30,6 +30,56 @@ HALF_FULL_ORDER = ("胜胜", "胜平", "胜负",
                    "负胜", "负平", "负负")
 
 
+def format_team_intelligence(pred: dict) -> list[str]:
+    """独立情报依据行；不改变五玩法、概率或稳胆排序。"""
+    observations = pred.get('team_observations') or {}
+    if observations.get('status') in ('ok', 'partial'):
+        return format_source_observations(pred)
+    intel=pred.get("team_intelligence") or {}
+    if intel.get("status") not in ("ok", "partial"):
+        return ["球队情报：外援注册/阵容数据未知，未作概率修正。"]
+    lines=[]
+    for side,label in (("home","主队"),("away","客队")):
+        team=intel.get("teams",{}).get(side)
+        if team is None:
+            lines.append(label+"情报：未知，不能推断无外援或无缺阵。");continue
+        status={"expected":"预计首发","confirmed":"确认首发","unknown":"首发未知"}[team["lineup_status"]]
+        foreign=team["foreign_starters_exact"]
+        count=(str(foreign)+"人" if foreign is not None else
+               f"已知{team['foreign_starters_known']}人（名单或注册身份不完整）")
+        absent="、".join(p["name"] for p in team["confirmed_unavailable"]) or "未记录"
+        lines.append(f"{label}情报：{status}，外援首发{count}；确认缺阵{absent}；影响系数未启用。")
+    return lines
+
+
+def format_source_observations(pred: dict) -> list[str]:
+    obs = pred.get('team_observations') or {}
+    lines = []
+    for side, label in (('home', '主队'), ('away', '客队')):
+        t = obs.get('selected_by_side', {}).get(side)
+        if t is None:
+            lines.append(label + '情报：未知，不能推断无伤停、无外援或零牌数。'); continue
+        f = t['features']
+        state = {'confirmed': '确认首发', 'expected': '预计首发', 'unknown': '首发未知'}[t['lineup_status']]
+        shown = lambda v: str(v) if v is not None else '未知'
+        absent = '、'.join(p['name'] for p in t['confirmed_unavailable']) or '未记录（不能推断无缺阵）'
+        lines.append(f"{label}情报（{t['source']}）：{state}；确认缺阵{absent}，出战成疑{t['doubtful_n']}条；外援首发{shown(f['foreign_starters_exact'])}；当前名单赛季黄/红牌{shown(f['season_yellow_total'])}/{shown(f['season_red_total'])}；概率系数未启用。")
+        freshness = t.get('freshness') or {}
+        if freshness.get('oldest_collection_age_seconds') is not None:
+            lines.append(f"{label}来源采集距快照约{freshness['newest_collection_age_seconds'] / 60:.1f}～{freshness['oldest_collection_age_seconds'] / 60:.1f}分钟；采集时间不能证明原文已更新。")
+        for kind, kind_label in (('lineup', '阵容'), ('discipline', '牌数'), ('registration', '注册')):
+            other = obs.get('selected_by_dimension', {}).get(side, {}).get(kind)
+            if other and other['source'] != t['source']:
+                detail = {'lineup': {'confirmed': '确认首发', 'expected': '预计首发', 'unknown': '首发未知'}[other['lineup_status']],
+                          'discipline': '已观测黄/红牌汇总' + shown(other['features']['observed_season_yellow_sum']) + '/' + shown(other['features']['observed_season_red_sum']) + '（完整性另见特征）',
+                          'registration': '按赛事赛季注册证据核验'}[kind]
+                lines.append(f"{label}{kind_label}补充（{other['source']}）：{detail}；独立名单，未按姓名合并。")
+    failed = [r['source'] + ':' + r['status'] for r in obs.get('sources', []) if r['status'] != 'ok']
+    if failed: lines.append('情报来源状态：' + '、'.join(failed))
+    if obs.get('conflicts'): lines.append('情报存在未解决的同源多包冲突，相关来源未选入。')
+    return lines
+
+
 def _top_n(prob_dict: dict, n: int = 3) -> list[tuple[str, float]]:
     """按概率降序取前 n 项（概率相同按 key 排序，保证确定性）。"""
     return sorted(prob_dict.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
@@ -69,7 +119,18 @@ def format_top_scores(pred: dict, n: int = 5) -> str:
     for idx, s in enumerate(scores):
         label = f"**{s['score']}**" if idx == 0 else s["score"]
         parts.append(f"{label}({s['prob']:.3f})")
-    return "比分：" + "、".join(parts)
+    text = "比分：" + "、".join(parts)
+    explanation = pred["derivatives"].get("score_explanation")
+    if explanation:
+        names = {"home": "主胜", "draw": "平局", "away": "客胜"}
+        aligned = explanation["scores_within_wdl_direction"]
+        text += "\n胜平负首选：" + names[explanation["wdl_direction"]]
+        text += "；该方向内比分参考：" + "、".join(
+            f"{s['score']}({s['prob']:.1%})" for s in aligned[:n])
+        text += "（均为原始单比分概率，未重新归一）"
+        if explanation["global_mode_direction_differs"]:
+            text += "\n单个最可能比分与汇总胜平负方向不同可同时成立。"
+    return text
 
 
 def format_goal_intervals(pred: dict) -> str:

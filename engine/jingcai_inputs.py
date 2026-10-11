@@ -70,7 +70,8 @@ def validate_payload(payload, cutoff):
     p = dict(payload)
     audit = {"status": "declared_inputs_checked_source_lineage_unverified",
              "cutoff_at": cutoff.isoformat(), "history": {},
-             "excluded_optional_signals": [], "feature_timestamps_checked": []}
+             "excluded_optional_signals": [], "feature_timestamps_checked": [],
+             "optional_signal_status": {}}
 
     def check_times(block, path):
         for key in TIME_FIELDS:
@@ -203,8 +204,18 @@ def validate_payload(payload, cutoff):
     for key in ("handicap_sp", "af_pred"):
         values = p.get(key)
         if values is None:
+            audit["optional_signal_status"][key] = {"status": "missing"}
             continue
+        original = values
+        # 未来时间必须拒绝整个预测，不能被可选信号容错吞掉。
+        if key == "handicap_sp" and isinstance(values, dict):
+            check_times(values, key)
         try:
+            if key == "handicap_sp" and isinstance(values, dict):
+                allowed = set(OUTCOMES) | set(TIME_FIELDS) | {"source"}
+                if set(values) - allowed or any(k not in values for k in OUTCOMES):
+                    raise ValueError("handicap_sp对象须含home/draw/away及已知元数据")
+                values = [values[k] for k in OUTCOMES]
             if not isinstance(values, (list, tuple)) or len(values) != 3:
                 raise ValueError("须有三个数值")
             values = [finite_number(v, key, minimum=1 if key == "handicap_sp" else 0,
@@ -213,8 +224,17 @@ def validate_payload(payload, cutoff):
             if key == "af_pred" and sum(values) <= 0:
                 raise ValueError("概率全为零")
             p[key] = values
+            evidence_time = (original.get("available_at") if isinstance(original, dict) else None)
+            evidence_time = evidence_time or (declared or {}).get(key)
+            audit["optional_signal_status"][key] = {
+                "status": "accepted", "input_format": "object" if isinstance(original, dict) else "sequence",
+                "outcome_order": list(OUTCOMES), "available_at": evidence_time,
+                "provenance_status": "declared_time_only" if evidence_time else "missing_available_at",
+                "source": original.get("source") if isinstance(original, dict) else None,
+            }
         except ValueError as exc:
             p[key] = None
+            audit["optional_signal_status"][key] = {"status": "excluded", "reason": str(exc)}
             audit["excluded_optional_signals"].append({"field": key, "reason": str(exc)})
     def has_availability(value):
         if isinstance(value, dict):
@@ -227,5 +247,10 @@ def validate_payload(payload, cutoff):
         key for key in ("home_recent", "away_recent", "h2h", "odds", "opening_odds",
                         "elo", "asian", "injury", "af_pred", "handicap_sp", "league_avg_goals")
         if p.get(key) and key not in (declared or {}) and
-        not has_availability(p[key])]
+        not has_availability(p[key]) and
+        not audit["optional_signal_status"].get(key, {}).get("available_at")]
+    from .jingcai_team_intelligence import build_intelligence
+    audit["team_intelligence"] = build_intelligence(payload, cutoff)
+    from .jingcai_observations import build_observations
+    audit["team_observations"] = build_observations(payload, cutoff)
     return p, audit

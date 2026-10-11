@@ -17,7 +17,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from engine.poisson import score_matrix, ipf_to_marginals, handicap_1x2, match_probs
-from engine.letdraw import apply_letdraw_to_matrix
+from engine.jingcai_letdraw import apply_letdraw_to_matrix
 from engine.jingcai_handicap import matrix_summary, integer_handicap
 
 BIAS_GRID = tuple(round(i * .1, 2) for i in range(-8, 9))

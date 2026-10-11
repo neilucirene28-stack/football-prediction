@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT))
 from engine.jingcai_grid import score_grid, TAIL_TOLERANCE
 from engine.poisson import (score_matrix, pmf, ipf_to_marginals, handicap_1x2,
                             match_probs, half_full_1x2)
-from engine.letdraw import apply_letdraw_to_matrix
+from engine.jingcai_letdraw import apply_letdraw_to_matrix
 from scripts.audit_jingcai_letdraw import load, outcome, brier
 
 

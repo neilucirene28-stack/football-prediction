@@ -5,7 +5,7 @@ from unittest.mock import patch
 import pytest
 
 from engine.jingcai_handicap import handicap_view, integer_handicap
-from engine.predictor import PredictError, predict
+from engine.jingcai_predictor import PredictError, predict
 from engine.poisson import (score_matrix, match_probs, handicap_1x2,
                             top_scores, total_goals_exact, expected_total_goals,
                             half_full_1x2, btts_prob)
@@ -55,7 +55,7 @@ def test_threshold_does_not_override_more_likely_outcome():
 
 
 def test_argmax_can_naturally_select_handicap_draw_below_fifty_percent():
-    with patch("engine.predictor.estimate_lambdas", return_value=(1.2, .02, {})):
+    with patch("engine.jingcai_core.estimate_lambdas", return_value=(1.2, .02, {})):
         r = predict(payload(odds=None), {"rho": 0, "letdraw_strength": 0, "mc_min_score": 101})
     assert r["derivatives"]["handicap_1x2"]["pick"] == "draw"
 
@@ -119,8 +119,8 @@ def test_risk_view_and_format_do_not_change_probabilities():
 
 
 def test_negative_fixed_odds_ev_is_a_difference_signal_not_value():
-    with patch("engine.predictor.ensemble", return_value=(.31, .34, .35)), \
-         patch("engine.predictor.shin_probs", return_value=(.25, .375, .375)):
+    with patch("engine.jingcai_core.ensemble", return_value=(.31, .34, .35)), \
+         patch("engine.jingcai_core.shin_probs", return_value=(.25, .375, .375)):
         r = predict(payload(odds={"home": 3., "draw": 2., "away": 2.}), {"mc_min_score": 101})
     assert r["value"] == []
     c = r["probability_difference_candidates"]
