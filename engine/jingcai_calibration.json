@@ -1,0 +1,7 @@
+{
+  "model": "jingcai",
+  "status": "disabled_pending_chronological_validation",
+  "form_only": null,
+  "form_only_provenance": null,
+  "note": "No auto migration of unverified legacy calibration parameters."
+}

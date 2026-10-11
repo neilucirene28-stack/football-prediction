@@ -15,7 +15,7 @@ from datetime import datetime, date, timedelta, timezone
 from collections import defaultdict
 
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
-from engine.predictor import predict, PredictError
+from engine.jingcai_predictor import predict, PredictError
 from engine.elo import update_ratings
 
 TZ8 = timezone(timedelta(hours=8))

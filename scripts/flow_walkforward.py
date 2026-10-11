@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from engine.fusion import ensemble  # noqa: E402
 from engine.market_flow import (apply_volume_weight, flow_features,  # noqa: E402
                                 liquidity_weight)
-from engine.predictor import PredictError, predict  # noqa: E402
+from engine.jingcai_predictor import PredictError, predict  # noqa: E402
 from collector.collector.sources.titan007 import Titan007Source  # noqa: E402
 
 try:

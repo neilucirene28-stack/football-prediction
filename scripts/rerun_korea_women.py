@@ -12,7 +12,7 @@ sys.path.insert(0, "/opt/football-v2")
 os.environ.setdefault("TITAN_REQUEST_DELAY", "0.4")
 
 from collector.collector.sources.titan007 import Titan007Source
-from engine.predictor import predict
+from engine.jingcai_predictor import predict
 from api.api import config as api_config
 import psycopg
 

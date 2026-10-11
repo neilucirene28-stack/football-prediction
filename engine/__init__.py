@@ -18,13 +18,34 @@ from .fusion import (completeness_score, fuse_probs, model_weight_for_grade,
 from .backtest import (brier_score, log_loss, ranked_probability_score,
                        platt_fit, platt_apply)
 from .montecarlo import simulate, maybe_simulate
-from .predictor import predict
-from .beidan_calibration import (apply_beidan_calibration, get_beidan_params,
-                                beidan_calibration_info)
-from .beidan_upset import (upset_risk as beidan_upset_risk,
-                           risk_tier as beidan_risk_tier,
-                           should_exclude as beidan_should_exclude)
-from .beidan_adjusted_goals import (goal_weight, adjust_goals, adjust_match)
+# Legacy facade exports load only when explicitly requested. Importing the
+# Jingcai entry must not import the dual predictor or another project's modules.
+_LAZY_EXPORTS = {
+    "predict": ("predictor", "predict"),
+    "apply_beidan_calibration": ("beidan_calibration", "apply_beidan_calibration"),
+    "get_beidan_params": ("beidan_calibration", "get_beidan_params"),
+    "beidan_calibration_info": ("beidan_calibration", "beidan_calibration_info"),
+    "beidan_upset_risk": ("beidan_upset", "upset_risk"),
+    "beidan_risk_tier": ("beidan_upset", "risk_tier"),
+    "beidan_should_exclude": ("beidan_upset", "should_exclude"),
+    "goal_weight": ("beidan_adjusted_goals", "goal_weight"),
+    "adjust_goals": ("beidan_adjusted_goals", "adjust_goals"),
+    "adjust_match": ("beidan_adjusted_goals", "adjust_match"),
+}
+
+
+def __getattr__(name):
+    if name not in _LAZY_EXPORTS:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    from importlib import import_module
+    module_name, attribute = _LAZY_EXPORTS[name]
+    value = getattr(import_module("." + module_name, __name__), attribute)
+    globals()[name] = value
+    return value
+
+
+def __dir__():
+    return sorted(set(globals()) | set(_LAZY_EXPORTS))
 
 __all__ = [
     "expected_home_win", "update_ratings", "win_probability_from_elo",

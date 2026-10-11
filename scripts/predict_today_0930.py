@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """按小店火 2026-09-30 竞足赛程（2 场：亚运男足）跑预测。输出 /tmp/xdh_today_0930.json。"""
 import sys, json, re
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from collector.collector.sources.titan007 import (
     Titan007Source, _DETAIL_URL, _http_get, ENTRY_URL)
-from engine.predictor import predict
-from engine.poisson import handicap_1x2, score_matrix
+from engine.jingcai_predictor import predict
+from engine.jingcai_batch import with_official_handicap, handicap_output
+from engine.jingcai_calibration import load_form_only_config
 
 # 小店火 2026-09-30 竞足页签 2 场（浏览器 11:16 提取，全部未开赛）
 # 1. 14:00 韩国亚 vs 中国亚  编号3001  让球0  赔率 1.13/5.50/16.00
@@ -17,11 +19,7 @@ SHOP = {
     ("乌兹别亚", "日本亚"): {"no": "3002", "kickoff": "18:30", "odds": (5.05, 3.50, 1.55)},
 }
 
-try:
-    _cal = json.load(open("/home/hatch/workspace/football-prediction-v2/engine/calibration.json"))
-    _PLATT = {k: tuple(v) for k, v in _cal["form_only"].items()}
-except Exception:
-    _PLATT = None
+_CALIBRATION_CONFIG, _CALIBRATION_SELECTION = load_form_only_config()
 
 
 def norm(s):
@@ -84,22 +82,15 @@ def main():
             p = dict(m)
             p["home"] = m["home_team"]
             p["away"] = m["away_team"]
-            cfg = {"platt": _PLATT} if (_PLATT and not p.get("odds")) else None
+            cfg = _CALIBRATION_CONFIG if not p.get("odds") else None
             res = predict(p, cfg)
             if res.get("status") == "insufficient_data":
                 results.append({"home": ht, "away": at_, "status": "insufficient",
                                 "reason": res.get("reason")})
                 continue
             d = res["derivatives"]
-            h1x2 = None
-            ah = (d.get("asian") or {}).get("handicap")
-            if ah is not None:
-                line = int(round(ah))
-                mx = score_matrix(res["lambda_home"], res["lambda_away"])
-                h, dr, a = handicap_1x2(mx, line)
-                h1x2 = {"line": line, "p_home": round(h, 4),
-                        "p_draw": round(dr, 4), "p_away": round(a, 4)}
-            cards = (d.get("cards") or {})
+            h1x2 = handicap_output(res)
+            cards = d.get("cards") or {}
             results.append({
                 "shop": SHOP[(ht, at_)],
                 "kickoff": m["kickoff_at"], "competition": m["competition"],
@@ -117,6 +108,7 @@ def main():
                 "top_scores": d["top_scores"][:5],
                 "half_time": d.get("half_time"),
                 "handicap_1x2": h1x2,
+                "calibration_selection": _CALIBRATION_SELECTION,
                 "d_asian": d.get("asian"), "d_ou": d.get("ou"),
                 "total_goals": d.get("total_goals"),
                 "cards": cards if cards else None,
