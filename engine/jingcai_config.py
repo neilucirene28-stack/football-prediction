@@ -1,8 +1,8 @@
-"""竞彩独立默认参数；复制v11数值，不表示重新拟合。"""
+"""竞彩独立默认参数；保留v12基线策略，规范基线候选不自动提升为默认。"""
 
 from copy import deepcopy
 
-ENGINE_VERSION = "2.10"
+ENGINE_VERSION = "2.11"
 DEFAULT_CONFIG = {
     "rho": -0.13,
     "kelly_fraction": 0.25,
@@ -17,6 +17,8 @@ DEFAULT_CONFIG = {
     "weak_goal_cap": 2.8,
     "letdraw_strength": 0.5,
     "divergence_gate": 0.15,
+    "league_min_matches": 30,
+    "strength_baseline_mode": "legacy_v12",
 }
 WEAK_COMPETITIONS = {"欧国联", "友谊赛", "球会友谊", "亚运男足", "亚运女足"}
 

@@ -36,6 +36,10 @@ def aware_datetime(value, path):
 
 
 def validate_config(cfg):
+    cfg.setdefault('league_min_matches', 30)
+    cfg.setdefault('strength_baseline_mode', 'legacy_v12')
+    if cfg['strength_baseline_mode'] not in ('legacy_v12', 'venue_normalized'):
+        raise ValueError('config.strength_baseline_mode 必须为legacy_v12或venue_normalized')
     bounds = {
         "rho": (None, None, False), "decay": (0, 1, True),
         "ht_factor": (0, 1, True), "kelly_fraction": (0, 1, False),
@@ -43,12 +47,16 @@ def validate_config(cfg):
         "weak_shrink_prior": (0, None, False), "weak_goal_cap": (0, None, False),
         "letdraw_strength": (0, 1, False), "divergence_gate": (0, 1, False),
         "mc_min_score": (0, None, False),
+        "league_min_matches": (1, None, False),
     }
     for key, (lo, hi, strict) in bounds.items():
         cfg[key] = finite_number(cfg[key], f"config.{key}", minimum=lo,
                                  maximum=hi, strict_min=strict)
     if cfg["ht_factor"] >= 1:
         raise ValueError("config.ht_factor 必须小于1")
+    if cfg['league_min_matches'] != int(cfg['league_min_matches']):
+        raise ValueError('config.league_min_matches 必须为正整数')
+    cfg['league_min_matches'] = int(cfg['league_min_matches'])
     n = cfg["mc_n"]
     if isinstance(n, bool) or not isinstance(n, int) or n <= 0:
         raise ValueError("config.mc_n 必须为正整数")
@@ -65,13 +73,16 @@ def validate_config(cfg):
         cfg["platt"] = normalized
 
 
-def validate_payload(payload, cutoff):
+def validate_payload(payload, cutoff, *, strength_evidence=False):
     """返回复制后的输入和时间覆盖审计；从不修改调用方数据。"""
     p = dict(payload)
     audit = {"status": "declared_inputs_checked_source_lineage_unverified",
              "cutoff_at": cutoff.isoformat(), "history": {},
              "excluded_optional_signals": [], "feature_timestamps_checked": [],
              "optional_signal_status": {}}
+    audit['league_avg_goals_input_kind'] = ('declared_scalar_unverified'
+        if 'league_avg_goals' in payload else 'model_default_not_observed')
+    audit['opponent_strength'] = {}
 
     def check_times(block, path):
         for key in TIME_FIELDS:
@@ -133,6 +144,8 @@ def validate_payload(payload, cutoff):
                 missing_completed += 1
             # kickoff_at/played_at是比赛发生时间，不能证明此时已有最终比分。
             stamp = None
+            match_start = None
+            match_start_priority = -1
             values = [(field, row[field]) for field in ("date", "played_at", "kickoff_at")
                       if row.get(field) is not None]
             for field, value in values:
@@ -156,10 +169,16 @@ def validate_payload(payload, cutoff):
                     raise ValueError(f"{path} 完赛时间早于比赛时间")
                 if stamp is None:
                     stamp = current
+                priority = {'date': 0, 'played_at': 1, 'kickoff_at': 2}[field]
+                if priority > match_start_priority:
+                    match_start, match_start_priority = current, priority
             if stamp is None:
                 stamp = completed
             if stamp is None:
                 missing += 1
+            if strength_evidence:
+                from .jingcai_strength_evidence import normalize_opponent_strength
+                audit['opponent_strength'][path] = normalize_opponent_strength(row, path, cutoff, match_start)
             stamps.append(stamp)
             normalized.append(row)
         # 日期不全时保留原序，不猜测缺日期行的位置。
@@ -174,6 +193,11 @@ def validate_payload(payload, cutoff):
                                  "date_only_rows": date_only, "ordering": ordering,
                                  "missing_completed_at": missing_completed,
                                  "invalid_venue_treated_as_unknown": invalid_venue}
+
+    from .jingcai_strength_evidence import validate_league_statistics
+    statistics = validate_league_statistics(p, cutoff)
+    if statistics is not None:
+        p['league_statistics'] = statistics
 
     for key in ("odds", "opening_odds", "elo", "asian", "injury"):
         block = p.get(key)

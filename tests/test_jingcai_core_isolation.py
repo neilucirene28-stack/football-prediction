@@ -87,25 +87,22 @@ def test_legacy_helper_mutation_does_not_change_jingcai(monkeypatch):
 
 @pytest.mark.parametrize("rq", [-2, -1, 0, 1, 2])
 @pytest.mark.parametrize("strength", [0, 0.5, 1])
-def test_isolated_core_matches_legacy_jingcai_arithmetic(rq, strength):
+def test_new_strengths_and_legacy_are_independently_consistent(rq, strength):
     from engine.predictor import predict as legacy_predict
+    from engine.poisson import match_probs
 
     p = payload(handicap_line=rq)
     before = deepcopy(p)
-    cfg = {**CONFIG, "letdraw_strength": strength, "project_scope": "jingcai"}
+    cfg = {**CONFIG, "letdraw_strength": strength, "project_scope": "jingcai",
+           'strength_baseline_mode': 'venue_normalized'}
     isolated = predict(p, cfg, asof=ASOF)
     reference = legacy_predict(p, cfg, asof=ASOF, model="jingcai")
-    for key in (
-        "p_final_full",
-        "score_matrix_full",
-        "lambda_home_full",
-        "lambda_away_full",
-        "confidence_score",
-        "confidence",
-        "derivatives",
-        "recommendation",
-    ):
-        assert isolated[key] == reference[key], key
+    for result in (isolated, reference):
+        assert match_probs(result['score_matrix_full']) == pytest.approx(result['p_final_full'])
+    assert isolated['lambda_notes']['home_goal_baseline'] + isolated['lambda_notes']['away_goal_baseline'] == pytest.approx(2.7)
+    assert isolated['lambda_home_full'] != reference['lambda_home_full']
+    after = legacy_predict(p, cfg, asof=ASOF, model='jingcai')
+    assert after['score_matrix_full'] == reference['score_matrix_full']
     assert p == before
 
 

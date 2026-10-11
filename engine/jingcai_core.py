@@ -1,4 +1,4 @@
-"""竞彩专用计算核心，由v11竞彩路径独立提取；不导入旧双模式预测器。"""
+"""竞彩专用核心；默认v12基线策略，规范基线候选需显式启用。"""
 
 from .errors import PredictError
 from .jingcai_scope import validated_config
@@ -7,7 +7,8 @@ from datetime import datetime
 import hashlib
 import json
 from .elo import win_probability_from_elo
-from .strengths import estimate_lambdas, team_tier
+from .jingcai_strengths import estimate_lambdas, team_tier, REVISION as STRENGTH_REVISION
+from .jingcai_strength_evidence import resolve_league_baseline, REVISION as STRENGTH_EVIDENCE_REVISION
 from .poisson import (
     score_matrix,
     match_probs,
@@ -182,6 +183,8 @@ def predict(
     except ValueError as e:
         raise PredictError(str(e)) from e
     cfg["jingcai_pipeline_revision"] = PIPELINE_REVISION
+    cfg['jingcai_strength_revision'] = STRENGTH_REVISION
+    cfg['jingcai_strength_evidence_revision'] = STRENGTH_EVIDENCE_REVISION
     cfg["jingcai_cards_revision"] = CARDS_REVISION
     cards_context = load_jingcai_cards_context()
     cfg["jingcai_cards_data_profile"] = cards_context["profile"]
@@ -220,7 +223,7 @@ def predict(
         raise PredictError("快照晚于预测截止时刻：存在未来泄漏")
     input_audit = None
     try:
-        payload, input_audit = validate_payload(payload, snapshot)
+        payload, input_audit = validate_payload(payload, snapshot, strength_evidence=True)
     except ValueError as e:
         raise PredictError(str(e)) from e
     calibration_audit = {"status": "not_requested"}
@@ -264,7 +267,12 @@ def predict(
         raise PredictError("主客队无效")
     home_recent = payload.get("home_recent") or []
     away_recent = payload.get("away_recent") or []
-    league_avg = float(payload.get("league_avg_goals", 2.7))
+    try:
+        league_avg, league_audit = resolve_league_baseline(payload, input_audit, cfg['league_min_matches'],
+            enabled=cfg['strength_baseline_mode'] == 'venue_normalized')
+    except ValueError as e:
+        raise PredictError(str(e)) from e
+    input_audit['league_baseline'] = league_audit
     present = {
         "form": _recent_ok(home_recent) and _recent_ok(away_recent),
         "venue_split": any((r.get("venue") for r in home_recent + away_recent)),
@@ -302,10 +310,12 @@ def predict(
         home_tier=ht,
         away_tier=at_,
         shrink_prior=eff_shrink,
+        baseline_mode=cfg['strength_baseline_mode'],
     )
     lam_notes["home_adv_factor"] = 1.0 if neutral else 1.12
     lam_notes["neutral_site"] = neutral
     lam_notes["weak_competition"] = is_weak
+    lam_notes['league_baseline_evidence'] = league_audit
     if is_weak:
         lam_notes["shrink_prior_effective"] = eff_shrink
     h2h = payload.get("h2h") or []
