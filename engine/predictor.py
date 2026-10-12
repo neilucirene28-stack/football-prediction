@@ -208,7 +208,7 @@ def predict(payload: dict, config: dict | None = None,
     if model == "jingcai" and config is not None and not isinstance(config, dict):
         raise PredictError("config 必须为对象")
     cfg = {"rho": -0.13, "kelly_fraction": 0.25, "model_edge": 0.0,
-           "decay": 0.90, "ht_factor": 0.44, "mc_n": 20000,
+           "decay": 0.90, "ht_factor": 0.47, "mc_n": 20000,
            "mc_min_score": 60, "platt": None,
            # 攻防评级向联赛均值收缩的先验权重（场）；0 = 关闭收缩
            "shrink_prior": 3.0,
@@ -337,12 +337,22 @@ def predict(payload: dict, config: dict | None = None,
         eff_shrink = cfg["weak_shrink_prior"]
     else:
         eff_shrink = cfg["shrink_prior"]
+    # xG先验：北单degraded场次用Understat xG代替naive 1.0收缩（竞彩已验证+3.49LL）
+    home_xg_prior = away_xg_prior = None
+    if model == "beidan":
+        try:
+            from .jingcai_xg_prior import get_xg_prior
+            home_xg_prior = get_xg_prior(home)
+            away_xg_prior = get_xg_prior(away)
+        except Exception:
+            pass
     lam_h, lam_a, lam_notes = estimate_lambdas(
         home_recent, away_recent, league_avg,
         injury=payload.get("injury"), decay=cfg["decay"],
         home_adv_factor=1.0 if neutral else 1.12,
         home_tier=ht, away_tier=at_,
-        shrink_prior=eff_shrink)
+        shrink_prior=eff_shrink,
+        home_xg_prior=home_xg_prior, away_xg_prior=away_xg_prior)
     lam_notes["home_adv_factor"] = 1.0 if neutral else 1.12
     lam_notes["neutral_site"] = neutral
     lam_notes["weak_competition"] = is_weak

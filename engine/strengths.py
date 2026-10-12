@@ -59,11 +59,12 @@ _TIER_DEFENSE_FACTOR = 1.18
 _DEFAULT_SHRINK_PRIOR = 3.0
 
 
-def _shrink_toward_one(rating: float, eff_n: float, prior_w: float) -> float:
-    """按有效样本量把评级向 1.0 收缩：(n*r + w*1)/(n+w)。"""
+def _shrink_toward_one(rating: float, eff_n: float, prior_w: float,
+                       prior_target: float = 1.0) -> float:
+    """按有效样本量把评级向 prior_target 收缩：(n*r + w*target)/(n+w)。"""
     if prior_w <= 0 or eff_n <= 0:
         return rating
-    return (eff_n * rating + prior_w * 1.0) / (eff_n + prior_w)
+    return (eff_n * rating + prior_w * prior_target) / (eff_n + prior_w)
 
 
 def team_tier(recent: Iterable[Mapping]) -> int | None:
@@ -79,12 +80,15 @@ def team_tier(recent: Iterable[Mapping]) -> int | None:
 def attack_defense(recent: Iterable[Mapping], league_avg_goals: float,
                    venue: str | None = None, decay: float = 0.90,
                    opponent_adjust: bool = True,
-                   shrink_prior: float = _DEFAULT_SHRINK_PRIOR
+                   shrink_prior: float = _DEFAULT_SHRINK_PRIOR,
+                   xg_prior: tuple[float, float] | None = None
                    ) -> tuple[float, float, dict]:
     """返回 (attack, defense, 诊断)。权重 decay**i，i=0 为最新一场。
 
-    shrink_prior: 向 1.0 收缩的先验权重（场）。有效样本越少，评级越靠近
-    联赛均值，抑制小样本噪声导致的 λ 过度离散。0 = 关闭。
+    shrink_prior: 向先验收缩的权重（场）。有效样本越少，评级越靠近
+    先验，抑制小样本噪声导致的 λ 过度离散。0 = 关闭。
+    xg_prior: 可选 (attack_prior, defense_prior)，来自 Understat xG。
+    提供时收缩目标为 xG 先验而非 1.0，强队/弱队在小样本时保持区分度。
     """
     # P0 Bug1修复：venue缺失/非法值视为中性"N"，参与计算。
     # 之前 r.get("venue","N")=="N" 只匹配显式"N"，无venue记录(r.get→None)
@@ -116,8 +120,9 @@ def attack_defense(recent: Iterable[Mapping], league_avg_goals: float,
     attack = max(0.2, (gf_sum / w_sum) / team_avg)
     defense = max(0.2, (ga_sum / w_sum) / team_avg)
     eff_n = w_sum
-    attack = _shrink_toward_one(attack, eff_n, shrink_prior)
-    defense = _shrink_toward_one(defense, eff_n, shrink_prior)
+    pa, pd = xg_prior if xg_prior else (1.0, 1.0)
+    attack = _shrink_toward_one(attack, eff_n, shrink_prior, pa)
+    defense = _shrink_toward_one(defense, eff_n, shrink_prior, pd)
     return attack, defense, {"n": len(rows),
                              "effective_n": round(eff_n, 2),
                              "shrink_prior": shrink_prior,
@@ -131,18 +136,24 @@ def estimate_lambdas(home_recent, away_recent, league_avg_goals: float,
                      decay: float = 0.90,
                      home_tier: int | None = None,
                      away_tier: int | None = None,
-                     shrink_prior: float = _DEFAULT_SHRINK_PRIOR
+                     shrink_prior: float = _DEFAULT_SHRINK_PRIOR,
+                     home_xg_prior: tuple[float, float] | None = None,
+                     away_xg_prior: tuple[float, float] | None = None
                      ) -> tuple[float, float, dict]:
     """估计主客进球期望 (λ_h, λ_a) 及诊断信息。
 
     injury: 已确认伤停修正，如 {'home_attack': 0.92}，未经确认不得传入。
     home_tier/away_tier: 联赛级别（数字越小越高）；级别不同时应用跨级修正。
     shrink_prior: 攻防评级向联赛均值收缩的先验权重（场），见 attack_defense。
+    home_xg_prior/away_xg_prior: 可选 (attack, defense)，来自 Understat xG。
+    提供时小样本收缩目标为 xG 先验而非 1.0（竞彩已验证 +3.49LL）。
     """
     ah, dh, dh_diag = attack_defense(home_recent, league_avg_goals, venue="H",
-                                     decay=decay, shrink_prior=shrink_prior)
+                                     decay=decay, shrink_prior=shrink_prior,
+                                     xg_prior=home_xg_prior)
     aa, da, da_diag = attack_defense(away_recent, league_avg_goals, venue="A",
-                                     decay=decay, shrink_prior=shrink_prior)
+                                     decay=decay, shrink_prior=shrink_prior,
+                                     xg_prior=away_xg_prior)
     notes_tier = None
     if home_tier is not None and away_tier is not None:
         gap = home_tier - away_tier  # 正数 = 主队联赛级别更低（弱方）
