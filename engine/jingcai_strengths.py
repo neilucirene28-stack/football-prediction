@@ -37,7 +37,11 @@ def venue_baselines(total, home_adv_factor=1.12):
     return away * home_adv_factor, away
 
 
-def _attack_defense(recent, total, ratio, venue, decay, shrink_prior, normalized=True):
+def _attack_defense(recent, total, ratio, venue, decay, shrink_prior, normalized=True,
+                    xg_prior=None):
+    """xG prior: optional (attack_prior, defense_prior) tuple from Understat.
+    When form data is sparse, shrink toward xG-informed prior instead of naive 1.0.
+    """
     home_base, away_base = venue_baselines(total, ratio)
     rows = []
     for i, row in enumerate(recent):
@@ -45,9 +49,10 @@ def _attack_defense(recent, total, ratio, venue, decay, shrink_prior, normalized
         v = v if v in ('H', 'A', 'N') else 'N'
         if v in (venue, 'N'):
             rows.append((i, row, v))
+    pa, pd = xg_prior if xg_prior else (1.0, 1.0)
     if not rows:
-        return 1.0, 1.0, {'n': 0, 'effective_n': 0.0, 'opp_adjust_coverage': 0.0,
-                          'neutral_or_unknown_n': 0}
+        return pa, pd, {'n': 0, 'effective_n': 0.0, 'opp_adjust_coverage': 0.0,
+                        'neutral_or_unknown_n': 0, 'xg_prior_used': bool(xg_prior)}
     w_sum = attack_sum = defense_sum = 0.0
     covered = 0
     for i, r, v in rows:
@@ -66,19 +71,25 @@ def _attack_defense(recent, total, ratio, venue, decay, shrink_prior, normalized
     attack = max(0.2, attack_sum / w_sum if normalized else (attack_sum / w_sum) / (total / 2))
     defense = max(0.2, defense_sum / w_sum if normalized else (defense_sum / w_sum) / (total / 2))
     if shrink_prior > 0:
-        attack = (w_sum * attack + shrink_prior) / (w_sum + shrink_prior)
-        defense = (w_sum * defense + shrink_prior) / (w_sum + shrink_prior)
+        attack = (w_sum * attack + shrink_prior * pa) / (w_sum + shrink_prior)
+        defense = (w_sum * defense + shrink_prior * pd) / (w_sum + shrink_prior)
     return attack, defense, {
         'n': len(rows), 'effective_n': round(w_sum, 2),
         'opp_adjust_coverage': round(covered / len(rows), 3),
         'neutral_or_unknown_n': sum(v == 'N' for _, _, v in rows),
+        'xg_prior_used': bool(xg_prior),
     }
 
 
 def estimate_lambdas(home_recent, away_recent, league_avg_goals,
                      home_adv_factor=1.12, injury=None, decay=0.9,
                      home_tier=None, away_tier=None, shrink_prior=3.0,
-                     baseline_mode='venue_normalized'):
+                     baseline_mode='venue_normalized',
+                     home_xg_prior=None, away_xg_prior=None):
+    """home_xg_prior / away_xg_prior: optional (attack, defense) tuples from
+    engine.jingcai_xg_prior.get_xg_prior(). When provided, shrinkage uses the
+    xG-informed prior instead of naive 1.0, allowing strong/weak teams to
+    retain differentiated lambdas even with sparse form data."""
     if baseline_mode not in ('legacy_v12', 'venue_normalized'):
         raise ValueError('未知竞彩进球基线模式')
     normalized = baseline_mode == 'venue_normalized'
@@ -86,8 +97,10 @@ def estimate_lambdas(home_recent, away_recent, league_avg_goals,
     home_base, away_base = venue_baselines(league_avg_goals, home_adv_factor)
     if not normalized:
         home_base, away_base = league_avg_goals / 2 * home_adv_factor, league_avg_goals / 2
-    ah, dh, h = _attack_defense(home_recent, league_avg_goals, 1.12, 'H', decay, shrink_prior, normalized)
-    aa, da, a = _attack_defense(away_recent, league_avg_goals, 1.12, 'A', decay, shrink_prior, normalized)
+    ah, dh, h = _attack_defense(home_recent, league_avg_goals, 1.12, 'H', decay, shrink_prior, normalized,
+                                xg_prior=home_xg_prior)
+    aa, da, a = _attack_defense(away_recent, league_avg_goals, 1.12, 'A', decay, shrink_prior, normalized,
+                                xg_prior=away_xg_prior)
     tier = None
     if home_tier is not None and away_tier is not None and home_tier != away_tier:
         gap = home_tier - away_tier
@@ -109,6 +122,7 @@ def estimate_lambdas(home_recent, away_recent, league_avg_goals,
         'neutral_or_unknown_sample': {'home': h['neutral_or_unknown_n'], 'away': a['neutral_or_unknown_n']},
         'decay': decay, 'shrink_prior': shrink_prior,
         'degraded': h['n'] < 5 or a['n'] < 5,
+        'xg_prior_home': bool(home_xg_prior), 'xg_prior_away': bool(away_xg_prior),
         'strength_revision': REVISION,
         'baseline_mode': baseline_mode,
         'league_total_baseline': league_avg_goals,

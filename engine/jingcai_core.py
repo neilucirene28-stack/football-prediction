@@ -9,6 +9,17 @@ import json
 from .elo import win_probability_from_elo
 from .jingcai_strengths import estimate_lambdas, team_tier, REVISION as STRENGTH_REVISION
 from .jingcai_strength_evidence import resolve_league_baseline, REVISION as STRENGTH_EVIDENCE_REVISION
+from .jingcai_xg_prior import get_xg_prior
+
+
+def _xg_prior_for(team_name):
+    """Look up Understat xG prior for a team; returns None if unavailable."""
+    if not team_name:
+        return None
+    try:
+        return get_xg_prior(team_name)
+    except Exception:
+        return None
 from .poisson import (
     score_matrix,
     match_probs,
@@ -327,6 +338,8 @@ def predict(
         away_tier=at_,
         shrink_prior=eff_shrink,
         baseline_mode=cfg['strength_baseline_mode'],
+        home_xg_prior=_xg_prior_for(home),
+        away_xg_prior=_xg_prior_for(away),
     )
     lam_notes["home_adv_factor"] = 1.0 if neutral else 1.12
     lam_notes["neutral_site"] = neutral
