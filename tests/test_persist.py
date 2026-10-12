@@ -23,7 +23,7 @@ def sample_payload(**kw):
     p = {
         "home": "土耳其", "away": "意大利", "competition": "欧国联",
         "kickoff_at": _future_ts(days=2),
-        "snapshot_at": _future_ts(days=1),
+        "snapshot_at": _future_ts(seconds=-1),
         "league_avg_goals": 2.70,
         "home_recent": _mk(2, 1, "H"),
         "away_recent": _mk(1, 1, "A"),
@@ -56,7 +56,7 @@ def test_predict_result_carries_model_version():
 
 
 def test_build_prediction_row_fields():
-    p, r = sample_payload(), predict(sample_payload())
+    p = sample_payload(); r = predict(p)
     row = build_prediction_row(42, p, r, deterministic_day=date(2026, 9, 30))
     assert row["match_id"] == 42
     assert row["model_version"] == r["model_version"]
@@ -76,7 +76,7 @@ def test_build_prediction_row_fields():
 
 
 def test_build_prediction_row_random_without_day():
-    p, r = sample_payload(), predict(sample_payload())
+    p = sample_payload(); r = predict(p)
     a = build_prediction_row(1, p, r)["prediction_id"]
     b = build_prediction_row(1, p, r)["prediction_id"]
     assert a != b
@@ -92,8 +92,8 @@ def _mock_conn(fetchone_result=None):
 
 
 def test_save_prediction_idempotent_sql():
-    p, r = sample_payload(), predict(sample_payload())
-    conn, cur = _mock_conn()
+    p = sample_payload(); r = predict(p)
+    conn, cur = _mock_conn(fetchone_result=("inserted",))
     pid = save_prediction(conn, 7, p, r, deterministic_day=date(2026, 9, 30))
     sql = cur.execute.call_args[0][0]
     assert "ON CONFLICT (prediction_id) DO NOTHING" in sql

@@ -10,7 +10,7 @@ from datetime import datetime, timezone, timedelta
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2/collector/sources")
 
-from engine.predictor import predict
+from engine.jingcai_predictor import predict
 
 BJ = timezone(timedelta(hours=8))
 

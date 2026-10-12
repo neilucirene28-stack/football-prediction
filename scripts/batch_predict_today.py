@@ -5,12 +5,15 @@
 不使用任何主观伤停系数。已开赛的比赛引擎会自动拒绝。
 """
 import sys, json, time, os
-from datetime import date
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from collector.collector.sources.titan007 import Titan007Source
-from engine.predictor import predict
-from engine.poisson import handicap_1x2, score_matrix
+from engine.jingcai_predictor import predict
+from engine.jingcai_batch import with_official_handicap, handicap_output
+from engine.jingcai_calibration import load_form_only_config
 from api.api.persist import save_prediction
 
 try:
@@ -19,11 +22,7 @@ except ImportError:
     psycopg = None
 
 # form-only 校准参数（无市场信号时启用；有市场时不用，避免过度收缩）
-try:
-    _cal = json.load(open("/home/hatch/workspace/football-prediction-v2/engine/calibration.json"))
-    _PLATT_FORM_ONLY = {k: tuple(v) for k, v in _cal["form_only"].items()}
-except Exception:
-    _PLATT_FORM_ONLY = None
+_CALIBRATION_CONFIG, _CALIBRATION_SELECTION = load_form_only_config()
 
 def _db_conn():
     """best-effort：无 DB 时返回 None，预测照常输出到 /tmp。"""
@@ -33,7 +32,7 @@ def _db_conn():
     try:
         return psycopg.connect(url)
     except Exception as e:
-        print(f"DB connect failed (continue without persistence): {e}", flush=True)
+        print(f"DB connect failed (continue without persistence): {type(e).__name__}", flush=True)
         return None
 
 
@@ -52,12 +51,12 @@ def _upsert_match(cur, m):
     return cur.fetchone()[0]
 
 
-def main():
-    with open("/tmp/today_matches.json") as f:
+def main(input_path="/tmp/today_matches.json", output_path="/tmp/today_predictions.json"):
+    with open(input_path) as f:
         matches = json.load(f)
     print(f"matches to predict: {len(matches)}", flush=True)
     conn = _db_conn()
-    today = date.today()
+    today = datetime.now(ZoneInfo("Asia/Shanghai")).date()
     if conn:
         print("DB persistence enabled (self-learning loop)", flush=True)
     src = Titan007Source(request_delay=0.5)
@@ -70,31 +69,33 @@ def main():
             if not m:
                 print(f"[{i}] {mid} build failed", flush=True); continue
             p = dict(m); p["home"] = m["home_team"]; p["away"] = m["away_team"]
-            # 无市场信号时启用 form-only Platt 校准
-            cfg = {"platt": _PLATT_FORM_ONLY} if (
-                _PLATT_FORM_ONLY and not p.get("odds")) else None
+            p = with_official_handicap(p, mm)
+            if "cards" in mm:
+                if p.get("cards") and p["cards"] != mm["cards"]:
+                    raise ValueError("比赛列表与采集快照的牌数输入冲突")
+                p["cards"] = mm["cards"]
+            # 仅带版本和时序证据的校准候选才能提交给预测器
+            cfg = _CALIBRATION_CONFIG if not p.get("odds") else None
             res = predict(p, cfg)
             if res.get("status") == "insufficient_data":
                 print(f"[{i}] {m['home_team']} vs {m['away_team']} 数据不足", flush=True); continue
             # 自学习回路：持久化完整预测记录（含 input 快照 + model_version），幂等
+            persistence = {"status": "not_saved", "reason": "database_unavailable"}
             if conn:
                 try:
                     with conn.cursor() as cur:
-                        mid = _upsert_match(cur, m)
-                    save_prediction(conn, mid, payload=p, result=res,
-                                    deterministic_day=today)
+                        db_match_id = _upsert_match(cur, m)
+                    prediction_id = save_prediction(conn, db_match_id, payload=p, result=res,
+                                                    deterministic_day=today)
+                    persistence = {"status": "stored_or_existing", "prediction_id": prediction_id}
                 except Exception as e:
-                    print(f"[{i}] persist ERROR {type(e).__name__}: {e}", flush=True)
+                    conn.rollback()
+                    persistence = {"status": "not_saved", "reason": "write_failed",
+                                   "error_type": type(e).__name__}
+                    print(f"[{i}] persist ERROR {type(e).__name__}", flush=True)
+            res["persistence"] = persistence
             d = res["derivatives"]
-            # 让球胜平负：按整数让球线算（取市场亚盘就近整数）
-            h1x2 = None
-            ah = (res.get("derivatives", {}).get("asian") or {}).get("handicap")
-            if ah is not None:
-                line = int(round(ah))
-                mx = score_matrix(res["lambda_home"], res["lambda_away"])
-                h, dr, a = handicap_1x2(mx, line)
-                h1x2 = {"line": line, "p_home": round(h, 4),
-                        "p_draw": round(dr, 4), "p_away": round(a, 4)}
+            h1x2 = handicap_output(res)
             out = {
                 "kickoff": m["kickoff_at"], "competition": m["competition"],
                 "home": m["home_team"], "away": m["away_team"],
@@ -113,7 +114,11 @@ def main():
                 "main_goal_interval": d["main_goal_interval"],
                 "total_goals": d["total_goals"],
                 "btts": d["btts"],
-                "issues": res.get("issues"),
+                "cards": d["cards"],
+                "issues": res.get("consistency_issues"),
+                "model_version": res["model_version"],
+                "calibration_selection": _CALIBRATION_SELECTION,
+                "input": p, "prediction": res,
             }
             results.append(out)
             print(f"[{i}] {m['kickoff_at'][11:16]} {m['home_team']} vs {m['away_team']} "
@@ -122,10 +127,11 @@ def main():
         except Exception as e:
             print(f"[{i}] {mid} ERROR {type(e).__name__}: {e}", flush=True)
         time.sleep(0.3)
-    with open("/tmp/today_predictions.json", "w") as f:
+    with open(output_path, "w") as f:
         json.dump(results, f, ensure_ascii=False, indent=1)
     if conn:
         conn.close()
-    print(f"DONE: {len(results)} predictions -> /tmp/today_predictions.json", flush=True)
+    print(f"DONE: {len(results)} predictions -> {output_path}", flush=True)
 
-main()
+if __name__ == "__main__":
+    main()

@@ -690,42 +690,40 @@ except Exception as e:
     results["sources"]["openfootball"] = {"ok": False, "error": str(e)[:200]}
     print(f"[FAIL] openfootball: {e}")
 
-# 19. ESPN summary: 单场阵容/事件/技术统计（2026-10-09 接入，espn.py扩展）
-#     对当日board在售场次拉阵容（赛前约1小时放出，未公布返回空）
-#     2026-10-10 修：按实际联赛映射 ESPN slug，不再硬编码 eng.1；
-#     无映射的联赛跳过并记录（此前非英超场次全部404）。
+# 19. 竞彩专用ESPN情报：只使用经过显式绑定的ESPN原生ID，禁止澳客mid。
 try:
-    from espn import get_summary, LEAGUE_CODES as _ESPN_LC
-    from okooo import get_board_map_with_league as _ok_bm2
-    _bm = _ok_bm2("jingcai")
-    es_out, es_n, es_skip = {}, 0, []
-    for (home, away), (_mid, _lg) in list(_bm.items())[:30]:  # 上限30场
-        _code = _ESPN_LC.get(_lg) if _lg else None
-        if not _code:
-            es_skip.append(f"{home}vs{away}({_lg or '未知联赛'})")
-            continue
+    sys.path.insert(0, BASE_DIR)
+    from collector.jingcai_intelligence import collect as _jc_collect
+    from engine.jingcai_inputs import aware_datetime as _jc_time
+    from pathlib import Path as _JCPath
+    _bindings_path = _JCPath(BASE_DIR) / 'data' / 'jingcai_source_bindings.json'
+    _bindings = json.loads(_bindings_path.read_text()) if _bindings_path.exists() else []
+    if not isinstance(_bindings, list):
+        raise ValueError('竞彩来源映射须为数组')
+    es_out, es_skip = [], []
+    _run = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+    for _i, _entry in enumerate(_bindings[:30]):
+        if _entry.get('project') != 'jingcai' or _entry.get('source') != 'espn':
+            es_skip.append({'index': _i, 'reason': 'not_jingcai_espn_binding'}); continue
+        if _jc_time(_entry['match']['kickoff_at'], 'kickoff_at') <= datetime.now(timezone.utc):
+            es_skip.append({'index': _i, 'reason': 'kickoff_already_passed'}); continue
         try:
-            sm = get_summary(_mid, _code)
-            if sm.get("lineups", {}).get("home"):
-                es_n += 1
-            es_out[f"{home}vs{away}"] = {
-                "lineups": sm.get("lineups"),
-                "events": sm.get("events"),
-                "stats": sm.get("stats"),
-            }
-        except Exception as e:
-            print(f"  - ESPN summary {home}vs{away}失败: {e}")
-    save("espn_lineups", es_out)
-    results["sources"]["espn_summary"] = {
-        "ok": True, "matches": len(es_out), "with_lineups": es_n,
-        "skipped_unmapped": es_skip,
-        "note": "赛前约1小时放出阵容，未公布返回空列表；无ESPN映射的联赛跳过",
+            _packet = _jc_collect('espn', _entry['binding'], _entry['match'],
+                _JCPath(day_dir) / 'jingcai_intelligence' / _run / str(_i))
+            es_out.append(_packet)
+        except (ValueError, KeyError, TypeError) as _exc:
+            es_skip.append({'index': _i, 'reason': type(_exc).__name__})
+    save('espn_lineups', {'scope': 'jingcai_only', 'packets': es_out,
+                         'skipped': es_skip, 'automatic_prediction_import': False})
+    results['sources']['espn_summary'] = {
+        'ok': bool(es_out), 'matches': len(es_out), 'skipped': es_skip,
+        'status': 'collected' if es_out else 'missing_explicit_bindings_or_no_prematch_data',
+        'note': '来源原件和实际采集时间已归档；须经竞彩导入校验，禁止澳客mid作为ESPN event ID',
     }
-    print(f"[OK] ESPN summary: {len(es_out)}场，{es_n}场有阵容"
-          + (f"，跳过{len(es_skip)}场无映射" if es_skip else ""))
+    print(f'[竞彩] ESPN原生映射采集: {len(es_out)}场，跳过{len(es_skip)}条')
 except Exception as e:
-    results["sources"]["espn_summary"] = {"ok": False, "error": str(e)[:200]}
-    print(f"[FAIL] ESPN summary: {e}")
+    results['sources']['espn_summary'] = {'ok': False, 'error_type': type(e).__name__}
+    print(f'[FAIL] 竞彩ESPN summary: {type(e).__name__}')
 
 # 保存汇总
 save("_summary", results)

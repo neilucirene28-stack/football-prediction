@@ -14,7 +14,7 @@ TZ = timezone(timedelta(hours=8))
 
 sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
 sys.path.insert(0, "/tmp")
-from engine.predictor import predict, PredictError
+from engine.jingcai_predictor import predict, PredictError
 from engine.elo import update_ratings
 from cn2en_jc import CN2EN
 

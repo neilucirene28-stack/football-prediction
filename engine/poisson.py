@@ -211,7 +211,8 @@ def _outcome(h: int, a: int) -> str:
 def half_full_1x2(lambda_home: float, lambda_away: float,
                   ht_factor: float = 0.44,
                   rho: float = 0.0,
-                  ft_matrix=None) -> dict:
+                  ft_matrix=None, strict_ft_grid: bool = False,
+                  strict_ft_support: bool = False) -> dict:
     """半全场胜平负：9 种组合概率（竞彩官方玩法）。
 
     推导：半场比分矩阵 M_ht（λ×ht_factor，Dixon-Coles 修正，与 half_time_probs
@@ -227,12 +228,21 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
         长尾质量<1e-5，边际误差可忽略。
         为None时保持原行为（仅测试/兼容用途）。
 
+    strict_ft_grid / strict_ft_support: 网格外权重为0，严格采用目标矩阵的支持集。
+        （竞彩v6/v12用前者，北单v2.10 R2用后者，语义相同，任一True即生效。）
+        半场模板网格同时扩至目标矩阵范围，保证目标每格均可重加权。
+        默认False保留旧调用的行为。
+
     返回 {"胜胜": p, "胜平": p, "胜负": p,
            "平胜": p, "平平": p, "平负": p,
            "负胜": p, "负平": p, "负负": p}，加总 = 1。
     """
+    strict = bool(strict_ft_grid or strict_ft_support)
+    if strict and ft_matrix is None:
+        raise ValueError("strict_ft_grid/strict_ft_support requires ft_matrix")
+    ht_max = max(10, len(ft_matrix) - 1) if strict else 10
     m_ht = score_matrix(lambda_home * ht_factor, lambda_away * ht_factor,
-                        rho=rho)
+                        rho=rho, max_goals=ht_max)
     lam_h2 = lambda_home * (1.0 - ht_factor)
     lam_a2 = lambda_away * (1.0 - ht_factor)
     # 下半场进球截断：归一化后尾部可忽略
@@ -267,8 +277,11 @@ def half_full_1x2(lambda_home: float, lambda_away: float,
 
     def _w(fi, fj):
         # P0 Bug4: IPF重加权；网格外长尾权重=1
-        if ft_matrix is None or fi >= n_ft or fj >= n_ft:
+        if ft_matrix is None:
             return 1.0
+        if fi >= n_ft or fj >= n_ft:
+            # 北单完整六玩法以同一个有限比分矩阵为支持域。
+            return 0.0 if strict else 1.0
         pj = ft_j.get((fi, fj), 0.0)
         if pj <= 0:
             return 0.0

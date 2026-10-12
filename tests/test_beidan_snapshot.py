@@ -73,7 +73,7 @@ def _mock_match_data(**kw):
         "league": "测试联赛",
         "home": "主队A",
         "away": "客队B",
-        "kickoff": "2026-10-10T19:00:00+08:00",
+        "kickoff": (datetime.now(timezone.utc) + timedelta(days=2)).isoformat(),
         "generated_at": now,
         "available_at": {"espn": now},
     }
@@ -417,7 +417,7 @@ def test_integration_real_predict_write_snapshot(tmp_path, monkeypatch):
     now = datetime.now(timezone.utc).isoformat()
     payload = {
         "home": "阿森纳", "away": "切尔西",
-        "kickoff_at": "2026-10-10T19:00:00+08:00",
+        "kickoff_at": (datetime.now(timezone.utc) + timedelta(days=2)).isoformat(),
         "snapshot_at": now,
         "competition": "英超",
         "home_recent": [{"gf": 2, "ga": 1, "venue": "H"} for _ in range(10)],

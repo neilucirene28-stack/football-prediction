@@ -12,9 +12,10 @@ import sys
 import time
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 
-sys.path.insert(0, "/home/hatch/workspace/football-prediction-v2")
-from api.api.persist import save_settlement  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from api.api.jingcai_settlement import save_jingcai_settlement  # noqa: E402
 
 try:
     import psycopg
@@ -53,6 +54,8 @@ def pending_predictions(cur):
            JOIN matches m ON m.id = p.match_id
            LEFT JOIN settlements s ON s.prediction_id = p.prediction_id
            WHERE s.prediction_id IS NULL
+             AND p.payload->'result'->>'model'='jingcai'
+             AND COALESCE(p.payload->'result'->>'project_scope','jingcai')='jingcai'
              AND p.kickoff_at < now() - interval '2 hours'
              AND m.external_id LIKE 'titan-%%'
            ORDER BY p.kickoff_at""")
@@ -78,7 +81,7 @@ def main() -> int:
                 skipped += 1
                 continue
             hg, ag, ht_hg, ht_ag = score
-            if save_settlement(conn, str(prediction_id), hg, ag,
+            if save_jingcai_settlement(conn, str(prediction_id), hg, ag,
                                ht_home=ht_hg, ht_away=ht_ag, source="titan007"):
                 settled += 1
             else:

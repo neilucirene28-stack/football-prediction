@@ -31,9 +31,18 @@ from .montecarlo import maybe_simulate
 from .cards import predict_cards
 from .market_flow import (flow_features, apply_volume_weight,
                           movement_features)
-from .letdraw import (apply_letdraw_to_matrix, letdraw_guard)
-from .beidan_calibration import apply_beidan_calibration
+from .letdraw import (apply_letdraw_to_matrix, letdraw_guard,
+                      TIER_PRIOR, LEAGUE_PRIOR_1)
+from .jingcai_handicap import (integer_handicap, handicap_view, matrix_summary,
+                               PIPELINE_REVISION, LETDRAW_FIT_BEFORE)
+from .beidan_calibration import apply_beidan_calibration, beidan_calibration_info
 from .beidan_upset import upset_risk as beidan_upset_risk, risk_tier as beidan_risk_tier
+from .jingcai_inputs import validate_config, validate_payload, aware_datetime
+from .jingcai_grid import score_grid, validate_dc, TAIL_TOLERANCE
+from .jingcai_ledger import input_digest
+from .jingcai_calibration import validate_provenance
+from .jingcai_cards import predict_cards as predict_jingcai_cards, CARDS_REVISION, load_context as load_jingcai_cards_context
+from .jingcai_montecarlo import simulate_matrix
 
 _CARDS_ALIAS = None
 
@@ -73,8 +82,7 @@ def _cards_block(payload):
                          derby_mult=1.1 if spec.get("derby") else 1.0)
 
 
-class PredictError(ValueError):
-    pass
+from .errors import PredictError
 
 
 # 引擎大版本：引擎代码逻辑变化时手动递增（参数变化由下方哈希覆盖）。
@@ -133,19 +141,19 @@ def _goal_interval_probs(matrix) -> dict:
     }
 
 
-def consistency_check(p_final, top3, asian, ou) -> list[str]:
+def consistency_check(p_final, top3, asian, ou, *, check_modal_score=True) -> list[str]:
     """十七节：所有市场必须方向一致，否则报告冲突。"""
     issues = []
     fav = max(range(3), key=lambda i: p_final[i])
     w0 = _score_winner(top3[0]["score"])
-    if w0 != fav and p_final[fav] - p_final[w0] > 0.08:
+    if check_modal_score and w0 != fav and p_final[fav] - p_final[w0] > 0.08:
         issues.append(
             f"首选比分 {top3[0]['score']} 的胜负方向与 1X2 首选不一致")
     if asian and fav == 0 and asian["win"] < 0.35:
         issues.append("1X2 看好主胜但亚盘赢盘概率过低，方向存疑")
     if asian and fav == 2 and asian["lose"] < 0.35:
         issues.append("1X2 看好客胜但亚盘输盘概率过低，方向存疑")
-    if ou and ou["over"] > 0.6 and top3[0]["prob"] > 0 and \
+    if check_modal_score and ou and ou["over"] > 0.6 and top3[0]["prob"] > 0 and \
             sum(int(x) for x in top3[0]["score"].split("-")) <= 1:
         issues.append("大小球倾向大球但首选比分为小比分，进球模型冲突")
     return issues
@@ -197,6 +205,8 @@ def predict(payload: dict, config: dict | None = None,
     """
     if model not in ("jingcai", "beidan"):
         raise PredictError(f"未知模型: {model}")
+    if model == "jingcai" and config is not None and not isinstance(config, dict):
+        raise PredictError("config 必须为对象")
     cfg = {"rho": -0.13, "kelly_fraction": 0.25, "model_edge": 0.0,
            "decay": 0.90, "ht_factor": 0.44, "mc_n": 20000,
            "mc_min_score": 60, "platt": None,
@@ -212,21 +222,85 @@ def predict(payload: dict, config: dict | None = None,
            # 自动触发背离警告并下调信心一档。0 = 关闭门控
            "divergence_gate": 0.15}
     cfg.update(config or {})
+    cards_context = None
+    if model == "jingcai":
+        try:
+            validate_config(cfg)
+        except ValueError as e:
+            raise PredictError(str(e)) from e
+        # 参数哈希也覆盖实际固定先验与竞彩链路修订；北单版本不变。
+        cfg["jingcai_pipeline_revision"] = PIPELINE_REVISION
+        cfg["jingcai_cards_revision"] = CARDS_REVISION
+        cards_context = load_jingcai_cards_context()
+        cfg["jingcai_cards_data_profile"] = cards_context["profile"]
+        cfg.setdefault("mc_seed", 0)
+        if isinstance(cfg["mc_seed"], bool) or not isinstance(cfg["mc_seed"], int):
+            raise PredictError("竞彩mc_seed必须为整数")
+        cfg["letdraw_prior_profile"] = {
+            "fit_before": LETDRAW_FIT_BEFORE,
+            "tier": TIER_PRIOR, "league": LEAGUE_PRIOR_1}
+    base_version = None
+    if model == "jingcai":
+        base_cfg = {k: v for k, v in cfg.items() if k != "platt_provenance"}
+        base_cfg["platt"] = None
+        base_version = model_version(base_cfg)
+    if model == "beidan":
+        cfg.setdefault("beidan_letdraw_strength", 0.0)
     version = model_version(cfg)
 
     # ---- 1. 输入校验与防泄漏 ----
+    if model == "jingcai" and not isinstance(payload, dict):
+        raise PredictError("payload 必须为对象")
+    original_input_digest = input_digest(payload) if model == "jingcai" else None
     try:
-        kickoff = _parse_dt(payload["kickoff_at"])
-        snapshot = _parse_dt(payload["snapshot_at"])
+        parse_time = aware_datetime if model == "jingcai" else lambda value, path: _parse_dt(value)
+        kickoff = parse_time(payload["kickoff_at"], "kickoff_at")
+        snapshot = parse_time(payload["snapshot_at"], "snapshot_at")
     except KeyError as e:
         raise PredictError(f"缺少必填时间字段: {e}")
-    now = asof or datetime.now().astimezone()
+    except ValueError as e:
+        raise PredictError(str(e)) from e
+    if model == "jingcai":
+        now = asof if asof is not None else datetime.now().astimezone()
+    else:
+        now = asof or datetime.now().astimezone()
+    if model == "jingcai" and (not isinstance(now, datetime) or now.tzinfo is None
+                                or now.utcoffset() is None):
+        raise PredictError("asof 必须为带时区的datetime")
     if kickoff <= now:
         raise PredictError("比赛已开赛或为历史比赛：拒绝赛后预测")
     if snapshot > kickoff:
         raise PredictError("快照晚于开球：存在未来泄漏")
+    if model == "jingcai" and snapshot > now:
+        raise PredictError("快照晚于预测截止时刻：存在未来泄漏")
+    input_audit = None
+    if model == "jingcai":
+        try:
+            payload, input_audit = validate_payload(payload, snapshot)
+        except ValueError as e:
+            raise PredictError(str(e)) from e
+    calibration_audit = {"status": "not_requested"}
+    if model == "jingcai" and cfg.get("platt"):
+        try:
+            calibration_audit = validate_provenance(cfg.get("platt_provenance"),
+                base_version=base_version, asof=now, has_market=bool(payload.get("odds")),
+                has_elo=bool(payload.get("elo")))
+        except ValueError as e:
+            raise PredictError(str(e)) from e
+    handicap = payload.get("handicap_line")
+    if model == "jingcai" and handicap is not None:
+        try:
+            handicap = integer_handicap(handicap)
+        except ValueError as e:
+            raise PredictError(str(e)) from e
+        if (handicap != 0 and cfg.get("letdraw_strength", 0.5) > 0
+                and now < _parse_dt(LETDRAW_FIT_BEFORE)):
+            raise PredictError("固定让平先验训练于2026-09，不能用于训练期内回测；"
+                               "请关闭letdraw_strength或使用另行验证的时序校准")
     home, away = payload.get("home"), payload.get("away")
-    if not home or not away or home == away:
+    if (not home or not away or home == away or
+            (model == "jingcai" and (not isinstance(home, str) or not isinstance(away, str)
+                                     or not home.strip() or not away.strip()))):
         raise PredictError("主客队无效")
 
     home_recent = payload.get("home_recent") or []
@@ -247,7 +321,8 @@ def predict(payload: dict, config: dict | None = None,
     if grade == "D":
         return {"status": "insufficient_data", "grade": grade,
                 "completeness": score,
-                "reason": "数据完整度不足（D级），拒绝给出概率预测"}
+                "reason": "数据完整度不足（D级），拒绝给出概率预测",
+                **({"input_audit": input_audit} if model == "jingcai" else {})}
 
     # ---- 3. 进球期望（时间衰减 + 对手修正 + 联赛级别修正） ----
     # 中立场地（如杯赛决赛/锦标赛）：主队无主场加成
@@ -277,7 +352,9 @@ def predict(payload: dict, config: dict | None = None,
     h2h = payload.get("h2h") or []
     if h2h:
         # h2h 以主队视角记录：gf=主队进球。近3场净胜球 → λ 微调（±3%封顶）
-        gd = sum(r["gf"] - r["ga"] for r in h2h[-3:])
+        # 采集器按最新在前提供交锋；竞彩校验入口有日期时也按此顺序排序。
+        recent_h2h = h2h[:3] if model == "jingcai" else h2h[-3:]
+        gd = sum(r["gf"] - r["ga"] for r in recent_h2h)
         adj = max(min(gd * 0.01, 0.03), -0.03)
         lam_h *= (1 + adj)
         lam_a *= (1 - adj)
@@ -293,7 +370,14 @@ def predict(payload: dict, config: dict | None = None,
             "cap": weak_cap, "scale": round(scale, 4)}
 
     # ---- 4. 比分矩阵 → 模型信号 ----
-    matrix = score_matrix(lam_h, lam_a, rho=cfg["rho"])
+    max_goals, tail_mass = 10, None
+    if model == "jingcai":
+        try:
+            validate_dc(lam_h, lam_a, cfg["rho"])
+            max_goals, tail_mass = score_grid(lam_h, lam_a)
+        except ValueError as e:
+            raise PredictError(str(e)) from e
+    matrix = score_matrix(lam_h, lam_a, rho=cfg["rho"], max_goals=max_goals)
     p_model = match_probs(matrix)
 
     # ---- 5. Elo 独立信号 ----
@@ -369,23 +453,52 @@ def predict(payload: dict, config: dict | None = None,
     # 半场子模型（half_time_probs / half_full_1x2）是独立的 HT 口径，
     # 其内部 1X2 与半场比分本就自洽，无校准目标，不做 IPF。
     matrix_cal = ipf_to_marginals(matrix, p_final)
+    matrix_pre_letdraw = matrix_cal
+    matrix_ld = None
+    if model == "jingcai" and handicap is not None:
+        # 校准只应用一次，随后比分、进球、亚盘、半全场和让球均从它聚合。
+        matrix_ld = apply_letdraw_to_matrix(
+            matrix_pre_letdraw, handicap, league=competition,
+            strength=cfg.get("letdraw_strength", 0.5))
+        matrix_cal = matrix_ld
 
     # ---- 8. 价值检测 ----
     value = []
+    probability_differences = []
     if o and market:
         names = ("home", "draw", "away")
         for idx, (name, p, odd) in enumerate(
                 zip(names, (p_home, p_draw, p_away), o)):
-            edge = round(p - market["implied"][idx], 4)
+            if model == "jingcai":
+                p = p_final[idx]
+                implied = p_market[idx]
+            else:
+                implied = market["implied"][idx]
+            edge = round(p - implied, 4)
             kelly = round(kelly_fraction(p, odd, cfg["kelly_fraction"]), 4)
             if edge > 0.05:
-                value.append({"outcome": name, "edge": edge, "kelly": kelly})
+                item = {"outcome": name, "edge": edge, "kelly": kelly}
+                if model == "jingcai":
+                    ev = p * odd - 1.0
+                    item.update({"model_probability": p,
+                                 "market_probability": implied,
+                                 "offered_odds": odd,
+                                 "fixed_odds_expected_net": ev,
+                                 "validation_status": "unvalidated"})
+                    probability_differences.append(dict(item))
+                    if ev <= 0:
+                        continue
+                value.append(item)
 
     # ---- 9. 衍生市场（校准后矩阵；B深修） ----
     # 全场衍生项全部从 matrix_cal 计算，与校准后 1X2 自洽。
     # raw 矩阵的值保留为 *_raw 对比字段，便于回测诊断。
     ou_line = payload.get("ou_line")
     fair = fair_handicap(matrix_cal)
+    half_full = half_full_1x2(lam_h, lam_a, ht_factor=cfg["ht_factor"],
+                             rho=cfg["rho"], ft_matrix=matrix_cal,
+                             strict_ft_grid=model == "jingcai",
+                             strict_ft_support=model == "beidan")
     deriv = {
         "btts": round(btts_prob(matrix_cal), 4),
         "over_under": None,
@@ -406,26 +519,40 @@ def predict(payload: dict, config: dict | None = None,
         "expected_goals_raw": round(expected_total_goals(matrix), 2),
         "main_goal_interval": None,
         "fair_handicap": fair,
-        "cards": _cards_block(payload),
+        "cards": None if model == "jingcai" else _cards_block(payload),
         "half_time": half_time_probs(lam_h, lam_a, ht_factor=cfg["ht_factor"],
                                      rho=cfg["rho"]),
         # 输出格式升级（对齐竞彩官方五大玩法）：半全场 9 种组合 + 总进球精确分布。
         # 纯输出项，不改变任何概率逻辑，ENGINE_VERSION 保持 2.5。
         # P0 Bug4：传入IPF后矩阵，使半全场全场边际与最终胜平负一致
         # 未舍入全精度存 half_full_1x2_full（供北单快照使用）
-        "half_full_1x2": {k: round(v, 4) for k, v in
-                          half_full_1x2(lam_h, lam_a,
-                                        ht_factor=cfg["ht_factor"],
-                                        rho=cfg["rho"],
-                                        ft_matrix=matrix_cal).items()},
-        "half_full_1x2_full": half_full_1x2(
-            lam_h, lam_a, ht_factor=cfg["ht_factor"],
-            rho=cfg["rho"], ft_matrix=matrix_cal),
+        "half_full_1x2": {k: round(v, 4) for k, v in half_full.items()},
+        "half_full_1x2_full": half_full,
         "total_goals_exact": {str(k): round(v, 4) for k, v in
                               total_goals_exact(matrix_cal).items()},
     }
     interval, interval_p = main_goal_interval(matrix_cal)
+    if model == "jingcai":
+        deriv["btts_full"] = btts_prob(matrix_cal)
+        deriv["expected_goals_full"] = expected_total_goals(matrix_cal)
+        deriv["total_goals_exact_full"] = {str(k): v for k, v in total_goals_exact(matrix_cal).items()}
+        names=("home","draw","away")
+        ht_probs=[sum(v for label,v in half_full.items() if label[0]==symbol)
+                  for symbol in ("胜","平","负")]
+        deriv["half_time_full"] = dict(zip(("home", "draw", "away"), ht_probs))
+        deriv["half_time_raw"] = deriv["half_time"]
+        deriv["half_time"] = {"ht_factor":cfg["ht_factor"],
+            **{f"p_{name}":round(v,4) for name,v in zip(names,ht_probs)},
+            "probability_source":"jingcai_half_full_joint_distribution",
+            "raw_model_top_scores":deriv["half_time_raw"]["top_scores"]}
+        try:
+            deriv["cards"] = predict_jingcai_cards(payload, snapshot, context=cards_context)
+        except (ValueError, TypeError, KeyError) as e:
+            raise PredictError(f"竞彩牌数输入无效：{e}") from e
     deriv["main_goal_interval"] = {"label": interval, "prob": interval_p}
+    if model == "beidan":
+        deriv["total_goals"] = dict(deriv["total_goals_exact"])
+
     if ou_line is not None:
         over, under = over_under_prob(matrix_cal, float(ou_line))
         deriv["over_under"] = {"line": ou_line, "over": round(over, 4),
@@ -448,25 +575,26 @@ def predict(payload: dict, config: dict | None = None,
                  "home_water": asian.get("home_water")},
                 p_home)
             deriv["asian"]["movement"] = movement
-    handicap = payload.get("handicap_line")
     if handicap is not None:
+        if model == "beidan":
+            if isinstance(handicap, bool) or not isinstance(handicap, (int, float)) or not float(handicap).is_integer():
+                raise PredictError("北单让球必须是整数，禁止将半球截断")
         # 让球口径先从校准后矩阵算 raw 值
-        h, d, a = handicap_1x2(matrix_cal, int(handicap))
+        h, d, a = handicap_1x2(matrix_pre_letdraw, int(handicap))
         # v2.9：让平修正直接作用于矩阵（区域内重分配；见 engine/letdraw.py），
         # 修正后让球概率从矩阵聚合，P(让胜)+P(让平)≡P(主胜)天然成立。
         # GPT BD-1.0审计：事后投影只能保证≤，不能保证=（曾差1.85pp）。
-        matrix_ld = apply_letdraw_to_matrix(
-            matrix_cal, int(handicap), league=competition,
-            strength=cfg.get("letdraw_strength", 0.5))
+        if matrix_ld is None:
+            # 北单v2.10 R2：北单不继承竞彩letdraw先验强度，单独强度0.0；
+            # 竞彩沿用v12链路（matrix_ld已在上游设置，此处仅兜底）。
+            matrix_ld = apply_letdraw_to_matrix(
+                matrix_cal, int(handicap), league=competition,
+                strength=cfg.get("beidan_letdraw_strength", 0.0) if model == "beidan" else cfg.get("letdraw_strength", 0.5))
         h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
-        # 让平选择规则（2026-10-10用户指令）：P(让平)>=0.28时选让平，
-        # 否则按argmax。依据：历史回填P(让平)>=0.28时实际让平率42.9%，
-        # 模型低估14pp；不选则系统性漏掉该档。
-        if d2 >= 0.28:
-            _hcp_pick = "draw"
-        else:
-            _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
-                            key=lambda x: x[1])[0]
+        # 让平选择：竞彩v6与北单R2均恢复纯argmax
+        # （原0.28阈值误用了普通平局统计，回测证明有害，已废除）。
+        _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
+                        key=lambda x: x[1])[0]
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),
@@ -476,9 +604,27 @@ def predict(payload: dict, config: dict | None = None,
                                  "p_home_full": h2, "p_draw_full": d2,
                                  "p_away_full": a2,
                                  "pick": _hcp_pick,
-                                 "pick_rule": "draw>=0.28",
+                                 "pick_rule": "argmax",
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
+        if model == "jingcai":
+            deriv["handicap_1x2"]["risk_view"] = handicap_view((h2, d2, a2), handicap)
+            deriv["handicap_1x2"]["probability_source"] = "jingcai_final_score_matrix"
+            deriv["handicap_1x2"]["probability_trace"] = {
+                "rho": cfg["rho"], "strength": cfg.get("letdraw_strength", 0.5),
+                "max_goals": len(matrix)-1,
+                "poisson_tail_mass_before_normalization": tail_mass,
+                "poisson_tail_tolerance": TAIL_TOLERANCE,
+                "prior_fit_before": LETDRAW_FIT_BEFORE,
+                "poisson": list(handicap_1x2(score_matrix(lam_h, lam_a, rho=0,
+                                                          max_goals=max_goals), handicap)),
+                "dc": list(handicap_1x2(matrix, handicap)),
+                "ipf": [h, d, a], "final": [h2, d2, a2],
+                "matrix_before": matrix_summary(matrix_pre_letdraw),
+                "matrix_after": matrix_summary(matrix_cal),
+                "wdl_before": list(match_probs(matrix_pre_letdraw)),
+                "wdl_after": list(match_probs(matrix_cal)),
+            }
 
     # 冷门比分：第二可能结果中概率最高的比分
     order = sorted(range(3), key=lambda i: p_final[i], reverse=True)
@@ -492,15 +638,22 @@ def predict(payload: dict, config: dict | None = None,
     # ---- 10. 一致性检查 ----
     issues = consistency_check((p_home, p_draw, p_away),
                                deriv["top_scores"], deriv["asian"],
-                               deriv["over_under"])
+                               deriv["over_under"], check_modal_score=model != "jingcai")
 
     # ---- 11. 置信度与冷门风险 ----
     signals = [p for p in (p_model, p_market, p_elo) if p is not None]
     drift_n = (len(market["drift"]["signals"])
                if market and market.get("drift") else 0)
+    lineup_audit = None
+    has_confirmed_lineup = bool(payload.get("injury"))
+    if model == "jingcai":
+        from .jingcai_reporting import lineup_confirmation, score_explanation
+        lineup_audit = lineup_confirmation(input_audit)
+        has_confirmed_lineup = lineup_audit["both_confirmed"]
+        deriv["score_explanation"] = score_explanation(matrix_cal, p_final)
     conf_score = _confidence_score(
         score, signals, market["overround"] if market else 0.0,
-        bool(payload.get("injury")), issues, drift_signals=drift_n)
+        has_confirmed_lineup, issues, drift_signals=drift_n)
     confidence = {"S": "S", "A": "A", "B": "B", "C": "C"}[grade]
     if lam_notes.get("degraded") or issues or conf_score < 50:
         confidence = {"S": "A", "A": "B", "B": "C", "C": "C"}[confidence]
@@ -595,8 +748,12 @@ def predict(payload: dict, config: dict | None = None,
                   else "模型与市场严重背离"))
 
     # ---- 12. Monte Carlo（门控） ----
-    mc = maybe_simulate(lam_h, lam_a, completeness=score,
-                        min_score=cfg["mc_min_score"], n=cfg["mc_n"])
+    if model == "jingcai":
+        mc = simulate_matrix(matrix_cal, completeness=score,
+                             min_score=cfg["mc_min_score"], n=cfg["mc_n"], seed=cfg["mc_seed"])
+    else:
+        mc = maybe_simulate(lam_h, lam_a, completeness=score,
+                            min_score=cfg["mc_min_score"], n=cfg["mc_n"])
 
     probs = {"home": p_home, "draw": p_draw, "away": p_away}
     fav = max(probs, key=probs.get)
@@ -609,20 +766,22 @@ def predict(payload: dict, config: dict | None = None,
     # ---- 北单适配层（model='beidan' 时启用，与竞彩链路隔离） ----
     beidan_out = {}
     if model == "beidan":
+        beidan_out["calibration_info"] = beidan_calibration_info()
         # 北单专属Platt校准：对胜平负首选、让球首选、总进球首选分别校准
         p_top_sp = max(p_home, p_draw, p_away)
         beidan_out["calibrated_p_top_sp"] = round(apply_beidan_calibration("sp", p_top_sp), 4)
         # 让球首选概率（从 handicap_1x2 取）
         try:
             h1x2 = deriv.get("handicap_1x2", {})
-            p_top_rq = max(h1x2.get("p_home", 0), h1x2.get("p_draw", 0), h1x2.get("p_away", 0))
+            selected = h1x2.get("pick")
+            p_top_rq = h1x2.get("p_" + selected + "_full", h1x2.get("p_" + selected)) if selected in ("home", "draw", "away") else None
         except Exception:
-            p_top_rq = p_top_sp
-        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4)
+            p_top_rq = None
+        beidan_out["calibrated_p_top_rq"] = round(apply_beidan_calibration("rq", p_top_rq), 4) if p_top_rq is not None else None
         # 冷门分层：翻车风险分
         rq_val = 0
         try:
-            rq_val = int(payload.get("handicap", 0) or 0)
+            rq_val = int(payload.get("handicap_line", payload.get("handicap", 0)) or 0)
         except (ValueError, TypeError):
             rq_val = 0
         b_risk = beidan_upset_risk(
@@ -681,6 +840,70 @@ def predict(payload: dict, config: dict | None = None,
     # score_matrix_full 用未舍入 p_final 校准；快照必须用 p_final_full
     # 统一 wdl/p_1x2/半全场目标，避免舍入导致的不一致。
     if model == "beidan":
+        out["score_matrix_full"] = [list(row) for row in matrix_cal]
+        out["p_final_full"] = [float(p) for p in p_final]
+        out["lambda_home_full"] = float(lam_h)
+        out["lambda_away_full"] = float(lam_a)
+    elif model == "jingcai":
+        generated_at = datetime.now().astimezone()
+        if asof is None and generated_at >= kickoff:
+            raise PredictError("预测计算完成时比赛已开球，拒绝封存赛前预测")
+        out["prediction_generated_at"] = generated_at.isoformat()
+        out["feature_cutoff_at"] = payload["snapshot_at"]
+        out["evaluation_asof"] = now.isoformat()
+        out["evaluation_mode"] = "historical_replay" if asof is not None else "live"
+        out["pipeline_revision"] = PIPELINE_REVISION
+        out["input_sha256"] = original_input_digest
+        out["base_model_version"] = base_version
+        out["calibration_audit"] = calibration_audit
+        out["signals_full"] = {"model": list(p_model),
+                               "market": list(p_market) if p_market is not None else None,
+                               "elo": list(p_elo) if p_elo is not None else None}
+        out["input_audit"] = input_audit
+        out["confidence_audit"] = {
+            "kind": "heuristic_data_quality_score_not_hit_probability",
+            "lineup": lineup_audit,
+            "lineup_factor": 1.0 if has_confirmed_lineup else 0.60,
+            "grade_policy": "legacy_completeness_grade_with_risk_downgrades",
+            "qualification": "not empirically calibrated; confidence letter is not a score bucket",
+        }
+        out["notes"].append("置信评分衡量数据质量与信号一致性，不代表命中概率；字母等级沿用完整度和风险降档规则。")
+        out["team_intelligence"] = input_audit["team_intelligence"]
+        out["team_observations"] = input_audit["team_observations"]
+        if out["team_observations"]["status"] in ("ok", "partial"):
+            out["notes"].append("已校验竞彩多源情报并输出分来源特征；缺失保留未知，概率影响系数尚未启用。")
+        if out["team_intelligence"]["status"] in ("missing", "partial"):
+            out["notes"].append("球队/外援阵容情报缺失或仅覆盖一方，未作概率修正。")
+        else:
+            out["notes"].append("已记录球队/外援阵容情报；影响系数待验证，未作概率修正。")
+        hsp_state = input_audit["optional_signal_status"]["handicap_sp"]
+        hsp = payload.get("handicap_sp")
+        out["handicap_market_diagnostic"] = {"status": hsp_state["status"],
+                                              "probability_fusion": False}
+        if hsp:
+            try:
+                hmarket = shin_probs(tuple(hsp)); method = "shin"
+            except Exception:
+                hmarket = implied_proportional(tuple(hsp)); method = "proportional_fallback"
+            hcap = deriv.get("handicap_1x2")
+            out["handicap_market_diagnostic"].update(
+                probabilities_full=list(hmarket), method=method,
+                available_at=hsp_state.get("available_at"), source=hsp_state.get("source"),
+                provenance_status=hsp_state["provenance_status"],
+                line=hcap.get("line") if hcap else None,
+                divergence=_divergence_gate(
+                    [hcap[f"p_{k}_full"] for k in ("home", "draw", "away")], hmarket
+                ) if hcap and gate > 0 else None,
+                used_for_divergence_gate=bool(p_market is None and hcap and gate > 0),
+                diagnostic_only=not bool(p_market is None and hcap and gate > 0))
+        if hsp_state["status"] == "excluded":
+            out["notes"].append("让球赔率未使用：" + hsp_state["reason"])
+        elif hsp_state["status"] == "accepted" and not hsp_state.get("available_at"):
+            out["notes"].append("让球赔率缺可得时间；可作诊断，不能视为已核验赛前数据。")
+        out["score_grid"] = {"max_goals": max_goals,
+                             "poisson_tail_mass_before_normalization": tail_mass,
+                             "poisson_tail_tolerance": TAIL_TOLERANCE}
+        out["probability_difference_candidates"] = probability_differences
         out["score_matrix_full"] = [list(row) for row in matrix_cal]
         out["p_final_full"] = [float(p) for p in p_final]
         out["lambda_home_full"] = float(lam_h)
