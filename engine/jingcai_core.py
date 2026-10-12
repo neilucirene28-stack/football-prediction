@@ -829,6 +829,19 @@ def predict(
         + (["一致性检查发现冲突，信心已下调。"] if issues else [])
         + ([_divergence_note(divergence)] if divergence else []),
     }
+    # 外部推荐号影子对比：默认关闭；开启时只在 out 上附加一致/分歧记录，
+    # 不改动任何生产概率与参数。attach_shadow 内部永不抛异常。
+    if cfg.get("tipster_shadow") and cfg.get("tipster_picks_path"):
+        from .tipster_shadow import attach_shadow
+
+        attach_shadow(
+            out,
+            cfg["tipster_picks_path"],
+            home=home,
+            away=away,
+            tipster=cfg.get("tipster_shadow_tipster", "eaglepredict"),
+            log_path=cfg.get("tipster_shadow_log"),
+        )
     generated_at = datetime.now().astimezone()
     if asof is None and generated_at >= kickoff:
         raise PredictError("预测计算完成时比赛已开球，拒绝封存赛前预测")
