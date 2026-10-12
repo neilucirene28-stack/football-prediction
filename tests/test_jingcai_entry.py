@@ -51,8 +51,10 @@ def test_jingcai_entry_has_scoped_version_and_no_beidan_output(monkeypatch):
     assert "beidan" not in result
     assert result["model_version"]!=original["model_version"]
     assert result["base_model_version"]!=original["base_model_version"]
-    assert result["p_final_full"]==original["p_final_full"]
-    assert result["derivatives"]["handicap_1x2"]==original["derivatives"]["handicap_1x2"]
+    assert result['lambda_notes']['strength_revision']=='jingcai-venue-baselines-v13'
+    assert result['lambda_home_full']==original['lambda_home_full']
+    assert result['p_final_full']==original['p_final_full']
+    assert core_predict(p,cfg)['score_matrix_full']==original['score_matrix_full']
     assert p==p_before and cfg==cfg_before
 
 

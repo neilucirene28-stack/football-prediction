@@ -4,6 +4,7 @@ import hashlib
 import json
 
 from .jingcai_inputs import aware_datetime
+from .jingcai_evidence import validate_forecast_evidence
 
 
 def input_digest(payload):
@@ -13,7 +14,7 @@ def input_digest(payload):
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def validate_live_record(payload, result, *, now=None, require_hash=True):
+def validate_live_record(payload, result, *, now=None, require_hash=True, require_evidence=True):
     if result.get("status") != "ok" or result.get("model") != "jingcai":
         raise ValueError("竞彩账本仅接受ok竞彩预测")
     if result.get("project_scope", "jingcai") != "jingcai":
@@ -45,4 +46,5 @@ def validate_live_record(payload, result, *, now=None, require_hash=True):
         raise ValueError("竞彩快照、截止或生成时间顺序无效")
     if generated > now or generated >= kickoff or now >= kickoff:
         raise ValueError("竞彩封存时已开球或生成时间在未来，不能记录赛前预测")
+    validate_forecast_evidence(payload, result, require_evidence=require_evidence)
     return {"kickoff": kickoff, "generated": generated, "snapshot": snapshot}
