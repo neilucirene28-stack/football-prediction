@@ -36,6 +36,18 @@ def aware_datetime(value, path):
 
 
 def validate_config(cfg):
+    cfg.setdefault('market_weight', None)
+    cfg.setdefault('score_shape_mode', 'legacy')
+    cfg.setdefault('score_total_market_weight', 0.)
+    cfg.setdefault('handicap_market_weight', 0.)
+    if cfg['score_shape_mode'] not in ('legacy', 'market_conditioned'):
+        raise ValueError('config.score_shape_mode 必须为legacy或market_conditioned')
+    if cfg['market_weight'] is not None:
+        cfg['market_weight'] = finite_number(cfg['market_weight'], 'config.market_weight', minimum=0, maximum=1)
+    cfg.setdefault('league_min_matches', 30)
+    cfg.setdefault('strength_baseline_mode', 'legacy_v12')
+    if cfg['strength_baseline_mode'] not in ('legacy_v12', 'venue_normalized'):
+        raise ValueError('config.strength_baseline_mode 必须为legacy_v12或venue_normalized')
     bounds = {
         "rho": (None, None, False), "decay": (0, 1, True),
         "ht_factor": (0, 1, True), "kelly_fraction": (0, 1, False),
@@ -43,12 +55,18 @@ def validate_config(cfg):
         "weak_shrink_prior": (0, None, False), "weak_goal_cap": (0, None, False),
         "letdraw_strength": (0, 1, False), "divergence_gate": (0, 1, False),
         "mc_min_score": (0, None, False),
+        "league_min_matches": (1, None, False),
+        "score_total_market_weight": (0, 1, False),
+        "handicap_market_weight": (0, 1, False),
     }
     for key, (lo, hi, strict) in bounds.items():
         cfg[key] = finite_number(cfg[key], f"config.{key}", minimum=lo,
                                  maximum=hi, strict_min=strict)
     if cfg["ht_factor"] >= 1:
         raise ValueError("config.ht_factor 必须小于1")
+    if cfg['league_min_matches'] != int(cfg['league_min_matches']):
+        raise ValueError('config.league_min_matches 必须为正整数')
+    cfg['league_min_matches'] = int(cfg['league_min_matches'])
     n = cfg["mc_n"]
     if isinstance(n, bool) or not isinstance(n, int) or n <= 0:
         raise ValueError("config.mc_n 必须为正整数")
@@ -65,13 +83,16 @@ def validate_config(cfg):
         cfg["platt"] = normalized
 
 
-def validate_payload(payload, cutoff):
+def validate_payload(payload, cutoff, *, strength_evidence=False):
     """返回复制后的输入和时间覆盖审计；从不修改调用方数据。"""
     p = dict(payload)
     audit = {"status": "declared_inputs_checked_source_lineage_unverified",
              "cutoff_at": cutoff.isoformat(), "history": {},
              "excluded_optional_signals": [], "feature_timestamps_checked": [],
              "optional_signal_status": {}}
+    audit['league_avg_goals_input_kind'] = ('declared_scalar_unverified'
+        if 'league_avg_goals' in payload else 'model_default_not_observed')
+    audit['opponent_strength'] = {}
 
     def check_times(block, path):
         for key in TIME_FIELDS:
@@ -133,6 +154,8 @@ def validate_payload(payload, cutoff):
                 missing_completed += 1
             # kickoff_at/played_at是比赛发生时间，不能证明此时已有最终比分。
             stamp = None
+            match_start = None
+            match_start_priority = -1
             values = [(field, row[field]) for field in ("date", "played_at", "kickoff_at")
                       if row.get(field) is not None]
             for field, value in values:
@@ -156,10 +179,16 @@ def validate_payload(payload, cutoff):
                     raise ValueError(f"{path} 完赛时间早于比赛时间")
                 if stamp is None:
                     stamp = current
+                priority = {'date': 0, 'played_at': 1, 'kickoff_at': 2}[field]
+                if priority > match_start_priority:
+                    match_start, match_start_priority = current, priority
             if stamp is None:
                 stamp = completed
             if stamp is None:
                 missing += 1
+            if strength_evidence:
+                from .jingcai_strength_evidence import normalize_opponent_strength
+                audit['opponent_strength'][path] = normalize_opponent_strength(row, path, cutoff, match_start)
             stamps.append(stamp)
             normalized.append(row)
         # 日期不全时保留原序，不猜测缺日期行的位置。
@@ -174,6 +203,11 @@ def validate_payload(payload, cutoff):
                                  "date_only_rows": date_only, "ordering": ordering,
                                  "missing_completed_at": missing_completed,
                                  "invalid_venue_treated_as_unknown": invalid_venue}
+
+    from .jingcai_strength_evidence import validate_league_statistics
+    statistics = validate_league_statistics(p, cutoff)
+    if statistics is not None:
+        p['league_statistics'] = statistics
 
     for key in ("odds", "opening_odds", "elo", "asian", "injury"):
         block = p.get(key)
@@ -212,9 +246,13 @@ def validate_payload(payload, cutoff):
             check_times(values, key)
         try:
             if key == "handicap_sp" and isinstance(values, dict):
-                allowed = set(OUTCOMES) | set(TIME_FIELDS) | {"source"}
+                allowed = set(OUTCOMES) | set(TIME_FIELDS) | {"source", "line"}
                 if set(values) - allowed or any(k not in values for k in OUTCOMES):
                     raise ValueError("handicap_sp对象须含home/draw/away及已知元数据")
+                if 'line' in values:
+                    from .jingcai_handicap import integer_handicap
+                    if integer_handicap(values['line']) != integer_handicap(p.get('handicap_line')):
+                        raise ValueError('handicap_sp.line 与本场整数让球不匹配')
                 values = [values[k] for k in OUTCOMES]
             if not isinstance(values, (list, tuple)) or len(values) != 3:
                 raise ValueError("须有三个数值")
@@ -236,6 +274,26 @@ def validate_payload(payload, cutoff):
             p[key] = None
             audit["optional_signal_status"][key] = {"status": "excluded", "reason": str(exc)}
             audit["excluded_optional_signals"].append({"field": key, "reason": str(exc)})
+    goals_market = p.get('goals_market')
+    audit['goals_market'] = {'status': 'missing'}
+    if goals_market is not None:
+        if not isinstance(goals_market, dict):
+            raise ValueError('goals_market 必须为对象')
+        check_times(goals_market, 'goals_market')
+        block = dict(goals_market)
+        for name in ('line', 'over', 'under'):
+            block[name] = finite_number(block.get(name), 'goals_market.'+name,
+                minimum=1 if name != 'line' else 0, strict_min=name != 'line')
+        if block['line'] != 2.5:
+            raise ValueError('goals_market 目前只支持无走盘的2.5球盘口')
+        if block.get('available_at') and isinstance(block.get('source'), str) and block['source'].strip():
+            p['goals_market'] = block
+            audit['goals_market'] = {'status': 'accepted', 'source': block['source'],
+                'available_at': block['available_at'], 'provenance_status': 'caller_declared_not_source_authenticated'}
+        else:
+            p['goals_market'] = None
+            audit['goals_market'] = {'status': 'excluded', 'reason': '缺少可得时间或来源'}
+
     def has_availability(value):
         if isinstance(value, dict):
             return bool(value.get("available_at"))

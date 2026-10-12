@@ -87,8 +87,27 @@ def _top_n(prob_dict: dict, n: int = 3) -> list[tuple[str, float]]:
 
 def format_1x2(pred: dict) -> str:
     """①胜平负。"""
-    return (f"胜平负：胜({pred['p_home']:.3f})/平({pred['p_draw']:.3f})"
+    if pred.get('status') == 'insufficient_data':
+        return '胜平负：数据不足，暂停推荐'
+    text = (f"胜平负：胜({pred['p_home']:.3f})/平({pred['p_draw']:.3f})"
             f"/负({pred['p_away']:.3f})")
+    evidence=pred.get('forecast_evidence') or {}
+    if evidence.get('mode') == 'market_only':
+        text += '；依据为市场赔率，球队战绩不足'
+    elif evidence.get('mode') in ('market_elo','elo_only'):
+        text += '；球队战绩不足，使用可用赔率或球队评级'
+    view=pred.get('wdl_draw_view')
+    if view:
+        names={'home':'胜','draw':'平','away':'负'}
+        text += f"；单选首选{names[view['top1']]}（{view['top1_probability_full']:.1%}）"
+        text += f"；平局{view['draw_probability_full']:.1%}（概率第{view['draw_rank']}）"
+        pair='＋'.join(names[k] for k in view['top2'])
+        text += f"\n概率最高双选：{pair}，覆盖{view['top2_coverage_full']:.1%}"
+        guard='＋'.join(names[k] for k in view['pair_including_draw'])
+        text += f"；防平双选参考：{guard}，覆盖{view['pair_including_draw_coverage_full']:.1%}（双选另计）"
+        if view['model_market_draw_disagreement']:
+            text += f"\n平局分歧：战绩模型首选{names[view['model_top1']]}，市场首选{names[view['market_top1']]}。"
+    return text
 
 
 def format_handicap_1x2(pred: dict) -> str:
@@ -122,10 +141,14 @@ def format_top_scores(pred: dict, n: int = 5) -> str:
     text = "比分：" + "、".join(parts)
     explanation = pred["derivatives"].get("score_explanation")
     if explanation:
+        if explanation.get('global_top2'):
+            text += '\n比分Top2：' + '、'.join(
+                f"{s['score']}({s['prob']:.1%})" for s in explanation['global_top2'])
+            text += f"；合计覆盖{explanation['global_top2_coverage']:.1%}"
         names = {"home": "主胜", "draw": "平局", "away": "客胜"}
         aligned = explanation["scores_within_wdl_direction"]
         text += "\n胜平负首选：" + names[explanation["wdl_direction"]]
-        text += "；该方向内比分参考：" + "、".join(
+        text += "；该方向内比分参考（另计）：" + "、".join(
             f"{s['score']}({s['prob']:.1%})" for s in aligned[:n])
         text += "（均为原始单比分概率，未重新归一）"
         if explanation["global_mode_direction_differs"]:
@@ -192,6 +215,8 @@ def format_h2h_brief(home: str, away: str,
 
 def format_five_playtypes(pred: dict) -> list[str]:
     """返回五大玩法行 + 进球区间行 + 冷门比分补充行（共 7 行，v2.10）。"""
+    if pred.get('status') == 'insufficient_data':
+        return ['数据不足：胜平负、让球胜平负和比分暂停推荐']
     return [
         format_1x2(pred),
         format_handicap_1x2(pred),

@@ -1,4 +1,4 @@
-"""竞彩专用计算核心，由v11竞彩路径独立提取；不导入旧双模式预测器。"""
+"""竞彩专用核心；默认v12基线策略，规范基线候选需显式启用。"""
 
 from .errors import PredictError
 from .jingcai_scope import validated_config
@@ -7,7 +7,8 @@ from datetime import datetime
 import hashlib
 import json
 from .elo import win_probability_from_elo
-from .strengths import estimate_lambdas, team_tier
+from .jingcai_strengths import estimate_lambdas, team_tier, REVISION as STRENGTH_REVISION
+from .jingcai_strength_evidence import resolve_league_baseline, REVISION as STRENGTH_EVIDENCE_REVISION
 from .poisson import (
     score_matrix,
     match_probs,
@@ -66,6 +67,10 @@ from .jingcai_cards import (
     load_context as load_jingcai_cards_context,
 )
 from .jingcai_montecarlo import simulate_matrix
+from .jingcai_joint import (market_weights, conditioned_score_matrix,
+                           fuse_handicap_fixed_wdl, REVISION as JOINT_REVISION)
+from .jingcai_draw import draw_view, REVISION as DRAW_REVISION
+from .jingcai_evidence import signal_evidence, supported_weights, REVISION as EVIDENCE_REVISION
 
 
 def model_version(cfg: dict) -> str:
@@ -183,6 +188,11 @@ def predict(
     except ValueError as e:
         raise PredictError(str(e)) from e
     cfg["jingcai_pipeline_revision"] = PIPELINE_REVISION
+    cfg['jingcai_strength_revision'] = STRENGTH_REVISION
+    cfg['jingcai_strength_evidence_revision'] = STRENGTH_EVIDENCE_REVISION
+    cfg['jingcai_joint_revision'] = JOINT_REVISION
+    cfg['jingcai_draw_revision'] = DRAW_REVISION
+    cfg['jingcai_signal_evidence_revision'] = EVIDENCE_REVISION
     cfg["jingcai_cards_revision"] = CARDS_REVISION
     cards_context = load_jingcai_cards_context()
     cfg["jingcai_cards_data_profile"] = cards_context["profile"]
@@ -221,7 +231,7 @@ def predict(
         raise PredictError("快照晚于预测截止时刻：存在未来泄漏")
     input_audit = None
     try:
-        payload, input_audit = validate_payload(payload, snapshot)
+        payload, input_audit = validate_payload(payload, snapshot, strength_evidence=True)
     except ValueError as e:
         raise PredictError(str(e)) from e
     calibration_audit = {"status": "not_requested"}
@@ -265,7 +275,12 @@ def predict(
         raise PredictError("主客队无效")
     home_recent = payload.get("home_recent") or []
     away_recent = payload.get("away_recent") or []
-    league_avg = float(payload.get("league_avg_goals", 2.7))
+    try:
+        league_avg, league_audit = resolve_league_baseline(payload, input_audit, cfg['league_min_matches'],
+            enabled=cfg['strength_baseline_mode'] == 'venue_normalized')
+    except ValueError as e:
+        raise PredictError(str(e)) from e
+    input_audit['league_baseline'] = league_audit
     present = {
         "form": _recent_ok(home_recent) and _recent_ok(away_recent),
         "venue_split": any((r.get("venue") for r in home_recent + away_recent)),
@@ -276,14 +291,22 @@ def predict(
         "advanced": False,
     }
     score, grade = completeness_score(present)
+    evidence = signal_evidence(payload)
     if grade == "D":
         return {
             "status": "insufficient_data",
+            "model": "jingcai", "model_version": version,
             "grade": grade,
             "completeness": score,
             "reason": "数据完整度不足（D级），拒绝给出概率预测",
             **{"input_audit": input_audit},
+            "forecast_evidence": evidence,
         }
+    if evidence['status'] != 'supported':
+        return {'status': 'insufficient_data', 'model': 'jingcai', 'model_version': version,
+                'grade': grade, 'completeness': score, 'input_audit': input_audit,
+                'forecast_evidence': evidence,
+                'reason': '没有可用的球队战绩或独立比赛信号，禁止统一先验兜底推荐'}
     neutral = bool(payload.get("neutral_site"))
     ht, at_ = (team_tier(home_recent), team_tier(away_recent))
     competition = payload.get("competition", "")
@@ -303,10 +326,12 @@ def predict(
         home_tier=ht,
         away_tier=at_,
         shrink_prior=eff_shrink,
+        baseline_mode=cfg['strength_baseline_mode'],
     )
     lam_notes["home_adv_factor"] = 1.0 if neutral else 1.12
     lam_notes["neutral_site"] = neutral
     lam_notes["weak_competition"] = is_weak
+    lam_notes['league_baseline_evidence'] = league_audit
     if is_weak:
         lam_notes["shrink_prior_effective"] = eff_shrink
     h2h = payload.get("h2h") or []
@@ -368,6 +393,15 @@ def predict(
     weights = ensemble_weights(
         grade, p_market is not None, p_elo is not None, edge=cfg["model_edge"]
     )
+    weights = market_weights(weights, cfg['market_weight'], p_market is not None)
+    try:
+        weights = supported_weights(weights, evidence)
+    except ValueError as e:
+        return {'status': 'insufficient_data', 'model': 'jingcai', 'model_version': version,
+                'grade': grade, 'completeness': score, 'input_audit': input_audit,
+                'forecast_evidence': evidence, 'reason': str(e)}
+    if not evidence['form_available']:
+        p_model = None
     p_final = ensemble({"model": p_model, "market": p_market, "elo": p_elo}, weights)
     if flow is not None:
         w_flow = apply_volume_weight(weights, flow["volume_weight"])
@@ -389,7 +423,21 @@ def predict(
             p_final = tuple((c / s for c in cal))
             platt_on = True
     p_home, p_draw, p_away = (round(p, 4) for p in p_final)
-    matrix_cal = ipf_to_marginals(matrix, p_final)
+    shape_matrix = matrix
+    shape_audit = {'status': 'legacy', 'raw_form_lambdas': [lam_h, lam_a]}
+    if cfg['score_shape_mode'] == 'market_conditioned':
+        if p_market is None:
+            shape_audit['reason'] = '没有胜平负市场，保留原比分形状'
+        else:
+            try:
+                shape_matrix, shape_audit = conditioned_score_matrix(lam_h, lam_a, p_final,
+                    rho=cfg['rho'], goals_market=payload.get('goals_market'),
+                    total_market_weight=cfg['score_total_market_weight'])
+            except ValueError as e:
+                raise PredictError(str(e)) from e
+            max_goals = shape_audit['max_goals']
+            tail_mass = shape_audit['poisson_tail_mass']
+    matrix_cal = ipf_to_marginals(shape_matrix, p_final)
     matrix_pre_letdraw = matrix_cal
     matrix_ld = None
     if handicap is not None:
@@ -400,6 +448,24 @@ def predict(
             strength=cfg.get("letdraw_strength", 0.5),
         )
         matrix_cal = matrix_ld
+    handicap_fusion = {'status': 'disabled', 'weight': cfg['handicap_market_weight']}
+    if cfg['handicap_market_weight'] > 0:
+        state = input_audit['optional_signal_status']['handicap_sp']
+        source = state.get('source')
+        if (handicap is not None and state['status'] == 'accepted'
+                and state.get('available_at') and isinstance(source, str) and source.strip()):
+            try:
+                hmarket = shin_probs(tuple(payload['handicap_sp']))
+            except Exception:
+                hmarket = implied_proportional(tuple(payload['handicap_sp']))
+            matrix_cal, handicap_fusion = fuse_handicap_fixed_wdl(matrix_cal, handicap,
+                hmarket, cfg['handicap_market_weight'])
+            matrix_ld = matrix_cal
+            handicap_fusion['provenance_status'] = 'caller_declared_not_source_authenticated'
+            handicap_fusion['available_at'] = state['available_at']
+            handicap_fusion['source'] = source
+        else:
+            handicap_fusion.update(status='excluded', reason='整数让球、有效赔率、来源或可得时间不全')
     value = []
     probability_differences = []
     if o and market:
@@ -447,7 +513,7 @@ def predict(
         "top_scores_raw": [
             {"score": s, "prob": round(p, 4)} for s, p in top_scores(matrix, n=5)
         ],
-        "p_1x2_raw": [round(p, 4) for p in p_model],
+        "p_1x2_raw": [round(p, 4) for p in p_model] if p_model is not None else None,
         "total_goals": {
             str(k): round(v, 4) for k, v in total_goals_distribution(matrix_cal).items()
         },
@@ -626,7 +692,7 @@ def predict(
             }
         return None
 
-    if gate > 0 and p_market is not None:
+    if gate > 0 and p_market is not None and p_model is not None:
         divergence = _divergence_gate(p_model, p_market)
     elif gate > 0:
         hsp = payload.get("handicap_sp")
@@ -691,10 +757,13 @@ def predict(
         seed=cfg["mc_seed"],
     )
     probs = {"home": p_home, "draw": p_draw, "away": p_away}
-    fav = max(probs, key=probs.get)
+    full_pick = max(range(3), key=lambda i: p_final[i])
+    fav = ('home','draw','away')[full_pick]
     recommendation = {
         "direction": {"home": "主胜", "draw": "平局", "away": "客胜"}[fav],
         "prob": probs[fav],
+        "prob_full": float(p_final[full_pick]),
+        "pick_rule": "argmax_full_precision",
         "value_outcomes": [v["outcome"] for v in value],
     }
     out = {
@@ -716,7 +785,7 @@ def predict(
         "p_draw": p_draw,
         "p_away": p_away,
         "signals": {
-            "model": [round(p, 4) for p in p_model],
+            "model": [round(p, 4) for p in p_model] if p_model is not None else None,
             "market": [round(p, 4) for p in p_market] if p_market else None,
             "elo": [round(p, 4) for p in p_elo] if p_elo else None,
         },
@@ -758,12 +827,25 @@ def predict(
     out["input_sha256"] = original_input_digest
     out["base_model_version"] = base_version
     out["calibration_audit"] = calibration_audit
+    out['score_shape_audit'] = shape_audit
+    out['handicap_fusion_audit'] = handicap_fusion
+    out['candidate_audit'] = {'status': 'explicit_research_candidate' if (
+        cfg['market_weight'] is not None or cfg['score_shape_mode'] != 'legacy'
+        or cfg['handicap_market_weight'] > 0) else 'legacy_probability_policy',
+        'revision': JOINT_REVISION, 'market_weight': cfg['market_weight'],
+        'score_shape_mode': cfg['score_shape_mode'],
+        'score_total_market_weight': cfg['score_total_market_weight'],
+        'handicap_market_weight': cfg['handicap_market_weight'],
+        'independent_accuracy_validation': False}
     out["signals_full"] = {
-        "model": list(p_model),
+        "model": list(p_model) if p_model is not None else None,
         "market": list(p_market) if p_market is not None else None,
         "elo": list(p_elo) if p_elo is not None else None,
     }
     out["input_audit"] = input_audit
+    out['forecast_evidence'] = evidence
+    if not evidence['form_available']:
+        out['notes'].append('球队战绩不足：仅使用独立可用信号；比分总进球仍可能含未学习的联赛先验。')
     out["confidence_audit"] = {
         "kind": "heuristic_data_quality_score_not_hit_probability",
         "lineup": lineup_audit,
@@ -788,7 +870,7 @@ def predict(
     hsp = payload.get("handicap_sp")
     out["handicap_market_diagnostic"] = {
         "status": hsp_state["status"],
-        "probability_fusion": False,
+        "probability_fusion": handicap_fusion['status'] == 'applied',
     }
     if hsp:
         try:
@@ -827,6 +909,9 @@ def predict(
     out["probability_difference_candidates"] = probability_differences
     out["score_matrix_full"] = [list(row) for row in matrix_cal]
     out["p_final_full"] = [float(p) for p in p_final]
+    out['wdl_draw_view'] = draw_view(list(p_final),
+        model=list(p_model) if p_model is not None else None,
+        market=list(p_market) if p_market is not None else None)
     out["lambda_home_full"] = float(lam_h)
     out["lambda_away_full"] = float(lam_a)
     return out

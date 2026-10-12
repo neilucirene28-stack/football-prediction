@@ -21,6 +21,9 @@ def ledger_row(match_id=1, version="synthetic-v1", **changes):
     p = {"home": "合成主队", "away": "合成客队", "competition": "合成测试联赛",
          "kickoff_at": "2030-01-02T12:00:00+08:00",
          "snapshot_at": "2030-01-01T10:00:00+08:00"}
+    p.update(home_recent=[{"gf":2,"ga":1,"venue":"H"}]*8,
+             away_recent=[{"gf":1,"ga":1,"venue":"A"}]*8,
+             odds={"home":2.,"draw":3.2,"away":4.})
     r = {"status": "ok", "model": "jingcai", "model_version": version,
          "evaluation_mode": "live", "prediction_generated_at": "2030-01-01T10:06:00+08:00",
          "feature_cutoff_at": p["snapshot_at"], "evaluation_asof": "2030-01-01T10:05:00+08:00",
@@ -29,6 +32,8 @@ def ledger_row(match_id=1, version="synthetic-v1", **changes):
          "p_home": .6, "p_draw": .25, "p_away": .15, "p_final_full": [.6,.25,.15],
          "signals": {"model": [.6,.25,.15], "market": [.5,.3,.2]},
          "signals_full": {"model": [.60001,.24999,.15], "market": [.5,.3,.2]},
+         "grade": "B", "completeness": 55,
+         "weights": {"model":.5,"market":.5,"elo":0.},
          "derivatives": {}}
     row = {"fixture_kind": "synthetic_contract_not_a_real_forecast", "match_id": match_id,
            "prediction_id": f"synthetic-{match_id}-{version}", "model_version": version,

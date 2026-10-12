@@ -6,6 +6,8 @@ import math
 
 from .jingcai_inputs import aware_datetime
 from .jingcai_ledger import validate_live_record
+from .jingcai_draw import class_audit
+from .jingcai_evidence import validate_forecast_evidence
 
 REVIEW_SCHEMA = "jingcai-ledger-review-v1"
 SIGNALS = ("model", "market", "elo")
@@ -46,7 +48,7 @@ def prepared_record(row, asof):
         settled = timestamp(row.get("settled_at"), "settled_at")
         if settled > asof or settled < kickoff or kickoff >= asof:
             return None, "result_not_available_at_cutoff"
-        times = validate_live_record(payload, result, now=sealed, require_hash=False)
+        times = validate_live_record(payload, result, now=sealed, require_hash=False, require_evidence=False)
         if times["kickoff"] != kickoff:
             return None, "mismatched_kickoff"
         match_id = row.get("match_id")
@@ -67,12 +69,18 @@ def prepared_record(row, asof):
                                     "away_goals": row["away_goals"],
                                     "ht_home": row.get("ht_home"), "ht_away": row.get("ht_away"),
                                     **{k:row.get(k) for k in ("yellow_home","yellow_away","red_home","red_away")}})
+        learning_evidence_ok = True
+        try:
+            validate_forecast_evidence(payload, result)
+        except ValueError:
+            learning_evidence_ok = False
         scored.update({"match_id": match_id, "prediction_id": str(row.get("prediction_id", "")),
                        "model_version": version, "league": row.get("league") or "未知",
                        "kickoff_at": kickoff, "predicted_at": sealed, "settled_at": settled,
                        "probs_full": probs,
                        "probability_precision": "full" if result.get("p_final_full") else "rounded_legacy",
-                       "eligible_for_shadow_learning": bool(result.get("input_sha256") and row.get("source"))})
+                       "eligible_for_shadow_learning": bool(result.get("input_sha256") and row.get("source")
+                                                            and learning_evidence_ok)})
         return scored, None
     except (ValueError, TypeError, KeyError, OverflowError):
         return None, "invalid_or_unbound_record"
@@ -166,6 +174,7 @@ def build_review(rows, *, asof=None):
         subset = [r for r in scored if r["model_version"] == version]
         by_version[version] = {
             "metrics": aggregate(subset), "physical_matches": len(subset),
+            "wdl_classification": class_audit(subset),
             "by_league": {league: aggregate([r for r in subset if r["league"] == league])
                           for league in sorted({r["league"] for r in subset})},
             "paired_signals": paired_comparisons(subset), "calibration": calibration_bins(subset),

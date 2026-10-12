@@ -29,6 +29,9 @@ def score_explanation(matrix, probabilities, n=5):
     mode = ranked[0]
     return {'wdl_direction': ('home', 'draw', 'away')[direction],
             'wdl_probability': float(probabilities[direction]), 'global_mode': fmt(mode),
+            'global_top2': [fmt(x) for x in ranked[:2]],
+            'global_top2_coverage': sum(x[2] for x in ranked[:2]),
+            'global_top2_rule': 'unconditional_probability_descending; no_diversity_override',
             'global_mode_direction_differs': winner(mode[0], mode[1]) != direction,
             'scores_within_wdl_direction': [fmt(x) for x in conditional],
             'qualification': 'score probabilities are unconditional; a single modal score may differ from aggregated WDL; not a distribution conflict'}

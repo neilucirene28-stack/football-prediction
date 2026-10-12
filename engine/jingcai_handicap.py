@@ -4,7 +4,7 @@ import re
 
 OUTCOMES = ("home", "draw", "away")
 LABELS = {"home": "让胜", "draw": "让平", "away": "让负"}
-PIPELINE_REVISION = "jingcai-independent-core-20261011-v12"
+PIPELINE_REVISION = "jingcai-signal-evidence-draw-review-20261012-v16"
 # 固定先验来自 2026-09-01~30，不能用于这个训练期内的历史验证。
 LETDRAW_FIT_BEFORE = "2026-10-01T00:00:00+08:00"
 
