@@ -618,8 +618,16 @@ def predict(payload: dict, config: dict | None = None,
         h2, d2, a2 = handicap_1x2(matrix_ld, int(handicap))
         # 让平选择：竞彩v6与北单R2均恢复纯argmax
         # （原0.28阈值误用了普通平局统计，回测证明有害，已废除）。
-        _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
-                        key=lambda x: x[1])[0]
+        # 实验分支 codex/letdraw-pick-20261014：P(让平)>0.25时直接选让平
+        #（10-13复盘提议#1，walk-forward验证中）。
+        _letdraw_pick_threshold = cfg.get("letdraw_pick_threshold", 0.0)
+        if _letdraw_pick_threshold > 0 and d2 > _letdraw_pick_threshold:
+            _hcp_pick = "draw"
+            _pick_rule = f"letdraw_threshold_{_letdraw_pick_threshold}"
+        else:
+            _hcp_pick = max([("home", h2), ("draw", d2), ("away", a2)],
+                            key=lambda x: x[1])[0]
+            _pick_rule = "argmax"
         deriv["handicap_1x2"] = {"line": handicap, "p_home": round(h2, 4),
                                  "p_draw": round(d2, 4), "p_away": round(a2, 4),
                                  "p_home_raw": round(h, 4),
@@ -629,7 +637,7 @@ def predict(payload: dict, config: dict | None = None,
                                  "p_home_full": h2, "p_draw_full": d2,
                                  "p_away_full": a2,
                                  "pick": _hcp_pick,
-                                 "pick_rule": "argmax",
+                                 "pick_rule": _pick_rule,
                                  "letdraw_guard": letdraw_guard(
                                      h2, d2, a2, int(handicap))}
         if model == "jingcai":
