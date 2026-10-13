@@ -43,6 +43,46 @@ _PREFIXES = ("afc ",)
 _OU_RE = re.compile(r"^(?:over|under|o|u)\s*(\d+(?:\.\d+)?)$", re.IGNORECASE)
 
 
+# 中文队名 → 推荐号侧英文拼写（影子匹配用）。
+# 预测 JSON 用中文队名，tipster picks 用英文；先翻译再走 normalize_team。
+# 只影响影子对比的匹配，不碰任何生产概率与参数。
+# 2026-10-13 实测：不加此表时 10 场全是 picks_matched=0（中英对不上），
+# 影子评估名存实亡。新增球队按推荐号实际拼写增补。
+_CN_ALIASES = {
+    "纽卡斯尔喷气机": "Newcastle Jets",
+    "大阪钢巴": "Gamba Osaka",
+    "上海海港": "Shanghai Port",
+    "大田市民": "Daejeon Hana Citizen",
+    "布里兰": "Buriram United",
+    "北京国安": "Beijing Guoan",
+    "朗斯": "Lens",
+    "里斯本竞技": "Sporting CP",
+    "国际米兰": "Inter",
+    "布鲁日": "Club Brugge",
+    "阿森纳": "Arsenal",
+    "里尔": "Lille OSC",
+    "比利亚雷亚尔": "Villarreal",
+    "那不勒斯": "Napoli",
+    "维京": "Viking",
+    "拜仁慕尼黑": "Bayern Munich",
+    "莱比锡红牛": "RB Leipzig",
+    "PSV埃因霍温": "PSV",
+    "加拉塔萨雷": "Galatasaray",
+    "巴塞罗那": "Barcelona",
+    "马德里竞技": "Atletico Madrid",
+    "曼彻斯特联": "Manchester United",
+    "斯托克城": "Stoke City",
+    "米德尔斯堡": "Middlesbrough",
+}
+
+
+def _to_en(name):
+    """中文队名翻成英文；非中文/未知名原样返回。"""
+    if not isinstance(name, str):
+        return name
+    return _CN_ALIASES.get(name.strip(), name)
+
+
 def normalize_team(name) -> str:
     """本地队名规范化；与 collector 保持同口径但不跨包依赖。"""
     if not isinstance(name, str):
@@ -89,7 +129,7 @@ def load_picks(path, tipster="eaglepredict") -> list[dict]:
 
 def find_matches(home, away, picks) -> list[dict]:
     """按主客队规范化匹配；主客不分也可命中（返回时标注是否反位）。"""
-    h, a = normalize_team(home), normalize_team(away)
+    h, a = normalize_team(_to_en(home)), normalize_team(_to_en(away))
     if not h or not a:
         return []
     hits = []
@@ -97,7 +137,7 @@ def find_matches(home, away, picks) -> list[dict]:
         mh = split_match(d.get("match"))
         if not mh:
             continue
-        ph, pa = normalize_team(mh[0]), normalize_team(mh[1])
+        ph, pa = normalize_team(_to_en(mh[0])), normalize_team(_to_en(mh[1]))
         if ph == h and pa == a:
             hits.append((d, False))
         elif ph == a and pa == h:
