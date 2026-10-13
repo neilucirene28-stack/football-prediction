@@ -248,6 +248,21 @@ def predict(payload: dict, config: dict | None = None,
         cfg.setdefault("beidan_letdraw_strength", 0.0)
     version = model_version(cfg)
 
+    # ---- 影子模式自启用（eaglepredict 接入，竞彩 live 预测） ----
+    # 2026-10-12 用户批准方案A：2周影子评估期。钩子在 jingcai_core 已有，
+    # 但日常脚本实际走本 predict()（engine/predictor），导致影子空转。
+    # 此处在版本计算之后打开，保证 model_version 摘要不变；
+    # 仅 live（asof=None）生效，回测/历史重放不污染影子日志；
+    # attach_shadow 内部永不抛异常，只附加记录+追加日志，不改动任何
+    # 生产概率与参数。cfg 显式 tipster_shadow=False 可关闭。
+    if model == "jingcai" and asof is None and cfg.get("tipster_shadow") is not False:
+        from .tipster_shadow import default_paths
+        _picks, _shadow_log = default_paths()
+        if os.path.exists(_picks):
+            cfg["tipster_shadow"] = True
+            cfg.setdefault("tipster_picks_path", _picks)
+            cfg.setdefault("tipster_shadow_log", _shadow_log)
+
     # ---- 1. 输入校验与防泄漏 ----
     if model == "jingcai" and not isinstance(payload, dict):
         raise PredictError("payload 必须为对象")
@@ -918,6 +933,22 @@ def predict(payload: dict, config: dict | None = None,
         out["p_final_full"] = [float(p) for p in p_final]
         out["lambda_home_full"] = float(lam_h)
         out["lambda_away_full"] = float(lam_a)
+    # 外部推荐号影子对比（竞彩）：默认关闭；开启时只在 out 上附加一致/分歧
+    # 记录并追加影子日志，不改动任何生产概率与参数。attach_shadow 内部
+    # 永不抛异常（外层再包一层，双保险）。北单链路按批准范围不启用。
+    if model == "jingcai" and cfg.get("tipster_shadow") and cfg.get("tipster_picks_path"):
+        try:
+            from .tipster_shadow import attach_shadow
+            attach_shadow(
+                out,
+                cfg["tipster_picks_path"],
+                home=out["match"]["home"],
+                away=out["match"]["away"],
+                tipster=cfg.get("tipster_shadow_tipster", "eaglepredict"),
+                log_path=cfg.get("tipster_shadow_log"),
+            )
+        except Exception:
+            pass
     return out
 
 

@@ -16,9 +16,30 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 
-_SUFFIXES = (" fc", " afc", " cf", " sc")
+_PICKS_FILENAME = "tipster-picks.jsonl"
+_SHADOW_LOG_FILENAME = "tipster-shadow.jsonl"
+
+
+def default_paths():
+    """推荐号 picks 文件与影子日志的默认位置。
+
+    由 tipster-daily-tracker 每日收集写入 goal workspace。返回 (picks, log)；
+    picks 不存在时调用方应视为影子源缺失、保持关闭。
+    """
+    base = os.path.join(
+        os.path.expanduser("~"),
+        "workspace/goals/football-prediction-project/hidden_files")
+    picks = os.path.join(base, _PICKS_FILENAME)
+    log = os.path.join(base, _SHADOW_LOG_FILENAME)
+    return picks, log
+
+
+_SUFFIXES = (" fc", " afc", " cf", " sc", " ud", " ssc", " rcd", " cd")
+# 前缀俱乐部词（仅最保守的 afc，如 AFC Bournemouth vs Bournemouth）
+_PREFIXES = ("afc ",)
 _OU_RE = re.compile(r"^(?:over|under|o|u)\s*(\d+(?:\.\d+)?)$", re.IGNORECASE)
 
 
@@ -29,6 +50,10 @@ def normalize_team(name) -> str:
     s = name.strip().lower()
     s = s.replace("&", " and ")
     s = re.sub(r"\s+", " ", s)
+    for pre in _PREFIXES:
+        if s.startswith(pre):
+            s = s[len(pre):]
+            break
     for suf in _SUFFIXES:
         if s.endswith(suf):
             s = s[: -len(suf)]
