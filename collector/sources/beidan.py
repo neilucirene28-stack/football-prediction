@@ -231,7 +231,48 @@ def get_all_sp(html_pages=None):
             if pt == "WL":
                 m["wl_handicap"] = r["handicap"]
             m[key] = r["sp"]
+    # P0修复（2026-10-13）：检测SP倒置并自动纠正
+    # 根因：okooo WDL页对主让深盘场次，SP三元组与主客场方向倒置
+    # 检测：handicap<0（主让）时胜SP应<负SP，否则倒置
+    for k, m in merged.items():
+        _fix_inverted_sp(m)
     return merged
+
+
+def _fix_inverted_sp(m):
+    """检测并纠正倒置的SP。handicap为对齐基准（来自对阵字符串，可靠）。
+
+    倒置判定：handicap<0（主让，主队强）但 sp_wdl[胜] > sp_wdl[负]，
+    或 handicap>0（客让）但 sp_wdl[胜] < sp_wdl[负]。
+    纠正：镜像交换所有主客场相关的SP。返回 True 表示发生纠正。
+    """
+    hc = m.get("handicap")
+    sp_wdl = m.get("sp_wdl") or {}
+    s, f = sp_wdl.get("胜"), sp_wdl.get("负")
+    if hc is None or hc == 0 or s is None or f is None:
+        return False
+    inverted = (hc < 0 and s > f) or (hc > 0 and s < f)
+    if not inverted:
+        return False
+    # 告警（stderr，不中断）
+    import sys
+    print(f"[WARN] 北单SP倒置自动纠正: seq={m.get('seq')} "
+          f"{m.get('home')}vs{m.get('away')} hc={hc} "
+          f"胜={s} 负={f}", file=sys.stderr)
+    # 1. sp_wdl: 胜<->负（引擎输入，P0核心）
+    m["sp_wdl"] = {"胜": f, "平": sp_wdl.get("平"), "负": s}
+    # 2-5. sp_score/sp_half_full/sp_wl: 暂不自动纠正
+    # 原因：2026-10-13验证发现sp_score的1:0/0:1方向正确（4.43<6.34），
+    # 仅WDL三元组倒置。其他玩法的倒置模式需单独验证，避免误伤。
+    # 如后续确认其他玩法也倒置，再扩展。
+    import sys as _sys
+    for _k in ("sp_score", "sp_half_full", "sp_wl"):
+        if m.get(_k):
+            print(f"[WARN] 北单SP倒置: seq={m.get('seq')} {_k}未自动纠正，需人工核查",
+                  file=_sys.stderr)
+    m["_sp_inverted_fixed"] = True
+    m["_sp_inverted_detail"] = "仅sp_wdl已纠正"
+    return True
 
 
 _RQ_MAP = {"3": "让胜", "1": "让平", "0": "让负"}
