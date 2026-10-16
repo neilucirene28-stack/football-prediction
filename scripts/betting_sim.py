@@ -258,33 +258,46 @@ def cmd_select(args):
     tickets = []
     total_stake = 0.0
     cap = MAX_DAILY_EXPOSURE_PCT * balance
-    # 1) 混串票：取 EV 最高的 3 场（gg=1 的腿），不足 3 场则 2 场
-    parlay_legs = [c for c in cands if c["gg"]][:3]
-    if len(parlay_legs) >= 2:
+    # 1) 容错混串：EV 最高的 3 条腿组 3串1 + 其中 EV 最高的 2 条腿组 2串1。
+    #    一腿翻车时 3串1 归零但 2串1 仍可中；每张票独立过 EV 门槛、独立算凯利。
+    def _parlay_ticket(legs, ticket_id):
         p_comb = 1.0
         odds_comb = 1.0
-        parlay_ev = 1.0
-        for c in parlay_legs:
+        ev_comb = 1.0
+        for c in legs:
             p_comb *= c["p"]
             odds_comb *= c["odds"]
-            parlay_ev *= (1 + c["ev"])
-        parlay_ev -= 1.0
-        if parlay_ev >= PARLAY_EV_MIN:
-            stake = _kelly_stake(p_comb, odds_comb, balance)
-            if stake >= MIN_STAKE_PCT * balance and total_stake + stake <= cap:
-                tickets.append({
-                    "date": date, "ticket_id": f"{date}-P1", "type": "parlay",
-                    "legs": [{k: c[k] for k in
-                              ("num", "home", "away", "kickoff", "handicap", "play",
-                               "option", "label", "p", "odds", "ev")} for c in parlay_legs],
-                    "p_combined": round(p_comb, 4),
-                    "odds_combined": round(odds_comb, 2),
-                    "ev": round(parlay_ev, 4),
-                    "stake": round(stake, 2),
-                    "potential_return": round(stake * odds_comb, 2),
-                    "status": "open", "placed_at": _now_iso(),
-                })
-                total_stake += stake
+            ev_comb *= (1 + c["ev"])
+        ev_comb -= 1.0
+        if ev_comb < PARLAY_EV_MIN:
+            return None
+        stake = _kelly_stake(p_comb, odds_comb, balance)
+        if stake < MIN_STAKE_PCT * balance:
+            return None
+        return {
+            "date": date, "ticket_id": ticket_id, "type": "parlay",
+            "legs": [{k: c[k] for k in
+                      ("num", "home", "away", "kickoff", "handicap", "play",
+                       "option", "label", "p", "odds", "ev")} for c in legs],
+            "p_combined": round(p_comb, 4),
+            "odds_combined": round(odds_comb, 2),
+            "ev": round(ev_comb, 4),
+            "stake": round(stake, 2),
+            "potential_return": round(stake * odds_comb, 2),
+            "status": "open", "placed_at": _now_iso(),
+        }
+
+    parlay_pool = [c for c in cands if c["gg"]]
+    if len(parlay_pool) >= 3:
+        t3 = _parlay_ticket(parlay_pool[:3], f"{date}-P1")
+        if t3 and total_stake + t3["stake"] <= cap:
+            tickets.append(t3)
+            total_stake += t3["stake"]
+    if len(parlay_pool) >= 2:
+        t2 = _parlay_ticket(parlay_pool[:2], f"{date}-P2")
+        if t2 and total_stake + t2["stake"] <= cap:
+            tickets.append(t2)
+            total_stake += t2["stake"]
     used_nums = {c["num"] for t in tickets for c in t["legs"]}
     # 2) 单关票：串外剩余腿中单关开售的，最多 2 注
     singles = [c for c in cands if c["num"] not in used_nums and c["dg"]]
