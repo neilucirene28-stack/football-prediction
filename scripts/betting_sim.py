@@ -380,25 +380,39 @@ def cmd_settle(args):
         if t.get("status") != "open":
             continue
         leg_results = []
-        unresolved = False
+        any_pending = False
         for leg in t["legs"]:
             s = by_num.get((t.get("date"), leg["num"])) or \
                 by_match.get(f"{leg.get('home')} vs {leg.get('away')}")
             if s is None:
-                unresolved = True
-                break
+                leg["leg_result"] = "pending"
+                any_pending = True
+                continue
             r = _eval_leg(leg, s.get("score"), s.get("ht_score"))
             if r == "unresolved":
-                unresolved = True
-                break
+                leg["leg_result"] = "pending"
+                any_pending = True
+                continue
             leg["leg_result"] = r
             leg["score"] = s.get("score")
             if s.get("ht_score"):
                 leg["ht_score"] = s.get("ht_score")
             leg_results.append(r)
-        if unresolved:
+        # 串关任一腿输了，整票已定为输，不必等其余腿
+        if "loss" in leg_results:
+            t["settled_at"] = _now_iso()
+            t["status"] = "settled"
+            t["result"] = "loss"
+            t["pnl"] = -t["stake"]
+            _record_event(state, "settle_loss", 0.0,
+                          f"{t['ticket_id']} 已定输（某腿输）")
+            settled.append(t)
+            continue
+        if any_pending:
             for leg in t["legs"]:
                 leg.pop("leg_result", None)
+                leg.pop("score", None)
+                leg.pop("ht_score", None)
             continue
         t["settled_at"] = _now_iso()
         if "loss" in leg_results:
